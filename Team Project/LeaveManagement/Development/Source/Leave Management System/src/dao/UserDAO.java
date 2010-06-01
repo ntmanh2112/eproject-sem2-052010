@@ -1,9 +1,14 @@
 
 package dao;
+import gui.Changepassword;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.JOptionPane;
+
 import common.ConnectionDB;
+import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
 
 public class UserDAO {
@@ -48,7 +53,49 @@ public class UserDAO {
 			ex.printStackTrace();
 			return result;
 		}
+		
 	}
+	public changeResult changePass(String oldpass,String newpass,String confirmpass ){
+		changeResult cpresult = null;
+		try {
+			ConnectionDB conn = new ConnectionDB();
+			conn.connect();
+			String sql = "update Users set PASSWORD = ? where USERNAME =?";
+			String sql1 = "SELECT PASSWORD FROM USER WHERE ID = ?";
+			PreparedStatement psmt = conn.getConn().prepareStatement(sql1);
+			psmt.setString(1, oldpass);
+			psmt.setString(2, newpass);
+			psmt.setString(3,confirmpass);
+			ResultSet rs =psmt.executeQuery();
+			String pass = null;
+			while(rs.next()){
+				 pass = rs.getString("PASSWORD");
+			}
+			if(oldpass.isEmpty()||newpass.isEmpty()||confirmpass.isEmpty()){
+				 JOptionPane.showMessageDialog(null,"Please input all of column!");
+			}
+			else {
+				if(pass.equalsIgnoreCase(oldpass)){
+					if(newpass.equalsIgnoreCase(oldpass)){
+						psmt = conn.getConn().prepareStatement(sql);
+	   				 	cpresult = changeResult.sucessful;
+	   				}
+					else {
+						 cpresult = changeResult.fail;
+					}
+				}
+				else{
+					 cpresult = changeResult.incorrect;
+				}
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			return cpresult;
+		}
+		return cpresult;
+	}
+
 	/*public static User loadUser(String username){
 		User user = new User();
 		try{
