@@ -132,7 +132,7 @@ public class Login extends JDialog {
 					String password = String.valueOf(txtPassword.getPassword());
 					try{
 						UserService service = new UserService();
-						loginResult result = service.loginUser(username,password);
+						loginResult result = service.loginUser(username, password);
 						if(result == loginResult.boss){
 							Login.this.dispose();
 						}else if (result == loginResult.managerbusiness){
@@ -140,10 +140,15 @@ public class Login extends JDialog {
 							Login.this.dispose();
 						}else if (result == loginResult.manager) {
 							new ManagerBusinessCP().setVisible(true);
+							Login.this.dispose();
 							
 						}
+						else if (result == loginResult.lock){
+							JOptionPane.showMessageDialog(null, "your permission is not enough for using this program");
+							Login.this.dispose();
+						}
 						else if (result == loginResult.fail){
-							JOptionPane.showMessageDialog(null, "Sai pass hoac username");
+							JOptionPane.showMessageDialog(null, "this username or password is wrong");
 						}
 					}
 							
