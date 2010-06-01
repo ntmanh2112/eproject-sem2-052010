@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -19,7 +17,6 @@ import javax.swing.SwingConstants;
 
 import business.UserService;
 
-import common.ConnectionDB;
 import common.Enumeration.loginResult;
 
 public class Login extends JDialog {
@@ -136,11 +133,16 @@ public class Login extends JDialog {
 					try{
 						UserService service = new UserService();
 						loginResult result = service.loginUser(username,password);
-						
-						if (result == loginResult.boss){
+						if(result == loginResult.boss){
+							Login.this.dispose();
+						}else if (result == loginResult.managerbusiness){
 							new ManagerBusinessCP().setVisible(true);
 							Login.this.dispose();
-						}else if (result == loginResult.fail){
+						}else if (result == loginResult.manager) {
+							new ManagerBusinessCP().setVisible(true);
+							
+						}
+						else if (result == loginResult.fail){
 							JOptionPane.showMessageDialog(null, "Sai pass hoac username");
 						}
 					}

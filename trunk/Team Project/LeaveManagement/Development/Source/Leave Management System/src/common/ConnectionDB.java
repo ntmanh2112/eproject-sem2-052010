@@ -5,16 +5,10 @@
 
 package common;
 
-import java.awt.image.renderable.ParameterBlock;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
 
-import org.omg.Dynamic.Parameter;
+import javax.swing.JOptionPane;
 
 /**
  *

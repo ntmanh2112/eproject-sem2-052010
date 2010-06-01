@@ -181,6 +181,11 @@ public class Viewhistory extends JDialog {
 			btnExit = new JButton();
 			btnExit.setBounds(new Rectangle(230, 301, 86, 24));
 			btnExit.setText("Exit");
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					Viewhistory.this.dispose();
+				}
+			});
 		}
 		return btnExit;
 	}

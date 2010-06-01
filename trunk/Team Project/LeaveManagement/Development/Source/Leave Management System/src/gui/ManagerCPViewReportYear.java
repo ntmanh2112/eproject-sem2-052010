@@ -8,7 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-public class ManagerBusinessCP extends JFrame {
+public class ManagerCPViewReportYear extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -28,7 +28,7 @@ public class ManagerBusinessCP extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public ManagerBusinessCP() {
+	public ManagerCPViewReportYear() {
 		super();
 		initialize();
 	}
@@ -42,7 +42,7 @@ public class ManagerBusinessCP extends JFrame {
 		this.setSize(619, 302);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("Business Manager Control Panel");
+		this.setTitle("Manager Control Panel");
 	}
 
 	/**

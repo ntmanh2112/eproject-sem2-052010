@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Leaveapp extends JDialog {
+public class CreateLeaveapp extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -35,7 +35,7 @@ public class Leaveapp extends JDialog {
 	/**
 	 * @param owner
 	 */
-	public Leaveapp(Frame owner) {
+	public CreateLeaveapp(Frame owner) {
 		super(owner);
 		initialize();
 	}

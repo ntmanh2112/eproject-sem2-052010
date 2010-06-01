@@ -1,14 +1,7 @@
 
 package dao;
-import gui.Login;
-import gui.ManagerBusinessCP;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import javax.swing.JOptionPane;
-
-import org.eclipse.jdt.internal.compiler.flow.FinallyFlowContext;
 
 import common.ConnectionDB;
 import common.Emloyee;
@@ -35,9 +28,18 @@ public class UserDAO {
 				id = rs.getInt("ID_POSITION");
 			}
 			if( i > 0&& id==2 ){
-				result = loginResult.boss;
+				result = loginResult.managerbusiness;
 			}
-			
+			else if (i> 0 && id == 1) {
+				result = loginResult.boss;
+				
+			}
+			else if(i> 0 && id == 3){
+				result = loginResult.manager;
+			}
+			else if (i> 0 && id ==4 ) {
+				result = loginResult.enginerr;
+			}
 			else{
 				result = loginResult.fail;
 			}
