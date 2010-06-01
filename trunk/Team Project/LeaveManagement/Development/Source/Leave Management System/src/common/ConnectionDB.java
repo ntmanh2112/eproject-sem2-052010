@@ -33,6 +33,7 @@ public class ConnectionDB {
             this.conn = DriverManager.getConnection(this.source, this.uid, this.pwd);
         } catch (Exception e){
             e.printStackTrace();
+             
             
         }
     }
