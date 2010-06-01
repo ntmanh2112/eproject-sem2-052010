@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -10,10 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import business.Method;
 
 public class Addmember extends JDialog {
 
@@ -38,6 +41,12 @@ public class Addmember extends JDialog {
 	private JButton btnExit = null;
 	private JLabel jLabel1 = null;
 	private JTextField txtEmail = null;
+	private JLabel lbIDmess = null;
+	private JLabel lbPassmess = null;
+	private JLabel lbPhonemess = null;
+	private JLabel lbAdressmess = null;
+	private JLabel lbEmailmess = null;
+	private JLabel lbNamemess = null;
 	/**
 	 * @param owner
 	 */
@@ -64,6 +73,30 @@ public class Addmember extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbNamemess = new JLabel();
+			lbNamemess.setText("");
+			lbNamemess.setSize(new Dimension(228, 20));
+			lbNamemess.setLocation(new Point(150, 190));
+			lbEmailmess = new JLabel();
+			lbEmailmess.setText("");
+			lbEmailmess.setSize(new Dimension(228, 20));
+			lbEmailmess.setLocation(new Point(150, 410));
+			lbAdressmess = new JLabel();
+			lbAdressmess.setText("");
+			lbAdressmess.setSize(new Dimension(228, 20));
+			lbAdressmess.setLocation(new Point(150, 367));
+			lbPhonemess = new JLabel();
+			lbPhonemess.setText("");
+			lbPhonemess.setSize(new Dimension(228, 20));
+			lbPhonemess.setLocation(new Point(150, 321));
+			lbPassmess = new JLabel();
+			lbPassmess.setText("");
+			lbPassmess.setSize(new Dimension(228, 20));
+			lbPassmess.setLocation(new Point(150, 143));
+			lbIDmess = new JLabel();
+			lbIDmess.setText("");
+			lbIDmess.setSize(new Dimension(228, 20));
+			lbIDmess.setLocation(new Point(150, 95));
 			jLabel1 = new JLabel();
 			jLabel1.setText("Email");
 			jLabel1.setSize(new Dimension(108, 20));
@@ -131,6 +164,12 @@ public class Addmember extends JDialog {
 			jContentPane.add(getBtnExit(), null);
 			jContentPane.add(jLabel1, null);
 			jContentPane.add(getTxtEmail(), null);
+			jContentPane.add(lbIDmess, null);
+			jContentPane.add(lbPassmess, null);
+			jContentPane.add(lbPhonemess, null);
+			jContentPane.add(lbAdressmess, null);
+			jContentPane.add(lbEmailmess, null);
+			jContentPane.add(lbNamemess, null);
 		}
 		return jContentPane;
 	}
@@ -145,6 +184,28 @@ public class Addmember extends JDialog {
 			txtUsername = new JTextField();
 			txtUsername.setLocation(new Point(150, 71));
 			txtUsername.setSize(new Dimension(228, 20));
+			txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtUsername.getText();
+					if (txtUsername.getText().length()>10||txtUsername.getText().length()<3) {
+						lbIDmess.setForeground(Color.red);
+						lbIDmess.setText("Please input 3-10 characters!!!");
+						txtUsername.setText("");
+					} else if(Method.CheckBlankCharacter(a) ) {
+									lbIDmess.setForeground(Color.red);
+									lbIDmess.setText("Don't input character blank!!!");
+					}else {
+							if(Method.CheckSpecialCharacter(a)) {
+								JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+								txtUsername.setText("");
+							} else {
+								lbIDmess.setForeground(Color.green);
+								lbIDmess.setText("OK");
+							}
+						}
+				}
+				
+			});
 		}
 		return txtUsername;
 	}
@@ -159,6 +220,24 @@ public class Addmember extends JDialog {
 			txtPassword = new JPasswordField();
 			txtPassword.setLocation(new Point(150, 120));
 			txtPassword.setSize(new Dimension(228, 20));
+			txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = String.valueOf(txtPassword.getPassword());
+					if (a.length()>20 || a.length()<8) {
+						lbPassmess.setText("8-20 chars!! Please type again");
+						lbPassmess.setForeground(Color.red);
+						txtPassword.setText("");
+					}
+					else {
+						if(Method.CheckSpecialCharacter(a)) {
+							JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+							txtPassword.setText(null);
+						}else {
+						lbPassmess.setText("OK");
+						lbPassmess.setForeground(Color.green);
+					}
+				}}
+			});
 		}
 		return txtPassword;
 	}
@@ -173,6 +252,25 @@ public class Addmember extends JDialog {
 			txtFullname = new JTextField();
 			txtFullname.setLocation(new Point(150, 165));
 			txtFullname.setSize(new Dimension(228, 20));
+			txtFullname.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtUsername.getText();
+					if (a.length()>30 || a.length()<10) {
+						lbNamemess.setText("10-30 chars!! Please type again");
+						lbNamemess.setForeground(Color.red);
+						txtUsername.setText("");
+					}
+					else {
+						if(Method.CheckSpecialCharacter(a)) {
+							JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+							txtUsername.setText(null);
+						}else {
+						lbNamemess.setText("OK");
+						lbNamemess.setForeground(Color.green);
+						}
+					}
+				}
+			});
 		}
 		return txtFullname;
 	}
@@ -187,6 +285,37 @@ public class Addmember extends JDialog {
 			txtPhone = new JTextField();
 			txtPhone.setLocation(new Point(150, 300));
 			txtPhone.setSize(new Dimension(228, 20));
+			txtPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtPhone.getText();
+					char[] array = a.toCharArray();
+					int t = 0;
+					if (a.length()>20){
+						JOptionPane.showMessageDialog(null, "Phone is not more than 20 chars!!");
+						lbPhonemess.setForeground(Color.red);
+						txtPhone.setText("");
+						txtPhone.requestFocus();
+					}
+						
+					for (int i = 0 ; i < array.length ; i++){
+						if (array[i]!='0' && array[i]!='1' && array[i]!='2' &&
+							array[i]!='3' && array[i]!='4' && array[i]!='5' &&
+							array[i]!='6' && array[i]!='7' && array[i]!='8' &&
+							array[i]!='9'){
+							t = 1;
+							break;
+						}
+					}
+					if (t == 1){
+						lbPhonemess.setText("Phone is number only");
+						lbPhonemess.setForeground(Color.red);
+						txtPhone.setText("");
+					}else {
+						lbPhonemess.setText("OK");
+						lbPhonemess.setForeground(Color.green);
+					}
+				}
+			});
 		}
 		return txtPhone;
 	}
@@ -201,6 +330,25 @@ public class Addmember extends JDialog {
 			txtAddress = new JTextField();
 			txtAddress.setLocation(new Point(150, 345));
 			txtAddress.setSize(new Dimension(228, 20));
+			txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtAddress.getText();
+					if (a.length()>30) {
+						lbAdressmess.setText("Address is not more than 30 chars!!");
+						lbAdressmess.setForeground(Color.red);
+						txtAddress.setText("");
+					}
+					else {
+						if(Method.CheckSpecialCharacter(a)) {
+							JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+							txtAddress.setText(null);
+						}else {
+							lbAdressmess.setText("OK");
+							lbAdressmess.setForeground(Color.green);
+						}
+					}
+				}
+			});
 		}
 		return txtAddress;
 	}
@@ -279,6 +427,32 @@ public class Addmember extends JDialog {
 			txtEmail = new JTextField();
 			txtEmail.setLocation(new Point(150, 390));
 			txtEmail.setSize(new Dimension(228, 20));
+			txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtEmail.getText();
+					if (txtEmail.getText().length()>30) {
+						lbEmailmess.setForeground(Color.red);
+						lbEmailmess.setText("Max chars is 30!!!");
+						txtEmail.setText("");
+					}else {
+						if(!Method.checkEmail(a)){
+						lbEmailmess.setText("Email is not correct syntax!!");
+						lbEmailmess.setForeground(Color.red);
+						txtEmail.setText("");
+					}
+						else {
+							if(Method.CheckSpecialCharacter(a)) {
+								JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+								txtEmail.setText(null);
+							}else {
+								lbEmailmess.setText("OK");
+								lbEmailmess.setForeground(Color.green);
+							}
+						}
+					}		
+				}
+					
+			});
 		}
 		return txtEmail;
 	}

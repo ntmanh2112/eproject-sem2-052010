@@ -9,8 +9,14 @@ import java.awt.Rectangle;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+
+
+import common.ChangeUser.changeResult;
+
+import business.UserService;
 
 public class Changepassword extends JDialog {
 
@@ -142,6 +148,30 @@ public class Changepassword extends JDialog {
 			btnChange.setText("Change");
 			btnChange.setSize(new Dimension(107, 27));
 			btnChange.setLocation(new Point(44, 244));
+			btnChange.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					String oldpass = String.valueOf(txtOldpassword.getPassword());
+					String newpass = String.valueOf(txtNewpassword.getPassword());
+					String confirmpass = String.valueOf(txtConfirmpassword.getPassword());
+					try{
+						UserService changepass = new UserService();
+						changeResult cpresult = changepass.changePass(oldpass, newpass, confirmpass);
+						if(cpresult == changeResult.sucessful){
+							JOptionPane.showMessageDialog(null, "Change Password Success!!!");
+	        				 Changepassword.this.dispose();
+						}
+						else if (cpresult == changeResult.fail) {
+							 JOptionPane.showMessageDialog(null, "Confirm pass is different from new pass!!!");
+							
+						}
+						else if (cpresult == changeResult.incorrect) {
+							JOptionPane.showMessageDialog(null, "Old password is incorrect!!!");
+						}
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return btnChange;
 	}
@@ -157,6 +187,13 @@ public class Changepassword extends JDialog {
 			btnReset.setText("Reset");
 			btnReset.setSize(new Dimension(107, 27));
 			btnReset.setLocation(new Point(185, 244));
+			btnReset.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txtConfirmpassword.setText("");
+					txtNewpassword.setText("");
+					txtOldpassword.setText("");
+				}
+			});
 		}
 		return btnReset;
 	}
@@ -172,6 +209,11 @@ public class Changepassword extends JDialog {
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(107, 27));
 			btnExit.setLocation(new Point(330, 244));
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					Changepassword.this.dispose();
+				}
+			});
 		}
 		return btnExit;
 	}
