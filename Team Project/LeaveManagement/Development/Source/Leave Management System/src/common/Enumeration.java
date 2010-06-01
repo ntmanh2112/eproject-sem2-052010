@@ -5,6 +5,8 @@ public class Enumeration {
 		lock,
 		fail,
 		boss,
-		user
+		managerbusiness,
+		manager,
+		enginerr
 	}
 }

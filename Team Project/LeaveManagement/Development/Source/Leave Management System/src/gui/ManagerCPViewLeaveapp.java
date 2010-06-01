@@ -1,14 +1,18 @@
 package gui;
 
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
-public class ManagerBusinessCP extends JFrame {
+public class ManagerCPViewLeaveapp extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -25,10 +29,16 @@ public class ManagerBusinessCP extends JFrame {
 	private JMenuItem mniAbout = null;
 	private JMenuItem mniEditpassword = null;
 	private JMenuItem mniEditProfile = null;
+	private JButton btnApprove = null;
+	private JButton btnReject = null;
+	private JButton btnRefresh = null;
+	private JButton btnExit = null;
+	private JScrollPane jScrollPane = null;
+	private JTable tblLeaveapp = null;
 	/**
 	 * This is the default constructor
 	 */
-	public ManagerBusinessCP() {
+	public ManagerCPViewLeaveapp() {
 		super();
 		initialize();
 	}
@@ -42,7 +52,7 @@ public class ManagerBusinessCP extends JFrame {
 		this.setSize(619, 302);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("Business Manager Control Panel");
+		this.setTitle("Manager Control Panel");
 	}
 
 	/**
@@ -52,8 +62,37 @@ public class ManagerBusinessCP extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
+			gridBagConstraints8.fill = GridBagConstraints.BOTH;
+			gridBagConstraints8.gridy = 0;
+			gridBagConstraints8.weightx = 1.0D;
+			gridBagConstraints8.weighty = 1.0;
+			gridBagConstraints8.ipadx = 4;
+			gridBagConstraints8.gridwidth = 4;
+			gridBagConstraints8.gridx = 0;
+			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
+			gridBagConstraints3.gridx = 3;
+			gridBagConstraints3.weightx = 10.0D;
+			gridBagConstraints3.gridy = 1;
+			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
+			gridBagConstraints2.gridx = 2;
+			gridBagConstraints2.weightx = 10.0D;
+			gridBagConstraints2.gridy = 1;
+			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
+			gridBagConstraints1.gridx = 1;
+			gridBagConstraints1.weightx = 10.0D;
+			gridBagConstraints1.gridy = 1;
+			GridBagConstraints gridBagConstraints = new GridBagConstraints();
+			gridBagConstraints.gridx = 0;
+			gridBagConstraints.weightx = 10.0D;
+			gridBagConstraints.gridy = 1;
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
+			jContentPane.add(getBtnApprove(), gridBagConstraints);
+			jContentPane.add(getBtnReject(), gridBagConstraints1);
+			jContentPane.add(getBtnRefresh(), gridBagConstraints2);
+			jContentPane.add(getBtnExit(), gridBagConstraints3);
+			jContentPane.add(getJScrollPane(), gridBagConstraints8);
 		}
 		return jContentPane;
 	}
@@ -236,6 +275,83 @@ public class ManagerBusinessCP extends JFrame {
 			mniEditProfile.setText("Edit Profile");
 		}
 		return mniEditProfile;
+	}
+
+	/**
+	 * This method initializes btnApprove	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnApprove() {
+		if (btnApprove == null) {
+			btnApprove = new JButton();
+			btnApprove.setText("Approve");
+		}
+		return btnApprove;
+	}
+
+	/**
+	 * This method initializes btnReject	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnReject() {
+		if (btnReject == null) {
+			btnReject = new JButton();
+			btnReject.setText("Reject");
+		}
+		return btnReject;
+	}
+
+	/**
+	 * This method initializes btnRefresh	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnRefresh() {
+		if (btnRefresh == null) {
+			btnRefresh = new JButton();
+			btnRefresh.setText("Refresh");
+		}
+		return btnRefresh;
+	}
+
+	/**
+	 * This method initializes btnExit	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnExit() {
+		if (btnExit == null) {
+			btnExit = new JButton();
+			btnExit.setText("Exit");
+		}
+		return btnExit;
+	}
+
+	/**
+	 * This method initializes jScrollPane	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane() {
+		if (jScrollPane == null) {
+			jScrollPane = new JScrollPane();
+			jScrollPane.setViewportView(getTblLeaveapp());
+		}
+		return jScrollPane;
+	}
+
+	/**
+	 * This method initializes tblLeaveapp	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblLeaveapp() {
+		if (tblLeaveapp == null) {
+			tblLeaveapp = new JTable();
+		}
+		return tblLeaveapp;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
