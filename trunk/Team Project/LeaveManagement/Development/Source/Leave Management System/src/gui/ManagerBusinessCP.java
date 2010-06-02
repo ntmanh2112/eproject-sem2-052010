@@ -266,6 +266,11 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniAdduser == null) {
 			mniAdduser = new JMenuItem();
 			mniAdduser.setText("Add User");
+			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Addmember(new ManagerBusinessCP()).setVisible(true);
+				}
+			});
 		}
 		return mniAdduser;
 	}

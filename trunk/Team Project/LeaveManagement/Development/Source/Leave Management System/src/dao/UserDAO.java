@@ -1,10 +1,11 @@
 
 package dao;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
+
+import model.User;
 
 import common.ConnectionDB;
 import common.AddUser.addResult;
@@ -12,42 +13,51 @@ import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
 
 public class UserDAO {
-	public addResult addUser(String username, String password ,String fullname , Date birthday ,String address,String gender,String phone,String email){
+	public addResult addUser(User  user){
 		addResult addresult = null;
 		try {
 			ConnectionDB conn = new ConnectionDB();
 			conn.connect();
+			String sql = "SELECT USERNAME FROM  TBL_USER  WHERE TBL_USER.USERNAME = ?";
+			String sql1 = " INSERT INTO TBL_USER (USERNAME ,PASSWORD,STATUS) VALUES (? ,? ,1)";
+			String sql2 = "INSERT INTO TBL_EMLOYEE (FULLNAME,BIRTHDAY,ADDRESS,GENDER,PHONE,EMAIL,ID_POSITION) VALUES(?,?,?,?,?,?,'1')";
+			PreparedStatement psmt = conn.getConn().prepareStatement(sql);
+			PreparedStatement psmt1 = conn.getConn().prepareStatement(sql1);
+			PreparedStatement psmt2 = conn.getConn().prepareStatement(sql2);
+			psmt.setString(1, user.getUsername());
+			psmt.setString(2,user.getPassword());
+			psmt.setString(3, user.getFullname());
+			psmt.setDate(4, user.getBirthday());
+			psmt.setString(5, user.getAddress());
+			psmt.setString(6, user.getGender());
+			psmt.setString(7, user.getPhone());
+			psmt.setString(8, user.getEmail());
 			
-			String sql = "INSERT INTO USER VALUES(?,?,?,?,?,?,?,'1','1')";
-			String sql1 = "SELECT USERNAME FROM  TBL_USER  WHERE TBL_USER.USERNAME = ?";
-			PreparedStatement psmt = conn.getConn().prepareStatement(sql1);
-			psmt.setString(1, username);
-			psmt.setString(2,password);
-			psmt.setString(3, fullname);
-			psmt.setDate(4, birthday);
-			psmt.setString(5, address);
-			psmt.setString(6, gender);
-			psmt.setString(7, phone);
-			psmt.setString(8, email);
-			ResultSet rs1 = psmt.executeQuery();
+			psmt1.setString(1, user.getUsername());
+			psmt1.setString(2,user.getPassword());
+			
+			psmt2.setString(3, user.getFullname());
+			psmt2.setDate(4, user.getBirthday());
+			psmt2.setString(5, user.getAddress());
+			psmt2.setString(6, user.getGender());
+			psmt2.setString(7, user.getPhone());
+			psmt2.setString(8, user.getEmail());
+			
+			ResultSet rs = psmt.executeQuery();
 			int i =0;
-			while(rs1.next()){
+			while(rs.next()){
 				i++;
 			}
 			if(i!=0){
 				addresult = addResult.incorrect;
 			}
+			
 			else {
-				if(username.isEmpty()||password.isEmpty()||fullname.isEmpty()||address.isEmpty()||gender.isEmpty()||phone.isEmpty()||email.isEmpty()){
-					addresult = addResult.fail;
-				}
-				else {
-					psmt = conn.getConn().prepareStatement(sql);
-					psmt.executeUpdate();
+					
+					psmt1.executeUpdate();
+					psmt2.executeUpdate();
 					addresult = addResult.sucessful;
 				}
-			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return addresult;
