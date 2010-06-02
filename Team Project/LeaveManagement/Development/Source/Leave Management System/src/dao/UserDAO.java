@@ -1,17 +1,60 @@
 
 package dao;
-import gui.Changepassword;
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
 
 import common.ConnectionDB;
+import common.AddUser.addResult;
 import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
 
 public class UserDAO {
+	public addResult addUser(String username, String password ,String fullname , Date birthday ,String address,String gender,String phone,String email){
+		addResult addresult = null;
+		try {
+			ConnectionDB conn = new ConnectionDB();
+			conn.connect();
+			
+			String sql = "INSERT INTO USER VALUES(?,?,?,?,?,?,?,'1','1')";
+			String sql1 = "SELECT USERNAME FROM  TBL_USER  WHERE TBL_USER.USERNAME = ?";
+			PreparedStatement psmt = conn.getConn().prepareStatement(sql1);
+			psmt.setString(1, username);
+			psmt.setString(2,password);
+			psmt.setString(3, fullname);
+			psmt.setDate(4, birthday);
+			psmt.setString(5, address);
+			psmt.setString(6, gender);
+			psmt.setString(7, phone);
+			psmt.setString(8, email);
+			ResultSet rs1 = psmt.executeQuery();
+			int i =0;
+			while(rs1.next()){
+				i++;
+			}
+			if(i!=0){
+				addresult = addResult.incorrect;
+			}
+			else {
+				if(username.isEmpty()||password.isEmpty()||fullname.isEmpty()||address.isEmpty()||gender.isEmpty()||phone.isEmpty()||email.isEmpty()){
+					addresult = addResult.fail;
+				}
+				else {
+					psmt = conn.getConn().prepareStatement(sql);
+					psmt.executeUpdate();
+					addresult = addResult.sucessful;
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return addresult;
+		}
+		return addresult;
+	}
+	
 	
 	public loginResult loginUser(String username,String password){
 		loginResult result = null;
@@ -20,7 +63,7 @@ public class UserDAO {
 			int status = 0;
 			ConnectionDB connection = new ConnectionDB();
 			connection.connect();
-			String sql = "SELECT tbl_user.username,password,status,ID_POSITION from tbl_employee INNER JOIN TBL_user on TBL_EMPLOYEE.username=tbl_user.username WHRE TBL_USER.USERNAME =? AND TBL_USER.PASSWORD = ?";
+			String sql = "SELECT tbl_user.username,password,status,ID_POSITION from tbl_employee INNER JOIN TBL_user on TBL_EMPLOYEE.username=tbl_user.username WHERE TBL_USER.USERNAME =? AND TBL_USER.PASSWORD = ?";
 			PreparedStatement psmt = connection.getConn().prepareStatement(sql);
 			psmt.setString(1, username);
 			psmt.setString(2, password);
@@ -96,6 +139,10 @@ public class UserDAO {
 		return cpresult;
 	}
 
+
+
+	
+	
 	/*public static User loadUser(String username){
 		User user = new User();
 		try{
