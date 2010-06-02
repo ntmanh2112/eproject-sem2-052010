@@ -1,12 +1,17 @@
 package gui;
 
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+
 
 public class ManagerBusinessCP extends JFrame {
 
@@ -162,6 +167,12 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniCreateLA == null) {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
+			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(new ManagerBusinessCP()).setVisible(true);
+				}
+			});
+			
 		}
 		return mniCreateLA;
 	}
@@ -175,6 +186,11 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniReportmonth == null) {
 			mniReportmonth = new JMenuItem();
 			mniReportmonth.setText("Report Month");
+			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewReportMonth().setVisible(true);
+				}
+			});	
 		}
 		return mniReportmonth;
 	}
@@ -188,6 +204,11 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniReportYeah == null) {
 			mniReportYeah = new JMenuItem();
 			mniReportYeah.setText("Report Year");
+			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewReportYear().setVisible(true);
+				}
+			});
 		}
 		return mniReportYeah;
 	}
@@ -201,6 +222,11 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniLeaveAP == null) {
 			mniLeaveAP = new JMenuItem();
 			mniLeaveAP.setText("View Leave AP");
+			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewLeaveapp().setVisible(true);
+				}
+			});	
 		}
 		return mniLeaveAP;
 	}
@@ -240,6 +266,11 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniEditpassword == null) {
 			mniEditpassword = new JMenuItem();
 			mniEditpassword.setText("Edit Password");
+			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Changepassword(new ManagerBusinessCP()).setVisible(true);
+				}
+			});
 		}
 		return mniEditpassword;
 	}
@@ -253,6 +284,11 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniEditProfile == null) {
 			mniEditProfile = new JMenuItem();
 			mniEditProfile.setText("Edit Profile");
+			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(new ManagerBusinessCP()).setVisible(true);
+				}
+			});
 		}
 		return mniEditProfile;
 	}
@@ -284,6 +320,12 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniViewuser == null) {
 			mniViewuser = new JMenuItem();
 			mniViewuser.setText("View User");
+			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewUser().setVisible(true);
+				}
+			});	
+			
 		}
 		return mniViewuser;
 	}

@@ -143,6 +143,12 @@ public class ManagerCP extends JFrame {
 		if (mniCreateLA == null) {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
+			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(new ManagerCP()).setVisible(true);
+				}
+			});
+			
 		}
 		return mniCreateLA;
 	}
@@ -156,6 +162,11 @@ public class ManagerCP extends JFrame {
 		if (mniReportmonth == null) {
 			mniReportmonth = new JMenuItem();
 			mniReportmonth.setText("Report Month");
+			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerCPViewReportMonth().setVisible(true);
+				}
+			});	
 		}
 		return mniReportmonth;
 	}
@@ -169,6 +180,11 @@ public class ManagerCP extends JFrame {
 		if (mniReportYeah == null) {
 			mniReportYeah = new JMenuItem();
 			mniReportYeah.setText("Report Year");
+			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerCPViewReportYear().setVisible(true);
+				}
+			});
 		}
 		return mniReportYeah;
 	}
@@ -182,6 +198,11 @@ public class ManagerCP extends JFrame {
 		if (mniLeaveAP == null) {
 			mniLeaveAP = new JMenuItem();
 			mniLeaveAP.setText("View Leave AP");
+			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerCPViewLeaveapp().setVisible(true);
+				}
+			});	
 		}
 		return mniLeaveAP;
 	}
@@ -221,6 +242,11 @@ public class ManagerCP extends JFrame {
 		if (mniEditpassword == null) {
 			mniEditpassword = new JMenuItem();
 			mniEditpassword.setText("Edit Password");
+			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Changepassword(new ManagerCP()).setVisible(true);
+				}
+			});
 		}
 		return mniEditpassword;
 	}
@@ -234,8 +260,15 @@ public class ManagerCP extends JFrame {
 		if (mniEditProfile == null) {
 			mniEditProfile = new JMenuItem();
 			mniEditProfile.setText("Edit Profile");
+			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(new ManagerCP()).setVisible(true);
+				}
+			});
 		}
 		return mniEditProfile;
 	}
-
+	public static void main(String[] args){
+		new ManagerCP().setVisible(true);
+	}
 }  //  @jve:decl-index=0:visual-constraint="10,10"
