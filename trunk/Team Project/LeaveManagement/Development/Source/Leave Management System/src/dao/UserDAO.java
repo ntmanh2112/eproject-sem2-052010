@@ -63,7 +63,7 @@ public class UserDAO {
 			int status = 0;
 			ConnectionDB connection = new ConnectionDB();
 			connection.connect();
-			String sql = "SELECT TBL_USER.USERNAME,PASSWORD,STATUS,ID_POSITION FROM TBL_EMLOYEE INNER JOIN TBL_USER ON TBL_EMPLOYEE.ID_USER = TBL_USER.ID_USER WHERE TBL_USER.USERNAME =? AND TBL_USER.PASSWORD = ?";
+			String sql = "SELECT TBL_USER.USERNAME,PASSWORD,STATUS,ID_POSITION FROM TBL_EMPLOYEE INNER JOIN TBL_USER ON TBL_EMPLOYEE.ID_USER = TBL_USER.ID_USER WHERE TBL_USER.USERNAME = ? AND TBL_USER.PASSWORD = ?";
 			PreparedStatement psmt = connection.getConn().prepareStatement(sql);
 			psmt.setString(1, username);
 			psmt.setString(2, password);
