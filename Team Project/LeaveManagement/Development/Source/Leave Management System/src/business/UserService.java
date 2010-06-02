@@ -1,10 +1,11 @@
 package business;
 
-import java.sql.Date;
+import model.User;
 
 import common.AddUser.addResult;
 import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
+
 import dao.UserDAO;
 
 public class UserService {
@@ -19,9 +20,9 @@ public class UserService {
 		changeResult result = dao.changePass(oldpass, newpass, confirmpass);
 		return result;
 	}
-	public addResult addUser(String username, String password ,String fullname ,Date birthday ,String address,String gender,String phone,String email){
+	public addResult addUser(User user){
 		UserDAO dao = new UserDAO();
-		addResult result = dao.addUser(username, password, fullname, birthday, address, gender, phone, email);
+		addResult result = dao.addUser(user);
 		return result;
 	}
 }

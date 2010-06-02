@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
+import model.User;
 import business.Method;
 import business.UserService;
 
@@ -91,7 +91,7 @@ public class Addmember extends JDialog {
 			lbMonth.setBounds(new Rectangle(254, 226, 38, 16));
 			lbMonth.setText("Month");
 			jLabel2 = new JLabel();
-			jLabel2.setBounds(new Rectangle(152, 226, 38, 16));
+			jLabel2.setBounds(new Rectangle(158, 226, 38, 16));
 			jLabel2.setText("Year");
 			lbNamemess = new JLabel();
 			lbNamemess.setText("");
@@ -280,7 +280,7 @@ public class Addmember extends JDialog {
 			txtFullname.setSize(new Dimension(228, 20));
 			txtFullname.addFocusListener(new java.awt.event.FocusAdapter() {
 				public void focusLost(java.awt.event.FocusEvent e) {
-					String a = txtUsername.getText();
+					String a = txtFullname.getText();
 					if (a.length()>30 || a.length()<10) {
 						lbNamemess.setText("10-30 chars!! Please type again");
 						lbNamemess.setForeground(Color.red);
@@ -409,17 +409,18 @@ public class Addmember extends JDialog {
 			btnAdd.setLocation(new Point(16, 435));
 			btnAdd.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					String username = txtUsername.getText();
-					String password = String.valueOf(txtPassword.getPassword());
-					String fullname = txtFullname.getText() ;
-					Date birtday =  Date.valueOf(cbxYear.getSelectedItem().toString()+"-"+cbxMonth.getSelectedItem().toString()+"-"+cbxDay.getSelectedItem().toString()) ;
-					String address = txtAddress.getText();
-					String gender = cbxSex.getSelectedItem().toString();
-					String phone = txtPhone.getText();
-					String email = txtEmail.getText();
+					User user = new User();
+					user.setUsername(txtUsername.getText())  ;
+					user.setPassword(String.valueOf(txtPassword.getPassword())) ;
+					user.setFullname(txtFullname.getText());
+					user.setBirthday(Date.valueOf(cbxYear.getSelectedItem().toString()+"-"+cbxMonth.getSelectedItem().toString()+"-"+cbxDay.getSelectedItem().toString()));
+					user.setAddress( txtAddress.getText());
+					user.setGender(cbxSex.getSelectedItem().toString()) ;
+					user.setPhone(txtPhone.getText());
+					user.setEmail( txtEmail.getText());
 					try{
 						UserService service = new UserService();
-						addResult result = service.addUser(username, password, fullname, birtday, address, gender, phone, email);
+						addResult result = service.addUser(user);
 						if(result == addResult.fail){
 							JOptionPane.showMessageDialog(null,"Please input all field (*)!!");
 						}
@@ -524,7 +525,7 @@ public class Addmember extends JDialog {
 		if (cbxYear == null) {
 			cbxYear = new JComboBox();
 			cbxYear.setBounds(new Rectangle(196, 224, 51, 25));
-			for (int i = 0; i > 31; i++){
+			for (int i = 1975; i < 1995; i++){
 				cbxYear.addItem(i);
 			}
 		}
@@ -540,7 +541,7 @@ public class Addmember extends JDialog {
 		if (cbxMonth == null) {
 			cbxMonth = new JComboBox();
 			cbxMonth.setBounds(new Rectangle(295, 226, 45, 25));
-			for(int j=0;j<13;j++){
+			for(int j=1;j<13;j++){
 				cbxMonth.addItem(j);
 			}
 		}
@@ -556,7 +557,7 @@ public class Addmember extends JDialog {
 		if (cbxDay == null) {
 			cbxDay = new JComboBox();
 			cbxDay.setBounds(new Rectangle(385, 226, 43, 25));
-			for(int i = 0 ; i<32;i++){
+			for(int i = 1 ; i<32;i++){
 				cbxDay.addItem(i);
 			}
 		}
