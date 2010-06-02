@@ -45,7 +45,7 @@ public class Editprofile extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(519, 384);
+		this.setSize(411, 384);
 		this.setTitle("Edit Profile");
 		this.setContentPane(getJContentPane());
 	}
