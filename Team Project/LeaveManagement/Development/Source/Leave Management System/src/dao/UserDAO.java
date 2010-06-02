@@ -20,35 +20,25 @@ public class UserDAO {
 			conn.connect();
 			String sql = "SELECT USERNAME FROM  TBL_USER  WHERE TBL_USER.USERNAME = ?";
 			String sql1 = " INSERT INTO TBL_USER (USERNAME ,PASSWORD,STATUS) VALUES (? ,? ,1)";
-			String sql2 = "INSERT INTO TBL_EMLOYEE (FULLNAME,BIRTHDAY,ADDRESS,GENDER,PHONE,EMAIL,ID_POSITION) VALUES(?,?,?,?,?,?,'1')";
+			String sql2 = "INSERT INTO TBL_EMPLOYEE (FULLNAME,BIRTHDAY,ADDRESS,GENDER,PHONE,EMAIL,ID_POSITION) VALUES(?,?,?,?,?,?,1)";
 			PreparedStatement psmt = conn.getConn().prepareStatement(sql);
 			PreparedStatement psmt1 = conn.getConn().prepareStatement(sql1);
 			PreparedStatement psmt2 = conn.getConn().prepareStatement(sql2);
 			psmt.setString(1, user.getUsername());
-			psmt.setString(2,user.getPassword());
-			psmt.setString(3, user.getFullname());
-			psmt.setDate(4, user.getBirthday());
-			psmt.setString(5, user.getAddress());
-			psmt.setString(6, user.getGender());
-			psmt.setString(7, user.getPhone());
-			psmt.setString(8, user.getEmail());
 			
 			psmt1.setString(1, user.getUsername());
 			psmt1.setString(2,user.getPassword());
 			
-			psmt2.setString(3, user.getFullname());
-			psmt2.setDate(4, user.getBirthday());
-			psmt2.setString(5, user.getAddress());
-			psmt2.setString(6, user.getGender());
-			psmt2.setString(7, user.getPhone());
-			psmt2.setString(8, user.getEmail());
+			
+			psmt2.setString(1, user.getFullname());
+			psmt2.setDate(2, user.getBirthday());
+			psmt2.setString(3, user.getAddress());
+			psmt2.setString(4, user.getGender());
+			psmt2.setString(5, user.getPhone());
+			psmt2.setString(6, user.getEmail());
 			
 			ResultSet rs = psmt.executeQuery();
-			int i =0;
-			while(rs.next()){
-				i++;
-			}
-			if(i!=0){
+			if (rs.wasNull()){
 				addresult = addResult.incorrect;
 			}
 			

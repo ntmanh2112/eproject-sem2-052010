@@ -7,6 +7,7 @@ import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import model.User;
 import business.Method;
 import business.UserService;
@@ -413,11 +415,18 @@ public class Addmember extends JDialog {
 					user.setUsername(txtUsername.getText())  ;
 					user.setPassword(String.valueOf(txtPassword.getPassword())) ;
 					user.setFullname(txtFullname.getText());
-					user.setBirthday(Date.valueOf(cbxYear.getSelectedItem().toString()+"-"+cbxMonth.getSelectedItem().toString()+"-"+cbxDay.getSelectedItem().toString()));
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					try {
+					java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
+					Date birthday = new Date(date.getTime());
+					user.setBirthday(birthday);
 					user.setAddress( txtAddress.getText());
 					user.setGender(cbxSex.getSelectedItem().toString()) ;
 					user.setPhone(txtPhone.getText());
 					user.setEmail( txtEmail.getText());
+					}catch (Exception ex){
+						ex.printStackTrace();
+					}
 					try{
 						UserService service = new UserService();
 						addResult result = service.addUser(user);
