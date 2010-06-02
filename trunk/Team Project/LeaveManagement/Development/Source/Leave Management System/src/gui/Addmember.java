@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.sql.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,7 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import business.Method;
+import business.UserService;
+
+import common.AddUser.addResult;
 
 public class Addmember extends JDialog {
 
@@ -47,6 +52,12 @@ public class Addmember extends JDialog {
 	private JLabel lbAdressmess = null;
 	private JLabel lbEmailmess = null;
 	private JLabel lbNamemess = null;
+	private JLabel jLabel2 = null;
+	private JComboBox cbxYear = null;
+	private JLabel lbMonth = null;
+	private JComboBox cbxMonth = null;
+	private JLabel lbDay = null;
+	private JComboBox cbxDay = null;
 	/**
 	 * @param owner
 	 */
@@ -61,7 +72,7 @@ public class Addmember extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(432, 535);
+		this.setSize(462, 535);
 		this.setTitle("Add User");
 		this.setContentPane(getJContentPane());
 	}
@@ -73,6 +84,15 @@ public class Addmember extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbDay = new JLabel();
+			lbDay.setBounds(new Rectangle(348, 226, 31, 16));
+			lbDay.setText("Day");
+			lbMonth = new JLabel();
+			lbMonth.setBounds(new Rectangle(254, 226, 38, 16));
+			lbMonth.setText("Month");
+			jLabel2 = new JLabel();
+			jLabel2.setBounds(new Rectangle(152, 226, 38, 16));
+			jLabel2.setText("Year");
 			lbNamemess = new JLabel();
 			lbNamemess.setText("");
 			lbNamemess.setSize(new Dimension(228, 20));
@@ -103,8 +123,8 @@ public class Addmember extends JDialog {
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel1.setLocation(new Point(15, 390));
 			lbSex = new JLabel();
-			lbSex.setText("Sex(*)");
-			lbSex.setSize(new Dimension(65, 20));
+			lbSex.setText("Gender(*)");
+			lbSex.setSize(new Dimension(89, 20));
 			lbSex.setFont(new Font("Dialog", Font.BOLD, 18));
 			lbSex.setLocation(new Point(15, 255));
 			lbAddress = new JLabel();
@@ -121,7 +141,7 @@ public class Addmember extends JDialog {
 			lbBirthday.setText("Birthday(*)");
 			lbBirthday.setSize(new Dimension(102, 20));
 			lbBirthday.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbBirthday.setLocation(new Point(15, 211));
+			lbBirthday.setLocation(new Point(15, 225));
 			lbFullname = new JLabel();
 			lbFullname.setText("Full Name(*)");
 			lbFullname.setSize(new Dimension(122, 20));
@@ -170,6 +190,12 @@ public class Addmember extends JDialog {
 			jContentPane.add(lbAdressmess, null);
 			jContentPane.add(lbEmailmess, null);
 			jContentPane.add(lbNamemess, null);
+			jContentPane.add(jLabel2, null);
+			jContentPane.add(getCbxYear(), null);
+			jContentPane.add(lbMonth, null);
+			jContentPane.add(getCbxMonth(), null);
+			jContentPane.add(lbDay, null);
+			jContentPane.add(getCbxDay(), null);
 		}
 		return jContentPane;
 	}
@@ -360,9 +386,12 @@ public class Addmember extends JDialog {
 	 */
 	private JComboBox getCbxSex() {
 		if (cbxSex == null) {
-			cbxSex = new JComboBox();
+			String[] data = {"Male","Female"};
+			cbxSex = new JComboBox(data);
 			cbxSex.setLocation(new Point(150, 255));
 			cbxSex.setSize(new Dimension(65, 20));
+			
+			
 		}
 		return cbxSex;
 	}
@@ -378,6 +407,35 @@ public class Addmember extends JDialog {
 			btnAdd.setText("Add");
 			btnAdd.setSize(new Dimension(106, 30));
 			btnAdd.setLocation(new Point(16, 435));
+			btnAdd.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					String username = txtUsername.getText();
+					String password = String.valueOf(txtPassword.getPassword());
+					String fullname = txtFullname.getText() ;
+					Date birtday =  Date.valueOf(cbxYear.getSelectedItem().toString()+"-"+cbxMonth.getSelectedItem().toString()+"-"+cbxDay.getSelectedItem().toString()) ;
+					String address = txtAddress.getText();
+					String gender = cbxSex.getSelectedItem().toString();
+					String phone = txtPhone.getText();
+					String email = txtEmail.getText();
+					try{
+						UserService service = new UserService();
+						addResult result = service.addUser(username, password, fullname, birtday, address, gender, phone, email);
+						if(result == addResult.fail){
+							JOptionPane.showMessageDialog(null,"Please input all field (*)!!");
+						}
+						else if (result == addResult.incorrect) {
+							JOptionPane.showMessageDialog(null, "This USERNAME is exist!!");
+						}
+						else if (result == addResult.sucessful) {
+							JOptionPane.showMessageDialog(null, "Add member successfully!!");
+							Addmember.this.dispose();
+						}
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					
+				}
+			});
 		}
 		return btnAdd;
 	}
@@ -455,6 +513,54 @@ public class Addmember extends JDialog {
 			});
 		}
 		return txtEmail;
+	}
+
+	/**
+	 * This method initializes cbxYear	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxYear() {
+		if (cbxYear == null) {
+			cbxYear = new JComboBox();
+			cbxYear.setBounds(new Rectangle(196, 224, 51, 25));
+			for (int i = 0; i > 31; i++){
+				cbxYear.addItem(i);
+			}
+		}
+		return cbxYear;
+	}
+
+	/**
+	 * This method initializes cbxMonth	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxMonth() {
+		if (cbxMonth == null) {
+			cbxMonth = new JComboBox();
+			cbxMonth.setBounds(new Rectangle(295, 226, 45, 25));
+			for(int j=0;j<13;j++){
+				cbxMonth.addItem(j);
+			}
+		}
+		return cbxMonth;
+	}
+
+	/**
+	 * This method initializes cbxDay	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxDay() {
+		if (cbxDay == null) {
+			cbxDay = new JComboBox();
+			cbxDay.setBounds(new Rectangle(385, 226, 43, 25));
+			for(int i = 0 ; i<32;i++){
+				cbxDay.addItem(i);
+			}
+		}
+		return cbxDay;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,30"

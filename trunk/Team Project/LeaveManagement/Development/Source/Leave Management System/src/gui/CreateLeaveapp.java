@@ -19,18 +19,21 @@ public class CreateLeaveapp extends JDialog {
 	private JLabel jLabel = null;
 	private JLabel jLabel1 = null;
 	private JLabel jLabel2 = null;
-	private JLabel jLabel3 = null;
 	private JLabel jLabel4 = null;
 	private JLabel jLabel5 = null;
 	private JLabel jLabel6 = null;
 	private JTextField txtUsername = null;
-	private JTextField txtSumdayoff = null;
 	private JTextField txtReason = null;
 	private JTextField txtAddress = null;
 	private JTextField txtPhone = null;
 	private JButton btnSend = null;
 	private JButton btnReset = null;
 	private JButton btnExit = null;
+	private JTextField txtDatefrom = null;
+	private JButton btnCalendar = null;
+	private JLabel lbDateto = null;
+	private JTextField txtDateto = null;
+	private JButton btnCalendar1 = null;
 
 	/**
 	 * @param owner
@@ -46,7 +49,7 @@ public class CreateLeaveapp extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(423, 448);
+		this.setSize(468, 496);
 		this.setContentPane(getJContentPane());
 	}
 
@@ -57,56 +60,60 @@ public class CreateLeaveapp extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbDateto = new JLabel();
+			lbDateto.setText("Date to (*)");
+			lbDateto.setLocation(new Point(15, 151));
+			lbDateto.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbDateto.setSize(new Dimension(107, 20));
 			jLabel6 = new JLabel();
 			jLabel6.setText("Phone(*)");
 			jLabel6.setSize(new Dimension(121, 20));
 			jLabel6.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel6.setLocation(new Point(15, 300));
+			jLabel6.setLocation(new Point(17, 298));
 			jLabel5 = new JLabel();
 			jLabel5.setText("Address(*)");
 			jLabel5.setSize(new Dimension(121, 20));
 			jLabel5.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel5.setLocation(new Point(15, 252));
+			jLabel5.setLocation(new Point(15, 255));
 			jLabel4 = new JLabel();
 			jLabel4.setText("Reason(*)");
 			jLabel4.setSize(new Dimension(121, 20));
 			jLabel4.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel4.setLocation(new Point(15, 194));
-			jLabel3 = new JLabel();
-			jLabel3.setText("Sum Day Off(*)");
-			jLabel3.setSize(new Dimension(137, 20));
-			jLabel3.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel3.setLocation(new Point(15, 146));
+			jLabel4.setLocation(new Point(15, 196));
 			jLabel2 = new JLabel();
 			jLabel2.setText("Date from(*)");
 			jLabel2.setSize(new Dimension(121, 20));
 			jLabel2.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel2.setLocation(new Point(15, 101));
+			jLabel2.setLocation(new Point(15, 105));
 			jLabel1 = new JLabel();
 			jLabel1.setText("Full Name");
 			jLabel1.setSize(new Dimension(121, 20));
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel1.setLocation(new Point(15, 56));
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(153, 8, 144, 16));
+			jLabel.setBounds(new Rectangle(172, 3, 111, 37));
+			jLabel.setFont(new Font("Dialog", Font.BOLD, 24));
 			jLabel.setText("Leav app");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(jLabel, null);
 			jContentPane.add(jLabel1, null);
 			jContentPane.add(jLabel2, null);
-			jContentPane.add(jLabel3, null);
 			jContentPane.add(jLabel4, null);
 			jContentPane.add(jLabel5, null);
 			jContentPane.add(jLabel6, null);
 			jContentPane.add(getTxtUsername(), null);
-			jContentPane.add(getTxtSumdayoff(), null);
 			jContentPane.add(getTxtReason(), null);
 			jContentPane.add(getTxtAddress(), null);
 			jContentPane.add(getTxtPhone(), null);
 			jContentPane.add(getBtnSend(), null);
 			jContentPane.add(getBtnReset(), null);
 			jContentPane.add(getBtnExit(), null);
+			jContentPane.add(getTxtDatefrom(), null);
+			jContentPane.add(getBtnCalendar(), null);
+			jContentPane.add(lbDateto, null);
+			jContentPane.add(getTxtDateto(), null);
+			jContentPane.add(getBtnCalendar1(), null);
 		}
 		return jContentPane;
 	}
@@ -120,23 +127,9 @@ public class CreateLeaveapp extends JDialog {
 		if (txtUsername == null) {
 			txtUsername = new JTextField();
 			txtUsername.setLocation(new Point(165, 56));
-			txtUsername.setSize(new Dimension(228, 20));
+			txtUsername.setSize(new Dimension(271, 20));
 		}
 		return txtUsername;
-	}
-
-	/**
-	 * This method initializes txtSumdayoff	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getTxtSumdayoff() {
-		if (txtSumdayoff == null) {
-			txtSumdayoff = new JTextField();
-			txtSumdayoff.setLocation(new Point(165, 146));
-			txtSumdayoff.setSize(new Dimension(228, 20));
-		}
-		return txtSumdayoff;
 	}
 
 	/**
@@ -147,8 +140,8 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtReason() {
 		if (txtReason == null) {
 			txtReason = new JTextField();
-			txtReason.setLocation(new Point(165, 194));
-			txtReason.setSize(new Dimension(228, 40));
+			txtReason.setLocation(new Point(164, 196));
+			txtReason.setSize(new Dimension(271, 40));
 		}
 		return txtReason;
 	}
@@ -161,8 +154,8 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtAddress() {
 		if (txtAddress == null) {
 			txtAddress = new JTextField();
-			txtAddress.setLocation(new Point(164, 252));
-			txtAddress.setSize(new Dimension(228, 20));
+			txtAddress.setLocation(new Point(165, 255));
+			txtAddress.setSize(new Dimension(271, 20));
 		}
 		return txtAddress;
 	}
@@ -175,8 +168,8 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtPhone() {
 		if (txtPhone == null) {
 			txtPhone = new JTextField();
-			txtPhone.setLocation(new Point(164, 300));
-			txtPhone.setSize(new Dimension(228, 20));
+			txtPhone.setLocation(new Point(165, 298));
+			txtPhone.setSize(new Dimension(271, 20));
 		}
 		return txtPhone;
 	}
@@ -190,7 +183,7 @@ public class CreateLeaveapp extends JDialog {
 		if (btnSend == null) {
 			btnSend = new JButton();
 			btnSend.setFont(new Font("Dialog", Font.BOLD, 14));
-			btnSend.setLocation(new Point(15, 345));
+			btnSend.setLocation(new Point(30, 345));
 			btnSend.setSize(new Dimension(106, 30));
 			btnSend.setText("Send");
 		}
@@ -207,7 +200,7 @@ public class CreateLeaveapp extends JDialog {
 			btnReset = new JButton();
 			btnReset.setText("Reset");
 			btnReset.setSize(new Dimension(106, 30));
-			btnReset.setLocation(new Point(150, 345));
+			btnReset.setLocation(new Point(164, 345));
 		}
 		return btnReset;
 	}
@@ -222,9 +215,69 @@ public class CreateLeaveapp extends JDialog {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(106, 30));
-			btnExit.setLocation(new Point(286, 345));
+			btnExit.setLocation(new Point(301, 345));
 		}
 		return btnExit;
+	}
+
+	/**
+	 * This method initializes txtDatefrom	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtDatefrom() {
+		if (txtDatefrom == null) {
+			txtDatefrom = new JTextField();
+			txtDatefrom.setLocation(new Point(164, 105));
+			txtDatefrom.setSize(new Dimension(151, 20));
+		}
+		return txtDatefrom;
+	}
+
+	/**
+	 * This method initializes btnCalendar	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnCalendar() {
+		if (btnCalendar == null) {
+			btnCalendar = new JButton();
+			btnCalendar.setText("Calendar");
+			btnCalendar.setSize(new Dimension(96, 20));
+			btnCalendar.setLocation(new Point(331, 105));
+		}
+		return btnCalendar;
+	}
+
+	/**
+	 * This method initializes txtDateto	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtDateto() {
+		if (txtDateto == null) {
+			txtDateto = new JTextField();
+			txtDateto.setLocation(new Point(164, 151));
+			txtDateto.setSize(new Dimension(151, 20));
+		}
+		return txtDateto;
+	}
+
+	/**
+	 * This method initializes btnCalendar1	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnCalendar1() {
+		if (btnCalendar1 == null) {
+			btnCalendar1 = new JButton();
+			btnCalendar1.setText("Calendar");
+			btnCalendar1.setPreferredSize(new Dimension(96, 20));
+			btnCalendar1.setLocation(new Point(333, 151));
+			btnCalendar1.setSize(new Dimension(96, 20));
+			btnCalendar1.setName("");
+		}
+		return btnCalendar1;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

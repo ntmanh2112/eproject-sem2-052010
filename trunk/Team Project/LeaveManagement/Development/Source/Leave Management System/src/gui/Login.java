@@ -47,6 +47,8 @@ public class Login extends JDialog {
 		this.setSize(414, 334);
 		this.setTitle("Login Form");
 		this.setContentPane(getJContentPane());
+		this.setContentPane(getJContentPane());
+		this.getRootPane().setDefaultButton(btnOk);
 	}
 
 	/**
