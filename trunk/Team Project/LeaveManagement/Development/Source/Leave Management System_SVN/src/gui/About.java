@@ -1,15 +1,15 @@
 package gui;
 
-import javax.swing.JPanel;
-import java.awt.Frame;
-import java.awt.BorderLayout;
-import javax.swing.JDialog;
 import java.awt.Dimension;
-import javax.swing.JLabel;
-import java.awt.Rectangle;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Point;
+import java.awt.Rectangle;
+
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class About extends JDialog {
 

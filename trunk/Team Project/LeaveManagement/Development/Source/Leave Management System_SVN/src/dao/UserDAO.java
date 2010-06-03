@@ -13,7 +13,7 @@ import common.AddUser.addResult;
 import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
 
-
+//ADD GROUP
 public class UserDAO {
 	public void addPosition(User user)throws Exception{
 		ConnectionDB conn = new ConnectionDB();
@@ -23,6 +23,7 @@ public class UserDAO {
 		st.execute(addP);
 		
 	}
+	//EDIT PROFILE
 	public void updateUser(User user)throws Exception{
 		ConnectionDB connectionDB = new ConnectionDB();
 		connectionDB.connect();
@@ -38,6 +39,7 @@ public class UserDAO {
 		psmt.executeUpdate();
 		
 	}
+	//LOCK USER
 	public void  blockUser(User user)throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
@@ -53,6 +55,7 @@ public class UserDAO {
 		}
 		
 	}
+	//ADD USER
 	public addResult addUser(User  user){
 		addResult addresult = null;
 		try {
@@ -96,6 +99,7 @@ public class UserDAO {
 		}
 		return addresult;
 	}
+	//LOAD USER
 	public User loadUser(int id){
 		User user = new User();
 		try{
@@ -119,7 +123,7 @@ public class UserDAO {
 		}
 		
 	}
-	
+	//LOGIN
 	public loginResult loginUser(String username,String password){
 		loginResult result = null;
 		try{
@@ -162,6 +166,7 @@ public class UserDAO {
 		}
 		
 	}
+	//CHANGE PASSWORD
 	public changeResult changePass(String oldpass,String newpass,String confirmpass ){
 		changeResult cpresult = null;
 		try {
@@ -202,7 +207,7 @@ public class UserDAO {
 		}
 		return cpresult;
 	}
-
+	//SELECT USER
 	public ResultSet selectAllUser() throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();

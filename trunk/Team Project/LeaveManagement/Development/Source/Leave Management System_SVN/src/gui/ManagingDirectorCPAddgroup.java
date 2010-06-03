@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,10 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import model.User;
-
 import business.UserService;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
 
 public class ManagingDirectorCPAddgroup extends JFrame {
 
@@ -471,7 +469,7 @@ public class ManagingDirectorCPAddgroup extends JFrame {
 	private JComboBox getCbxGroup() {
 		if (cbxGroup == null) {
 			String[] data = {"","Engineer","Manager","Business Manager"};
-			cbxGroup = new JComboBox();
+			cbxGroup = new JComboBox(data);
 		}
 		return cbxGroup;
 	}
