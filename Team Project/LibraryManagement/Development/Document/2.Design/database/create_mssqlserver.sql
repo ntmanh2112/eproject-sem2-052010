@@ -5,9 +5,20 @@
 /* Project name:                                                          */
 /* Author:                                                                */
 /* Script type:           Database creation script                        */
-/* Created on:            2010-06-01 11:05                                */
+/* Created on:            2010-06-01 12:08                                */
 /* ---------------------------------------------------------------------- */
 
+/* ---------------------------------------------------------------------- */
+/* Database                                                               */
+/* ---------------------------------------------------------------------- */
+
+create database librarymanagement
+
+go
+
+use librarymanagement
+
+go
 
 /* ---------------------------------------------------------------------- */
 /* Tables                                                                 */
@@ -18,11 +29,11 @@
 /* ---------------------------------------------------------------------- */
 
 CREATE TABLE [Employee] (
-    [UserName] VARCHAR(40) NOT NULL,
-    [FullName] VARCHAR(50),
-    [Address] VARCHAR(200),
-    [PhoneNumber] VARCHAR(15),
-    [Department] VARCHAR(100),
+    [UserName] NVARCHAR(40) NOT NULL,
+    [FullName] NVARCHAR(40),
+    [Address] NVARCHAR(40),
+    [PhoneNumber] NVARCHAR(40),
+    [Department] NVARCHAR(40),
     [Statuts] BIT NOT NULL,
     CONSTRAINT [PK_Employee] PRIMARY KEY ([UserName])
 )
@@ -34,15 +45,15 @@ GO
 
 CREATE TABLE [Book] (
     [ID] INTEGER IDENTITY(0,1) NOT NULL,
-    [CallNumber] VARCHAR(9) NOT NULL,
-    [ISBN] VARCHAR(8) NOT NULL,
-    [Title] VARCHAR(100),
+    [CallNumber] NVARCHAR(40) NOT NULL,
+    [ISBN] NVARCHAR(40) NOT NULL,
+    [Title] NVARCHAR(40),
     [AuthorID] INTEGER NOT NULL,
     [statuts] BIT NOT NULL,
     [Last_updated_date] DATETIME,
     [TypeID] INTEGER NOT NULL,
     [ProducersID] INTEGER NOT NULL,
-    [Address] VARCHAR(40),
+    [Address] NVARCHAR(40),
     CONSTRAINT [PK_Book] PRIMARY KEY ([ID])
 )
 GO
@@ -52,11 +63,11 @@ GO
 /* ---------------------------------------------------------------------- */
 
 CREATE TABLE [CheckBook] (
-    [UserName] VARCHAR(40) NOT NULL,
+    [UserName] NVARCHAR(40) NOT NULL,
     [IDBooks] INTEGER NOT NULL,
     [DateCheckout] DATETIME,
     [DateCheckin] DATETIME,
-    [DelateDate] VARCHAR(40),
+    [DelateDate] NVARCHAR(40),
     CONSTRAINT [PK_CheckBook] PRIMARY KEY ([UserName], [IDBooks])
 )
 GO
@@ -67,8 +78,8 @@ GO
 
 CREATE TABLE [Users] (
     [ID] INTEGER IDENTITY(0,1) NOT NULL,
-    [UserName] VARCHAR(40) NOT NULL,
-    [PassWord] VARCHAR(40),
+    [UserName] NVARCHAR(40) NOT NULL,
+    [PassWord] NVARCHAR(40),
     [Last_updated_date] DATETIME,
     CONSTRAINT [PK_Users] PRIMARY KEY ([ID])
 )
@@ -79,7 +90,7 @@ GO
 /* ---------------------------------------------------------------------- */
 
 CREATE TABLE [sys_User_Function] (
-    [UserName] VARCHAR(40) NOT NULL,
+    [UserName] NVARCHAR(40) NOT NULL,
     [IDFunction] INTEGER NOT NULL,
     CONSTRAINT [PK_sys_User_Function] PRIMARY KEY ([UserName], [IDFunction])
 )
@@ -91,7 +102,7 @@ GO
 
 CREATE TABLE [sys_Function] (
     [ID] INTEGER IDENTITY(0,1) NOT NULL,
-    [FunctionName] INTEGER NOT NULL,
+    [FunctionName] NVARCHAR(40) NOT NULL,
     CONSTRAINT [PK_sys_Function] PRIMARY KEY ([ID])
 )
 GO
@@ -102,8 +113,8 @@ GO
 
 CREATE TABLE [Author] (
     [ID] INTEGER IDENTITY(0,1) NOT NULL,
-    [FullName] VARCHAR(40),
-    [Address] VARCHAR(40),
+    [FullName] NVARCHAR(40),
+    [Address] NVARCHAR(40),
     [Birthday] DATETIME,
     CONSTRAINT [PK_Author] PRIMARY KEY ([ID])
 )
@@ -115,7 +126,7 @@ GO
 
 CREATE TABLE [Type] (
     [ID] INTEGER IDENTITY(0,1) NOT NULL,
-    [Name] VARCHAR(40),
+    [Name] NVARCHAR(40),
     CONSTRAINT [PK_Type] PRIMARY KEY ([ID])
 )
 GO
@@ -125,9 +136,9 @@ GO
 /* ---------------------------------------------------------------------- */
 
 CREATE TABLE [Producers] (
-    [ID] INTEGER NOT NULL,
-    [Name] VARCHAR(40),
-    [BirthDate] DATETIME,
+    [ID] INTEGER IDENTITY(0,1) NOT NULL,
+    [Name] NVARCHAR(40),
+    [Address] NVARCHAR(40),
     CONSTRAINT [PK_Producers] PRIMARY KEY ([ID])
 )
 GO
