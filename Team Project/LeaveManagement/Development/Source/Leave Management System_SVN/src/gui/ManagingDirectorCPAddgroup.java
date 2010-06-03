@@ -386,10 +386,28 @@ public class ManagingDirectorCPAddgroup extends JFrame {
 		if (btnAdd == null) {
 			btnAdd = new JButton();
 			btnAdd.setText("Add  Group");
-			btnAdd.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
+			btnAdd.addActionListener(new java.awt.event.ActionListener() {   
+				public void actionPerformed(java.awt.event.ActionEvent e) {    
+					int i = tblUser.getSelectedRow();
+					int count = tblUser.getSelectedRowCount();
+					String position_name = null;
+					if(count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one user");
+					}else{
+						
+							User user = new User();
+							if(cbxGroup.getSelectedItem().toString().equalsIgnoreCase(user.getPosition_name().toString())){
+								JOptionPane.showMessageDialog(null, "trung position");
+							}
+							else {
+								
+							
+						
+							}
 					
+					}
 				}
+			
 			});
 		}
 		return btnAdd;
