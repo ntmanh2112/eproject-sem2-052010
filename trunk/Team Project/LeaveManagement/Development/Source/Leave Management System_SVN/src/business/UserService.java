@@ -34,9 +34,14 @@ public class UserService {
 		dao.blockUser(user);
 		
 	}
-	public void addPosition(User user)throws Exception{
+	public User selectPositon(User user){
 		UserDAO dao = new UserDAO();
-		dao.addPosition(user);
+		dao.selectidposition(user);
+		return user;
+	}
+	public void addPositon(User user){
+		UserDAO dao = new UserDAO();
+		dao.addpostion(user);
 	}
 	public User loadUser(int id){
 		UserDAO dao = new UserDAO();

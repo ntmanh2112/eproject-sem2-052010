@@ -13,16 +13,42 @@ import common.AddUser.addResult;
 import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
 
+
 //ADD GROUP
 public class UserDAO {
-	public void addPosition(User user)throws Exception{
-		ConnectionDB conn = new ConnectionDB();
-		conn.connect();
-		String addP = "UPDATE TBL_EMPLOYEE ID_POSITION WHRE USERNAME =  "+ user.getId_user();
-		Statement st = conn.getConn().createStatement();
-		st.execute(addP);
+	public User selectidposition(User user){
+			try{
+			ConnectionDB conn = new ConnectionDB();
+			conn.connect();
+			String sql = "SELECT ID_POSITON FROM TBL_POSITION WHERE POSITION_NAME = " + user.getPosition_name();
+			
+			Statement st = conn.getConn().createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()){
+				user.setId_position(rs.getInt("ID_POSITION"));
+			}
+			
+			return user;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return user;
+	}
+	public void addpostion(User user){
+		try{
+			ConnectionDB conn = new ConnectionDB();
+			conn.connect();
+			String sql = "UPDATE TBL_EMPLOYEE SET ID_POSITION = '" + user.getId_position() + "' WHERE ID_USER = '" + user.getId_user()+ "'" ;
+			Statement st = conn.getConn().createStatement();
+			st.executeUpdate(sql);
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
+	
 	//EDIT PROFILE
 	public void updateUser(User user)throws Exception{
 		ConnectionDB connectionDB = new ConnectionDB();
@@ -52,6 +78,7 @@ public class UserDAO {
 		}else{
 				Statement st = connection.getConn().createStatement();
 				st.executeUpdate(lock);
+				
 		}
 		
 	}
