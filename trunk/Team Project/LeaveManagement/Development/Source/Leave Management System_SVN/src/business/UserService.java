@@ -41,8 +41,12 @@ public class UserService {
 	public User loadUser(int id){
 		UserDAO dao = new UserDAO();
 		User user = new User();
-		dao.loadUser(id);
+		user = dao.loadUser(id);
 		return user;
+	}
+	public void updateUser(User user)throws Exception{
+		UserDAO dao = new UserDAO();
+		dao.updateUser(user);
 	}
 	
 	public String[][] selectAllUser()throws Exception{

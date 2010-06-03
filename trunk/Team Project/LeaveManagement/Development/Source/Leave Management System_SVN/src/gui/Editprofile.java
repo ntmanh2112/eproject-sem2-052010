@@ -5,18 +5,19 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
-import javax.management.loading.PrivateClassLoader;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import business.UserService;
-
 import model.User;
+import business.UserService;
 
 public class Editprofile extends JDialog {
 
@@ -44,8 +45,8 @@ public class Editprofile extends JDialog {
 	private JLabel lbPhone = null;
 	private JTextField txtPhone = null;
 	private int id = 0;
-	private User user = null;
-	//private UserService service = null
+	private User user = new User();
+	private UserService service = new  UserService();
 
 	/**
 	 * @param owner
@@ -58,7 +59,7 @@ public class Editprofile extends JDialog {
 	public Editprofile(Frame owner,int id){
 		super(owner);
 		this.id = id;
-		//user = service.loadUser(id);
+		this.user = service.loadUser(id);
 		initialize();
 		
 	}
@@ -200,7 +201,7 @@ public class Editprofile extends JDialog {
 	private JComboBox getCbxSex() {
 		if (cbxSex == null) {
 			String[] data = {"Male","Female"};
-			cbxSex = new JComboBox();
+			cbxSex = new JComboBox(data);
 			cbxSex.setLocation(new Point(150, 147));
 			cbxSex.setSize(new Dimension(66, 20));
 		}
@@ -218,6 +219,46 @@ public class Editprofile extends JDialog {
 			btnUpdate.setText("Update");
 			btnUpdate.setSize(new Dimension(106, 30));
 			btnUpdate.setLocation(new Point(15, 303));
+			btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					User user = new User();
+					user.setId_user(id);
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					if(txtFullname.getText().isEmpty()||
+							txtAddress.getText().isEmpty()||
+							txtEmail.getText().isEmpty()||
+							txtPhone.getText().isEmpty()|| 
+							cbxYear.getSelectedItem().toString().isEmpty()||
+							cbxMonth.getSelectedItem().toString().isEmpty()||
+							cbxDay.getSelectedItem().toString().isEmpty()||
+							cbxSex.getSelectedItem().toString().isEmpty() ){
+						JOptionPane.showMessageDialog(null, "Please input full of column!!");
+						}else{
+							try {
+								java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
+								Date birthday = new Date(date.getTime());
+								user.setFullname(txtFullname.getText());
+								user.setBirthday(birthday);
+								user.setAddress( txtAddress.getText());
+								user.setGender(cbxSex.getSelectedItem().toString()) ;
+								user.setPhone(txtPhone.getText());
+								user.setEmail( txtEmail.getText());
+							}catch (Exception ex){
+								ex.printStackTrace();
+							}
+							try{
+								UserService service = new UserService();
+								service.updateUser(user);
+								JOptionPane.showMessageDialog(null, "edit successfull");
+								Editprofile.this.dispose();
+							}catch(Exception ex){
+								ex.printStackTrace();
+								JOptionPane.showMessageDialog(null, "edit fail");
+							}
+						}
+				}
+				
+			});
 		}
 		return btnUpdate;
 	}
@@ -233,6 +274,16 @@ public class Editprofile extends JDialog {
 			btnReset.setText("Reset");
 			btnReset.setSize(new Dimension(106, 30));
 			btnReset.setLocation(new Point(138, 303));
+			btnReset.addActionListener(new java.awt.event.ActionListener() {   
+				public void actionPerformed(java.awt.event.ActionEvent e) {    
+					txtAddress.setText("");
+					txtEmail.setText("");
+					txtFullname.setText("");
+					txtPhone.setText("");
+					
+				}
+			
+			});
 		}
 		return btnReset;
 	}
@@ -248,6 +299,11 @@ public class Editprofile extends JDialog {
 			btnExit.setLocation(new Point(255, 301));
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(106, 30));
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					Editprofile.this.dispose();
+				}
+			});
 		}
 		return btnExit;
 	}
@@ -277,7 +333,7 @@ public class Editprofile extends JDialog {
 		if (cbxMonth == null) {
 			cbxMonth = new JComboBox();
 			cbxMonth.setBounds(new Rectangle(316, 103, 54, 25));
-			for(int j=1;j<13;j++){
+			for(int j=1; j<13 ;j++){
 				cbxMonth.addItem(j);
 			}
 		}
@@ -293,8 +349,8 @@ public class Editprofile extends JDialog {
 		if (cbxDay == null) {
 			cbxDay = new JComboBox();
 			cbxDay.setBounds(new Rectangle(420, 104, 52, 25));
-			for(int j=1;j<13;j++){
-				cbxMonth.addItem(j);
+			for(int j=1;j<32;j++){
+				cbxDay.addItem(j);
 			}
 		
 		}

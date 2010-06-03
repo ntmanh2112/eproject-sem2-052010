@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 public class CreateLeaveapp extends JDialog {
 
@@ -31,6 +32,11 @@ public class CreateLeaveapp extends JDialog {
 	private JButton btnExit = null;
 	private JLabel lbDateto = null;
 	private JLabel lbYear = null;
+	private JComboBox cbxYear = null;
+	private JLabel lbDay = null;
+	private JLabel lbMonth = null;
+	private JComboBox cbxMonth = null;
+	private JComboBox cbxDay = null;
 	/**
 	 * @param owner
 	 */
@@ -56,8 +62,14 @@ public class CreateLeaveapp extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbMonth = new JLabel();
+			lbMonth.setBounds(new Rectangle(270, 105, 38, 16));
+			lbMonth.setText("Month");
+			lbDay = new JLabel();
+			lbDay.setBounds(new Rectangle(354, 106, 28, 16));
+			lbDay.setText("Day");
 			lbYear = new JLabel();
-			lbYear.setBounds(new Rectangle(165, 104, 48, 16));
+			lbYear.setBounds(new Rectangle(165, 104, 35, 16));
 			lbYear.setText("Year");
 			lbDateto = new JLabel();
 			lbDateto.setText("Date to (*)");
@@ -110,6 +122,11 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(getBtnExit(), null);
 			jContentPane.add(lbDateto, null);
 			jContentPane.add(lbYear, null);
+			jContentPane.add(getCbxYear(), null);
+			jContentPane.add(lbDay, null);
+			jContentPane.add(lbMonth, null);
+			jContentPane.add(getCbxMonth(), null);
+			jContentPane.add(getCbxDay(), null);
 		}
 		return jContentPane;
 	}
@@ -214,6 +231,45 @@ public class CreateLeaveapp extends JDialog {
 			btnExit.setLocation(new Point(301, 345));
 		}
 		return btnExit;
+	}
+
+	/**
+	 * This method initializes cbxYear	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxYear() {
+		if (cbxYear == null) {
+			cbxYear = new JComboBox();
+			cbxYear.setBounds(new Rectangle(199, 102, 69, 25));
+		}
+		return cbxYear;
+	}
+
+	/**
+	 * This method initializes cbxMonth	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxMonth() {
+		if (cbxMonth == null) {
+			cbxMonth = new JComboBox();
+			cbxMonth.setBounds(new Rectangle(308, 105, 45, 25));
+		}
+		return cbxMonth;
+	}
+
+	/**
+	 * This method initializes cbxDay	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxDay() {
+		if (cbxDay == null) {
+			cbxDay = new JComboBox();
+			cbxDay.setBounds(new Rectangle(381, 105, 45, 25));
+		}
+		return cbxDay;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

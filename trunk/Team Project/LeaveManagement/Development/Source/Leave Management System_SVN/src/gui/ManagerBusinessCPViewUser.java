@@ -374,7 +374,11 @@ public class ManagerBusinessCPViewUser extends JFrame {
 						JOptionPane.showMessageDialog(null, "Please select only one User");
 					}else{
 						int id = Integer.parseInt(tblUser.getValueAt(i, 0).toString());
-						new Editprofile(new ManagerBusinessCPViewUser(),id).setVisible(true);
+						try{
+							new Editprofile(new ManagerBusinessCPViewUser(),id).setVisible(true);
+						}catch(Exception ex){
+							ex.printStackTrace();
+						}
 					}
 				}
 			});

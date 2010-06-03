@@ -9,10 +9,8 @@ import javax.swing.JOptionPane;
 import model.User;
 
 import common.ConnectionDB;
-import common.Enumeration;
 import common.AddUser.addResult;
 import common.ChangeUser.changeResult;
-
 import common.Enumeration.loginResult;
 
 
@@ -23,6 +21,22 @@ public class UserDAO {
 		String addP = "UPDATE TBL_EMPLOYEE ID_POSITION WHRE USERNAME =  "+ user.getId_user();
 		Statement st = conn.getConn().createStatement();
 		st.execute(addP);
+		
+	}
+	public void updateUser(User user)throws Exception{
+		ConnectionDB connectionDB = new ConnectionDB();
+		connectionDB.connect();
+		String update = " UPDATE TBL_EMPLOYEE SET FULLNAME = ?, BIRTHDAY = ?, GENDER = ? ,ADDRESS = ? ,EMAIL = ?, PHONE = ?  WHERE ID_USER = "+user.getId_user();
+		PreparedStatement psmt = connectionDB.getConn().prepareStatement(update);
+		psmt.setString(1, user.getFullname());
+		psmt.setDate(2, user.getBirthday());
+		psmt.setString(3, user.getGender());
+		psmt.setString(4, user.getAddress());
+		psmt.setString(5, user.getEmail());
+		psmt.setString(6, user.getPhone());
+		
+		psmt.executeUpdate();
+		
 	}
 	public void  blockUser(User user)throws Exception{
 		ConnectionDB connection = new ConnectionDB();
@@ -64,6 +78,7 @@ public class UserDAO {
 			psmt2.setString(6, user.getEmail());
 			
 			ResultSet rs = psmt.executeQuery();
+			
 			if (rs.wasNull()){
 				addresult = addResult.incorrect;
 			}
@@ -74,6 +89,7 @@ public class UserDAO {
 					psmt2.executeUpdate();
 					addresult = addResult.sucessful;
 				}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return addresult;
@@ -179,7 +195,7 @@ public class UserDAO {
 					 cpresult = changeResult.incorrect;
 				}
 			}
-				
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return cpresult;
