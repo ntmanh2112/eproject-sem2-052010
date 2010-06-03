@@ -244,6 +244,12 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniLeaveAP == null) {
 			mniLeaveAP = new JMenuItem();
 			mniLeaveAP.setText("View Leave AP");
+			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewLeaveapp().setVisible(true);
+					ManagerBusinessCPViewLeaveapp.this.dispose();
+				}
+			});
 		}
 		return mniLeaveAP;
 	}
@@ -270,6 +276,11 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniAbout == null) {
 			mniAbout = new JMenuItem();
 			mniAbout.setText("About");
+			mniAbout.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new About(new ManagerBusinessCPViewLeaveapp()).setVisible(true);
+				}
+			});
 		}
 		return mniAbout;
 	}
@@ -283,6 +294,11 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniEditpassword == null) {
 			mniEditpassword = new JMenuItem();
 			mniEditpassword.setText("Edit Password");
+			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Changepassword(new ManagerBusinessCPViewLeaveapp());
+				}
+			});
 		}
 		return mniEditpassword;
 	}
