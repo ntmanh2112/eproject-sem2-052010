@@ -411,39 +411,50 @@ public class Addmember extends JDialog {
 			btnAdd.setLocation(new Point(16, 435));
 			btnAdd.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					User user = new User();
-					user.setUsername(txtUsername.getText())  ;
-					user.setPassword(String.valueOf(txtPassword.getPassword())) ;
-					user.setFullname(txtFullname.getText());
-					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-					try {
-					java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
-					Date birthday = new Date(date.getTime());
-					user.setBirthday(birthday);
-					user.setAddress( txtAddress.getText());
-					user.setGender(cbxSex.getSelectedItem().toString()) ;
-					user.setPhone(txtPhone.getText());
-					user.setEmail( txtEmail.getText());
-					}catch (Exception ex){
-						ex.printStackTrace();
-					}
-					try{
-						UserService service = new UserService();
-						addResult result = service.addUser(user);
-						if(result == addResult.fail){
-							JOptionPane.showMessageDialog(null,"Please input all field (*)!!");
+					if(txtFullname.getText().isEmpty()||
+							txtAddress.getText().isEmpty()||
+							txtEmail.getText().isEmpty()||
+							txtPhone.getText().isEmpty()|| 
+							cbxYear.getSelectedItem().toString().isEmpty()||
+							cbxMonth.getSelectedItem().toString().isEmpty()||
+							cbxDay.getSelectedItem().toString().isEmpty()||
+							cbxSex.getSelectedItem().toString().isEmpty() ){
+						JOptionPane.showMessageDialog(null, "Please input full of column!!");
+						}else{
+							User user = new User();
+							user.setUsername(txtUsername.getText())  ;
+							user.setPassword(String.valueOf(txtPassword.getPassword())) ;
+							user.setFullname(txtFullname.getText());
+							SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+							try {
+							java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
+							Date birthday = new Date(date.getTime());
+							user.setBirthday(birthday);
+							user.setAddress( txtAddress.getText());
+							user.setGender(cbxSex.getSelectedItem().toString()) ;
+							user.setPhone(txtPhone.getText());
+							user.setEmail( txtEmail.getText());
+							}catch (Exception ex){
+								ex.printStackTrace();
+							}
+							try{
+								UserService service = new UserService();
+								addResult result = service.addUser(user);
+								if(result == addResult.fail){
+									JOptionPane.showMessageDialog(null,"Please input all field (*)!!");
+								}
+								else if (result == addResult.incorrect) {
+									JOptionPane.showMessageDialog(null, "This USERNAME is exist!!");
+								}
+								else if (result == addResult.sucessful) {
+									JOptionPane.showMessageDialog(null, "Add member successfully!!");
+									Addmember.this.dispose();
+								}
+							}catch (Exception ex) {
+								ex.printStackTrace();
+							}
+							
 						}
-						else if (result == addResult.incorrect) {
-							JOptionPane.showMessageDialog(null, "This USERNAME is exist!!");
-						}
-						else if (result == addResult.sucessful) {
-							JOptionPane.showMessageDialog(null, "Add member successfully!!");
-							Addmember.this.dispose();
-						}
-					}catch (Exception ex) {
-						ex.printStackTrace();
-					}
-					
 				}
 			});
 		}
