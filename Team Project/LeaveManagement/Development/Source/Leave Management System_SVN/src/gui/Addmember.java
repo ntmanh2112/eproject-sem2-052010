@@ -440,10 +440,7 @@ public class Addmember extends JDialog {
 							try{
 								UserService service = new UserService();
 								addResult result = service.addUser(user);
-								if(result == addResult.fail){
-									JOptionPane.showMessageDialog(null,"Please input all field (*)!!");
-								}
-								else if (result == addResult.incorrect) {
+								 if (result == addResult.incorrect) {
 									JOptionPane.showMessageDialog(null, "This USERNAME is exist!!");
 								}
 								else if (result == addResult.sucessful) {
