@@ -282,7 +282,7 @@ public class ManagingDirectorCPAddgroup extends JFrame {
 			mniLeaveAP.setText("View Leave AP");
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewLeaveapp().setVisible(true);
+					new ManagingDirectorCPViewLeaveappValid().setVisible(true);
 					
 				}
 			});

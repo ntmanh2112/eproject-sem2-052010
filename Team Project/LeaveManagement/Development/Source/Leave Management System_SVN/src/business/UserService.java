@@ -15,48 +15,38 @@ import dao.UserDAO;
 public class UserService {
 	UserDAO dao = new UserDAO();
 	public loginResult loginUser(String username,String password){
-		UserDAO dao = new UserDAO();
 		loginResult result = dao.loginUser(username, password);
-		
 		return result;
 	}
 	public changeResult changePass(String oldpass,String newpass,String confirmpass){
-		UserDAO dao = new UserDAO();
 		changeResult result = dao.changePass(oldpass, newpass, confirmpass);
 		return result;
 	}
 	public addResult addUser(User user){
-		UserDAO dao = new UserDAO();
 		addResult result = dao.addUser(user);
 		return result;
 	}
 	public void blockUser(User user)throws Exception{
-		UserDAO dao = new UserDAO();
 		dao.blockUser(user);
 		
 	}
 	public User selectPositon(User user){
-		UserDAO dao = new UserDAO();
 		dao.selectidposition(user);
 		return user;
 	}
 	public void addPositon(User user){
-		UserDAO dao = new UserDAO();
 		dao.addpostion(user);
 	}
 	public User loadUser(int id){
-		UserDAO dao = new UserDAO();
 		User user = new User();
 		user = dao.loadUser(id);
 		return user;
 	}
 	public void updateUser(User user)throws Exception{
-		UserDAO dao = new UserDAO();
 		dao.updateUser(user);
 	}
 	
 	public String[][] selectAllUser()throws Exception{
-		UserDAO dao = new UserDAO();
 		ArrayList<User> list = new ArrayList<User>();
 		ResultSet rs = dao.selectAllUser();
 		while (rs.next()){
