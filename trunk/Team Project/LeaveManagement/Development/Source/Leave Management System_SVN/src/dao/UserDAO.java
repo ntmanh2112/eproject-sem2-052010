@@ -128,7 +128,7 @@ public class UserDAO {
 		try{
 			ConnectionDB conn = new ConnectionDB();
 			conn.connect();
-			String sql = "SELECT FULLNAME,ADDRESS,EMAIL,PHONE FROM TBL_EMPLOYEE WHERE ID_USER  = " + id;
+			String sql = "SELECT FULLNAME,ADDRESS,EMAIL,PHONE FROM TBL_USER WHERE ID_USER  = " + id;
 			Statement st = conn.getConn().createStatement();
 			ResultSet rs= st.executeQuery(sql);
 			
