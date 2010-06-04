@@ -92,6 +92,8 @@ public class ManagerBusinessCP extends JFrame {
 			mnFile = new JMenu();
 			mnFile.setText("File");
 			mnFile.add(getMniCreateLA());
+			
+			
 		}
 		return mnFile;
 	}
@@ -290,6 +292,11 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniEditProfile == null) {
 			mniEditProfile = new JMenuItem();
 			mniEditProfile.setText("Edit Profile");
+			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(new ManagerBusinessCP()).setVisible(true);
+				}
+			});
 		}
 		return mniEditProfile;
 	}
@@ -330,5 +337,5 @@ public class ManagerBusinessCP extends JFrame {
 		}
 		return mniViewuser;
 	}
-
+	
 }  //  @jve:decl-index=0:visual-constraint="10,10"

@@ -166,6 +166,13 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniCreateLA == null) {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
+			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewLeaveapp().setVisible(true);
+					
+				}
+			});
+
 		}
 		return mniCreateLA;
 	}

@@ -205,6 +205,11 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniCreateLA == null) {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
+			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(new ManagerBusinessCPViewLeaveapp()).setVisible(true);
+				}
+			});
 		}
 		return mniCreateLA;
 	}
@@ -218,6 +223,12 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniReportmonth == null) {
 			mniReportmonth = new JMenuItem();
 			mniReportmonth.setText("Report Month");
+			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewReportMonth().setVisible(true);
+					
+				}
+			});
 		}
 		return mniReportmonth;
 	}
@@ -231,6 +242,12 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniReportYeah == null) {
 			mniReportYeah = new JMenuItem();
 			mniReportYeah.setText("Report Year");
+			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewReportYear().setVisible(true);
+					
+				}
+			});
 		}
 		return mniReportYeah;
 	}
@@ -247,7 +264,7 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagerBusinessCPViewLeaveapp().setVisible(true);
-					ManagerBusinessCPViewLeaveapp.this.dispose();
+					
 				}
 			});
 		}
@@ -296,7 +313,7 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniEditpassword.setText("Edit Password");
 			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(new ManagerBusinessCPViewLeaveapp());
+					new Changepassword(new ManagerBusinessCPViewLeaveapp()).setVisible(true);
 				}
 			});
 		}
@@ -312,6 +329,11 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniEditProfile == null) {
 			mniEditProfile = new JMenuItem();
 			mniEditProfile.setText("Edit Profile");
+			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(new ManagerBusinessCPViewLeaveapp()).setVisible(true);
+				}
+			});
 		}
 		return mniEditProfile;
 	}
@@ -325,6 +347,11 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniAdduser == null) {
 			mniAdduser = new JMenuItem();
 			mniAdduser.setText("Add User");
+			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Addmember(new ManagerBusinessCPViewReportMonth()).setVisible(true);
+				}
+			});
 		}
 		return mniAdduser;
 	}
@@ -338,6 +365,12 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mniViewuser == null) {
 			mniViewuser = new JMenuItem();
 			mniViewuser.setText("View User");
+			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewUser().setVisible(true);
+				
+				}
+			});
 		}
 		return mniViewuser;
 	}
@@ -390,6 +423,11 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (btnExit == null) {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					ManagerBusinessCPViewLeaveapp.this.dispose();
+				}
+			});
 		}
 		return btnExit;
 	}

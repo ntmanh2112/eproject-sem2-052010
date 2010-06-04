@@ -142,6 +142,11 @@ public class EngineerCP extends JFrame {
 		if (mniHelpcontent == null) {
 			mniHelpcontent = new JMenuItem();
 			mniHelpcontent.setText("Help Content");
+			mniHelpcontent.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					
+				}
+			});
 		}
 		return mniHelpcontent;
 	}
@@ -155,6 +160,11 @@ public class EngineerCP extends JFrame {
 		if (mniAbout == null) {
 			mniAbout = new JMenuItem();
 			mniAbout.setText("About");
+			mniAbout.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new About(new EngineerCP()).setVisible(true);
+				}
+			});
 		}
 		return mniAbout;
 	}
@@ -168,6 +178,11 @@ public class EngineerCP extends JFrame {
 		if (mniEditpass == null) {
 			mniEditpass = new JMenuItem();
 			mniEditpass.setText("Edit Password");
+			mniEditpass.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Changepassword(new EngineerCP()).setVisible(true);
+				}
+			});
 		}
 		return mniEditpass;
 	}
@@ -181,6 +196,11 @@ public class EngineerCP extends JFrame {
 		if (mniEditprofile == null) {
 			mniEditprofile = new JMenuItem();
 			mniEditprofile.setText("Edit Profile");
+			mniEditprofile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(new EngineerCP()).setVisible(true);
+				}
+			});
 		}
 		return mniEditprofile;
 	}
@@ -194,6 +214,7 @@ public class EngineerCP extends JFrame {
 		if (mniViewprofile == null) {
 			mniViewprofile = new JMenuItem();
 			mniViewprofile.setText("View Profile");
+			
 		}
 		return mniViewprofile;
 	}
@@ -207,6 +228,11 @@ public class EngineerCP extends JFrame {
 		if (mniHistory == null) {
 			mniHistory = new JMenuItem();
 			mniHistory.setText("View History");
+			mniHistory.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Viewhistory(new EngineerCP()).setVisible(true);
+				}
+			});
 		}
 		return mniHistory;
 	}
@@ -220,6 +246,11 @@ public class EngineerCP extends JFrame {
 		if (mniExit == null) {
 			mniExit = new JMenuItem();
 			mniExit.setText("Exit");
+			mniExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					EngineerCP.this.dispose();
+				}
+			});
 		}
 		return mniExit;
 	}
@@ -234,8 +265,15 @@ public class EngineerCP extends JFrame {
 			mniCreatleaveapp = new JMenuItem();
 			mniCreatleaveapp.setToolTipText("");
 			mniCreatleaveapp.setText("Create Leave app");
+			mniCreatleaveapp.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(new EngineerCP()).setVisible(true);
+				}
+			});
 		}
 		return mniCreatleaveapp;
 	}
-
+	public static void main(String [] args){
+		new EngineerCP().setVisible(true);
+	}
 }
