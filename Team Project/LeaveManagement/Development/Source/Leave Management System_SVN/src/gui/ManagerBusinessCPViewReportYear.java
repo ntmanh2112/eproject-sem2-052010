@@ -166,10 +166,9 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniCreateLA == null) {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
-			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
+			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewLeaveapp().setVisible(true);
-					
+					new CreateLeaveapp(new ManagerBusinessCPViewReportYear()).setVisible(true);
 				}
 			});
 
@@ -186,6 +185,12 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniReportmonth == null) {
 			mniReportmonth = new JMenuItem();
 			mniReportmonth.setText("Report Month");
+			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewReportMonth().setVisible(true);
+					
+				}
+			});
 		}
 		return mniReportmonth;
 	}
@@ -199,6 +204,12 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniReportYeah == null) {
 			mniReportYeah = new JMenuItem();
 			mniReportYeah.setText("Report Year");
+			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewReportYear().setVisible(true);
+					
+				}
+			});
 		}
 		return mniReportYeah;
 	}
@@ -212,6 +223,12 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniLeaveAP == null) {
 			mniLeaveAP = new JMenuItem();
 			mniLeaveAP.setText("View Leave AP");
+			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewLeaveapp().setVisible(true);
+					
+				}
+			});	
 		}
 		return mniLeaveAP;
 	}
@@ -238,6 +255,11 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniAbout == null) {
 			mniAbout = new JMenuItem();
 			mniAbout.setText("About");
+			mniAbout.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new About(new ManagerBusinessCPViewReportYear()).setVisible(true);
+				}
+			});
 		}
 		return mniAbout;
 	}
@@ -251,6 +273,11 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniEditpassword == null) {
 			mniEditpassword = new JMenuItem();
 			mniEditpassword.setText("Edit Password");
+			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Changepassword(new ManagerBusinessCPViewReportYear()).setVisible(true);
+				}
+			});
 		}
 		return mniEditpassword;
 	}
@@ -264,6 +291,11 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniEditProfile == null) {
 			mniEditProfile = new JMenuItem();
 			mniEditProfile.setText("Edit Profile");
+			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(new ManagerBusinessCPViewReportYear()).setVisible(true);
+				}
+			});
 		}
 		return mniEditProfile;
 	}
@@ -277,6 +309,11 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniAdduser == null) {
 			mniAdduser = new JMenuItem();
 			mniAdduser.setText("Add User");
+			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Addmember(new ManagerBusinessCPViewReportYear()).setVisible(true);
+				}
+			});
 		}
 		return mniAdduser;
 	}
@@ -290,8 +327,16 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 		if (mniViewuser == null) {
 			mniViewuser = new JMenuItem();
 			mniViewuser.setText("View User");
+			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerBusinessCPViewUser().setVisible(true);
+				
+				}
+			});
 		}
 		return mniViewuser;
 	}
-
+	public static void main(String [] args){
+		new ManagerBusinessCPViewReportYear().setVisible(true);
+	}
 }  //  @jve:decl-index=0:visual-constraint="10,10"

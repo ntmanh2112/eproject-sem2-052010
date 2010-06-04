@@ -167,5 +167,7 @@ public class Wellcome extends JFrame {
 		}
 		return mnAbout;
 	}
-
+	public static void main(String [] args){
+		new Wellcome().setVisible(true);
+	}
 }

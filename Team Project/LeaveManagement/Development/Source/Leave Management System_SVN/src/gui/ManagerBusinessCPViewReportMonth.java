@@ -335,7 +335,5 @@ public class ManagerBusinessCPViewReportMonth extends JFrame {
 		}
 		return mniViewuser;
 	}
-	public static void main(String [] args){
-		new ManagerBusinessCPViewReportMonth().setVisible(true);
-	}
+	
 }  //  @jve:decl-index=0:visual-constraint="10,10"

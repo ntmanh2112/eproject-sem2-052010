@@ -331,7 +331,7 @@ public class ManagerBusinessCP extends JFrame {
 			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagerBusinessCPViewUser().setVisible(true);
-					ManagerBusinessCP.this.dispose();
+				//	ManagerBusinessCP.this.dispose();
 				}
 			});
 		}
