@@ -166,6 +166,11 @@ public class ManagerBusinessCP extends JFrame {
 		if (mniCreateLA == null) {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
+			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(new ManagerBusinessCP()).setVisible(true);
+				}
+			});
 		}
 		return mniCreateLA;
 	}
