@@ -53,7 +53,7 @@ public class UserDAO {
 	public void updateUser(User user)throws Exception{
 		ConnectionDB connectionDB = new ConnectionDB();
 		connectionDB.connect();
-		String update = " UPDATE TBL_EMPLOYEE SET FULLNAME = ?, BIRTHDAY = ?, GENDER = ? ,ADDRESS = ? ,EMAIL = ?, PHONE = ?  WHERE ID_USER = "+user.getId_user();
+		String update = " UPDATE TBL_USER SET FULLNAME = ?, BIRTHDAY = ?, GENDER = ? ,ADDRESS = ? ,EMAIL = ?, PHONE = ?  WHERE ID_USER = "+user.getId_user();
 		PreparedStatement psmt = connectionDB.getConn().prepareStatement(update);
 		psmt.setString(1, user.getFullname());
 		psmt.setDate(2, user.getBirthday());
@@ -89,23 +89,21 @@ public class UserDAO {
 			ConnectionDB conn = new ConnectionDB();
 			conn.connect();
 			String sql = "SELECT USERNAME FROM  TBL_USER  WHERE TBL_USER.USERNAME = ?";
-			String sql1 = " INSERT INTO TBL_USER (USERNAME ,PASSWORD,STATUS) VALUES (? ,? ,1)";
-			String sql2 = "INSERT INTO TBL_EMPLOYEE (FULLNAME,BIRTHDAY,ADDRESS,GENDER,PHONE,EMAIL,ID_POSITION) VALUES(?,?,?,?,?,?,1)";
+			String sql1 = " INSERT INTO TBL_USER (USERNAME ,PASSWORD,STATUS,FULLNAME,BIRTHDAY,ADDRESS,GENDER,PHONE,EMAIL,ID_POSITION) VALUES (? ,? ,1,?,?,?,?,?,?,1)";
+			
 			PreparedStatement psmt = conn.getConn().prepareStatement(sql);
 			PreparedStatement psmt1 = conn.getConn().prepareStatement(sql1);
-			PreparedStatement psmt2 = conn.getConn().prepareStatement(sql2);
+			
 			psmt.setString(1, user.getUsername());
 			
 			psmt1.setString(1, user.getUsername());
 			psmt1.setString(2,user.getPassword());
-			
-			
-			psmt2.setString(1, user.getFullname());
-			psmt2.setDate(2, user.getBirthday());
-			psmt2.setString(3, user.getAddress());
-			psmt2.setString(4, user.getGender());
-			psmt2.setString(5, user.getPhone());
-			psmt2.setString(6, user.getEmail());
+			psmt1.setString(3, user.getFullname());
+			psmt1.setDate(4, user.getBirthday());
+			psmt1.setString(5, user.getAddress());
+			psmt1.setString(6, user.getGender());
+			psmt1.setString(7, user.getPhone());
+			psmt1.setString(8, user.getEmail());
 			
 			ResultSet rs = psmt.executeQuery();
 			
@@ -114,8 +112,6 @@ public class UserDAO {
 			}
 			
 			else {
-					
-					psmt2.executeUpdate();
 					psmt1.executeUpdate();
 					addresult = addResult.sucessful;
 				}
@@ -158,12 +154,11 @@ public class UserDAO {
 			int status = 0;
 			ConnectionDB connection = new ConnectionDB();
 			connection.connect();
-			String sql = "SELECT TBL_USER.USERNAME,PASSWORD,STATUS,ID_POSITION FROM TBL_EMPLOYEE INNER JOIN TBL_USER ON TBL_EMPLOYEE.ID_USER = TBL_USER.ID_USER WHERE TBL_USER.USERNAME = ? AND TBL_USER.PASSWORD = ?";
+			String sql = "SELECT USERNAME,PASSWORD,STATUS,ID_POSITION FROM TBL_USER  WHERE USERNAME = ? AND PASSWORD = ?";
 			PreparedStatement psmt = connection.getConn().prepareStatement(sql);
 			psmt.setString(1, username);
 			psmt.setString(2, password);
 			ResultSet rs = psmt.executeQuery();
-			
 			int i = 0;
 			while(rs.next()){
 				i++;
