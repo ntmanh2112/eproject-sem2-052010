@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class Leave_app {
+public class Leaveapp {
 
 	
 	int id_leaveapp;
@@ -12,7 +12,14 @@ public class Leave_app {
 	String reason;
 	String statusleave;
 	String phone;
-	String adress;
+	String address;
+	String fullname;
+	public String getFullname() {
+		return fullname;
+	}
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 	public int getId_leaveapp() {
 		return id_leaveapp;
 	}
@@ -55,11 +62,11 @@ public class Leave_app {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

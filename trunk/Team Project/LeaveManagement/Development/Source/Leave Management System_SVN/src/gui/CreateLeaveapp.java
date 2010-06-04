@@ -16,12 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import common.AddLeaveApp.addLeaveApp;
-import common.AddUser.addResult;
-
-import model.Leave_app;
+import model.Leaveapp;
 import model.User;
-import business.Leave_appService;
+import business.LeaveappService;
 import business.UserService;
 
 
@@ -39,7 +36,6 @@ public class CreateLeaveapp extends JDialog {
 	private JLabel jLabel4 = null;
 	private JLabel jLabel5 = null;
 	private JLabel jLabel6 = null;
-	private JTextField txtId_user = null;
 	private JTextField txtReason = null;
 	private JTextField txtAddress = null;
 	private JTextField txtPhone = null;
@@ -60,8 +56,9 @@ public class CreateLeaveapp extends JDialog {
 	private JLabel lbDay1 = null;
 	private JComboBox cbxDay1 = null;
 	private int id = 0;
-	private User user = new User();
+	private User user = new User();  //  @jve:decl-index=0:
 	private UserService service = new  UserService();
+	private JLabel lbId_user = null;
 	/**
 	 * @param owner
 	 */
@@ -93,6 +90,9 @@ public class CreateLeaveapp extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbId_user = new JLabel(String.valueOf(id));
+			lbId_user.setBounds(new Rectangle(163, 59, 92, 16));
+			lbId_user.setText("");
 			lbDay1 = new JLabel();
 			lbDay1.setBounds(new Rectangle(352, 164, 28, 16));
 			lbDay1.setText("Day");
@@ -153,7 +153,6 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(jLabel4, null);
 			jContentPane.add(jLabel5, null);
 			jContentPane.add(jLabel6, null);
-			jContentPane.add(getTxtUsername(), null);
 			jContentPane.add(getTxtReason(), null);
 			jContentPane.add(getTxtAddress(), null);
 			jContentPane.add(getTxtPhone(), null);
@@ -173,22 +172,9 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(getCbxMonth1(), null);
 			jContentPane.add(lbDay1, null);
 			jContentPane.add(getCbxDay1(), null);
+			jContentPane.add(lbId_user, null);
 		}
 		return jContentPane;
-	}
-
-	/**
-	 * This method initializes txtUsername	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getTxtUsername() {
-		if (txtId_user == null) {
-			txtId_user = new JTextField(user.getId_user());
-			txtId_user.setLocation(new Point(165, 56));
-			txtId_user.setSize(new Dimension(75, 20));
-		}
-		return txtId_user;
 	}
 
 	/**
@@ -260,8 +246,8 @@ public class CreateLeaveapp extends JDialog {
 						){
 						JOptionPane.showMessageDialog(null, "Please input full of column!!");
 					}else{
-						Leave_app leave_app = new Leave_app();
-						leave_app.setId_leaveapp(id);
+						Leaveapp leave_app = new Leaveapp();
+						leave_app.setId_user(id);
 						SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 						try{
 							java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
@@ -271,26 +257,21 @@ public class CreateLeaveapp extends JDialog {
 							leave_app.setDatefrom(datefrom);
 							leave_app.setDateto(dateto);
 							leave_app.setReason(txtReason.getText());
-							leave_app.setAdress(txtAddress.getText());
+							leave_app.setAddress(txtAddress.getText());
 							leave_app.setPhone(txtPhone.getText());
 						}catch (Exception ex) {
 							ex.printStackTrace();
-						}
-						try {
-							Leave_appService leaveappserive = new Leave_appService();
-							addLeaveApp addleave = leaveappserive.addLeaveApp(leave_app);
-							if (addleave == addleave.incorrect) {
-								JOptionPane.showMessageDialog(null, "This USERNAME is exist!!");
-							}
-							else if (addleave == addleave.sucessful) {
-								JOptionPane.showMessageDialog(null, "Add member successfully!!");
-								CreateLeaveapp.this.dispose();
-							}
-							
+						}try {
+							LeaveappService service = new LeaveappService();
+							service.addLeaveApp(leave_app);
+							JOptionPane.showMessageDialog(null, "Add member successfully!!");
+							CreateLeaveapp.this.dispose();
 						} catch (Exception e2) {
-							
+							e2.printStackTrace();
 						}
+							
 					}
+									
 				}
 			});
 			
@@ -311,7 +292,7 @@ public class CreateLeaveapp extends JDialog {
 			btnReset.setLocation(new Point(164, 345));
 			btnReset.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					txtId_user.setText("");
+					
 					txtAddress.setText("");
 					txtPhone.setText("");
 					txtReason.setText("");

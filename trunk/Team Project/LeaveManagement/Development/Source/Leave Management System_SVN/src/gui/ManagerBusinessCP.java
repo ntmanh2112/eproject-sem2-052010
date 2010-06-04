@@ -9,6 +9,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import business.UserService;
+
 public class ManagerBusinessCP extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -29,6 +31,7 @@ public class ManagerBusinessCP extends JFrame {
 	private JMenuItem mniEditProfile = null;
 	private JMenuItem mniAdduser = null;
 	private JMenuItem mniViewuser = null;
+	UserService service = new UserService();
 	/**
 	 * This is the default constructor
 	 */
@@ -170,7 +173,13 @@ public class ManagerBusinessCP extends JFrame {
 			mniCreateLA.setText("Create LA");
 			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(new ManagerBusinessCP()).setVisible(true);
+					try{
+						int id = service.selectIdUser(Wellcome.username);
+						new CreateLeaveapp(new ManagerBusinessCP(),id).setVisible(true);
+					}catch(Exception ex){
+						ex.printStackTrace();
+					}
+					
 				}
 			});
 		}

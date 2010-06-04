@@ -139,6 +139,7 @@ public class Login extends JDialog {
 							Login.this.dispose();
 						}else if (result == loginResult.managerbusiness){
 							new ManagerBusinessCP().setVisible(true);
+							Wellcome.username = txtUsername.getText();
 							Login.this.dispose();
 						}else if (result == loginResult.manager) {
 							new ManagerBusinessCP().setVisible(true);
