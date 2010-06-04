@@ -238,6 +238,19 @@ public class UserDAO {
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
 	}
+	
+	public int selectIdUser(String username) throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		int id = 0;
+		String sql = "SELECT * FROM TBL_USER WHERE USERNAME = '"+username+"'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		while(rs.next()){
+			id = rs.getInt("ID_USER");
+		}
+		return id;
+	}
 
 }
 

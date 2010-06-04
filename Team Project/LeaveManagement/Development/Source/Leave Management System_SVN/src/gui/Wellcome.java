@@ -20,6 +20,7 @@ public class Wellcome extends JFrame {
 	private JMenu jMenu = null;
 	private JMenuItem mnHelp = null;
 	private JMenuItem mnAbout = null;
+	public static String username = null;
 
 	/**
 	 * This is the default constructor

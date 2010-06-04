@@ -13,6 +13,7 @@ import common.Enumeration.loginResult;
 import dao.UserDAO;
 
 public class UserService {
+	UserDAO dao = new UserDAO();
 	public loginResult loginUser(String username,String password){
 		UserDAO dao = new UserDAO();
 		loginResult result = dao.loginUser(username, password);
@@ -89,5 +90,8 @@ public class UserService {
 			i++;
 		}
 		return data;
+	}
+	public int selectIdUser(String username) throws Exception{
+		return dao.selectIdUser(username);
 	}
 }
