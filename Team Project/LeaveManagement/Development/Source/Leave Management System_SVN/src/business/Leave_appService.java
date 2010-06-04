@@ -4,13 +4,10 @@
 package business;
 
 import model.Leave_app;
-import model.User;
 
 import common.AddLeaveApp.addLeaveApp;
-import common.AddUser.addResult;
 
 import dao.LeaveDAO;
-import dao.UserDAO;
 
 /**
  * @author HIEU

@@ -4,26 +4,26 @@ import java.sql.Date;
 
 public class Leave_app {
 
+	
 	int id_leaveapp;
-	String creat_id;
+	int id_user;
 	Date datefrom;
 	Date dateto;
 	String reason;
-	String status;
-	String reviewer_id;
-	String reject_msg;
-	Date lastupdate;
+	String statusleave;
+	String phone;
+	String adress;
 	public int getId_leaveapp() {
 		return id_leaveapp;
 	}
-	public void setId_leaveapp(int id_leaveapp) {
-		this.id_leaveapp = id_leaveapp;
+	public void setId_leaveapp(int idLeaveapp) {
+		id_leaveapp = idLeaveapp;
 	}
-	public String getCreat_id() {
-		return creat_id;
+	public int getId_user() {
+		return id_user;
 	}
-	public void setCreat_id(String creat_id) {
-		this.creat_id = creat_id;
+	public void setId_user(int idUser) {
+		id_user = idUser;
 	}
 	public Date getDatefrom() {
 		return datefrom;
@@ -43,29 +43,25 @@ public class Leave_app {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public String getStatus() {
-		return status;
+	public String getStatusleave() {
+		return statusleave;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatusleave(String statusleave) {
+		this.statusleave = statusleave;
 	}
-	public String getReviewer_id() {
-		return reviewer_id;
+	public String getPhone() {
+		return phone;
 	}
-	public void setReviewer_id(String reviewer_id) {
-		this.reviewer_id = reviewer_id;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public String getReject_msg() {
-		return reject_msg;
+	public String getAdress() {
+		return adress;
 	}
-	public void setReject_msg(String reject_msg) {
-		this.reject_msg = reject_msg;
+	public void setAdress(String adress) {
+		this.adress = adress;
 	}
-	public Date getLastupdate() {
-		return lastupdate;
-	}
-	public void setLastupdate(Date lastupdate) {
-		this.lastupdate = lastupdate;
-	}
-
+	
+	
+	
 }
