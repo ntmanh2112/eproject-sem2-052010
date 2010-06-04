@@ -5,13 +5,23 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+
+import model.Leave_app;
+import model.User;
+import business.UserService;
+
+import common.AddUser.addResult;
 
 public class CreateLeaveapp extends JDialog {
 
@@ -23,7 +33,7 @@ public class CreateLeaveapp extends JDialog {
 	private JLabel jLabel4 = null;
 	private JLabel jLabel5 = null;
 	private JLabel jLabel6 = null;
-	private JTextField txtUsername = null;
+	private JTextField txtFullname = null;
 	private JTextField txtReason = null;
 	private JTextField txtAddress = null;
 	private JTextField txtPhone = null;
@@ -158,12 +168,12 @@ public class CreateLeaveapp extends JDialog {
 	 * @return javax.swing.JTextField	
 	 */
 	private JTextField getTxtUsername() {
-		if (txtUsername == null) {
-			txtUsername = new JTextField();
-			txtUsername.setLocation(new Point(165, 56));
-			txtUsername.setSize(new Dimension(271, 20));
+		if (txtFullname == null) {
+			txtFullname = new JTextField();
+			txtFullname.setLocation(new Point(165, 56));
+			txtFullname.setSize(new Dimension(271, 20));
 		}
-		return txtUsername;
+		return txtFullname;
 	}
 
 	/**
@@ -220,6 +230,18 @@ public class CreateLeaveapp extends JDialog {
 			btnSend.setLocation(new Point(30, 345));
 			btnSend.setSize(new Dimension(106, 30));
 			btnSend.setText("Send");
+			btnSend.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					if(txtFullname.getText().isEmpty()||
+							txtReason.getText().isEmpty()||
+							txtAddress.getText().isEmpty()||
+							txtPhone.getText().isEmpty()
+						){
+						JOptionPane.showMessageDialog(null, "Please input full of column!!");
+					}
+				}
+			});
+			
 		}
 		return btnSend;
 	}
@@ -235,6 +257,15 @@ public class CreateLeaveapp extends JDialog {
 			btnReset.setText("Reset");
 			btnReset.setSize(new Dimension(106, 30));
 			btnReset.setLocation(new Point(164, 345));
+			btnReset.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txtFullname.setText("");
+					txtAddress.setText("");
+					txtPhone.setText("");
+					txtReason.setText("");
+					
+				}
+			});
 		}
 		return btnReset;
 	}
@@ -250,10 +281,16 @@ public class CreateLeaveapp extends JDialog {
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(106, 30));
 			btnExit.setLocation(new Point(301, 345));
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					CreateLeaveapp.this.dispose();
+					
+				}
+			});
 		}
 		return btnExit;
 	}
-
+	
 	/**
 	 * This method initializes cbxYear	
 	 * 	
@@ -263,9 +300,15 @@ public class CreateLeaveapp extends JDialog {
 		if (cbxYear == null) {
 			cbxYear = new JComboBox();
 			cbxYear.setBounds(new Rectangle(199, 102, 69, 25));
+
+			for(int i=2010;i<2021;i++){
+				cbxYear.addItem(i);
+			}
+
 			for(int i = 2010 ;i< 2020;i++){
 				cbxYear.addItem(i);
 			}
+
 		}
 		return cbxYear;
 	}
@@ -278,7 +321,10 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxMonth() {
 		if (cbxMonth == null) {
 			cbxMonth = new JComboBox();
-			cbxMonth.setBounds(new Rectangle(308, 105, 45, 25));
+			cbxMonth.setBounds(new Rectangle(308, 102, 45, 25));
+			for(int i=1;i<13;i++){
+				cbxMonth.addItem(i);
+			}
 			for(int i = 1 ;i< 13;i++){
 				cbxMonth.addItem(i);
 			}
@@ -294,12 +340,18 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxDay() {
 		if (cbxDay == null) {
 			cbxDay = new JComboBox();
-			cbxDay.setBounds(new Rectangle(381, 105, 45, 25));
+			cbxDay.setBounds(new Rectangle(381, 102, 45, 25));
+			for(int i=1;i<32;i++){
+				cbxDay.addItem(i);
+			}
 			for(int i = 1 ;i< 32;i++){
 				cbxDay.addItem(i);
 			}
 		}
 		return cbxDay;
+	}
+	public static void main(String [] args){
+		new CreateLeaveapp(null).setVisible(true);
 	}
 
 	/**
