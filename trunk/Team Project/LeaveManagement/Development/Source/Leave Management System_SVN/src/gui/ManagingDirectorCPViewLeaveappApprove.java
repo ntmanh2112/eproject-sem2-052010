@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class ManagingDirectorCPViewLeaveapp extends JFrame {
+public class ManagingDirectorCPViewLeaveappApprove extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -41,7 +41,7 @@ public class ManagingDirectorCPViewLeaveapp extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public ManagingDirectorCPViewLeaveapp() {
+	public ManagingDirectorCPViewLeaveappApprove() {
 		super();
 		initialize();
 	}
@@ -203,7 +203,7 @@ public class ManagingDirectorCPViewLeaveapp extends JFrame {
 			mniCreateLA.setText("Create LA");
 			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(new ManagingDirectorCPViewLeaveapp()).setVisible(true);
+					new CreateLeaveapp(new ManagingDirectorCPViewLeaveappApprove()).setVisible(true);
 				}
 			});
 		}
@@ -258,7 +258,7 @@ public class ManagingDirectorCPViewLeaveapp extends JFrame {
 			mniLeaveAP.setText("View Leave AP");
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewLeaveapp().setVisible(true);
+					new ManagingDirectorCPViewLeaveappApprove().setVisible(true);
 					
 				}
 			});
@@ -290,7 +290,7 @@ public class ManagingDirectorCPViewLeaveapp extends JFrame {
 			mniAbout.setText("About");
 			mniAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new ManagingDirectorCPViewLeaveapp()).setVisible(true);
+					new About(new ManagingDirectorCPViewLeaveappApprove()).setVisible(true);
 				}
 			});
 		}
@@ -308,7 +308,7 @@ public class ManagingDirectorCPViewLeaveapp extends JFrame {
 			mniEditpassword.setText("Edit Password");
 			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(new ManagingDirectorCPViewLeaveapp()).setVisible(true);
+					new Changepassword(new ManagingDirectorCPViewLeaveappApprove()).setVisible(true);
 				}
 			});
 		}
@@ -326,7 +326,7 @@ public class ManagingDirectorCPViewLeaveapp extends JFrame {
 			mniEditProfile.setText("Edit Profile");
 			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Editprofile(new ManagingDirectorCPViewLeaveapp()).setVisible(true);
+					new Editprofile(new ManagingDirectorCPViewLeaveappApprove()).setVisible(true);
 				}
 			});
 		}
@@ -344,7 +344,7 @@ public class ManagingDirectorCPViewLeaveapp extends JFrame {
 			mniAdduser.setText("Add User");
 			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new ManagingDirectorCPViewLeaveapp()).setVisible(true);
+					new Addmember(new ManagingDirectorCPViewLeaveappApprove()).setVisible(true);
 				}
 			});
 		}
@@ -420,7 +420,7 @@ public class ManagingDirectorCPViewLeaveapp extends JFrame {
 			btnExit.setText("Exit");
 			btnExit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					ManagingDirectorCPViewLeaveapp.this.dispose();
+					ManagingDirectorCPViewLeaveappApprove.this.dispose();
 				}
 			});
 		}

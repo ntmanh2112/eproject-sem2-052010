@@ -9,9 +9,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+
+import business.LeaveappService;
 
 public class ManagerBusinessCPViewLeaveapp extends JFrame {
 
@@ -37,8 +42,14 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 	private JButton btnReject = null;
 	private JButton btnRefresh = null;
 	private JButton btnExit = null;
+	private JLabel lbStatus = null;
+	private JComboBox cbxLeaveapp = null;
+	private JButton btnView = null;
 	private JScrollPane jScrollPane = null;
-	private JTable tblLeaveapp = null;
+	private JTable tblLeave = null;
+	LeaveappService service = new LeaveappService();  //  @jve:decl-index=0:
+	private String[][]data1 = null;
+	private String[] column = {"ID","Full Name","Date From","Date to","Reason","Status ","Address","Phone"};
 	/**
 	 * This is the default constructor
 	 */
@@ -69,37 +80,52 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
-			gridBagConstraints8.fill = GridBagConstraints.BOTH;
-			gridBagConstraints8.gridy = 0;
-			gridBagConstraints8.weightx = 1.0D;
-			gridBagConstraints8.weighty = 1.0;
-			gridBagConstraints8.ipadx = 4;
-			gridBagConstraints8.gridwidth = 4;
-			gridBagConstraints8.gridx = 0;
+			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
+			gridBagConstraints4.fill = GridBagConstraints.BOTH;
+			gridBagConstraints4.gridy = 1;
+			gridBagConstraints4.weightx = 1.0;
+			gridBagConstraints4.weighty = 1.0;
+			gridBagConstraints4.gridwidth = 4;
+			gridBagConstraints4.gridx = 0;
+			GridBagConstraints gridBagConstraints31 = new GridBagConstraints();
+			gridBagConstraints31.gridx = 2;
+			gridBagConstraints31.gridy = 0;
+			GridBagConstraints gridBagConstraints21 = new GridBagConstraints();
+			gridBagConstraints21.fill = GridBagConstraints.VERTICAL;
+			gridBagConstraints21.gridy = 0;
+			gridBagConstraints21.weightx = 1.0;
+			gridBagConstraints21.gridx = 1;
+			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
+			gridBagConstraints11.gridx = 0;
+			gridBagConstraints11.gridy = 0;
+			lbStatus = new JLabel();
+			lbStatus.setText("Status Leaveapp");
 			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
 			gridBagConstraints3.gridx = 3;
 			gridBagConstraints3.weightx = 10.0D;
-			gridBagConstraints3.gridy = 1;
+			gridBagConstraints3.gridy = 2;
 			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
 			gridBagConstraints2.gridx = 2;
 			gridBagConstraints2.weightx = 10.0D;
-			gridBagConstraints2.gridy = 1;
+			gridBagConstraints2.gridy = 2;
 			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
 			gridBagConstraints1.gridx = 1;
 			gridBagConstraints1.weightx = 10.0D;
-			gridBagConstraints1.gridy = 1;
+			gridBagConstraints1.gridy = 2;
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
 			gridBagConstraints.gridx = 0;
 			gridBagConstraints.weightx = 10.0D;
-			gridBagConstraints.gridy = 1;
+			gridBagConstraints.gridy = 2;
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
 			jContentPane.add(getBtnApprove(), gridBagConstraints);
 			jContentPane.add(getBtnReject(), gridBagConstraints1);
 			jContentPane.add(getBtnRefresh(), gridBagConstraints2);
 			jContentPane.add(getBtnExit(), gridBagConstraints3);
-			jContentPane.add(getJScrollPane(), gridBagConstraints8);
+			jContentPane.add(lbStatus, gridBagConstraints11);
+			jContentPane.add(getCbxLeaveapp(), gridBagConstraints21);
+			jContentPane.add(getBtnView(), gridBagConstraints31);
+			jContentPane.add(getJScrollPane(), gridBagConstraints4);
 		}
 		return jContentPane;
 	}
@@ -433,6 +459,32 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 	}
 
 	/**
+	 * This method initializes cbxLeaveapp	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxLeaveapp() {
+		if (cbxLeaveapp == null) {
+			String[] data = {"valid","approve","reject","finish"};
+			cbxLeaveapp = new JComboBox(data);
+		}
+		return cbxLeaveapp;
+	}
+
+	/**
+	 * This method initializes btnView	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnView() {
+		if (btnView == null) {
+			btnView = new JButton();
+			btnView.setText("View");
+		}
+		return btnView;
+	}
+
+	/**
 	 * This method initializes jScrollPane	
 	 * 	
 	 * @return javax.swing.JScrollPane	
@@ -440,21 +492,28 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 	private JScrollPane getJScrollPane() {
 		if (jScrollPane == null) {
 			jScrollPane = new JScrollPane();
-			jScrollPane.setViewportView(getTblLeaveapp());
+			jScrollPane.setViewportView(getTblLeave());
 		}
 		return jScrollPane;
 	}
 
 	/**
-	 * This method initializes tblLeaveapp	
+	 * This method initializes tblLeave	
 	 * 	
 	 * @return javax.swing.JTable	
 	 */
-	private JTable getTblLeaveapp() {
-		if (tblLeaveapp == null) {
-			tblLeaveapp = new JTable();
+	private JTable getTblLeave() {
+		
+		if (tblLeave == null) {
+				try{
+					service.selectLeaveapp();
+					tblLeave = new JTable(data1, column);
+				}catch(Exception ex){
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Co loi");
+				}
 		}
-		return tblLeaveapp;
+		return tblLeave;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

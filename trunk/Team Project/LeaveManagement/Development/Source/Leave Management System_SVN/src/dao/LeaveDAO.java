@@ -44,6 +44,38 @@ public class LeaveDAO {
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
 	}	
+	public ResultSet selectLeaveAppValid()throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT * FROM viewLeaveAppValid";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	public ResultSet selectLeaveAppApprove()throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT * FROM viewLeaveAppApprove";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	public ResultSet selectLeaveAppReject()throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT * FROM viewLeaveAppReject";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	public ResultSet selectLeaveAppFinish()throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT * FROM viewLeaveAppFinish";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
 	
 
 }

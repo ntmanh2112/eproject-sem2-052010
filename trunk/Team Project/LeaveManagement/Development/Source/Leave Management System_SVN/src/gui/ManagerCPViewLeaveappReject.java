@@ -1,14 +1,18 @@
 package gui;
 
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
-public class ManagingDirector extends JFrame {
+public class ManagerCPViewLeaveappReject extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -28,10 +32,16 @@ public class ManagingDirector extends JFrame {
 	private JMenuItem mniEditProfile = null;
 	private JMenuItem mniAdduser = null;
 	private JMenuItem mniViewuser = null;
+	private JButton btnApprove = null;
+	private JButton btnReject = null;
+	private JButton btnRefresh = null;
+	private JButton btnExit = null;
+	private JScrollPane jScrollPane = null;
+	private JTable tblLeaveapp = null;
 	/**
 	 * This is the default constructor
 	 */
-	public ManagingDirector() {
+	public ManagerCPViewLeaveappReject() {
 		super();
 		initialize();
 	}
@@ -55,8 +65,37 @@ public class ManagingDirector extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
+			gridBagConstraints8.fill = GridBagConstraints.BOTH;
+			gridBagConstraints8.gridy = 0;
+			gridBagConstraints8.weightx = 1.0D;
+			gridBagConstraints8.weighty = 1.0;
+			gridBagConstraints8.ipadx = 4;
+			gridBagConstraints8.gridwidth = 4;
+			gridBagConstraints8.gridx = 0;
+			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
+			gridBagConstraints3.gridx = 3;
+			gridBagConstraints3.weightx = 10.0D;
+			gridBagConstraints3.gridy = 1;
+			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
+			gridBagConstraints2.gridx = 2;
+			gridBagConstraints2.weightx = 10.0D;
+			gridBagConstraints2.gridy = 1;
+			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
+			gridBagConstraints1.gridx = 1;
+			gridBagConstraints1.weightx = 10.0D;
+			gridBagConstraints1.gridy = 1;
+			GridBagConstraints gridBagConstraints = new GridBagConstraints();
+			gridBagConstraints.gridx = 0;
+			gridBagConstraints.weightx = 10.0D;
+			gridBagConstraints.gridy = 1;
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
+			jContentPane.add(getBtnApprove(), gridBagConstraints);
+			jContentPane.add(getBtnReject(), gridBagConstraints1);
+			jContentPane.add(getBtnRefresh(), gridBagConstraints2);
+			jContentPane.add(getBtnExit(), gridBagConstraints3);
+			jContentPane.add(getJScrollPane(), gridBagConstraints8);
 		}
 		return jContentPane;
 	}
@@ -164,7 +203,7 @@ public class ManagingDirector extends JFrame {
 			mniCreateLA.setText("Create LA");
 			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(new ManagingDirector()).setVisible(true);
+					new CreateLeaveapp(new ManagerCPViewLeaveappReject()).setVisible(true);
 				}
 			});
 		}
@@ -182,8 +221,7 @@ public class ManagingDirector extends JFrame {
 			mniReportmonth.setText("Report Month");
 			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewReportMonth().setVisible(true);
-					
+					new ManagingDirectorCPViewReportMonth().setVisible(true);	
 				}
 			});
 		}
@@ -220,7 +258,7 @@ public class ManagingDirector extends JFrame {
 			mniLeaveAP.setText("View Leave AP");
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewLeaveappValid().setVisible(true);
+					new ManagerCPViewLeaveappReject().setVisible(true);
 					
 				}
 			});
@@ -252,7 +290,7 @@ public class ManagingDirector extends JFrame {
 			mniAbout.setText("About");
 			mniAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new ManagingDirector()).setVisible(true);
+					new About(new ManagerCPViewLeaveappReject()).setVisible(true);
 				}
 			});
 		}
@@ -270,7 +308,7 @@ public class ManagingDirector extends JFrame {
 			mniEditpassword.setText("Edit Password");
 			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(new ManagingDirector()).setVisible(true);
+					new Changepassword(new ManagerCPViewLeaveappReject()).setVisible(true);
 				}
 			});
 		}
@@ -288,7 +326,7 @@ public class ManagingDirector extends JFrame {
 			mniEditProfile.setText("Edit Profile");
 			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Editprofile(new ManagingDirector()).setVisible(true);
+					new Editprofile(new ManagerCPViewLeaveappReject()).setVisible(true);
 				}
 			});
 		}
@@ -306,7 +344,7 @@ public class ManagingDirector extends JFrame {
 			mniAdduser.setText("Add User");
 			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new ManagingDirector()).setVisible(true);
+					new Addmember(new ManagerCPViewLeaveappReject()).setVisible(true);
 				}
 			});
 		}
@@ -330,6 +368,88 @@ public class ManagingDirector extends JFrame {
 			});
 		}
 		return mniViewuser;
+	}
+
+	/**
+	 * This method initializes btnApprove	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnApprove() {
+		if (btnApprove == null) {
+			btnApprove = new JButton();
+			btnApprove.setText("Approve");
+		}
+		return btnApprove;
+	}
+
+	/**
+	 * This method initializes btnReject	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnReject() {
+		if (btnReject == null) {
+			btnReject = new JButton();
+			btnReject.setText("Reject");
+		}
+		return btnReject;
+	}
+
+	/**
+	 * This method initializes btnRefresh	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnRefresh() {
+		if (btnRefresh == null) {
+			btnRefresh = new JButton();
+			btnRefresh.setText("Refresh");
+		}
+		return btnRefresh;
+	}
+
+	/**
+	 * This method initializes btnExit	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnExit() {
+		if (btnExit == null) {
+			btnExit = new JButton();
+			btnExit.setText("Exit");
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					ManagerCPViewLeaveappReject.this.dispose();
+				}
+			});
+		}
+		return btnExit;
+	}
+
+	/**
+	 * This method initializes jScrollPane	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane() {
+		if (jScrollPane == null) {
+			jScrollPane = new JScrollPane();
+			jScrollPane.setViewportView(getTblLeaveapp());
+		}
+		return jScrollPane;
+	}
+
+	/**
+	 * This method initializes tblLeaveapp	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblLeaveapp() {
+		if (tblLeaveapp == null) {
+			tblLeaveapp = new JTable();
+		}
+		return tblLeaveapp;
 	}
 	
 }  //  @jve:decl-index=0:visual-constraint="10,10"
