@@ -3,18 +3,27 @@ package model;
 import java.sql.Date;
 
 public class Leave_app {
-	int id_user;
-	public int getId_user() {
-		return id_user;
+
+	int id_leaveapp;
+	String creat_id;
+	Date datefrom;
+	Date dateto;
+	String reason;
+	String status;
+	String reviewer_id;
+	String reject_msg;
+	Date lastupdate;
+	public int getId_leaveapp() {
+		return id_leaveapp;
 	}
-	public void setId_user(int idUser) {
-		id_user = idUser;
+	public void setId_leaveapp(int id_leaveapp) {
+		this.id_leaveapp = id_leaveapp;
 	}
-	public String getFullname() {
-		return fullname;
+	public String getCreat_id() {
+		return creat_id;
 	}
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	public void setCreat_id(String creat_id) {
+		this.creat_id = creat_id;
 	}
 	public Date getDatefrom() {
 		return datefrom;
@@ -40,11 +49,23 @@ public class Leave_app {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	String fullname;
-	Date datefrom;
-	Date  dateto;
-	String reason;
-	String status;
-	
+	public String getReviewer_id() {
+		return reviewer_id;
+	}
+	public void setReviewer_id(String reviewer_id) {
+		this.reviewer_id = reviewer_id;
+	}
+	public String getReject_msg() {
+		return reject_msg;
+	}
+	public void setReject_msg(String reject_msg) {
+		this.reject_msg = reject_msg;
+	}
+	public Date getLastupdate() {
+		return lastupdate;
+	}
+	public void setLastupdate(Date lastupdate) {
+		this.lastupdate = lastupdate;
+	}
 
 }

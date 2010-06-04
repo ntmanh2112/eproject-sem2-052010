@@ -427,13 +427,13 @@ public class Addmember extends JDialog {
 							user.setFullname(txtFullname.getText());
 							SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 							try {
-							java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
-							Date birthday = new Date(date.getTime());
-							user.setBirthday(birthday);
-							user.setAddress( txtAddress.getText());
-							user.setGender(cbxSex.getSelectedItem().toString()) ;
-							user.setPhone(txtPhone.getText());
-							user.setEmail( txtEmail.getText());
+								java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
+								Date birthday = new Date(date.getTime());
+								user.setBirthday(birthday);
+								user.setAddress( txtAddress.getText());
+								user.setGender(cbxSex.getSelectedItem().toString()) ;
+								user.setPhone(txtPhone.getText());
+								user.setEmail( txtEmail.getText());
 							}catch (Exception ex){
 								ex.printStackTrace();
 							}
@@ -583,5 +583,7 @@ public class Addmember extends JDialog {
 		}
 		return cbxDay;
 	}
-
+	public static void main(String [] args){
+		new Addmember(null).setVisible(true);
+	}
 }  //  @jve:decl-index=0:visual-constraint="10,30"

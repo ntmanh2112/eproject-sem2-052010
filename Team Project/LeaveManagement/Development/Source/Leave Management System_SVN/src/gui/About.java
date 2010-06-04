@@ -108,5 +108,8 @@ public class About extends JDialog {
 		}
 		return btnOk;
 	}
+	public static void main(String [] args){
+		new About(null).setVisible(true);
+	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,43"
