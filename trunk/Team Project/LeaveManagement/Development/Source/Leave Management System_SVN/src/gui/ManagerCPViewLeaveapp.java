@@ -182,6 +182,11 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		if (mniCreateLA == null) {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
+			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(new ManagerCPViewLeaveapp()).setVisible(true);
+				}
+			});
 		}
 		return mniCreateLA;
 	}
@@ -195,6 +200,12 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		if (mniReportmonth == null) {
 			mniReportmonth = new JMenuItem();
 			mniReportmonth.setText("Report Month");
+			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerCPViewReportMonth().setVisible(true);
+					
+				}
+			});
 		}
 		return mniReportmonth;
 	}
@@ -208,6 +219,13 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		if (mniReportYeah == null) {
 			mniReportYeah = new JMenuItem();
 			mniReportYeah.setText("Report Year");
+			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerCPViewReportYear().setVisible(true);
+					
+				}
+			});
+
 		}
 		return mniReportYeah;
 	}
@@ -221,6 +239,12 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		if (mniLeaveAP == null) {
 			mniLeaveAP = new JMenuItem();
 			mniLeaveAP.setText("View Leave AP");
+			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new ManagerCPViewLeaveapp().setVisible(true);
+					
+				}
+			});
 		}
 		return mniLeaveAP;
 	}
@@ -247,6 +271,11 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		if (mniAbout == null) {
 			mniAbout = new JMenuItem();
 			mniAbout.setText("About");
+			mniAbout.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new About(new ManagerCPViewLeaveapp()).setVisible(true);
+				}
+			});
 		}
 		return mniAbout;
 	}
@@ -260,6 +289,11 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		if (mniEditpassword == null) {
 			mniEditpassword = new JMenuItem();
 			mniEditpassword.setText("Edit Password");
+			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Changepassword(new ManagerCPViewLeaveapp()).setVisible(true);
+				}
+			});
 		}
 		return mniEditpassword;
 	}
@@ -273,6 +307,11 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		if (mniEditProfile == null) {
 			mniEditProfile = new JMenuItem();
 			mniEditProfile.setText("Edit Profile");
+			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(new ManagerCPViewLeaveapp()).setVisible(true);
+				}
+			});
 		}
 		return mniEditProfile;
 	}
@@ -325,6 +364,11 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		if (btnExit == null) {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					ManagerCPViewLeaveapp.this.dispose();
+				}
+			});
 		}
 		return btnExit;
 	}
@@ -353,5 +397,5 @@ public class ManagerCPViewLeaveapp extends JFrame {
 		}
 		return tblLeaveapp;
 	}
-
+	
 }  //  @jve:decl-index=0:visual-constraint="10,10"
