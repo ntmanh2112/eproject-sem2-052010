@@ -37,6 +37,12 @@ public class CreateLeaveapp extends JDialog {
 	private JLabel lbMonth = null;
 	private JComboBox cbxMonth = null;
 	private JComboBox cbxDay = null;
+	private JLabel lbYear1 = null;
+	private JComboBox cbxYear1 = null;
+	private JLabel lbMonth1 = null;
+	private JComboBox cbxMonth1 = null;
+	private JLabel lbDay1 = null;
+	private JComboBox cbxDay1 = null;
 	/**
 	 * @param owner
 	 */
@@ -62,6 +68,15 @@ public class CreateLeaveapp extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbDay1 = new JLabel();
+			lbDay1.setBounds(new Rectangle(352, 164, 28, 16));
+			lbDay1.setText("Day");
+			lbMonth1 = new JLabel();
+			lbMonth1.setBounds(new Rectangle(262, 163, 44, 16));
+			lbMonth1.setText("Month");
+			lbYear1 = new JLabel();
+			lbYear1.setBounds(new Rectangle(163, 161, 38, 16));
+			lbYear1.setText("Year");
 			lbMonth = new JLabel();
 			lbMonth.setBounds(new Rectangle(270, 105, 38, 16));
 			lbMonth.setText("Month");
@@ -127,6 +142,12 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(lbMonth, null);
 			jContentPane.add(getCbxMonth(), null);
 			jContentPane.add(getCbxDay(), null);
+			jContentPane.add(lbYear1, null);
+			jContentPane.add(getCbxYear1(), null);
+			jContentPane.add(lbMonth1, null);
+			jContentPane.add(getCbxMonth1(), null);
+			jContentPane.add(lbDay1, null);
+			jContentPane.add(getCbxDay1(), null);
 		}
 		return jContentPane;
 	}
@@ -242,6 +263,9 @@ public class CreateLeaveapp extends JDialog {
 		if (cbxYear == null) {
 			cbxYear = new JComboBox();
 			cbxYear.setBounds(new Rectangle(199, 102, 69, 25));
+			for(int i = 2010 ;i< 2020;i++){
+				cbxYear.addItem(i);
+			}
 		}
 		return cbxYear;
 	}
@@ -255,6 +279,9 @@ public class CreateLeaveapp extends JDialog {
 		if (cbxMonth == null) {
 			cbxMonth = new JComboBox();
 			cbxMonth.setBounds(new Rectangle(308, 105, 45, 25));
+			for(int i = 1 ;i< 13;i++){
+				cbxMonth.addItem(i);
+			}
 		}
 		return cbxMonth;
 	}
@@ -268,8 +295,59 @@ public class CreateLeaveapp extends JDialog {
 		if (cbxDay == null) {
 			cbxDay = new JComboBox();
 			cbxDay.setBounds(new Rectangle(381, 105, 45, 25));
+			for(int i = 1 ;i< 32;i++){
+				cbxDay.addItem(i);
+			}
 		}
 		return cbxDay;
+	}
+
+	/**
+	 * This method initializes cbxYear1	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxYear1() {
+		if (cbxYear1 == null) {
+			cbxYear1 = new JComboBox();
+			cbxYear1.setBounds(new Rectangle(202, 162, 60, 25));
+			for(int i = 2010 ;i< 2020;i++){
+				cbxYear1.addItem(i);
+			}
+		}
+		return cbxYear1;
+	}
+
+	/**
+	 * This method initializes cbxMonth1	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxMonth1() {
+		if (cbxMonth1 == null) {
+			cbxMonth1 = new JComboBox();
+			cbxMonth1.setBounds(new Rectangle(306, 163, 46, 25));
+			for(int i = 1 ;i< 13;i++){
+				cbxMonth1.addItem(i);
+			}
+		}
+		return cbxMonth1;
+	}
+
+	/**
+	 * This method initializes cbxDay1	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxDay1() {
+		if (cbxDay1 == null) {
+			cbxDay1 = new JComboBox();
+			cbxDay1.setBounds(new Rectangle(378, 163, 50, 25));
+			for(int i = 1 ;i< 32;i++){
+				cbxDay1.addItem(i);
+			}
+		}
+		return cbxDay1;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

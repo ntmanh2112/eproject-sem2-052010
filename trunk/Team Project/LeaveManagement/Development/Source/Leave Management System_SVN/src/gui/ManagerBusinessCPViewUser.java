@@ -217,6 +217,11 @@ public class ManagerBusinessCPViewUser extends JFrame {
 		if (mniCreateLA == null) {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
+			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(new ManagerBusinessCPViewUser()).setVisible(true);
+				}
+			});
 		}
 		return mniCreateLA;
 	}

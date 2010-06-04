@@ -115,8 +115,8 @@ public class UserDAO {
 			
 			else {
 					
-					psmt1.executeUpdate();
 					psmt2.executeUpdate();
+					psmt1.executeUpdate();
 					addresult = addResult.sucessful;
 				}
 			
