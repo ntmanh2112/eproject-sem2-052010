@@ -6,13 +6,12 @@ import javax.swing.JFrame;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
+import javax.swing.ImageIcon;
 
 public class SignIn extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
-	private JLabel lbIcon = null;
-
 	/**
 	 * This is the default constructor
 	 */
@@ -39,12 +38,8 @@ public class SignIn extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			lbIcon = new JLabel();
-			lbIcon.setBounds(new Rectangle(123, 33, 38, 16));
-			lbIcon.setText("");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
-			jContentPane.add(lbIcon, null);
 		}
 		return jContentPane;
 	}
