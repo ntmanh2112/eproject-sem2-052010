@@ -235,7 +235,7 @@ public class ManagerBusinessCP extends JFrame {
 			mniLeaveAP.setText("View Leave AP");
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewLeaveapp().setVisible(true);
+					new ManagerBusinessCPViewLeaveappValid().setVisible(true);
 					ManagerBusinessCP.this.dispose();
 				}
 			});
@@ -340,7 +340,7 @@ public class ManagerBusinessCP extends JFrame {
 			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagerBusinessCPViewUser().setVisible(true);
-				//	ManagerBusinessCP.this.dispose();
+					ManagerBusinessCP.this.dispose();
 				}
 			});
 		}

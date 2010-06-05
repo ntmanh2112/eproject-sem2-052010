@@ -30,7 +30,6 @@ public class ManagingDirectorCPViewLeaveappReject extends JFrame {
 	private JMenuItem mniAbout = null;
 	private JMenuItem mniEditpassword = null;
 	private JMenuItem mniEditProfile = null;
-	private JMenuItem mniAdduser = null;
 	private JMenuItem mniViewuser = null;
 	private JButton btnApprove = null;
 	private JButton btnReject = null;
@@ -140,7 +139,6 @@ public class ManagingDirectorCPViewLeaveappReject extends JFrame {
 		if (mnManager == null) {
 			mnManager = new JMenu();
 			mnManager.setText("Manager");
-			mnManager.add(getMniAdduser());
 			mnManager.add(getMniViewuser());
 		}
 		return mnManager;
@@ -221,7 +219,8 @@ public class ManagingDirectorCPViewLeaveappReject extends JFrame {
 			mniReportmonth.setText("Report Month");
 			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewReportMonth().setVisible(true);	
+					new ManagingDirectorCPViewReportMonth().setVisible(true);
+					ManagingDirectorCPViewLeaveappReject.this.dispose();
 				}
 			});
 		}
@@ -240,6 +239,7 @@ public class ManagingDirectorCPViewLeaveappReject extends JFrame {
 			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagingDirectorCPViewReportYear().setVisible(true);
+					ManagingDirectorCPViewLeaveappReject.this.dispose();
 					
 				}
 			});
@@ -259,7 +259,7 @@ public class ManagingDirectorCPViewLeaveappReject extends JFrame {
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagingDirectorCPViewLeaveappReject().setVisible(true);
-					
+					ManagingDirectorCPViewLeaveappReject.this.dispose();
 				}
 			});
 		}
@@ -334,24 +334,6 @@ public class ManagingDirectorCPViewLeaveappReject extends JFrame {
 	}
 
 	/**
-	 * This method initializes mniAdduser	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMniAdduser() {
-		if (mniAdduser == null) {
-			mniAdduser = new JMenuItem();
-			mniAdduser.setText("Add User");
-			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new ManagingDirectorCPViewLeaveappReject()).setVisible(true);
-				}
-			});
-		}
-		return mniAdduser;
-	}
-
-	/**
 	 * This method initializes mniViewuser	
 	 * 	
 	 * @return javax.swing.JMenuItem	
@@ -362,8 +344,8 @@ public class ManagingDirectorCPViewLeaveappReject extends JFrame {
 			mniViewuser.setText("View User");
 			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewUser().setVisible(true);
-					
+					new ManagingDirectorCPAddgroup().setVisible(true);
+					ManagingDirectorCPViewLeaveappReject.this.dispose();
 				}
 			});
 		}
