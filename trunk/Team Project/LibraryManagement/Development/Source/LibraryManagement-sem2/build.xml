@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+ <project name="QuanLyNhanVien" default="compileAll" basedir=".">
+	<property name="src" value="${basedir}/src" />
+	 	<property name="build" value="${basedir}/build" />
+	 	<property name="dist" value="${basedir}/dist" />
+	 	<property name="lib" value="${basedir}/lib" />
+	 	<property name="image" value="${basedir}/image" />
+	 	<property name="compile.debug" value="true" />
+	 	
+	 	<target name="prepare"
+	 			description="Prepare some necessary steps">
+	 		<mkdir dir="${build}"/>
+	 		<mkdir dir="${dist}"/>
+	 		<mkdir dir="${image}"/>
+	 	</target>
+	 	
+	 	<target name="clean" description="xoa">
+	 		<delete dir="${build}"></delete>
+	 		<delete dir="${dist}"></delete>
+	 		<delete dir="${image}"></delete>
+		</target>
+	 	
+	 	<path id="compileClasspath">
+	 	 		<fileset dir="${lib}"/>
+	 	</path>
+	 	
+	 	<target name="compileAll" depends="prepare" description="compile java sources">
+	 		<javac encoding="UTF-8" srcdir="${src}" destdir="${build}" debug="true" deprecation="true">
+	 			<classpath refid="compileClasspath"/>
+	 		</javac>
+	 		<copy todir="${build}">
+	 			<fileset dir="${src}">
+	 				<include name="*.properties"/>
+	 			</fileset>
+	 		</copy>
+	 	</target>
+	 	
+	    <target name="dist" depends="compileAll">
+	            <jar destfile="${dist}/${ant.project.name}.jar" basedir="${build}" compress="true">
+	            	<manifest>
+	            		<attribute name="Main-Class" value="${ant.project.name}"/>
+	            	</manifest>
+	            </jar>
+	    </target>
+ 	
+ 		<target name="run">
+ 			<java jar="${dist}/${ant.project.name}.jar" fork="true">
+ 				<classpath refid="compileClasspath" />
+ 			</java>
+ 		</target>
+</project>
