@@ -38,7 +38,6 @@ public class Login extends JDialog {
 	private JPasswordField txtPassword = null;
 	private JButton btnOk = null;
 	private JButton btnCancel = null;
-	private ImagePanel ip;
 	/**
 	 * @param owner
 	 */
@@ -62,25 +61,15 @@ public class Login extends JDialog {
 		
 		this.setSize(400,300);
 		
-		Container c =this.getContentPane();
 		GridBagConstraints contrains = new GridBagConstraints();
 		this.setLayout(new BorderLayout());
 		
 		
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		this.setTitle("Login Form");
 		
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(new File("image/login.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
-				Double.valueOf(dim.getHeight()).intValue());
+		
      
-        c.add(ip, BorderLayout.CENTER);
 		
 	}
 

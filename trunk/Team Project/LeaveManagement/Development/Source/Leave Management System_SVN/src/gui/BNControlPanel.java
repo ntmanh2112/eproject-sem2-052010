@@ -1,3 +1,4 @@
+package gui;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -25,7 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 
-public class BNCP extends JFrame {
+public class BNControlPanel extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -141,7 +142,7 @@ public class BNCP extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public BNCP() {
+	public BNControlPanel() {
 		super();
 		initialize();
 	}
