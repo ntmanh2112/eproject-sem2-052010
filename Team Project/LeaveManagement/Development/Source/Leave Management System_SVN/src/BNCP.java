@@ -20,6 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class BNCP extends JFrame {
 
@@ -45,24 +48,73 @@ public class BNCP extends JFrame {
 	private JTextField txtGender = null;
 	private JTextField txtAddress = null;
 	private JTextField txtEmail = null;
+	private JButton btnAdduser = null;
+	private JButton btnEditUser = null;
+	private JButton btnChangepass = null;
+	private JButton btnEditProfile = null;
+	private JButton btnCreatleaveapp = null;
+	private JButton btnLock = null;
+	private JButton btnUnlock = null;
+	private JButton btnLogout = null;
 	private JPanel jPanel = null;
 	private JTabbedPane jTabbedPane = null;
-	private JPanel pnManager = null;
-	private JPanel pnLeaveApp = null;
-	private JTabbedPane jTabbedPane1 = null;
-	private JPanel pnValid = null;
-	private JPanel pnApprove = null;
-	private JPanel pnReject = null;
-	private JPanel pnFinish = null;
-	private JTabbedPane jTabbedPane2 = null;
-	private JPanel pnBusinessmanager = null;
-	private JPanel pnManagerr = null;
-	private JPanel pnEngineer = null;
-	private JPanel pnReport = null;
-	private JTabbedPane jTabbedPane3 = null;
-	private JPanel pnReportmonth = null;
-	private JPanel pnReportYear = null;
-	private JButton btnAdduser = null;
+	private JPanel jpnHistory = null;
+	private JPanel jpnLeaveapp = null;
+	private JPanel jpnReport = null;
+	private JPanel jpmUsermanager = null;
+	private JTabbedPane jtpnUsermanager = null;
+	private JPanel jpnBusinessmanager = null;
+	private JPanel jpnManager = null;
+	private JPanel jpnEngineer = null;
+	private JTabbedPane jtpnReport = null;
+	private JPanel jpnReportmonth = null;
+	private JPanel jpnReportYear = null;
+	private JTabbedPane jtbnLeaveapp = null;
+	private JPanel jpnValid = null;
+	private JPanel jpnApprove = null;
+	private JPanel jpnReject = null;
+	private JPanel jpnFinish = null;
+	private JMenuItem mniEditprofile = null;
+	private JMenuItem mniChangepass = null;
+	private JMenuItem mniCreatleaveapp = null;
+	private JMenuItem mniViewleaveapp = null;
+	private JMenuItem mniHistory = null;
+	private JMenuItem mniSignout = null;
+	private JMenuItem mniAdduser = null;
+	private JMenuItem mniLockuser = null;
+	private JMenuItem mniUnlockuser = null;
+	private JMenuItem mniAddgroup = null;
+	private JMenuItem mniEditUser = null;
+	private JMenu mnManagerLeaveapp = null;
+	private JMenuItem mnViewValid = null;
+	private JMenuItem mniViewApprove = null;
+	private JMenuItem mniViewReject = null;
+	private JMenuItem mniViewFinish = null;
+	private JMenuItem mniViewMyLeaveApp = null;
+	private JToolBar jJToolBarBar = null;
+	private JButton btnApprove = null;
+	private JButton btnReject = null;
+	private JButton btnFinish = null;
+	private JPanel pnUser = null;
+	private JScrollPane jScrollPane = null;
+	private JTable tblLeaveappValid = null;
+	private JToolBar jtbLeaveApprove = null;
+	private JButton btnViewLeaveappApprove = null;
+	private JButton btnViewApprovereject = null;
+	private JButton btnViewApprovefinish = null;
+	private JPanel pnTableViewLeaveApp = null;
+	private JScrollPane jScrollPane1 = null;
+	private JTable tblLeaveappApprove = null;
+	private JToolBar jtbLeaveappReject = null;
+	private JButton btnViewLeaveappRejectApprove = null;
+	private JButton btnViewLeaveappRejectFinish = null;
+	private JButton btnViewLeaveappRejectReject = null;
+	private JPanel pnTableViewLeaveappReject = null;
+	private JScrollPane jScrollPane2 = null;
+	private JTable tblLeaveappReject = null;
+	private JScrollPane jScrollPane3 = null;
+	private JTable tblLeaveappFinish = null;
+	private JLabel jLabel = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -92,6 +144,9 @@ public class BNCP extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabel = new JLabel();
+			jLabel.setBounds(new Rectangle(1192, 40, 38, 16));
+			jLabel.setText("");
 			lbEmail = new JLabel();
 			lbEmail.setText("Email");
 			lbEmail.setSize(new Dimension(91, 23));
@@ -157,8 +212,16 @@ public class BNCP extends JFrame {
 			jContentPane.add(getTxtGender(), null);
 			jContentPane.add(getTxtAddress(), null);
 			jContentPane.add(getTxtEmail(), null);
-			jContentPane.add(getJPanel(), null);
 			jContentPane.add(getBtnAdduser(), null);
+			jContentPane.add(getBtnEditUser(), null);
+			jContentPane.add(getBtnChangepass(), null);
+			jContentPane.add(getBtnEditProfile(), null);
+			jContentPane.add(getBtnCreatleaveapp(), null);
+			jContentPane.add(getBtnLock(), null);
+			jContentPane.add(getBtnUnlock(), null);
+			jContentPane.add(getBtnLogout(), null);
+			jContentPane.add(getJPanel(), null);
+			jContentPane.add(jLabel, null);
 		}
 		return jContentPane;
 	}
@@ -173,6 +236,7 @@ public class BNCP extends JFrame {
 			jJMenuBar = new JMenuBar();
 			jJMenuBar.add(getMnUser());
 			jJMenuBar.add(getMnManager());
+			jJMenuBar.add(getMnManagerLeaveapp());
 		}
 		return jJMenuBar;
 	}
@@ -186,6 +250,13 @@ public class BNCP extends JFrame {
 		if (mnUser == null) {
 			mnUser = new JMenu();
 			mnUser.setText("User");
+			mnUser.setIcon(new ImageIcon(getClass().getResource("/image/Preppy-icon.png")));
+			mnUser.add(getMniEditprofile());
+			mnUser.add(getMniChangepass());
+			mnUser.add(getMniCreatleaveapp());
+			mnUser.add(getMniViewleaveapp());
+			mnUser.add(getMniHistory());
+			mnUser.add(getMniSignout());
 		}
 		return mnUser;
 	}
@@ -198,7 +269,13 @@ public class BNCP extends JFrame {
 	private JMenu getMnManager() {
 		if (mnManager == null) {
 			mnManager = new JMenu();
-			mnManager.setText("Manager");
+			mnManager.setText("Manager User");
+			mnManager.setIcon(new ImageIcon(getClass().getResource("/image/Clients-icon.png")));
+			mnManager.add(getMniAdduser());
+			mnManager.add(getMniEditUser());
+			mnManager.add(getMniLockuser());
+			mnManager.add(getMniUnlockuser());
+			mnManager.add(getMniAddgroup());
 		}
 		return mnManager;
 	}
@@ -316,6 +393,130 @@ public class BNCP extends JFrame {
 	}
 
 	/**
+	 * This method initializes btnAdduser	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnAdduser() {
+		if (btnAdduser == null) {
+			btnAdduser = new JButton();
+			btnAdduser.setIcon(new ImageIcon(getClass().getResource("/image/add-user-icon.png")));
+			btnAdduser.setLocation(new Point(809, 30));
+			btnAdduser.setSize(new Dimension(151, 40));
+			btnAdduser.setText("Add USer");
+		}
+		return btnAdduser;
+	}
+
+	/**
+	 * This method initializes btnEditUser	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnEditUser() {
+		if (btnEditUser == null) {
+			btnEditUser = new JButton();
+			btnEditUser.setText("Edit User");
+			btnEditUser.setSize(new Dimension(151, 40));
+			btnEditUser.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
+			btnEditUser.setLocation(new Point(996, 90));
+		}
+		return btnEditUser;
+	}
+
+	/**
+	 * This method initializes btnChangepass	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnChangepass() {
+		if (btnChangepass == null) {
+			btnChangepass = new JButton();
+			btnChangepass.setText("Change pass");
+			btnChangepass.setSize(new Dimension(138, 40));
+			btnChangepass.setLocation(new Point(632, 30));
+		}
+		return btnChangepass;
+	}
+
+	/**
+	 * This method initializes btnEditProfile	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnEditProfile() {
+		if (btnEditProfile == null) {
+			btnEditProfile = new JButton();
+			btnEditProfile.setText("Edit Profile");
+			btnEditProfile.setSize(new Dimension(138, 40));
+			btnEditProfile.setLocation(new Point(632, 90));
+		}
+		return btnEditProfile;
+	}
+
+	/**
+	 * This method initializes btnCreatleaveapp	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnCreatleaveapp() {
+		if (btnCreatleaveapp == null) {
+			btnCreatleaveapp = new JButton();
+			btnCreatleaveapp.setBounds(new Rectangle(632, 150, 138, 40));
+			btnCreatleaveapp.setText("Create Leaveapp");
+		}
+		return btnCreatleaveapp;
+	}
+
+	/**
+	 * This method initializes btnLock	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnLock() {
+		if (btnLock == null) {
+			btnLock = new JButton();
+			btnLock.setText("Lock");
+			btnLock.setSize(new Dimension(151, 40));
+			btnLock.setIcon(new ImageIcon(getClass().getResource("/image/remove-user-icon.png")));
+			btnLock.setLocation(new Point(809, 90));
+		}
+		return btnLock;
+	}
+
+	/**
+	 * This method initializes btnUnlock	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnUnlock() {
+		if (btnUnlock == null) {
+			btnUnlock = new JButton();
+			btnUnlock.setText("Unlock");
+			btnUnlock.setSize(new Dimension(151, 40));
+			btnUnlock.setIcon(new ImageIcon(getClass().getResource("/image/user-icon_2.png")));
+			btnUnlock.setLocation(new Point(809, 150));
+		}
+		return btnUnlock;
+	}
+
+	/**
+	 * This method initializes btnLogout	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnLogout() {
+		if (btnLogout == null) {
+			btnLogout = new JButton();
+			btnLogout.setLocation(new Point(996, 150));
+			btnLogout.setText("Sign Out");
+			btnLogout.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
+			btnLogout.setSize(new Dimension(151, 40));
+		}
+		return btnLogout;
+	}
+
+	/**
 	 * This method initializes jPanel	
 	 * 	
 	 * @return javax.swing.JPanel	
@@ -330,7 +531,7 @@ public class BNCP extends JFrame {
 			gridBagConstraints.gridx = 0;
 			jPanel = new JPanel();
 			jPanel.setLayout(new GridBagLayout());
-			jPanel.setBounds(new Rectangle(2, 184, 1105, 487));
+			jPanel.setBounds(new Rectangle(1, 195, 1272, 472));
 			jPanel.add(getJTabbedPane(), gridBagConstraints);
 		}
 		return jPanel;
@@ -344,248 +545,835 @@ public class BNCP extends JFrame {
 	private JTabbedPane getJTabbedPane() {
 		if (jTabbedPane == null) {
 			jTabbedPane = new JTabbedPane();
-			jTabbedPane.addTab("User Manager", new ImageIcon("D:/icon/Clients-icon.png"), getPnManager(), null);
-			jTabbedPane.addTab("LeaveApp", null, getPnLeaveApp(), null);
-			jTabbedPane.addTab("Report", null, getPnReport(), null);
+			jTabbedPane.addTab("History", null, getJpnHistory(), null);
+			jTabbedPane.addTab("Manager LeaveApp", new ImageIcon(getClass().getResource("/image/Attach-icon.png")), getJpnLeaveapp(), null);
+			jTabbedPane.addTab("Report", new ImageIcon(getClass().getResource("/image/Document-icon.png")), getJpnReport(), null);
+			jTabbedPane.addTab("User Manager", new ImageIcon(getClass().getResource("/image/user-group-icon.png")), getJpmUsermanager(), "");
 		}
 		return jTabbedPane;
 	}
 
 	/**
-	 * This method initializes pnManager	
+	 * This method initializes jpnHistory	
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */
-	private JPanel getPnManager() {
-		if (pnManager == null) {
-			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
-			gridBagConstraints2.fill = GridBagConstraints.BOTH;
-			gridBagConstraints2.gridy = 0;
-			gridBagConstraints2.weightx = 1.0;
-			gridBagConstraints2.weighty = 1.0;
-			gridBagConstraints2.gridx = 0;
-			pnManager = new JPanel();
-			pnManager.setLayout(new GridBagLayout());
-			pnManager.setToolTipText("");
-			pnManager.add(getJTabbedPane2(), gridBagConstraints2);
+	private JPanel getJpnHistory() {
+		if (jpnHistory == null) {
+			jpnHistory = new JPanel();
+			jpnHistory.setLayout(null);
 		}
-		return pnManager;
+		return jpnHistory;
 	}
 
 	/**
-	 * This method initializes pnLeaveApp	
+	 * This method initializes jpnLeaveapp	
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */
-	private JPanel getPnLeaveApp() {
-		if (pnLeaveApp == null) {
-			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
-			gridBagConstraints1.fill = GridBagConstraints.BOTH;
-			gridBagConstraints1.gridy = 0;
-			gridBagConstraints1.weightx = 1.0;
-			gridBagConstraints1.weighty = 1.0;
-			gridBagConstraints1.gridx = 0;
-			pnLeaveApp = new JPanel();
-			pnLeaveApp.setLayout(new GridBagLayout());
-			pnLeaveApp.add(getJTabbedPane1(), gridBagConstraints1);
-		}
-		return pnLeaveApp;
-	}
-
-	/**
-	 * This method initializes jTabbedPane1	
-	 * 	
-	 * @return javax.swing.JTabbedPane	
-	 */
-	private JTabbedPane getJTabbedPane1() {
-		if (jTabbedPane1 == null) {
-			jTabbedPane1 = new JTabbedPane();
-			jTabbedPane1.addTab("Valid", null, getPnValid(), null);
-			jTabbedPane1.addTab("Approve", null, getPnApprove(), null);
-			jTabbedPane1.addTab("ReJect", null, getPnReject(), null);
-			jTabbedPane1.addTab("Finish", null, getPnFinish(), null);
-		}
-		return jTabbedPane1;
-	}
-
-	/**
-	 * This method initializes pnValid	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnValid() {
-		if (pnValid == null) {
-			pnValid = new JPanel();
-			pnValid.setLayout(new GridBagLayout());
-		}
-		return pnValid;
-	}
-
-	/**
-	 * This method initializes pnApprove	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnApprove() {
-		if (pnApprove == null) {
-			pnApprove = new JPanel();
-			pnApprove.setLayout(new GridBagLayout());
-		}
-		return pnApprove;
-	}
-
-	/**
-	 * This method initializes pnReject	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReject() {
-		if (pnReject == null) {
-			pnReject = new JPanel();
-			pnReject.setLayout(new GridBagLayout());
-		}
-		return pnReject;
-	}
-
-	/**
-	 * This method initializes pnFinish	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnFinish() {
-		if (pnFinish == null) {
-			pnFinish = new JPanel();
-			pnFinish.setLayout(new GridBagLayout());
-		}
-		return pnFinish;
-	}
-
-	/**
-	 * This method initializes jTabbedPane2	
-	 * 	
-	 * @return javax.swing.JTabbedPane	
-	 */
-	private JTabbedPane getJTabbedPane2() {
-		if (jTabbedPane2 == null) {
-			jTabbedPane2 = new JTabbedPane();
-			jTabbedPane2.addTab("Business Manager", null, getPnBusinessmanager(), null);
-			jTabbedPane2.addTab("Manager", null, getPnManagerr(), null);
-			jTabbedPane2.addTab("Engineer", null, getPnEngineer(), null);
-		}
-		return jTabbedPane2;
-	}
-
-	/**
-	 * This method initializes pnBusinessmanager	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnBusinessmanager() {
-		if (pnBusinessmanager == null) {
-			pnBusinessmanager = new JPanel();
-			pnBusinessmanager.setLayout(new GridBagLayout());
-		}
-		return pnBusinessmanager;
-	}
-
-	/**
-	 * This method initializes pnManagerr	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnManagerr() {
-		if (pnManagerr == null) {
-			pnManagerr = new JPanel();
-			pnManagerr.setLayout(new GridBagLayout());
-		}
-		return pnManagerr;
-	}
-
-	/**
-	 * This method initializes pnEngineer	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnEngineer() {
-		if (pnEngineer == null) {
-			pnEngineer = new JPanel();
-			pnEngineer.setLayout(new GridBagLayout());
-		}
-		return pnEngineer;
-	}
-
-	/**
-	 * This method initializes pnReport	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReport() {
-		if (pnReport == null) {
+	private JPanel getJpnLeaveapp() {
+		if (jpnLeaveapp == null) {
 			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
 			gridBagConstraints3.fill = GridBagConstraints.BOTH;
 			gridBagConstraints3.gridy = 0;
 			gridBagConstraints3.weightx = 1.0;
 			gridBagConstraints3.weighty = 1.0;
 			gridBagConstraints3.gridx = 0;
-			pnReport = new JPanel();
-			pnReport.setLayout(new GridBagLayout());
-			pnReport.add(getJTabbedPane3(), gridBagConstraints3);
+			jpnLeaveapp = new JPanel();
+			jpnLeaveapp.setLayout(new GridBagLayout());
+			jpnLeaveapp.add(getJtbnLeaveapp(), gridBagConstraints3);
 		}
-		return pnReport;
+		return jpnLeaveapp;
 	}
 
 	/**
-	 * This method initializes jTabbedPane3	
+	 * This method initializes jpnReport	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpnReport() {
+		if (jpnReport == null) {
+			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
+			gridBagConstraints2.fill = GridBagConstraints.BOTH;
+			gridBagConstraints2.gridy = 0;
+			gridBagConstraints2.weightx = 1.0;
+			gridBagConstraints2.weighty = 1.0;
+			gridBagConstraints2.gridx = 0;
+			jpnReport = new JPanel();
+			jpnReport.setLayout(new GridBagLayout());
+			jpnReport.add(getJtpnReport(), gridBagConstraints2);
+		}
+		return jpnReport;
+	}
+
+	/**
+	 * This method initializes jpmUsermanager	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpmUsermanager() {
+		if (jpmUsermanager == null) {
+			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
+			gridBagConstraints1.fill = GridBagConstraints.BOTH;
+			gridBagConstraints1.gridy = 0;
+			gridBagConstraints1.weightx = 1.0;
+			gridBagConstraints1.weighty = 1.0;
+			gridBagConstraints1.gridx = 0;
+			jpmUsermanager = new JPanel();
+			jpmUsermanager.setLayout(new GridBagLayout());
+			jpmUsermanager.add(getJtpnUsermanager(), gridBagConstraints1);
+		}
+		return jpmUsermanager;
+	}
+
+	/**
+	 * This method initializes jtpnUsermanager	
 	 * 	
 	 * @return javax.swing.JTabbedPane	
 	 */
-	private JTabbedPane getJTabbedPane3() {
-		if (jTabbedPane3 == null) {
-			jTabbedPane3 = new JTabbedPane();
-			jTabbedPane3.addTab("Report Month", null, getPnReportmonth(), null);
-			jTabbedPane3.addTab("Report Year", null, getPnReportYear(), null);
+	private JTabbedPane getJtpnUsermanager() {
+		if (jtpnUsermanager == null) {
+			jtpnUsermanager = new JTabbedPane();
+			jtpnUsermanager.addTab("Business Manager", null, getJpnBusinessmanager(), null);
+			jtpnUsermanager.addTab("Manager", null, getJpnManager(), null);
+			jtpnUsermanager.addTab("Engineer", null, getJpnEngineer(), null);
 		}
-		return jTabbedPane3;
+		return jtpnUsermanager;
 	}
 
 	/**
-	 * This method initializes pnReportmonth	
+	 * This method initializes jpnBusinessmanager	
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */
-	private JPanel getPnReportmonth() {
-		if (pnReportmonth == null) {
-			pnReportmonth = new JPanel();
-			pnReportmonth.setLayout(new GridBagLayout());
+	private JPanel getJpnBusinessmanager() {
+		if (jpnBusinessmanager == null) {
+			jpnBusinessmanager = new JPanel();
+			jpnBusinessmanager.setLayout(new GridBagLayout());
 		}
-		return pnReportmonth;
+		return jpnBusinessmanager;
 	}
 
 	/**
-	 * This method initializes pnReportYear	
+	 * This method initializes jpnManager	
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */
-	private JPanel getPnReportYear() {
-		if (pnReportYear == null) {
-			pnReportYear = new JPanel();
-			pnReportYear.setLayout(new GridBagLayout());
+	private JPanel getJpnManager() {
+		if (jpnManager == null) {
+			jpnManager = new JPanel();
+			jpnManager.setLayout(new GridBagLayout());
 		}
-		return pnReportYear;
+		return jpnManager;
 	}
 
 	/**
-	 * This method initializes btnAdduser	
+	 * This method initializes jpnEngineer	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpnEngineer() {
+		if (jpnEngineer == null) {
+			jpnEngineer = new JPanel();
+			jpnEngineer.setLayout(new GridBagLayout());
+		}
+		return jpnEngineer;
+	}
+
+	/**
+	 * This method initializes jtpnReport	
+	 * 	
+	 * @return javax.swing.JTabbedPane	
+	 */
+	private JTabbedPane getJtpnReport() {
+		if (jtpnReport == null) {
+			jtpnReport = new JTabbedPane();
+			jtpnReport.addTab("Report Month", null, getJpnReportmonth(), null);
+			jtpnReport.addTab("Report Year", null, getJpnReportYear(), null);
+		}
+		return jtpnReport;
+	}
+
+	/**
+	 * This method initializes jpnReportmonth	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpnReportmonth() {
+		if (jpnReportmonth == null) {
+			jpnReportmonth = new JPanel();
+			jpnReportmonth.setLayout(new GridBagLayout());
+		}
+		return jpnReportmonth;
+	}
+
+	/**
+	 * This method initializes jpnReportYear	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpnReportYear() {
+		if (jpnReportYear == null) {
+			jpnReportYear = new JPanel();
+			jpnReportYear.setLayout(null);
+		}
+		return jpnReportYear;
+	}
+
+	/**
+	 * This method initializes jtbnLeaveapp	
+	 * 	
+	 * @return javax.swing.JTabbedPane	
+	 */
+	private JTabbedPane getJtbnLeaveapp() {
+		if (jtbnLeaveapp == null) {
+			jtbnLeaveapp = new JTabbedPane();
+			jtbnLeaveapp.addTab("Valid", null, getJpnValid(), null);
+			jtbnLeaveapp.addTab("Approve", null, getJpnApprove(), null);
+			jtbnLeaveapp.addTab("Reject", null, getJpnReject(), null);
+			jtbnLeaveapp.addTab("Finish", null, getJpnFinish(), null);
+		}
+		return jtbnLeaveapp;
+	}
+
+	/**
+	 * This method initializes jpnValid	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpnValid() {
+		if (jpnValid == null) {
+			jpnValid = new JPanel();
+			jpnValid.setLayout(null);
+			jpnValid.add(getJJToolBarBar(), null);
+			jpnValid.add(getPnUser(), null);
+		}
+		return jpnValid;
+	}
+
+	/**
+	 * This method initializes jpnApprove	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpnApprove() {
+		if (jpnApprove == null) {
+			jpnApprove = new JPanel();
+			jpnApprove.setLayout(null);
+			jpnApprove.add(getJtbLeaveApprove(), null);
+			jpnApprove.add(getPnTableViewLeaveApp(), null);
+		}
+		return jpnApprove;
+	}
+
+	/**
+	 * This method initializes jpnReject	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpnReject() {
+		if (jpnReject == null) {
+			jpnReject = new JPanel();
+			jpnReject.setLayout(null);
+			jpnReject.add(getJtbLeaveappReject(), null);
+			jpnReject.add(getPnTableViewLeaveappReject(), null);
+		}
+		return jpnReject;
+	}
+
+	/**
+	 * This method initializes jpnFinish	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getJpnFinish() {
+		if (jpnFinish == null) {
+			GridBagConstraints gridBagConstraints7 = new GridBagConstraints();
+			gridBagConstraints7.fill = GridBagConstraints.BOTH;
+			gridBagConstraints7.gridy = 0;
+			gridBagConstraints7.weightx = 1.0;
+			gridBagConstraints7.weighty = 1.0;
+			gridBagConstraints7.gridx = 0;
+			jpnFinish = new JPanel();
+			jpnFinish.setLayout(new GridBagLayout());
+			jpnFinish.add(getJScrollPane3(), gridBagConstraints7);
+		}
+		return jpnFinish;
+	}
+
+	/**
+	 * This method initializes mniEditprofile	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniEditprofile() {
+		if (mniEditprofile == null) {
+			mniEditprofile = new JMenuItem();
+			mniEditprofile.setText("Edit Profile");
+		}
+		return mniEditprofile;
+	}
+
+	/**
+	 * This method initializes mniChangepass	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniChangepass() {
+		if (mniChangepass == null) {
+			mniChangepass = new JMenuItem();
+			mniChangepass.setText("Change Password");
+		}
+		return mniChangepass;
+	}
+
+	/**
+	 * This method initializes mniCreatleaveapp	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniCreatleaveapp() {
+		if (mniCreatleaveapp == null) {
+			mniCreatleaveapp = new JMenuItem();
+			mniCreatleaveapp.setText("Creat Leaveapp");
+		}
+		return mniCreatleaveapp;
+	}
+
+	/**
+	 * This method initializes mniViewleaveapp	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniViewleaveapp() {
+		if (mniViewleaveapp == null) {
+			mniViewleaveapp = new JMenuItem();
+			mniViewleaveapp.setText("View Leaveapp");
+		}
+		return mniViewleaveapp;
+	}
+
+	/**
+	 * This method initializes mniHistory	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniHistory() {
+		if (mniHistory == null) {
+			mniHistory = new JMenuItem();
+			mniHistory.setText("View History");
+		}
+		return mniHistory;
+	}
+
+	/**
+	 * This method initializes mniSignout	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniSignout() {
+		if (mniSignout == null) {
+			mniSignout = new JMenuItem();
+			mniSignout.setText("Sign Out");
+		}
+		return mniSignout;
+	}
+
+	/**
+	 * This method initializes mniAdduser	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniAdduser() {
+		if (mniAdduser == null) {
+			mniAdduser = new JMenuItem();
+			mniAdduser.setText("Add User");
+			mniAdduser.setIcon(new ImageIcon(getClass().getResource("/image/button-ok-icon.png")));
+		}
+		return mniAdduser;
+	}
+
+	/**
+	 * This method initializes mniLockuser	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniLockuser() {
+		if (mniLockuser == null) {
+			mniLockuser = new JMenuItem();
+			mniLockuser.setText("Lock User");
+			mniLockuser.setIcon(new ImageIcon(getClass().getResource("/image/lock-icon.png")));
+		}
+		return mniLockuser;
+	}
+
+	/**
+	 * This method initializes mniUnlockuser	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniUnlockuser() {
+		if (mniUnlockuser == null) {
+			mniUnlockuser = new JMenuItem();
+			mniUnlockuser.setText("Unlock User");
+			mniUnlockuser.setIcon(new ImageIcon(getClass().getResource("/image/lock-off-icon.png")));
+		}
+		return mniUnlockuser;
+	}
+
+	/**
+	 * This method initializes mniAddgroup	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniAddgroup() {
+		if (mniAddgroup == null) {
+			mniAddgroup = new JMenuItem();
+			mniAddgroup.setToolTipText("Add Group");
+			mniAddgroup.setIcon(new ImageIcon(getClass().getResource("/image/user-info-icon.png")));
+			mniAddgroup.setText("Add Group");
+		}
+		return mniAddgroup;
+	}
+
+	/**
+	 * This method initializes mniEditUser	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniEditUser() {
+		if (mniEditUser == null) {
+			mniEditUser = new JMenuItem();
+			mniEditUser.setText("Edit User");
+			mniEditUser.setIcon(new ImageIcon(getClass().getResource("/image/Edit-icon.png")));
+		}
+		return mniEditUser;
+	}
+
+	/**
+	 * This method initializes mnManagerLeaveapp	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	private JMenu getMnManagerLeaveapp() {
+		if (mnManagerLeaveapp == null) {
+			mnManagerLeaveapp = new JMenu();
+			mnManagerLeaveapp.setText("Manager LeaveApp");
+			mnManagerLeaveapp.add(getMnViewValid());
+			mnManagerLeaveapp.add(getMniViewApprove());
+			mnManagerLeaveapp.add(getMniViewReject());
+			mnManagerLeaveapp.add(getMniViewFinish());
+			mnManagerLeaveapp.add(getMniViewMyLeaveApp());
+		}
+		return mnManagerLeaveapp;
+	}
+
+	/**
+	 * This method initializes mnViewValid	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMnViewValid() {
+		if (mnViewValid == null) {
+			mnViewValid = new JMenuItem();
+			mnViewValid.setText("View LeaveApp valid");
+		}
+		return mnViewValid;
+	}
+
+	/**
+	 * This method initializes mniViewApprove	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniViewApprove() {
+		if (mniViewApprove == null) {
+			mniViewApprove = new JMenuItem();
+			mniViewApprove.setText("View LeaveApp Approve");
+		}
+		return mniViewApprove;
+	}
+
+	/**
+	 * This method initializes mniViewReject	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniViewReject() {
+		if (mniViewReject == null) {
+			mniViewReject = new JMenuItem();
+			mniViewReject.setText("View LeaveApp Reject");
+		}
+		return mniViewReject;
+	}
+
+	/**
+	 * This method initializes mniViewFinish	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniViewFinish() {
+		if (mniViewFinish == null) {
+			mniViewFinish = new JMenuItem();
+			mniViewFinish.setText("View Leaveapp Finish");
+		}
+		return mniViewFinish;
+	}
+
+	/**
+	 * This method initializes mniViewMyLeaveApp	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMniViewMyLeaveApp() {
+		if (mniViewMyLeaveApp == null) {
+			mniViewMyLeaveApp = new JMenuItem();
+			mniViewMyLeaveApp.setText("View My LeaveAPP");
+		}
+		return mniViewMyLeaveApp;
+	}
+
+	/**
+	 * This method initializes jJToolBarBar	
+	 * 	
+	 * @return javax.swing.JToolBar	
+	 */
+	private JToolBar getJJToolBarBar() {
+		if (jJToolBarBar == null) {
+			jJToolBarBar = new JToolBar();
+			jJToolBarBar.setBounds(new Rectangle(-2, 347, 1265, 31));
+			jJToolBarBar.setBackground(new Color(153, 255, 153));
+			jJToolBarBar.add(getBtnApprove());
+			jJToolBarBar.add(getBtnReject());
+			jJToolBarBar.add(getBtnFinish());
+		}
+		return jJToolBarBar;
+	}
+
+	/**
+	 * This method initializes btnApprove	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getBtnAdduser() {
-		if (btnAdduser == null) {
-			btnAdduser = new JButton();
-			btnAdduser.setBounds(new Rectangle(1152, 220, 100, 32));
-			btnAdduser.setText("Add USer");
+	private JButton getBtnApprove() {
+		if (btnApprove == null) {
+			btnApprove = new JButton();
+			btnApprove.setText("Approve");
+			btnApprove.setLocation(new Point(16, 1));
+			btnApprove.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
 		}
-		return btnAdduser;
+		return btnApprove;
+	}
+
+	/**
+	 * This method initializes btnReject	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnReject() {
+		if (btnReject == null) {
+			btnReject = new JButton();
+			btnReject.setText("Reject");
+			btnReject.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+		}
+		return btnReject;
+	}
+
+	/**
+	 * This method initializes btnFinish	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnFinish() {
+		if (btnFinish == null) {
+			btnFinish = new JButton();
+			btnFinish.setText("Finish");
+			btnFinish.setIcon(new ImageIcon(getClass().getResource("/image/info-icon.png")));
+		}
+		return btnFinish;
+	}
+
+	/**
+	 * This method initializes pnUser	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPnUser() {
+		if (pnUser == null) {
+			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
+			gridBagConstraints4.fill = GridBagConstraints.BOTH;
+			gridBagConstraints4.gridy = 0;
+			gridBagConstraints4.weightx = 1.0;
+			gridBagConstraints4.weighty = 1.0;
+			gridBagConstraints4.gridx = 0;
+			pnUser = new JPanel();
+			pnUser.setLayout(new GridBagLayout());
+			pnUser.setBounds(new Rectangle(0, -1, 1261, 347));
+			pnUser.add(getJScrollPane(), gridBagConstraints4);
+		}
+		return pnUser;
+	}
+
+	/**
+	 * This method initializes jScrollPane	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane() {
+		if (jScrollPane == null) {
+			jScrollPane = new JScrollPane();
+			jScrollPane.setViewportView(getTblLeaveappValid());
+		}
+		return jScrollPane;
+	}
+
+	/**
+	 * This method initializes tblLeaveappValid	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblLeaveappValid() {
+		if (tblLeaveappValid == null) {
+			tblLeaveappValid = new JTable();
+		}
+		return tblLeaveappValid;
+	}
+
+	/**
+	 * This method initializes jtbLeaveApprove	
+	 * 	
+	 * @return javax.swing.JToolBar	
+	 */
+	private JToolBar getJtbLeaveApprove() {
+		if (jtbLeaveApprove == null) {
+			jtbLeaveApprove = new JToolBar();
+			jtbLeaveApprove.setLocation(new Point(-4, 345));
+			jtbLeaveApprove.setBackground(new Color(153, 255, 153));
+			jtbLeaveApprove.setSize(new Dimension(1273, 31));
+			jtbLeaveApprove.add(getBtnViewLeaveappApprove());
+			jtbLeaveApprove.add(getBtnViewApprovereject());
+			jtbLeaveApprove.add(getBtnViewApprovefinish());
+		}
+		return jtbLeaveApprove;
+	}
+
+	/**
+	 * This method initializes btnViewLeaveappApprove	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnViewLeaveappApprove() {
+		if (btnViewLeaveappApprove == null) {
+			btnViewLeaveappApprove = new JButton();
+			btnViewLeaveappApprove.setText("Approve");
+			btnViewLeaveappApprove.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
+		}
+		return btnViewLeaveappApprove;
+	}
+
+	/**
+	 * This method initializes btnViewApprovereject	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnViewApprovereject() {
+		if (btnViewApprovereject == null) {
+			btnViewApprovereject = new JButton();
+			btnViewApprovereject.setText("Reject");
+			btnViewApprovereject.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+		}
+		return btnViewApprovereject;
+	}
+
+	/**
+	 * This method initializes btnViewApprovefinish	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnViewApprovefinish() {
+		if (btnViewApprovefinish == null) {
+			btnViewApprovefinish = new JButton();
+			btnViewApprovefinish.setText("Finish");
+			btnViewApprovefinish.setIcon(new ImageIcon(getClass().getResource("/image/info-icon.png")));
+		}
+		return btnViewApprovefinish;
+	}
+
+	/**
+	 * This method initializes pnTableViewLeaveApp	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPnTableViewLeaveApp() {
+		if (pnTableViewLeaveApp == null) {
+			GridBagConstraints gridBagConstraints5 = new GridBagConstraints();
+			gridBagConstraints5.fill = GridBagConstraints.BOTH;
+			gridBagConstraints5.gridy = 0;
+			gridBagConstraints5.weightx = 1.0;
+			gridBagConstraints5.weighty = 1.0;
+			gridBagConstraints5.gridx = 0;
+			pnTableViewLeaveApp = new JPanel();
+			pnTableViewLeaveApp.setLayout(new GridBagLayout());
+			pnTableViewLeaveApp.setBounds(new Rectangle(0, 1, 1263, 344));
+			pnTableViewLeaveApp.add(getJScrollPane1(), gridBagConstraints5);
+		}
+		return pnTableViewLeaveApp;
+	}
+
+	/**
+	 * This method initializes jScrollPane1	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane1() {
+		if (jScrollPane1 == null) {
+			jScrollPane1 = new JScrollPane();
+			jScrollPane1.setViewportView(getTblLeaveappApprove());
+		}
+		return jScrollPane1;
+	}
+
+	/**
+	 * This method initializes tblLeaveappApprove	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblLeaveappApprove() {
+		if (tblLeaveappApprove == null) {
+			tblLeaveappApprove = new JTable();
+		}
+		return tblLeaveappApprove;
+	}
+
+	/**
+	 * This method initializes jtbLeaveappReject	
+	 * 	
+	 * @return javax.swing.JToolBar	
+	 */
+	private JToolBar getJtbLeaveappReject() {
+		if (jtbLeaveappReject == null) {
+			jtbLeaveappReject = new JToolBar();
+			jtbLeaveappReject.setLocation(new Point(-3, 345));
+			jtbLeaveappReject.setBackground(new Color(153, 255, 153));
+			jtbLeaveappReject.setSize(new Dimension(1273, 31));
+			jtbLeaveappReject.add(getBtnViewLeaveappRejectApprove());
+			jtbLeaveappReject.add(getBtnViewLeaveappRejectReject());
+			jtbLeaveappReject.add(getBtnViewLeaveappRejectFinish());
+		}
+		return jtbLeaveappReject;
+	}
+
+	/**
+	 * This method initializes btnViewLeaveappRejectApprove	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnViewLeaveappRejectApprove() {
+		if (btnViewLeaveappRejectApprove == null) {
+			btnViewLeaveappRejectApprove = new JButton();
+			btnViewLeaveappRejectApprove.setText("Approve");
+			btnViewLeaveappRejectApprove.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
+		}
+		return btnViewLeaveappRejectApprove;
+	}
+
+	/**
+	 * This method initializes btnViewLeaveappRejectFinish	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnViewLeaveappRejectFinish() {
+		if (btnViewLeaveappRejectFinish == null) {
+			btnViewLeaveappRejectFinish = new JButton();
+			btnViewLeaveappRejectFinish.setText("Finish");
+			btnViewLeaveappRejectFinish.setIcon(new ImageIcon(getClass().getResource("/image/info-icon.png")));
+		}
+		return btnViewLeaveappRejectFinish;
+	}
+
+	/**
+	 * This method initializes btnViewLeaveappRejectReject	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnViewLeaveappRejectReject() {
+		if (btnViewLeaveappRejectReject == null) {
+			btnViewLeaveappRejectReject = new JButton();
+			btnViewLeaveappRejectReject.setText("Reject");
+			btnViewLeaveappRejectReject.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+		}
+		return btnViewLeaveappRejectReject;
+	}
+
+	/**
+	 * This method initializes pnTableViewLeaveappReject	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPnTableViewLeaveappReject() {
+		if (pnTableViewLeaveappReject == null) {
+			GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
+			gridBagConstraints6.fill = GridBagConstraints.BOTH;
+			gridBagConstraints6.gridy = 0;
+			gridBagConstraints6.weightx = 1.0;
+			gridBagConstraints6.weighty = 1.0;
+			gridBagConstraints6.gridx = 0;
+			pnTableViewLeaveappReject = new JPanel();
+			pnTableViewLeaveappReject.setLayout(new GridBagLayout());
+			pnTableViewLeaveappReject.setBounds(new Rectangle(-1, 0, 1263, 344));
+			pnTableViewLeaveappReject.add(getJScrollPane2(), gridBagConstraints6);
+		}
+		return pnTableViewLeaveappReject;
+	}
+
+	/**
+	 * This method initializes jScrollPane2	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane2() {
+		if (jScrollPane2 == null) {
+			jScrollPane2 = new JScrollPane();
+			jScrollPane2.setViewportView(getTblLeaveappReject());
+		}
+		return jScrollPane2;
+	}
+
+	/**
+	 * This method initializes tblLeaveappReject	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblLeaveappReject() {
+		if (tblLeaveappReject == null) {
+			tblLeaveappReject = new JTable();
+		}
+		return tblLeaveappReject;
+	}
+
+	/**
+	 * This method initializes jScrollPane3	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane3() {
+		if (jScrollPane3 == null) {
+			jScrollPane3 = new JScrollPane();
+			jScrollPane3.setViewportView(getTblLeaveappFinish());
+		}
+		return jScrollPane3;
+	}
+
+	/**
+	 * This method initializes tblLeaveappFinish	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblLeaveappFinish() {
+		if (tblLeaveappFinish == null) {
+			tblLeaveappFinish = new JTable();
+		}
+		return tblLeaveappFinish;
 	}
 
 }
