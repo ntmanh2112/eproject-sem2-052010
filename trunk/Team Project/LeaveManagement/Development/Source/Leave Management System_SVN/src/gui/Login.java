@@ -77,8 +77,8 @@ public class Login extends JDialog {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()/2).intValue()/2,
-				Double.valueOf(dim.getHeight()/2).intValue()/2);
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
+				Double.valueOf(dim.getHeight()).intValue());
      
         c.add(ip, BorderLayout.CENTER);
 		

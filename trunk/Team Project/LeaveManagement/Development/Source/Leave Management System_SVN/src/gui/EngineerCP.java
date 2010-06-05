@@ -1,7 +1,16 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -25,6 +34,7 @@ public class EngineerCP extends JFrame {
 	private JMenuItem mniHistory = null;
 	private JMenuItem mniExit = null;
 	private JMenuItem mniCreatleaveapp = null;
+	private ImagePanel ip;
 	/**
 	 * This is the default constructor
 	 */
@@ -39,10 +49,29 @@ public class EngineerCP extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(300, 200);
+		/*this.setSize(300, 200);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("Engineer Control Panel");
+		*/
+		Container c =this.getContentPane();
+		GridBagConstraints contrains = new GridBagConstraints();
+		this.setJMenuBar(getJJMenuBar());
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setTitle("Welcome to Engineer Leave Manager System");
+				BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("image/main1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
+				Double.valueOf(dim.getHeight()).intValue());
+        ip.setLayout(new GridBagLayout());
+        c.add(ip, BorderLayout.CENTER);
+		this.setPreferredSize(dim);
+		this.pack();
+		this.setVisible(true);
 	}
 
 	/**
@@ -162,7 +191,7 @@ public class EngineerCP extends JFrame {
 			mniAbout.setText("About");
 			mniAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new EngineerCP()).setVisible(true);
+					new About(null).setVisible(true);
 				}
 			});
 		}
@@ -180,7 +209,7 @@ public class EngineerCP extends JFrame {
 			mniEditpass.setText("Edit Password");
 			mniEditpass.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(new EngineerCP()).setVisible(true);
+					new Changepassword(null).setVisible(true);
 				}
 			});
 		}
@@ -198,7 +227,7 @@ public class EngineerCP extends JFrame {
 			mniEditprofile.setText("Edit Profile");
 			mniEditprofile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Editprofile(new EngineerCP()).setVisible(true);
+					new Editprofile(null).setVisible(true);
 				}
 			});
 		}
@@ -230,7 +259,7 @@ public class EngineerCP extends JFrame {
 			mniHistory.setText("View History");
 			mniHistory.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Viewhistory(new EngineerCP()).setVisible(true);
+					new Viewhistory(null).setVisible(true);
 				}
 			});
 		}
@@ -267,7 +296,8 @@ public class EngineerCP extends JFrame {
 			mniCreatleaveapp.setText("Create Leave app");
 			mniCreatleaveapp.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(new EngineerCP()).setVisible(true);
+					new CreateLeaveapp(null).setVisible(true);
+					
 				}
 			});
 		}
