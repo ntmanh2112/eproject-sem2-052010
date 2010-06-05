@@ -19,13 +19,9 @@ public class ManagerBusinessCPViewLeaveappValid extends JFrame {
 	private JMenuBar jJMenuBar = null;
 	private JMenu mnFile = null;
 	private JMenu mnManager = null;
-	private JMenu mnView = null;
 	private JMenu mnEdit = null;
 	private JMenu mnHelp = null;
 	private JMenuItem mniCreateLA = null;
-	private JMenuItem mniReportmonth = null;
-	private JMenuItem mniReportYeah = null;
-	private JMenuItem mniLeaveAP = null;
 	private JMenuItem mniHelpcontent = null;
 	private JMenuItem mniAbout = null;
 	private JMenuItem mniEditpassword = null;
@@ -110,7 +106,6 @@ public class ManagerBusinessCPViewLeaveappValid extends JFrame {
 			jJMenuBar = new JMenuBar();
 			jJMenuBar.add(getMnFile());
 			jJMenuBar.add(getMnManager());
-			jJMenuBar.add(getMnView());
 			jJMenuBar.add(getMnEdit());
 			jJMenuBar.add(getMnHelp());
 		}
@@ -144,22 +139,6 @@ public class ManagerBusinessCPViewLeaveappValid extends JFrame {
 			mnManager.add(getMniViewuser());
 		}
 		return mnManager;
-	}
-
-	/**
-	 * This method initializes mnView	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	private JMenu getMnView() {
-		if (mnView == null) {
-			mnView = new JMenu();
-			mnView.setText("View");
-			mnView.add(getMniReportmonth());
-			mnView.add(getMniReportYeah());
-			mnView.add(getMniLeaveAP());
-		}
-		return mnView;
 	}
 
 	/**
@@ -208,62 +187,6 @@ public class ManagerBusinessCPViewLeaveappValid extends JFrame {
 			});
 		}
 		return mniCreateLA;
-	}
-
-	/**
-	 * This method initializes mniReportmonth	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMniReportmonth() {
-		if (mniReportmonth == null) {
-			mniReportmonth = new JMenuItem();
-			mniReportmonth.setText("Report Month");
-			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewReportMonth().setVisible(true);	
-				}
-			});
-		}
-		return mniReportmonth;
-	}
-
-	/**
-	 * This method initializes mniReportYeah	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMniReportYeah() {
-		if (mniReportYeah == null) {
-			mniReportYeah = new JMenuItem();
-			mniReportYeah.setText("Report Year");
-			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewReportYear().setVisible(true);
-					
-				}
-			});
-		}
-		return mniReportYeah;
-	}
-
-	/**
-	 * This method initializes mniLeaveAP	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMniLeaveAP() {
-		if (mniLeaveAP == null) {
-			mniLeaveAP = new JMenuItem();
-			mniLeaveAP.setText("View Leave AP");
-			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewLeaveappValid().setVisible(true);
-					
-				}
-			});
-		}
-		return mniLeaveAP;
 	}
 
 	/**

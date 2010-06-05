@@ -1,42 +1,26 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-
-import common.ImagePanel_icon;;
-
-
-
-
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.ImageIcon;
+import java.awt.Dimension;
 
 public class Wellcome extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JMenuBar menubar = null;
-	private JMenu menuFile = null;
+	private JPanel jContentPane = null;
+	private JMenuBar jJMenuBar = null;
+	private JMenu mnFile = null;
 	private JMenuItem mnLogin = null;
 	private JMenuItem mnExit = null;
-	private JMenu jMenu = null;
-	private JMenuItem mnHelp = null;
+	private JMenu mnHelp = null;
+	private JMenuItem mnHelpcontent = null;
 	private JMenuItem mnAbout = null;
-	public static String username = null;
+
 	/**
 	 * This is the default constructor
 	 */
@@ -51,44 +35,52 @@ public class Wellcome extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		GridBagConstraints contrains = new GridBagConstraints();
-		this.setJMenuBar(getMenubar());
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setTitle("Welcome to Leave Manager System");
-				
-		this.setPreferredSize(dim);
-		this.pack();
-		this.setVisible(true);
+		this.setSize(440, 276);
+		this.setJMenuBar(getJJMenuBar());
+		this.setContentPane(getJContentPane());
+		this.setTitle("JFrame");
 	}
 
 	/**
-	 * This method initializes menubar	
+	 * This method initializes jContentPane
+	 * 
+	 * @return javax.swing.JPanel
+	 */
+	private JPanel getJContentPane() {
+		if (jContentPane == null) {
+			jContentPane = new JPanel();
+			jContentPane.setLayout(null);
+		}
+		return jContentPane;
+	}
+
+	/**
+	 * This method initializes jJMenuBar	
 	 * 	
 	 * @return javax.swing.JMenuBar	
 	 */
-	private JMenuBar getMenubar() {
-		if (menubar == null){
-			menubar = new JMenuBar();
-			menubar.add(getMenuFile());
-			menubar.add(getJMenu());
+	private JMenuBar getJJMenuBar() {
+		if (jJMenuBar == null) {
+			jJMenuBar = new JMenuBar();
+			jJMenuBar.add(getMnFile());
+			jJMenuBar.add(getMnHelp());
 		}
-		return menubar;
+		return jJMenuBar;
 	}
 
 	/**
-	 * This method initializes menuFile	
+	 * This method initializes mnFile	
 	 * 	
 	 * @return javax.swing.JMenu	
 	 */
-	private JMenu getMenuFile() {
-		if (menuFile == null) {
-			menuFile = new JMenu();
-			menuFile.setText("File");
-			menuFile.add(getMnLogin());
-			menuFile.add(getMnExit());
-			
+	private JMenu getMnFile() {
+		if (mnFile == null) {
+			mnFile = new JMenu();
+			mnFile.setText("File");
+			mnFile.add(getMnLogin());
+			mnFile.add(getMnExit());
 		}
-		return menuFile;
+		return mnFile;
 	}
 
 	/**
@@ -99,17 +91,9 @@ public class Wellcome extends JFrame {
 	private JMenuItem getMnLogin() {
 		if (mnLogin == null) {
 			mnLogin = new JMenuItem();
-			mnLogin.setMnemonic(KeyEvent.VK_L);
-			
-			mnLogin.setText("Login");
-			
-			mnLogin.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Login().setVisible(true);
-				}
-			});
+			mnLogin.setText("LogIn");
+			mnLogin.setIcon(new ImageIcon(getClass().getResource("/image/Preppy-icon.png")));
 		}
-		
 		return mnLogin;
 	}
 
@@ -122,41 +106,38 @@ public class Wellcome extends JFrame {
 		if (mnExit == null) {
 			mnExit = new JMenuItem();
 			mnExit.setText("Exit");
-			mnExit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.exit(0);
-				}
-			});
+			mnExit.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
 		}
 		return mnExit;
 	}
 
 	/**
-	 * This method initializes jMenu	
+	 * This method initializes mnHelp	
 	 * 	
 	 * @return javax.swing.JMenu	
 	 */
-	private JMenu getJMenu() {
-		if (jMenu == null) {
-			jMenu = new JMenu();
-			jMenu.setText("Help");
-			jMenu.add(getMnHelp());
-			jMenu.add(getMnAbout());
+	private JMenu getMnHelp() {
+		if (mnHelp == null) {
+			mnHelp = new JMenu();
+			mnHelp.setText("Help");
+			mnHelp.add(getMnHelpcontent());
+			mnHelp.add(getMnAbout());
 		}
-		return jMenu;
+		return mnHelp;
 	}
 
 	/**
-	 * This method initializes mnHelp	
+	 * This method initializes mnHelpcontent	
 	 * 	
 	 * @return javax.swing.JMenuItem	
 	 */
-	private JMenuItem getMnHelp() {
-		if (mnHelp == null) {
-			mnHelp = new JMenuItem();
-			mnHelp.setText("Help Content");
+	private JMenuItem getMnHelpcontent() {
+		if (mnHelpcontent == null) {
+			mnHelpcontent = new JMenuItem();
+			mnHelpcontent.setText("Help Content");
+			mnHelpcontent.setIcon(new ImageIcon(getClass().getResource("/image/FAQ-icon.png")));
 		}
-		return mnHelp;
+		return mnHelpcontent;
 	}
 
 	/**
@@ -168,15 +149,9 @@ public class Wellcome extends JFrame {
 		if (mnAbout == null) {
 			mnAbout = new JMenuItem();
 			mnAbout.setText("About");
-			mnAbout.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new Wellcome()).setVisible(true);
-				}
-			});
+			mnAbout.setIcon(new ImageIcon(getClass().getResource("/image/user-info-icon.png")));
 		}
 		return mnAbout;
 	}
-	public static void main(String [] args){
-		new Wellcome().setVisible(true);
-	}
-}
+
+}  //  @jve:decl-index=0:visual-constraint="10,10"
