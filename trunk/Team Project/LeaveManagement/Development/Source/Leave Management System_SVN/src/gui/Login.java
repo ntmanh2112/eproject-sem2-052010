@@ -1,11 +1,19 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -30,6 +38,7 @@ public class Login extends JDialog {
 	private JPasswordField txtPassword = null;
 	private JButton btnOk = null;
 	private JButton btnCancel = null;
+	private ImagePanel ip;
 	/**
 	 * @param owner
 	 */
@@ -44,11 +53,35 @@ public class Login extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(414, 334);
+		/*this.setSize(414, 334);
 		this.setTitle("Login Form");
+		*/
 		this.setContentPane(getJContentPane());
-		this.setContentPane(getJContentPane());
+		
 		this.getRootPane().setDefaultButton(btnOk);
+		
+		this.setSize(400,300);
+		
+		Container c =this.getContentPane();
+		GridBagConstraints contrains = new GridBagConstraints();
+		this.setLayout(new BorderLayout());
+		
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		this.setTitle("Login Form");
+		
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("image/login.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()/2).intValue()/2,
+				Double.valueOf(dim.getHeight()/2).intValue()/2);
+     
+        c.add(ip, BorderLayout.CENTER);
+		
 	}
 
 	/**
@@ -186,5 +219,7 @@ public class Login extends JDialog {
 		}
 		return btnCancel;
 	}
-
+	public static void main(String [] args){
+		new Login(null).setVisible(true);
+	}
 }  //  @jve:decl-index=0:visual-constraint="10,10"
