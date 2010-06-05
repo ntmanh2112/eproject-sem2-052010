@@ -129,7 +129,7 @@ public class Wellcome extends JFrame {
 			mnLogin.setText("Login");
 			mnLogin.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Login(new Wellcome()).setVisible(true);
+					new Login(null).setVisible(true);
 				}
 			});
 		}
