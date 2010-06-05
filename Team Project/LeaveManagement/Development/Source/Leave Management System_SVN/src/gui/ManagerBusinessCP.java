@@ -346,5 +346,7 @@ public class ManagerBusinessCP extends JFrame {
 		}
 		return mniViewuser;
 	}
-	
+	public static void main(){
+		new ManagerBusinessCP();
+	}
 }  //  @jve:decl-index=0:visual-constraint="10,10"
