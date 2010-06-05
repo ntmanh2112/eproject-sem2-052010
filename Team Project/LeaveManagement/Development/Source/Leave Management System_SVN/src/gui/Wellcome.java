@@ -29,7 +29,6 @@ import common.ImagePanel_icon;;
 public class Wellcome extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel jContentPane = null;
 	private JMenuBar menubar = null;
 	private JMenu menuFile = null;
 	private JMenuItem mnLogin = null;
@@ -38,8 +37,6 @@ public class Wellcome extends JFrame {
 	private JMenuItem mnHelp = null;
 	private JMenuItem mnAbout = null;
 	public static String username = null;
-	private ImagePanel ip;
-
 	/**
 	 * This is the default constructor
 	 */
@@ -54,37 +51,14 @@ public class Wellcome extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		Container c =this.getContentPane();
 		GridBagConstraints contrains = new GridBagConstraints();
 		this.setJMenuBar(getMenubar());
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setTitle("Welcome to Leave Manager System");
-				BufferedImage image = null;
-		try {
-			image = ImageIO.read(new File("image/main1.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
-				Double.valueOf(dim.getHeight()).intValue());
-        ip.setLayout(new GridBagLayout());
-        c.add(ip, BorderLayout.CENTER);
+				
 		this.setPreferredSize(dim);
 		this.pack();
 		this.setVisible(true);
-	}
-
-	/**
-	 * This method initializes jContentPane
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getJContentPane() {
-		if (jContentPane == null) {
-			jContentPane = new JPanel();
-			jContentPane.setLayout(new GridBagLayout());
-		}
-		return jContentPane;
 	}
 
 	/**
@@ -126,9 +100,9 @@ public class Wellcome extends JFrame {
 		if (mnLogin == null) {
 			mnLogin = new JMenuItem();
 			mnLogin.setMnemonic(KeyEvent.VK_L);
-			KeyStroke keystroke = KeyStroke.getKeyStroke("control L");
+			
 			mnLogin.setText("Login");
-			//mnLogin.setIcon(new ImageIcon(getClass().getResource("images/Edit-icon.png")));
+			
 			mnLogin.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Login(null).setVisible(true);
