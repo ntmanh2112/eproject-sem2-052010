@@ -6,16 +6,21 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
+import common.ImagePanel_icon;;
 
 
 
@@ -49,21 +54,14 @@ public class Wellcome extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		//this.setSize(413,281);
-	
 		Container c =this.getContentPane();
 		GridBagConstraints contrains = new GridBagConstraints();
-		//this.setLayout(new BorderLayout());
 		this.setJMenuBar(getMenubar());
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		//this.setContentPane(getJContentPane());
 		this.setTitle("Welcome to Leave Manager System");
-		//Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
-		//Dimension dialogSize = this.getSize();
-		//this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/5);
-		BufferedImage image = null;
+				BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("image/wellcome.jpg"));
+			image = ImageIO.read(new File("image/main1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +93,7 @@ public class Wellcome extends JFrame {
 	 * @return javax.swing.JMenuBar	
 	 */
 	private JMenuBar getMenubar() {
-		if (menubar == null) {
+		if (menubar == null){
 			menubar = new JMenuBar();
 			menubar.add(getMenuFile());
 			menubar.add(getJMenu());
@@ -114,6 +112,7 @@ public class Wellcome extends JFrame {
 			menuFile.setText("File");
 			menuFile.add(getMnLogin());
 			menuFile.add(getMnExit());
+			
 		}
 		return menuFile;
 	}
@@ -126,13 +125,17 @@ public class Wellcome extends JFrame {
 	private JMenuItem getMnLogin() {
 		if (mnLogin == null) {
 			mnLogin = new JMenuItem();
+			mnLogin.setMnemonic(KeyEvent.VK_L);
+			KeyStroke keystroke = KeyStroke.getKeyStroke("control L");
 			mnLogin.setText("Login");
+			mnLogin.setIcon(new ImageIcon(getClass().getResource("images/Edit-icon.png")));
 			mnLogin.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Login(null).setVisible(true);
 				}
 			});
 		}
+		
 		return mnLogin;
 	}
 
