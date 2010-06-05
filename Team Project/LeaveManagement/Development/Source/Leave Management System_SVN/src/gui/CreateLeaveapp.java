@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -19,6 +20,7 @@ import javax.swing.JTextField;
 import model.Leaveapp;
 import model.User;
 import business.LeaveappService;
+import business.Method;
 import business.UserService;
 
 
@@ -59,6 +61,11 @@ public class CreateLeaveapp extends JDialog {
 	private User user = new User();  //  @jve:decl-index=0:
 	private UserService service = new  UserService();
 	private JLabel lbId_user = null;
+	private JLabel lbDatefromMess = null;
+	private JLabel lbDatetoMess = null;
+	private JLabel lbReasonMess = null;
+	private JLabel lbAddressMess = null;
+	private JLabel lbPhoneMess = null;
 	/**
 	 * @param owner
 	 */
@@ -79,7 +86,7 @@ public class CreateLeaveapp extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(468, 496);
+		this.setSize(468, 509);
 		this.setContentPane(getJContentPane());
 	}
 
@@ -90,55 +97,87 @@ public class CreateLeaveapp extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbPhoneMess = new JLabel();
+			lbPhoneMess.setText("");
+			lbPhoneMess.setSize(new Dimension(307, 20));
+			lbPhoneMess.setLocation(new Point(133, 394));
+			lbAddressMess = new JLabel();
+			lbAddressMess.setText("");
+			lbAddressMess.setSize(new Dimension(307, 20));
+			lbAddressMess.setLocation(new Point(133, 333));
+			lbReasonMess = new JLabel();
+			lbReasonMess.setText("");
+			lbReasonMess.setSize(new Dimension(307, 20));
+			lbReasonMess.setLocation(new Point(133, 279));
+			lbDatetoMess = new JLabel();
+			lbDatetoMess.setText("");
+			lbDatetoMess.setSize(new Dimension(307, 20));
+			lbDatetoMess.setLocation(new Point(133, 209));
+			lbDatefromMess = new JLabel();
+			lbDatefromMess.setText("");
+			lbDatefromMess.setSize(new Dimension(307, 20));
+			lbDatefromMess.setLocation(new Point(133, 131));
 			lbId_user = new JLabel(String.valueOf(id));
 			lbId_user.setBounds(new Rectangle(163, 59, 92, 16));
 			lbId_user.setText("");
 			lbDay1 = new JLabel();
-			lbDay1.setBounds(new Rectangle(352, 164, 28, 16));
 			lbDay1.setText("Day");
+			lbDay1.setSize(new Dimension(37, 20));
+			lbDay1.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbDay1.setLocation(new Point(360, 176));
 			lbMonth1 = new JLabel();
-			lbMonth1.setBounds(new Rectangle(262, 163, 44, 16));
 			lbMonth1.setText("Month");
+			lbMonth1.setSize(new Dimension(57, 20));
+			lbMonth1.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbMonth1.setLocation(new Point(253, 176));
 			lbYear1 = new JLabel();
-			lbYear1.setBounds(new Rectangle(163, 161, 38, 16));
 			lbYear1.setText("Year");
+			lbYear1.setSize(new Dimension(47, 20));
+			lbYear1.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbYear1.setLocation(new Point(133, 176));
 			lbMonth = new JLabel();
-			lbMonth.setBounds(new Rectangle(270, 105, 38, 16));
+			lbMonth.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbMonth.setLocation(new Point(253, 101));
+			lbMonth.setSize(new Dimension(57, 20));
 			lbMonth.setText("Month");
 			lbDay = new JLabel();
-			lbDay.setBounds(new Rectangle(354, 106, 28, 16));
 			lbDay.setText("Day");
+			lbDay.setLocation(new Point(360, 101));
+			lbDay.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbDay.setSize(new Dimension(37, 20));
 			lbYear = new JLabel();
-			lbYear.setBounds(new Rectangle(165, 104, 35, 16));
 			lbYear.setText("Year");
+			lbYear.setLocation(new Point(133, 101));
+			lbYear.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbYear.setSize(new Dimension(47, 20));
 			lbDateto = new JLabel();
 			lbDateto.setText("Date to (*)");
-			lbDateto.setLocation(new Point(15, 151));
+			lbDateto.setLocation(new Point(13, 176));
 			lbDateto.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbDateto.setSize(new Dimension(107, 20));
+			lbDateto.setSize(new Dimension(121, 20));
 			jLabel6 = new JLabel();
 			jLabel6.setText("Phone(*)");
 			jLabel6.setSize(new Dimension(121, 20));
 			jLabel6.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel6.setLocation(new Point(17, 298));
+			jLabel6.setLocation(new Point(13, 375));
 			jLabel5 = new JLabel();
 			jLabel5.setText("Address(*)");
 			jLabel5.setSize(new Dimension(121, 20));
 			jLabel5.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel5.setLocation(new Point(15, 255));
+			jLabel5.setLocation(new Point(13, 314));
 			jLabel4 = new JLabel();
 			jLabel4.setText("Reason(*)");
 			jLabel4.setSize(new Dimension(121, 20));
 			jLabel4.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel4.setLocation(new Point(15, 196));
+			jLabel4.setLocation(new Point(13, 240));
 			jLabel2 = new JLabel();
 			jLabel2.setText("Date from(*)");
 			jLabel2.setSize(new Dimension(121, 20));
 			jLabel2.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel2.setLocation(new Point(15, 105));
+			jLabel2.setLocation(new Point(13, 101));
 			jLabel1 = new JLabel();
 			jLabel1.setText("ID_USERNAME");
-			jLabel1.setSize(new Dimension(121, 20));
+			jLabel1.setSize(new Dimension(135, 20));
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel1.setLocation(new Point(15, 56));
 			jLabel = new JLabel();
@@ -173,6 +212,11 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(lbDay1, null);
 			jContentPane.add(getCbxDay1(), null);
 			jContentPane.add(lbId_user, null);
+			jContentPane.add(lbDatefromMess, null);
+			jContentPane.add(lbDatetoMess, null);
+			jContentPane.add(lbReasonMess, null);
+			jContentPane.add(lbAddressMess, null);
+			jContentPane.add(lbPhoneMess, null);
 		}
 		return jContentPane;
 	}
@@ -185,8 +229,27 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtReason() {
 		if (txtReason == null) {
 			txtReason = new JTextField();
-			txtReason.setLocation(new Point(164, 196));
-			txtReason.setSize(new Dimension(271, 40));
+			txtReason.setLocation(new Point(133, 240));
+			txtReason.setSize(new Dimension(307, 40));
+			txtReason.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtReason.getText();
+					if (a.length()<20) {
+						lbReasonMess.setText("Reason is not more than 30 chars!!");
+						lbReasonMess.setForeground(Color.red);
+						lbReasonMess.setText("");
+					}
+					else {
+						if(Method.CheckSpecialCharacter(a)) {
+							JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+							lbReasonMess.setText(null);
+						}else {
+							lbReasonMess.setText("OK");
+							lbReasonMess.setForeground(Color.green);
+						}
+					}
+				}
+			});
 		}
 		return txtReason;
 	}
@@ -199,8 +262,39 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtAddress() {
 		if (txtAddress == null) {
 			txtAddress = new JTextField();
-			txtAddress.setLocation(new Point(165, 255));
-			txtAddress.setSize(new Dimension(271, 20));
+			txtAddress.setLocation(new Point(133, 314));
+			txtAddress.setSize(new Dimension(307, 20));
+			txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtPhone.getText();
+					char[] array = a.toCharArray();
+					int t = 0;
+					if (a.length()>20){
+						JOptionPane.showMessageDialog(null, "Phone is not more than 20 chars!!");
+						lbPhoneMess.setForeground(Color.red);
+						txtPhone.setText("");
+						txtPhone.requestFocus();
+					}
+						
+					for (int i = 0 ; i < array.length ; i++){
+						if (array[i]!='0' && array[i]!='1' && array[i]!='2' &&
+							array[i]!='3' && array[i]!='4' && array[i]!='5' &&
+							array[i]!='6' && array[i]!='7' && array[i]!='8' &&
+							array[i]!='9'){
+							t = 1;
+							break;
+						}
+					}
+					if (t == 1){
+						lbPhoneMess.setText("Phone is number only");
+						lbPhoneMess.setForeground(Color.red);
+						txtPhone.setText("");
+					}else {
+						lbPhoneMess.setText("OK");
+						lbPhoneMess.setForeground(Color.green);
+					}
+				}
+			});
 		}
 		return txtAddress;
 	}
@@ -213,8 +307,8 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtPhone() {
 		if (txtPhone == null) {
 			txtPhone = new JTextField();
-			txtPhone.setLocation(new Point(165, 298));
-			txtPhone.setSize(new Dimension(271, 20));
+			txtPhone.setLocation(new Point(133, 375));
+			txtPhone.setSize(new Dimension(135, 20));
 		}
 		return txtPhone;
 	}
@@ -228,7 +322,7 @@ public class CreateLeaveapp extends JDialog {
 		if (btnSend == null) {
 			btnSend = new JButton();
 			btnSend.setFont(new Font("Dialog", Font.BOLD, 14));
-			btnSend.setLocation(new Point(30, 345));
+			btnSend.setLocation(new Point(15, 436));
 			btnSend.setSize(new Dimension(106, 30));
 			btnSend.setText("Send");
 			btnSend.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +383,7 @@ public class CreateLeaveapp extends JDialog {
 			btnReset = new JButton();
 			btnReset.setText("Reset");
 			btnReset.setSize(new Dimension(106, 30));
-			btnReset.setLocation(new Point(164, 345));
+			btnReset.setLocation(new Point(173, 436));
 			btnReset.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					
@@ -313,7 +407,7 @@ public class CreateLeaveapp extends JDialog {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(106, 30));
-			btnExit.setLocation(new Point(301, 345));
+			btnExit.setLocation(new Point(330, 436));
 			btnExit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					CreateLeaveapp.this.dispose();
@@ -332,8 +426,8 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxYear() {
 		if (cbxYear == null) {
 			cbxYear = new JComboBox();
-			cbxYear.setBounds(new Rectangle(199, 102, 69, 25));
-
+			cbxYear.setSize(new Dimension(69, 20));
+			cbxYear.setLocation(new Point(179, 101));
 			for(int i=2010;i<2021;i++){
 				cbxYear.addItem(i);
 			}
@@ -354,7 +448,9 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxMonth() {
 		if (cbxMonth == null) {
 			cbxMonth = new JComboBox();
-			cbxMonth.setBounds(new Rectangle(308, 102, 45, 25));
+			cbxMonth.setSize(new Dimension(45, 20));
+			cbxMonth.setPreferredSize(new Dimension(31, 25));
+			cbxMonth.setLocation(new Point(314, 101));
 			for(int i=1;i<13;i++){
 				cbxMonth.addItem(i);
 			}
@@ -373,7 +469,8 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxDay() {
 		if (cbxDay == null) {
 			cbxDay = new JComboBox();
-			cbxDay.setBounds(new Rectangle(381, 102, 45, 25));
+			cbxDay.setLocation(new Point(399, 101));
+			cbxDay.setSize(new Dimension(45, 20));
 			for(int i=1;i<32;i++){
 				cbxDay.addItem(i);
 			}
@@ -395,7 +492,8 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxYear1() {
 		if (cbxYear1 == null) {
 			cbxYear1 = new JComboBox();
-			cbxYear1.setBounds(new Rectangle(202, 162, 60, 25));
+			cbxYear1.setSize(new Dimension(69, 20));
+			cbxYear1.setLocation(new Point(179, 176));
 			for(int i = 2010 ;i< 2020;i++){
 				cbxYear1.addItem(i);
 			}
@@ -411,7 +509,8 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxMonth1() {
 		if (cbxMonth1 == null) {
 			cbxMonth1 = new JComboBox();
-			cbxMonth1.setBounds(new Rectangle(306, 163, 46, 25));
+			cbxMonth1.setSize(new Dimension(45, 20));
+			cbxMonth1.setLocation(new Point(314, 176));
 			for(int i = 1 ;i< 13;i++){
 				cbxMonth1.addItem(i);
 			}
@@ -427,7 +526,8 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxDay1() {
 		if (cbxDay1 == null) {
 			cbxDay1 = new JComboBox();
-			cbxDay1.setBounds(new Rectangle(378, 163, 50, 25));
+			cbxDay1.setLocation(new Point(399, 176));
+			cbxDay1.setSize(new Dimension(45, 20));
 			for(int i = 1 ;i< 32;i++){
 				cbxDay1.addItem(i);
 			}
