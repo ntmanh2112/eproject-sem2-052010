@@ -1,32 +1,28 @@
 package gui;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import java.awt.Dimension;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JInternalFrame;
-import java.awt.Rectangle;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
-import java.awt.Scrollbar;
-import javax.swing.JToolBar;
-import javax.swing.JButton;
-import javax.swing.JTree;
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Point;
-import javax.swing.JTextField;
-import javax.swing.JTabbedPane;
-import javax.swing.ImageIcon;
-import javax.swing.JEditorPane;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JComboBox;
+import java.awt.Rectangle;
 
-public class BNControlPanel extends JFrame {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+
+public class MDControlPanel extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -142,7 +138,7 @@ public class BNControlPanel extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public BNControlPanel() {
+	public MDControlPanel() {
 		super();
 		initialize();
 	}
