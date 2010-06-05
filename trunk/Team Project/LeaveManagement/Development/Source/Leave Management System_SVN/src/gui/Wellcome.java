@@ -105,7 +105,7 @@ public class Wellcome extends JFrame {
 			
 			mnLogin.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Login(null).setVisible(true);
+					new Login().setVisible(true);
 				}
 			});
 		}
