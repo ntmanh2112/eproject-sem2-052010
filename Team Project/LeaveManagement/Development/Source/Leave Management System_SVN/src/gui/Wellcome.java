@@ -128,7 +128,7 @@ public class Wellcome extends JFrame {
 			mnLogin.setMnemonic(KeyEvent.VK_L);
 			KeyStroke keystroke = KeyStroke.getKeyStroke("control L");
 			mnLogin.setText("Login");
-			mnLogin.setIcon(new ImageIcon(getClass().getResource("images/Edit-icon.png")));
+			//mnLogin.setIcon(new ImageIcon(getClass().getResource("images/Edit-icon.png")));
 			mnLogin.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Login(null).setVisible(true);
