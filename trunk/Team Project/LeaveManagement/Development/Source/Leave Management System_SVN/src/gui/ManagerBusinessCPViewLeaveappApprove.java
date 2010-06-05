@@ -221,7 +221,8 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniReportmonth.setText("Report Month");
 			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewReportMonth().setVisible(true);	
+					new ManagerBusinessCPViewReportMonth().setVisible(true);	
+					ManagerBusinessCPViewLeaveappApprove.this.dispose();
 				}
 			});
 		}
@@ -239,8 +240,8 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniReportYeah.setText("Report Year");
 			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagingDirectorCPViewReportYear().setVisible(true);
-					
+					new ManagerBusinessCPViewReportYear().setVisible(true);
+					ManagerBusinessCPViewLeaveappApprove.this.dispose();
 				}
 			});
 		}
@@ -258,7 +259,7 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniLeaveAP.setText("View Leave AP");
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewLeaveappApprove().setVisible(true);
+					new ManagerBusinessCPViewLeaveappValid().setVisible(true);
 					
 				}
 			});
@@ -363,7 +364,7 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagerBusinessCPViewUser().setVisible(true);
-					
+					ManagerBusinessCPViewLeaveappApprove.this.dispose();
 				}
 			});
 		}

@@ -245,6 +245,7 @@ public class ManagingDirectorCPAddgroup extends JFrame {
 			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagingDirectorCPViewReportMonth().setVisible(true);
+					ManagingDirectorCPAddgroup.this.dispose();
 					
 				}
 			});
@@ -264,7 +265,7 @@ public class ManagingDirectorCPAddgroup extends JFrame {
 			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagingDirectorCPViewReportYear().setVisible(true);
-					
+					ManagingDirectorCPAddgroup.this.dispose();
 				}
 			});
 		}
@@ -283,7 +284,7 @@ public class ManagingDirectorCPAddgroup extends JFrame {
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagingDirectorCPViewLeaveappValid().setVisible(true);
-					
+					ManagingDirectorCPAddgroup.this.dispose();
 				}
 			});
 		}
@@ -387,6 +388,7 @@ public class ManagingDirectorCPAddgroup extends JFrame {
 			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagerBusinessCPViewUser().setVisible(true);
+					ManagingDirectorCPAddgroup.this.dispose();
 					
 				}
 			});
@@ -415,7 +417,7 @@ public class ManagingDirectorCPAddgroup extends JFrame {
 	private JTable getTblUser() {
 		if (tblUser == null) {
 			try{
-				data = service.selectAllUser();
+				data = service.selectAllUserMD();
 				tblUser = new JTable(data, column);
 			}catch(Exception ex){
 				ex.printStackTrace();

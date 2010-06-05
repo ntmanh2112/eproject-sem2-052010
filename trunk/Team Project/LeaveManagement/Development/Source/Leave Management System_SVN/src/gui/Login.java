@@ -131,7 +131,7 @@ public class Login extends JDialog {
 		if (txtUsername == null) {
 			txtUsername = new JTextField();
 			txtUsername.setLocation(new Point(150, 89));
-			txtUsername.setSize(new Dimension(213, 30));
+			txtUsername.setSize(new Dimension(213, 25));
 		}
 		return txtUsername;
 	}
@@ -145,7 +145,7 @@ public class Login extends JDialog {
 		if (txtPassword == null) {
 			txtPassword = new JPasswordField();
 			txtPassword.setLocation(new Point(150, 150));
-			txtPassword.setSize(new Dimension(213, 30));
+			txtPassword.setSize(new Dimension(213, 25));
 		}
 		return txtPassword;
 	}
@@ -169,6 +169,7 @@ public class Login extends JDialog {
 						UserService service = new UserService();
 						loginResult result = service.loginUser(username, password);
 						if(result == loginResult.boss){
+							new ManagingDirectorCP().setVisible(true);
 							Login.this.dispose();
 						}else if (result == loginResult.managerbusiness){
 							new ManagerBusinessCP().setVisible(true);

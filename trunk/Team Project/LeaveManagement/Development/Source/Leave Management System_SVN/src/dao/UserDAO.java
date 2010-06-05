@@ -150,7 +150,7 @@ public class UserDAO {
 	public loginResult loginUser(String username,String password){
 		loginResult result = null;
 		try{
-			int id = 0;
+			int idposition = 0;
 			int status = 0;
 			ConnectionDB connection = new ConnectionDB();
 			connection.connect();
@@ -162,20 +162,20 @@ public class UserDAO {
 			int i = 0;
 			while(rs.next()){
 				i++;
-				id = rs.getInt("ID_POSITION");
+				idposition = rs.getInt("ID_POSITION");
 				status = rs.getInt("STATUS");
 			}
-			if( i> 0 && id == 3 && status == 1 ){
+			if( i!= 0 && idposition == 3 && status == 1 ){
 				result = loginResult.managerbusiness;
 			}
-			else if (i> 0 && id == 4 && status == 1) {
+			else if (i!= 0 && idposition == 4 && status == 1) {
 				result = loginResult.boss;
 				
 			}
-			else if(i> 0 && id == 2 && status == 1){
+			else if(i!= 0 && idposition == 2 && status == 1){
 				result = loginResult.manager;
 			}
-			else if (i> 0 && status == 0 ) {
+			else if (i!= 0 && status == 0 ) {
 				result = loginResult.lock;
 			}
 			else if(i==0){
@@ -230,10 +230,26 @@ public class UserDAO {
 		return cpresult;
 	}
 	//SELECT USER
-	public ResultSet selectAllUser() throws Exception{
+	public ResultSet selectAllUserBM() throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		String sql = "SELECT * FROM viewUser";
+		String sql = "SELECT * FROM viewUserBM";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	public ResultSet selectAllUserM() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT * FROM viewUserM";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	public ResultSet selectAllUserMD() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT * FROM viewUserMD";
 		Statement st = connection.getConn().createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		return rs;

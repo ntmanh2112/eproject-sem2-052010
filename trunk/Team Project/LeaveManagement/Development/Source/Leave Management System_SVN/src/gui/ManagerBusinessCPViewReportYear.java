@@ -225,7 +225,7 @@ public class ManagerBusinessCPViewReportYear extends JFrame {
 			mniLeaveAP.setText("View Leave AP");
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewLeaveapp().setVisible(true);
+					new ManagerBusinessCPViewLeaveappValid().setVisible(true);
 					
 				}
 			});	

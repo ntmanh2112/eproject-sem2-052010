@@ -1,24 +1,23 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.JButton;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 
-import business.LeaveappService;
-
-public class ManagerBusinessCPViewLeaveapp extends JFrame {
+public class ManagingDirectorCP extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -36,24 +35,12 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 	private JMenuItem mniAbout = null;
 	private JMenuItem mniEditpassword = null;
 	private JMenuItem mniEditProfile = null;
-	private JMenuItem mniAdduser = null;
 	private JMenuItem mniViewuser = null;
-	private JButton btnApprove = null;
-	private JButton btnReject = null;
-	private JButton btnRefresh = null;
-	private JButton btnExit = null;
-	private JLabel lbStatus = null;
-	private JComboBox cbxLeaveapp = null;
-	private JButton btnView = null;
-	private JScrollPane jScrollPane = null;
-	private JTable tblLeave = null;
-	LeaveappService service = new LeaveappService();  //  @jve:decl-index=0:
-	private String[][]data1 = null;
-	private String[] column = {"ID","Full Name","Date From","Date to","Reason","Status ","Address","Phone"};
+	private ImagePanel ip;
 	/**
 	 * This is the default constructor
 	 */
-	public ManagerBusinessCPViewLeaveapp() {
+	public ManagingDirectorCP() {
 		super();
 		initialize();
 	}
@@ -64,13 +51,34 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(619, 302);
+		/*this.setSize(619, 302);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("Business Manager Control Panel");
-		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
-		Dimension dialogSize = this.getSize();
-		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/5);
+		this.setTitle("ManageingDirector Control Panel");
+		*/
+		Container c =this.getContentPane();
+		GridBagConstraints contrains = new GridBagConstraints();
+		this.setLayout(new BorderLayout());
+		this.setJMenuBar(getJJMenuBar());
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		//this.setContentPane(getJContentPane());
+		this.setTitle("Welcome to Managing Director Leave Manager System");
+		//Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		//Dimension dialogSize = this.getSize();
+		//this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/5);
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("image/Wellcome.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
+				Double.valueOf(dim.getHeight()).intValue());
+        ip.setLayout(new GridBagLayout());
+        c.add(ip, BorderLayout.CENTER);
+		this.setPreferredSize(dim);
+		this.pack();
+		this.setVisible(true);
 	}
 
 	/**
@@ -80,52 +88,8 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
-			gridBagConstraints4.fill = GridBagConstraints.BOTH;
-			gridBagConstraints4.gridy = 1;
-			gridBagConstraints4.weightx = 1.0;
-			gridBagConstraints4.weighty = 1.0;
-			gridBagConstraints4.gridwidth = 4;
-			gridBagConstraints4.gridx = 0;
-			GridBagConstraints gridBagConstraints31 = new GridBagConstraints();
-			gridBagConstraints31.gridx = 2;
-			gridBagConstraints31.gridy = 0;
-			GridBagConstraints gridBagConstraints21 = new GridBagConstraints();
-			gridBagConstraints21.fill = GridBagConstraints.VERTICAL;
-			gridBagConstraints21.gridy = 0;
-			gridBagConstraints21.weightx = 1.0;
-			gridBagConstraints21.gridx = 1;
-			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
-			gridBagConstraints11.gridx = 0;
-			gridBagConstraints11.gridy = 0;
-			lbStatus = new JLabel();
-			lbStatus.setText("Status Leaveapp");
-			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
-			gridBagConstraints3.gridx = 3;
-			gridBagConstraints3.weightx = 10.0D;
-			gridBagConstraints3.gridy = 2;
-			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
-			gridBagConstraints2.gridx = 2;
-			gridBagConstraints2.weightx = 10.0D;
-			gridBagConstraints2.gridy = 2;
-			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
-			gridBagConstraints1.gridx = 1;
-			gridBagConstraints1.weightx = 10.0D;
-			gridBagConstraints1.gridy = 2;
-			GridBagConstraints gridBagConstraints = new GridBagConstraints();
-			gridBagConstraints.gridx = 0;
-			gridBagConstraints.weightx = 10.0D;
-			gridBagConstraints.gridy = 2;
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
-			jContentPane.add(getBtnApprove(), gridBagConstraints);
-			jContentPane.add(getBtnReject(), gridBagConstraints1);
-			jContentPane.add(getBtnRefresh(), gridBagConstraints2);
-			jContentPane.add(getBtnExit(), gridBagConstraints3);
-			jContentPane.add(lbStatus, gridBagConstraints11);
-			jContentPane.add(getCbxLeaveapp(), gridBagConstraints21);
-			jContentPane.add(getBtnView(), gridBagConstraints31);
-			jContentPane.add(getJScrollPane(), gridBagConstraints4);
 		}
 		return jContentPane;
 	}
@@ -170,7 +134,6 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 		if (mnManager == null) {
 			mnManager = new JMenu();
 			mnManager.setText("Manager");
-			mnManager.add(getMniAdduser());
 			mnManager.add(getMniViewuser());
 		}
 		return mnManager;
@@ -233,7 +196,7 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniCreateLA.setText("Create LA");
 			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(new ManagerBusinessCPViewLeaveapp()).setVisible(true);
+					new CreateLeaveapp(new ManagingDirectorCP()).setVisible(false);
 				}
 			});
 		}
@@ -251,7 +214,7 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniReportmonth.setText("Report Month");
 			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewReportMonth().setVisible(true);
+					new ManagingDirectorCPViewReportMonth().setVisible(true);
 					
 				}
 			});
@@ -270,7 +233,7 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniReportYeah.setText("Report Year");
 			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewReportYear().setVisible(true);
+					new ManagingDirectorCPViewReportYear().setVisible(true);
 					
 				}
 			});
@@ -289,7 +252,7 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniLeaveAP.setText("View Leave AP");
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewLeaveapp().setVisible(true);
+					new ManagingDirectorCPViewLeaveappValid().setVisible(true);
 					
 				}
 			});
@@ -321,7 +284,7 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniAbout.setText("About");
 			mniAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new ManagerBusinessCPViewLeaveapp()).setVisible(true);
+					new About(new ManagingDirectorCP()).setVisible(true);
 				}
 			});
 		}
@@ -339,7 +302,7 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniEditpassword.setText("Edit Password");
 			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(new ManagerBusinessCPViewLeaveapp()).setVisible(true);
+					new Changepassword(new ManagingDirectorCP()).setVisible(true);
 				}
 			});
 		}
@@ -357,29 +320,11 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniEditProfile.setText("Edit Profile");
 			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Editprofile(new ManagerBusinessCPViewLeaveapp()).setVisible(true);
+					new Editprofile(new ManagingDirectorCP()).setVisible(true);
 				}
 			});
 		}
 		return mniEditProfile;
-	}
-
-	/**
-	 * This method initializes mniAdduser	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMniAdduser() {
-		if (mniAdduser == null) {
-			mniAdduser = new JMenuItem();
-			mniAdduser.setText("Add User");
-			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new ManagerBusinessCPViewReportMonth()).setVisible(true);
-				}
-			});
-		}
-		return mniAdduser;
 	}
 
 	/**
@@ -393,127 +338,14 @@ public class ManagerBusinessCPViewLeaveapp extends JFrame {
 			mniViewuser.setText("View User");
 			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewUser().setVisible(true);
-				
+					new ManagingDirectorCPAddgroup().setVisible(true);
+					
 				}
 			});
 		}
 		return mniViewuser;
 	}
-
-	/**
-	 * This method initializes btnApprove	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnApprove() {
-		if (btnApprove == null) {
-			btnApprove = new JButton();
-			btnApprove.setText("Approve");
-		}
-		return btnApprove;
+	public static void main(String [] args){
+		new ManagingDirectorCP().setVisible(true);
 	}
-
-	/**
-	 * This method initializes btnReject	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnReject() {
-		if (btnReject == null) {
-			btnReject = new JButton();
-			btnReject.setText("Reject");
-		}
-		return btnReject;
-	}
-
-	/**
-	 * This method initializes btnRefresh	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnRefresh() {
-		if (btnRefresh == null) {
-			btnRefresh = new JButton();
-			btnRefresh.setText("Refresh");
-		}
-		return btnRefresh;
-	}
-
-	/**
-	 * This method initializes btnExit	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnExit() {
-		if (btnExit == null) {
-			btnExit = new JButton();
-			btnExit.setText("Exit");
-			btnExit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					ManagerBusinessCPViewLeaveapp.this.dispose();
-				}
-			});
-		}
-		return btnExit;
-	}
-
-	/**
-	 * This method initializes cbxLeaveapp	
-	 * 	
-	 * @return javax.swing.JComboBox	
-	 */
-	private JComboBox getCbxLeaveapp() {
-		if (cbxLeaveapp == null) {
-			String[] data = {"valid","approve","reject","finish"};
-			cbxLeaveapp = new JComboBox(data);
-		}
-		return cbxLeaveapp;
-	}
-
-	/**
-	 * This method initializes btnView	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnView() {
-		if (btnView == null) {
-			btnView = new JButton();
-			btnView.setText("View");
-		}
-		return btnView;
-	}
-
-	/**
-	 * This method initializes jScrollPane	
-	 * 	
-	 * @return javax.swing.JScrollPane	
-	 */
-	private JScrollPane getJScrollPane() {
-		if (jScrollPane == null) {
-			jScrollPane = new JScrollPane();
-			jScrollPane.setViewportView(getTblLeave());
-		}
-		return jScrollPane;
-	}
-
-	/**
-	 * This method initializes tblLeave	
-	 * 	
-	 * @return javax.swing.JTable	
-	 */
-	private JTable getTblLeave() {
-		
-		if (tblLeave == null) {
-				try{
-					service.selectLeaveapp();
-					tblLeave = new JTable(data1, column);
-				}catch(Exception ex){
-					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Co loi");
-				}
-		}
-		return tblLeave;
-	}
-
 }  //  @jve:decl-index=0:visual-constraint="10,10"

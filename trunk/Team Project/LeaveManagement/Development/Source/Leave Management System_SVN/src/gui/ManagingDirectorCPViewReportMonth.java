@@ -26,7 +26,6 @@ public class ManagingDirectorCPViewReportMonth extends JFrame {
 	private JMenuItem mniAbout = null;
 	private JMenuItem mniEditpassword = null;
 	private JMenuItem mniEditProfile = null;
-	private JMenuItem mniAdduser = null;
 	private JMenuItem mniViewuser = null;
 	/**
 	 * This is the default constructor
@@ -101,7 +100,6 @@ public class ManagingDirectorCPViewReportMonth extends JFrame {
 		if (mnManager == null) {
 			mnManager = new JMenu();
 			mnManager.setText("Manager");
-			mnManager.add(getMniAdduser());
 			mnManager.add(getMniViewuser());
 		}
 		return mnManager;
@@ -183,6 +181,7 @@ public class ManagingDirectorCPViewReportMonth extends JFrame {
 			mniReportmonth.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagingDirectorCPViewReportMonth().setVisible(true);	
+					ManagingDirectorCPViewReportMonth.this.dispose();
 				}
 			});
 		}
@@ -201,7 +200,7 @@ public class ManagingDirectorCPViewReportMonth extends JFrame {
 			mniReportYeah.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagingDirectorCPViewReportYear().setVisible(true);
-					
+					ManagingDirectorCPViewReportMonth.this.dispose();
 				}
 			});
 		}
@@ -220,7 +219,7 @@ public class ManagingDirectorCPViewReportMonth extends JFrame {
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new ManagingDirectorCPViewLeaveappValid().setVisible(true);
-					
+					ManagingDirectorCPViewReportMonth.this.dispose();
 				}
 			});
 		}
@@ -295,24 +294,6 @@ public class ManagingDirectorCPViewReportMonth extends JFrame {
 	}
 
 	/**
-	 * This method initializes mniAdduser	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMniAdduser() {
-		if (mniAdduser == null) {
-			mniAdduser = new JMenuItem();
-			mniAdduser.setText("Add User");
-			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new ManagingDirectorCPViewReportMonth()).setVisible(true);
-				}
-			});
-		}
-		return mniAdduser;
-	}
-
-	/**
 	 * This method initializes mniViewuser	
 	 * 	
 	 * @return javax.swing.JMenuItem	
@@ -323,8 +304,8 @@ public class ManagingDirectorCPViewReportMonth extends JFrame {
 			mniViewuser.setText("View User");
 			mniViewuser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewUser().setVisible(true);
-					
+					new ManagingDirectorCPAddgroup().setVisible(true);
+					ManagingDirectorCPViewReportMonth.this.dispose();
 				}
 			});
 		}

@@ -275,7 +275,7 @@ public class ManagerBusinessCPViewUser extends JFrame {
 			mniLeaveAP.setText("View Leave AP");
 			mniLeaveAP.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new ManagerBusinessCPViewLeaveapp().setVisible(true);
+					new ManagerBusinessCPViewLeaveappValid().setVisible(true);
 					
 				}
 			});
@@ -526,7 +526,7 @@ public class ManagerBusinessCPViewUser extends JFrame {
 	private JTable getTblUser() {
 		if (tblUser == null) {
 			try{
-				data = service.selectAllUser();
+				data = service.selectAllUserBM();
 				tblUser = new JTable(data, column);
 			}catch(Exception ex){
 				ex.printStackTrace();
