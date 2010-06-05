@@ -1,13 +1,25 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+
+
+
+
 
 public class Wellcome extends JFrame {
 
@@ -21,6 +33,7 @@ public class Wellcome extends JFrame {
 	private JMenuItem mnHelp = null;
 	private JMenuItem mnAbout = null;
 	public static String username = null;
+	private ImagePanel ip;
 
 	/**
 	 * This is the default constructor
@@ -36,13 +49,31 @@ public class Wellcome extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(300, 200);
+		//this.setSize(413,281);
+	
+		Container c =this.getContentPane();
+		GridBagConstraints contrains = new GridBagConstraints();
+		//this.setLayout(new BorderLayout());
 		this.setJMenuBar(getMenubar());
-		this.setContentPane(getJContentPane());
-		this.setTitle("WELL COME");
-		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
-		Dimension dialogSize = this.getSize();
-		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/5);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		//this.setContentPane(getJContentPane());
+		this.setTitle("Welcome to Leave Manager System");
+		//Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		//Dimension dialogSize = this.getSize();
+		//this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/5);
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("image/wellcome.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
+				Double.valueOf(dim.getHeight()).intValue());
+        ip.setLayout(new GridBagLayout());
+        c.add(ip, BorderLayout.CENTER);
+		this.setPreferredSize(dim);
+		this.pack();
+		this.setVisible(true);
 	}
 
 	/**
@@ -80,7 +111,7 @@ public class Wellcome extends JFrame {
 	private JMenu getMenuFile() {
 		if (menuFile == null) {
 			menuFile = new JMenu();
-			menuFile.setText("FIile");
+			menuFile.setText("File");
 			menuFile.add(getMnLogin());
 			menuFile.add(getMnExit());
 		}
