@@ -451,5 +451,7 @@ public class ManagingDirectorCPViewLeaveappApprove extends JFrame {
 		}
 		return tblLeaveapp;
 	}
-	
+	public static void main(String [] args){
+		new ManagingDirectorCPViewLeaveappApprove().setVisible(true);
+	}
 }  //  @jve:decl-index=0:visual-constraint="10,10"

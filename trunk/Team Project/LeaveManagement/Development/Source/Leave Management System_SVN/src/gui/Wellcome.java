@@ -49,11 +49,11 @@ public class Wellcome extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		//this.setSize(413,281);
+		this.setSize(600,300);
 	
 		Container c =this.getContentPane();
-		GridBagConstraints contrains = new GridBagConstraints();
-		//this.setLayout(new BorderLayout());
+		//GridBagConstraints contrains = new GridBagConstraints();
+		this.setLayout(new BorderLayout());
 		this.setJMenuBar(getMenubar());
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		//this.setContentPane(getJContentPane());
@@ -67,11 +67,11 @@ public class Wellcome extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
-				Double.valueOf(dim.getHeight()).intValue());
-        ip.setLayout(new GridBagLayout());
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()/2).intValue()/2,
+				Double.valueOf(dim.getHeight()/2).intValue()/2);
+       // ip.setLayout(new GridBagLayout());
         c.add(ip, BorderLayout.CENTER);
-		this.setPreferredSize(dim);
+		//this.setPreferredSize(dim);
 		this.pack();
 		this.setVisible(true);
 	}

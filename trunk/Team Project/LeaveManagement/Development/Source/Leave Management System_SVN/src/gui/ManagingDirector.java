@@ -1,7 +1,16 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -28,6 +37,7 @@ public class ManagingDirector extends JFrame {
 	private JMenuItem mniEditProfile = null;
 	private JMenuItem mniAdduser = null;
 	private JMenuItem mniViewuser = null;
+	private ImagePanel ip;
 	/**
 	 * This is the default constructor
 	 */
@@ -42,10 +52,34 @@ public class ManagingDirector extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(619, 302);
+		/*this.setSize(619, 302);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("Business Manager Control Panel");
+		this.setTitle("ManageingDirector Control Panel");
+		*/
+		Container c =this.getContentPane();
+		GridBagConstraints contrains = new GridBagConstraints();
+		this.setLayout(new BorderLayout());
+		this.setJMenuBar(getJJMenuBar());
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		//this.setContentPane(getJContentPane());
+		this.setTitle("Welcome to Managing Director Leave Manager System");
+		//Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		//Dimension dialogSize = this.getSize();
+		//this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/5);
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("image/Wellcome.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
+				Double.valueOf(dim.getHeight()).intValue());
+        ip.setLayout(new GridBagLayout());
+        c.add(ip, BorderLayout.CENTER);
+		this.setPreferredSize(dim);
+		this.pack();
+		this.setVisible(true);
 	}
 
 	/**
@@ -164,7 +198,7 @@ public class ManagingDirector extends JFrame {
 			mniCreateLA.setText("Create LA");
 			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(new ManagingDirector()).setVisible(true);
+					new CreateLeaveapp(new ManagingDirector()).setVisible(false);
 				}
 			});
 		}
@@ -331,5 +365,7 @@ public class ManagingDirector extends JFrame {
 		}
 		return mniViewuser;
 	}
-	
+	public static void main(String [] args){
+		new ManagingDirector().setVisible(true);
+	}
 }  //  @jve:decl-index=0:visual-constraint="10,10"
