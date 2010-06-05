@@ -303,7 +303,5 @@ public class EngineerCP extends JFrame {
 		}
 		return mniCreatleaveapp;
 	}
-	public static void main(String [] args){
-		new EngineerCP().setVisible(true);
-	}
+	
 }

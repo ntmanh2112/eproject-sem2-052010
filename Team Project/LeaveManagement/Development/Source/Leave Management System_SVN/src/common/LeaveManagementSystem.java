@@ -1,4 +1,6 @@
 package common;
+import gui.ManagerBusinessCP;
+import gui.ManagerBusinessCPViewLeaveappApprove;
 import gui.Wellcome;
 import javax.swing.UIManager;
 
@@ -16,7 +18,7 @@ public class LeaveManagementSystem {
                 	e.printStackTrace();
                 }
                
-              new Wellcome().setVisible(true);
+              new ManagerBusinessCPViewLeaveappApprove().setVisible(true);
             }
 	 });
 }
