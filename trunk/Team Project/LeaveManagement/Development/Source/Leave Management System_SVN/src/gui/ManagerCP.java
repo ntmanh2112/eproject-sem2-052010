@@ -1,7 +1,16 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -25,6 +34,7 @@ public class ManagerCP extends JFrame {
 	private JMenuItem mniAbout = null;
 	private JMenuItem mniEditpassword = null;
 	private JMenuItem mniEditProfile = null;
+	private ImagePanel ip;
 	/**
 	 * This is the default constructor
 	 */
@@ -39,10 +49,29 @@ public class ManagerCP extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(619, 302);
+		/*this.setSize(619, 302);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("Manager Control Panel");
+		*/
+		Container c =this.getContentPane();
+		GridBagConstraints contrains = new GridBagConstraints();
+		this.setJMenuBar(getJJMenuBar());
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setTitle("Welcome to Manager Leave Manager System");
+				BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("image/main1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
+				Double.valueOf(dim.getHeight()).intValue());
+        ip.setLayout(new GridBagLayout());
+        c.add(ip, BorderLayout.CENTER);
+		this.setPreferredSize(dim);
+		this.pack();
+		this.setVisible(true);
 	}
 
 	/**
@@ -145,7 +174,7 @@ public class ManagerCP extends JFrame {
 			mniCreateLA.setText("Create LA");
 			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(new ManagerCP()).setVisible(true);
+					new CreateLeaveapp(null).setVisible(true);
 				}
 			});
 		}
@@ -233,7 +262,7 @@ public class ManagerCP extends JFrame {
 			mniAbout.setText("About");
 			mniAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new ManagerCP()).setVisible(true);
+					new About(null).setVisible(true);
 				}
 			});
 		}
@@ -251,7 +280,7 @@ public class ManagerCP extends JFrame {
 			mniEditpassword.setText("Edit Password");
 			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(new ManagerCP()).setVisible(true);
+					new Changepassword(null).setVisible(true);
 				}
 			});
 		}
@@ -269,11 +298,14 @@ public class ManagerCP extends JFrame {
 			mniEditProfile.setText("Edit Profile");
 			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Editprofile(new ManagerCP()).setVisible(true);
+					new Editprofile(null).setVisible(true);
 				}
 			});
 		}
 		return mniEditProfile;
+	}
+	public static void main(String [] args){
+		new ManagerCP().setVisible(true);
 	}
 	
 }  //  @jve:decl-index=0:visual-constraint="10,10"

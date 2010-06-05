@@ -1,8 +1,16 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -38,6 +46,7 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 	private JButton btnExit = null;
 	private JScrollPane jScrollPane = null;
 	private JTable tblLeaveapp = null;
+	private ImagePanel ip;
 	/**
 	 * This is the default constructor
 	 */
@@ -52,10 +61,29 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(619, 302);
+		/*this.setSize(619, 302);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("Business Manager Control Panel");
+*/	
+		Container c =this.getContentPane();
+		GridBagConstraints contrains = new GridBagConstraints();
+		this.setJMenuBar(getJJMenuBar());
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setTitle("Welcome to Manager Business Leave Manager System");
+				BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("image/main.gif"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
+				Double.valueOf(dim.getHeight()).intValue());
+        ip.setLayout(new GridBagLayout());
+        c.add(ip, BorderLayout.CENTER);
+		this.setPreferredSize(dim);
+		this.pack();
+		this.setVisible(true);
 	}
 
 	/**
@@ -203,7 +231,7 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniCreateLA.setText("Create LA");
 			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(new ManagerBusinessCPViewLeaveappApprove()).setVisible(true);
+					new CreateLeaveapp(null).setVisible(true);
 				}
 			});
 		}
@@ -291,7 +319,7 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniAbout.setText("About");
 			mniAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new ManagerBusinessCPViewLeaveappApprove()).setVisible(true);
+					new About(null).setVisible(true);
 				}
 			});
 		}
@@ -309,7 +337,7 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniEditpassword.setText("Edit Password");
 			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(new ManagerBusinessCPViewLeaveappApprove()).setVisible(true);
+					new Changepassword(null).setVisible(true);
 				}
 			});
 		}
@@ -327,7 +355,7 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniEditProfile.setText("Edit Profile");
 			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Editprofile(new ManagerBusinessCPViewLeaveappApprove()).setVisible(true);
+					new Editprofile(null).setVisible(true);
 				}
 			});
 		}
@@ -345,7 +373,7 @@ public class ManagerBusinessCPViewLeaveappApprove extends JFrame {
 			mniAdduser.setText("Add User");
 			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new ManagerBusinessCPViewLeaveappApprove()).setVisible(true);
+					new Addmember(null).setVisible(true);
 				}
 			});
 		}

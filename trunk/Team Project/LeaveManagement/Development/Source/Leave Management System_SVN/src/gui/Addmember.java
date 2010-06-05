@@ -580,7 +580,5 @@ public class Addmember extends JDialog {
 		}
 		return cbxDay;
 	}
-	public static void main(String [] args){
-		new Addmember(null).setVisible(true);
-	}
+	
 }  //  @jve:decl-index=0:visual-constraint="10,30"

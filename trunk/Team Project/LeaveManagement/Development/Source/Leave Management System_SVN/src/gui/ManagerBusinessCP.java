@@ -1,8 +1,16 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -31,6 +39,7 @@ public class ManagerBusinessCP extends JFrame {
 	private JMenuItem mniEditProfile = null;
 	private JMenuItem mniAdduser = null;
 	private JMenuItem mniViewuser = null;
+	private ImagePanel ip;
 	UserService service = new UserService();
 	/**
 	 * This is the default constructor
@@ -46,13 +55,32 @@ public class ManagerBusinessCP extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(619, 302);
+		/*this.setSize(619, 302);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("Business Manager Control Panel");
 		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
 		Dimension dialogSize = this.getSize();
 		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/5);
+	*/
+		Container c =this.getContentPane();
+		GridBagConstraints contrains = new GridBagConstraints();
+		this.setJMenuBar(getJJMenuBar());
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setTitle("Welcome to Manager Business Leave Manager System");
+				BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("image/main1.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ip = new ImagePanel(image,Double.valueOf(dim.getWidth()).intValue(),
+				Double.valueOf(dim.getHeight()).intValue());
+        ip.setLayout(new GridBagLayout());
+        c.add(ip, BorderLayout.CENTER);
+		this.setPreferredSize(dim);
+		this.pack();
+		this.setVisible(true);
 	}
 
 	/**
@@ -172,13 +200,8 @@ public class ManagerBusinessCP extends JFrame {
 			mniCreateLA = new JMenuItem();
 			mniCreateLA.setText("Create LA");
 			mniCreateLA.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					try{
-						int id = service.selectIdUser(Wellcome.username);
-						new CreateLeaveapp(new ManagerBusinessCP(),id).setVisible(true);
-					}catch(Exception ex){
-						ex.printStackTrace();
-					}
+				public void actionPerformed(java.awt.event.ActionEvent e) {	
+							new CreateLeaveapp(null).setVisible(true);		
 					
 				}
 			});
@@ -267,7 +290,7 @@ public class ManagerBusinessCP extends JFrame {
 			mniAbout.setText("About");
 			mniAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new ManagerBusinessCP()).setVisible(true);
+					new About(null).setVisible(true);
 				}
 			});
 		}
@@ -285,7 +308,7 @@ public class ManagerBusinessCP extends JFrame {
 			mniEditpassword.setText("Edit Password");
 			mniEditpassword.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(new ManagerBusinessCP()).setVisible(true);
+					new Changepassword(null).setVisible(true);
 				}
 			});
 		}
@@ -303,7 +326,7 @@ public class ManagerBusinessCP extends JFrame {
 			mniEditProfile.setText("Edit Profile");
 			mniEditProfile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Editprofile(new ManagerBusinessCP()).setVisible(true);
+					new Editprofile(null).setVisible(true);
 				}
 			});
 		}
@@ -321,7 +344,7 @@ public class ManagerBusinessCP extends JFrame {
 			mniAdduser.setText("Add User");
 			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new ManagerBusinessCP()).setVisible(true);
+					new Addmember(null).setVisible(true);
 				}
 			});
 		}
@@ -347,6 +370,6 @@ public class ManagerBusinessCP extends JFrame {
 		return mniViewuser;
 	}
 	public static void main(){
-		new ManagerBusinessCP();
+		new ManagerBusinessCP().setVisible(true);
 	}
 }  //  @jve:decl-index=0:visual-constraint="10,10"
