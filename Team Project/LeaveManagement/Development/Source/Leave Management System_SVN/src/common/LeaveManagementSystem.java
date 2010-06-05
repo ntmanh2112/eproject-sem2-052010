@@ -1,10 +1,6 @@
 package common;
-
 import gui.Wellcome;
-
 import javax.swing.UIManager;
-
-
 
 public class LeaveManagementSystem {
 
@@ -19,7 +15,8 @@ public class LeaveManagementSystem {
                 } catch (Exception e) {
                 	e.printStackTrace();
                 }
-                new Wellcome().setVisible(true);
+               
+              new Wellcome().setVisible(true);
             }
 	 });
 }
