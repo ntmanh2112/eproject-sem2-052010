@@ -1,48 +1,43 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import javax.swing.JLabel;
+import java.awt.Rectangle;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Point;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
 
 import business.UserService;
 
 import common.Enumeration.loginResult;
 
-public class Login extends JDialog {
+public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
-	private JLabel jLabel = null;
-	private JLabel jLabel1 = null;
-	private JLabel jLabel2 = null;
+	private JLabel lbLogin = null;
+	private JLabel lbUsername = null;
+	private JLabel lbPassword = null;
 	private JTextField txtUsername = null;
+	private JLabel lbUsernameMess = null;
 	private JPasswordField txtPassword = null;
+	private JLabel lbPasswordMess = null;
 	private JButton btnOk = null;
-	private JButton btnCancel = null;
-	/**
-	 * @param owner
+	private JButton btnExit = null;
+		/**
+	 * This is the default constructor
 	 */
-	public Login(Frame owner) {
-		super(owner);
+	public Login() {
+		super();
 		initialize();
 	}
 
@@ -52,25 +47,10 @@ public class Login extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		/*this.setSize(414, 334);
-		this.setTitle("Login Form");
-		*/
+		this.setSize(364, 310);
+		this.setResizable(false);
 		this.setContentPane(getJContentPane());
-		
-		this.getRootPane().setDefaultButton(btnOk);
-		
-		this.setSize(400,300);
-		
-		GridBagConstraints contrains = new GridBagConstraints();
-		this.setLayout(new BorderLayout());
-		
-		
-		
-		this.setTitle("Login Form");
-		
-		
-     
-		
+		this.setTitle("JFrame");
 	}
 
 	/**
@@ -80,33 +60,40 @@ public class Login extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			jLabel2 = new JLabel();
-			jLabel2.setText("Password");
-			jLabel2.setSize(new Dimension(101, 30));
-			jLabel2.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel2.setLocation(new Point(31, 148));
-			jLabel1 = new JLabel();
-			jLabel1.setText("User Name");
-			jLabel1.setSize(new Dimension(101, 30));
-			jLabel1.setHorizontalTextPosition(SwingConstants.LEFT);
-			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel1.setLocation(new Point(30, 89));
-			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(174, 26, 87, 35));
-			jLabel.setFont(new Font("Dialog", Font.BOLD, 24));
-			jLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			jLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-			jLabel.setVerticalAlignment(SwingConstants.CENTER);
-			jLabel.setText("Login");
+			lbPasswordMess = new JLabel();
+			lbPasswordMess.setText("");
+			lbPasswordMess.setSize(new Dimension(194, 20));
+			lbPasswordMess.setLocation(new Point(135, 164));
+			lbUsernameMess = new JLabel();
+			lbUsernameMess.setText("");
+			lbUsernameMess.setSize(new Dimension(194, 20));
+			lbUsernameMess.setLocation(new Point(135, 104));
+			lbPassword = new JLabel();
+			lbPassword.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbPassword.setLocation(new Point(15, 135));
+			lbPassword.setSize(new Dimension(110, 31));
+			lbPassword.setText("Password");
+			lbUsername = new JLabel();
+			lbUsername.setText("User Name");
+			lbUsername.setSize(new Dimension(110, 31));
+			lbUsername.setFont(new Font("Dialog", Font.BOLD, 18));
+			lbUsername.setLocation(new Point(15, 75));
+			lbLogin = new JLabel();
+			lbLogin.setBounds(new Rectangle(118, 4, 76, 43));
+			lbLogin.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
+			lbLogin.setForeground(Color.blue);
+			lbLogin.setText("Login");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
-			jContentPane.add(jLabel, null);
-			jContentPane.add(jLabel1, null);
-			jContentPane.add(jLabel2, null);
+			jContentPane.add(lbLogin, null);
+			jContentPane.add(lbUsername, null);
+			jContentPane.add(lbPassword, null);
 			jContentPane.add(getTxtUsername(), null);
+			jContentPane.add(lbUsernameMess, null);
 			jContentPane.add(getTxtPassword(), null);
+			jContentPane.add(lbPasswordMess, null);
 			jContentPane.add(getBtnOk(), null);
-			jContentPane.add(getBtnCancel(), null);
+			jContentPane.add(getBtnExit(), null);
 		}
 		return jContentPane;
 	}
@@ -119,8 +106,8 @@ public class Login extends JDialog {
 	private JTextField getTxtUsername() {
 		if (txtUsername == null) {
 			txtUsername = new JTextField();
-			txtUsername.setLocation(new Point(150, 89));
-			txtUsername.setSize(new Dimension(213, 25));
+			txtUsername.setLocation(new Point(135, 74));
+			txtUsername.setSize(new Dimension(165, 31));
 		}
 		return txtUsername;
 	}
@@ -133,8 +120,8 @@ public class Login extends JDialog {
 	private JPasswordField getTxtPassword() {
 		if (txtPassword == null) {
 			txtPassword = new JPasswordField();
-			txtPassword.setLocation(new Point(150, 150));
-			txtPassword.setSize(new Dimension(213, 25));
+			txtPassword.setLocation(new Point(135, 135));
+			txtPassword.setSize(new Dimension(165, 31));
 		}
 		return txtPassword;
 	}
@@ -148,8 +135,9 @@ public class Login extends JDialog {
 		if (btnOk == null) {
 			btnOk = new JButton();
 			btnOk.setText("Ok");
-			btnOk.setSize(new Dimension(101, 30));
-			btnOk.setLocation(new Point(75, 211));
+			btnOk.setSize(new Dimension(90, 35));
+			btnOk.setIcon(new ImageIcon(getClass().getResource("/image/changepass1.png")));
+			btnOk.setLocation(new Point(76, 210));
 			btnOk.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					String username = txtUsername.getText();
@@ -191,25 +179,24 @@ public class Login extends JDialog {
 	}
 
 	/**
-	 * This method initializes btnCancel	
+	 * This method initializes btnExit	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getBtnCancel() {
-		if (btnCancel == null) {
-			btnCancel = new JButton();
-			btnCancel.setText("Cancel");
-			btnCancel.addActionListener(new java.awt.event.ActionListener() {
+	private JButton getBtnExit() {
+		if (btnExit == null) {
+			btnExit = new JButton();
+			btnExit.setText("Exit");
+			btnExit.setSize(new Dimension(91, 35));
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/button-cancel-icon.png")));
+			btnExit.setLocation(new Point(196, 210));
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					Login.this.dispose();
 				}
 			});
-			btnCancel.setSize(new Dimension(101, 30));
-			btnCancel.setLocation(new Point(211, 211));
 		}
-		return btnCancel;
+		return btnExit;
 	}
-	public static void main(String [] args){
-		new Login(null).setVisible(true);
-	}
+
 }  //  @jve:decl-index=0:visual-constraint="10,10"
