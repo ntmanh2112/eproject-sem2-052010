@@ -146,14 +146,14 @@ public class Login extends JFrame {
 						UserService service = new UserService();
 						loginResult result = service.loginUser(username, password);
 						if(result == loginResult.boss){
-							new ManagingDirectorCP().setVisible(true);
+							
 							Login.this.dispose();
 						}else if (result == loginResult.managerbusiness){
-							new ManagerBusinessCP().setVisible(true);
-							Wellcome.username = txtUsername.getText();
+							
+							
 							Login.this.dispose();
 						}else if (result == loginResult.manager) {
-							new ManagerBusinessCP().setVisible(true);
+							
 							Login.this.dispose();
 							
 						}
