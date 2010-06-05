@@ -18,7 +18,7 @@ public class LeaveManagementSystem {
                 	e.printStackTrace();
                 }
                
-              new ManagerBusinessCPViewLeaveappApprove().setVisible(true);
+              new  Wellcome().setVisible(true);
             }
 	 });
 }
