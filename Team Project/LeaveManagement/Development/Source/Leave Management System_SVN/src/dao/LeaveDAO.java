@@ -18,6 +18,115 @@ import common.ConnectionDB;
  *
  */
 public class LeaveDAO {
+	//SELECT LEAVEAPP OF MANAGING DIRECTOR = VALID
+	public ResultSet selectAllLeaveappMDValid() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='valid'AND TBL_USER.ID_POSITION = '3'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF MANAGING DIRECTOR = APPROVE
+	public ResultSet selectAllLeaveappMDApprove() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='approve'AND TBL_USER.ID_POSITION = '3'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF MANAGING DIRECTOR = REJECT
+	public ResultSet selectAllLeaveappMDReject() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='reject'AND TBL_USER.ID_POSITION = '3'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF MANAGING DIRECTOR = FINISH
+	public ResultSet selectAllLeaveappMDFinish() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='finish'AND TBL_USER.ID_POSITION = '3'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF BUSINESSMANAGER = VALID
+	public ResultSet selectAllLeaveappBMValid() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='valid'AND TBL_USER.ID_POSITION = '2'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF BUSINESSMANAGER = APPROVE
+	public ResultSet selectAllLeaveappBMApprove() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='approve'AND TBL_USER.ID_POSITION = '2'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF BUSINESSMANAGER = REJECT
+	public ResultSet selectAllLeaveappBMReject() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='reject'AND TBL_USER.ID_POSITION = '2'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF BUSINESSMANAGER = FINISH
+	public ResultSet selectAllLeaveappBMFinish() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='finish' AND TBL_USER.ID_POSITION = '2'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF MANAGER = VALID
+	public ResultSet selectAllLeaveappMValid() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='valid' AND TBL_USER.ID_POSITION = '1' ";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF MANAGER = APPROVE
+	public ResultSet selectAllLeaveappMApprove() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='approve' AND TBL_USER.ID_POSITION = '1'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF MANAGER = REJECT
+	public ResultSet selectAllLeaveappMReject() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='reject' AND TBL_USER.ID_POSITION = '1' ";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//SELECT LEAVEAPP OF MANAGER = FINISH
+	public ResultSet selectAllLeaveappMFinish() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='finish' AND TBL_USER.ID_POSITION = '1'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	
 	public void addLeaveapp(Leaveapp leave_app){
 		try {
 			ConnectionDB conn = new ConnectionDB();
@@ -35,46 +144,6 @@ public class LeaveDAO {
 			e.printStackTrace();
 			
 		}
-	}
-	public ResultSet selectLeaveApp() throws Exception{
-		ConnectionDB connection = new ConnectionDB();
-		connection.connect();
-		String sql = "SELECT * FROM viewLeaveApp";
-		Statement st = connection.getConn().createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		return rs;
-	}	
-	public ResultSet selectLeaveAppValid()throws Exception{
-		ConnectionDB connection = new ConnectionDB();
-		connection.connect();
-		String sql = "SELECT * FROM viewLeaveAppValid";
-		Statement st = connection.getConn().createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		return rs;
-	}
-	public ResultSet selectLeaveAppApprove()throws Exception{
-		ConnectionDB connection = new ConnectionDB();
-		connection.connect();
-		String sql = "SELECT * FROM viewLeaveAppApprove";
-		Statement st = connection.getConn().createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		return rs;
-	}
-	public ResultSet selectLeaveAppReject()throws Exception{
-		ConnectionDB connection = new ConnectionDB();
-		connection.connect();
-		String sql = "SELECT * FROM viewLeaveAppReject";
-		Statement st = connection.getConn().createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		return rs;
-	}
-	public ResultSet selectLeaveAppFinish()throws Exception{
-		ConnectionDB connection = new ConnectionDB();
-		connection.connect();
-		String sql = "SELECT * FROM viewLeaveAppFinish";
-		Statement st = connection.getConn().createStatement();
-		ResultSet rs = st.executeQuery(sql);
-		return rs;
 	}
 	
 
