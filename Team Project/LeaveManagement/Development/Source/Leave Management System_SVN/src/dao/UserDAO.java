@@ -12,10 +12,14 @@ import common.ConnectionDB;
 import common.AddUser.addResult;
 import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
+import java.util.* ;
+import java.text.*;
+import java.text.SimpleDateFormat;
 
 
 //ADD GROUP
 public class UserDAO {
+	
 	public User selectidposition(User user){
 			try{
 			ConnectionDB conn = new ConnectionDB();
@@ -34,20 +38,7 @@ public class UserDAO {
 		}
 		return user;
 	}
-	public void addpostion(User user){
-		try{
-			ConnectionDB conn = new ConnectionDB();
-			conn.connect();
-			String sql = "UPDATE TBL_EMPLOYEE SET ID_POSITION = '" + user.getId_position() + "' WHERE ID_USER = '" + user.getId_user()+ "'" ;
-			Statement st = conn.getConn().createStatement();
-			st.executeUpdate(sql);
-			
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+	
 	
 	//EDIT PROFILE
 	public void updateUser(User user)throws Exception{
@@ -235,6 +226,7 @@ public class UserDAO {
 		}
 		return cpresult;
 	}
+	
 	//SELECT USER
 	public ResultSet selectAllUserBM() throws Exception{
 		ConnectionDB connection = new ConnectionDB();
