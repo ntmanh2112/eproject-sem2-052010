@@ -6,6 +6,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import java.awt.Dimension;
+import javax.swing.JLabel;
+import java.awt.Rectangle;
+import java.awt.Point;
 
 public class Wellcome extends JFrame {
 
@@ -18,6 +22,7 @@ public class Wellcome extends JFrame {
 	private JMenu mnHelp = null;
 	private JMenuItem mnHelpcontent = null;
 	private JMenuItem mnAbout = null;
+	private JLabel lbBackground = null;
 
 	/**
 	 * This is the default constructor
@@ -33,7 +38,7 @@ public class Wellcome extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(440, 276);
+		this.setSize(424, 333);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("JFrame");
@@ -46,8 +51,14 @@ public class Wellcome extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbBackground = new JLabel();
+			lbBackground.setText("");
+			lbBackground.setSize(new Dimension(414, 281));
+			lbBackground.setIcon(new ImageIcon(getClass().getResource("/image/wellcome.jpg")));
+			lbBackground.setLocation(new Point(1, -1));
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
+			jContentPane.add(lbBackground, null);
 		}
 		return jContentPane;
 	}
@@ -91,6 +102,11 @@ public class Wellcome extends JFrame {
 			mnLogin = new JMenuItem();
 			mnLogin.setText("LogIn");
 			mnLogin.setIcon(new ImageIcon(getClass().getResource("/image/Preppy-icon.png")));
+			mnLogin.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Login().setVisible(true);
+				}
+			});
 		}
 		return mnLogin;
 	}
