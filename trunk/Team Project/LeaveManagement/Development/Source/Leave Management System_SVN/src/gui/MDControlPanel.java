@@ -1778,7 +1778,14 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTable getTblUserlock() {
 		if (tblUserlock == null) {
-			tblUserlock = new JTable();
+			try{
+					data = userservice.selectAllUserlock();
+					tblUserlock = new JTable(data, column);
+				}catch(Exception ex){
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error");
+				}
+			
 		}
 		return tblUserlock;
 	}

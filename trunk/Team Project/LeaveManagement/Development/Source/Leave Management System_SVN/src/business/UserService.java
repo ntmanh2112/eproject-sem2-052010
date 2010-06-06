@@ -87,6 +87,44 @@ public class UserService {
 		}
 		return data;
 	}
+	//LOAD USERLOCK
+	public String[][] selectAllUserlock() throws Exception{
+		ArrayList<User> list = new ArrayList<User>();
+		ResultSet rs = dao.selectAllUserLock();
+		while (rs.next()){
+			User user = new User();
+			user.setId_user(rs.getInt("ID_USER"));
+			user.setUsername(rs.getString("USERNAME"));
+			user.setStatus(rs.getString("STATUS"));
+			user.setPosition_name(rs.getString("POSITION_NAME"));
+			user.setFullname(rs.getString("FULLNAME"));
+			user.setBirthday(rs.getDate("BIRTHDAY"));
+			user.setAddress(rs.getString("ADDRESS"));
+			user.setGender(rs.getString("GENDER"));
+			user.setPhone(rs.getString("PHONE"));
+			user.setEmail(rs.getString("EMAIL"));
+			
+			list.add(user);
+		}
+		
+		String[][] data = new String[list.size()][10];
+		int i = 0;
+		for(User user : list){
+			data[i][0] = String.valueOf(user.getId_user());
+			data[i][1] = user.getUsername();
+			data[i][2] = user.getStatus();
+			data[i][3] = user.getPosition_name();
+			data[i][4] = user.getFullname();
+			data[i][5] = user.getBirthday().toString();
+			data[i][6] = user.getAddress();
+			data[i][7] = user.getGender();
+			data[i][8] = user.getPhone();
+			data[i][9] = user.getEmail();
+			i++;
+		}
+		return data;
+	}
+	
 	//LOAD MANAGER
 	public String[][] selectAllUserM()throws Exception{
 		ArrayList<User> list = new ArrayList<User>();

@@ -69,21 +69,19 @@ public class UserDAO {
 	public void  lockUser(User user)throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		String lock = "UPDATE TBl_USER SET STATUS = 0 WHERE ID_USER = "+user.getId_user();
-		if (user.getStatus() == "1"){
-			Statement st = connection.getConn().createStatement();
-			st.executeUpdate(lock);
-		}
+		String lock = "UPDATE TBl_USER SET STATUS = '0' WHERE ID_USER = "+user.getId_user();
+		Statement st = connection.getConn().createStatement();
+		st.executeUpdate(lock);
+		
 	}
 	//UNLIOCK USER
 	public void  unlockUser(User user)throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		String unlock = "UPDATE TBl_USER SET STATUS = 1 WHERE ID_USER = "+user.getId_user();
-		if (user.getStatus() == "0"){
-			Statement st = connection.getConn().createStatement();
-			st.executeUpdate(unlock);
-		}
+		String unlock = "UPDATE TBl_USER SET STATUS = '1' WHERE ID_USER = "+user.getId_user();
+		Statement st = connection.getConn().createStatement();
+		st.executeUpdate(unlock);
+		
 		
 	}
 	//ADD USER
@@ -265,7 +263,7 @@ public class UserDAO {
 	public ResultSet selectAllUserLock() throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		String sql = "select tbl_user.id_user,tbl_user.username,tbl_user.status,tbl_user.fullname,tbl_user.birthday,tbl_user.address,tbl_user.gender,tbl_user.phone,tbl_user.email,tbl_position.position_name from tbl_user INNER JOIN tbl_position on tbl_position.id_position=tbl_user.id_position where  tbl_user.status = '1'";
+		String sql = "select tbl_user.id_user,tbl_user.username,tbl_user.status,tbl_user.fullname,tbl_user.birthday,tbl_user.address,tbl_user.gender,tbl_user.phone,tbl_user.email,tbl_position.position_name from tbl_user INNER JOIN tbl_position on tbl_position.id_position=tbl_user.id_position where  tbl_user.status = '0'";
 		Statement st = connection.getConn().createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
