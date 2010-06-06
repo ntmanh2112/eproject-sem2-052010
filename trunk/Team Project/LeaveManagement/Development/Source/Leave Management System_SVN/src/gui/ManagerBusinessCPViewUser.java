@@ -16,6 +16,7 @@ import javax.swing.JTable;
 
 import model.User;
 import business.UserService;
+import javax.swing.ImageIcon;
 
 public class ManagerBusinessCPViewUser extends JFrame {
 
@@ -368,6 +369,7 @@ public class ManagerBusinessCPViewUser extends JFrame {
 		if (btnBlock == null) {
 			btnBlock = new JButton();
 			btnBlock.setText("Lock");
+			btnBlock.setIcon(new ImageIcon(getClass().getResource("/image/Administrator-icon.png")));
 			btnBlock.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					int i = tblUser.getSelectedRow();

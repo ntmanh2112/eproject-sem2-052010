@@ -55,7 +55,6 @@ public class Editprofile extends JDialog {
 	private JLabel lbAddressmess = null;
 	private JLabel lbEmailmess = null;
 	private JLabel lbPhonemess = null;
-
 	/**
 	 * @param owner
 	 */
@@ -78,7 +77,7 @@ public class Editprofile extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(508, 552);
+		this.setSize(505, 542);
 		this.setTitle("Edit Profile");
 		this.setContentPane(getJContentPane());
 	}
@@ -152,7 +151,7 @@ public class Editprofile extends JDialog {
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel1.setLocation(new Point(15, 56));
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(120, 3, 134, 28));
+			jLabel.setBounds(new Rectangle(177, 1, 134, 28));
 			jLabel.setFont(new Font("Dialog", Font.BOLD, 24));
 			jLabel.setText("Edit Profile");
 			jContentPane = new JPanel();
@@ -483,4 +482,4 @@ public class Editprofile extends JDialog {
 		return cbxSex;
 	}
 
-}  //  @jve:decl-index=0:visual-constraint="10,10"
+}  //  @jve:decl-index=0:visual-constraint="10,-12"

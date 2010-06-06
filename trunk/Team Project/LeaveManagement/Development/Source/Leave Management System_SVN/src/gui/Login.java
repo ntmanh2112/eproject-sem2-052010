@@ -20,6 +20,7 @@ import model.User;
 import business.UserService;
 
 import common.Enumeration.loginResult;
+import javax.swing.SwingConstants;
 
 public class Login extends JFrame {
 
@@ -36,7 +37,8 @@ public class Login extends JFrame {
 	private JButton btnExit = null;
 	private int id = 0;
 	private User user = new User();
-		/**
+	private JLabel lbIcon = null;
+	/**
 	 * This is the default constructor
 	 */
 	public Login() {
@@ -50,7 +52,7 @@ public class Login extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(364, 310);
+		this.setSize(310, 293);
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
 		this.setTitle("JFrame");
@@ -63,31 +65,39 @@ public class Login extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbIcon = new JLabel();
+			lbIcon.setBounds(new Rectangle(1, 0, 130, 114));
+			lbIcon.setIcon(new ImageIcon(getClass().getResource("/image/Contact.png")));
+			lbIcon.setHorizontalTextPosition(SwingConstants.TRAILING);
+			lbIcon.setText("");
 			lbPasswordMess = new JLabel();
 			lbPasswordMess.setText("");
-			lbPasswordMess.setSize(new Dimension(194, 20));
-			lbPasswordMess.setLocation(new Point(135, 164));
+			lbPasswordMess.setSize(new Dimension(164, 20));
+			lbPasswordMess.setLocation(new Point(125, 200));
 			lbUsernameMess = new JLabel();
 			lbUsernameMess.setText("");
-			lbUsernameMess.setSize(new Dimension(194, 20));
-			lbUsernameMess.setLocation(new Point(135, 104));
+			lbUsernameMess.setSize(new Dimension(163, 20));
+			lbUsernameMess.setLocation(new Point(125, 151));
 			lbPassword = new JLabel();
 			lbPassword.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbPassword.setLocation(new Point(15, 135));
+			lbPassword.setLocation(new Point(15, 170));
 			lbPassword.setSize(new Dimension(110, 31));
 			lbPassword.setText("Password");
 			lbUsername = new JLabel();
 			lbUsername.setText("User Name");
 			lbUsername.setSize(new Dimension(110, 31));
 			lbUsername.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbUsername.setLocation(new Point(15, 75));
+			lbUsername.setLocation(new Point(15, 122));
 			lbLogin = new JLabel();
-			lbLogin.setBounds(new Rectangle(118, 4, 76, 43));
+			lbLogin.setBounds(new Rectangle(169, 31, 76, 43));
 			lbLogin.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
 			lbLogin.setForeground(Color.blue);
 			lbLogin.setText("Login");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
+			jContentPane.add(lbLogin, null);
+			jContentPane.add(lbLogin, null);
+			jContentPane.add(lbLogin, null);
 			jContentPane.add(lbLogin, null);
 			jContentPane.add(lbUsername, null);
 			jContentPane.add(lbPassword, null);
@@ -97,6 +107,7 @@ public class Login extends JFrame {
 			jContentPane.add(lbPasswordMess, null);
 			jContentPane.add(getBtnOk(), null);
 			jContentPane.add(getBtnExit(), null);
+			jContentPane.add(lbIcon, null);
 		}
 		return jContentPane;
 	}
@@ -109,7 +120,7 @@ public class Login extends JFrame {
 	private JTextField getTxtUsername() {
 		if (txtUsername == null) {
 			txtUsername = new JTextField();
-			txtUsername.setLocation(new Point(135, 74));
+			txtUsername.setLocation(new Point(125, 122));
 			txtUsername.setSize(new Dimension(165, 31));
 		}
 		return txtUsername;
@@ -123,7 +134,7 @@ public class Login extends JFrame {
 	private JPasswordField getTxtPassword() {
 		if (txtPassword == null) {
 			txtPassword = new JPasswordField();
-			txtPassword.setLocation(new Point(135, 135));
+			txtPassword.setLocation(new Point(125, 170));
 			txtPassword.setSize(new Dimension(165, 31));
 		}
 		return txtPassword;
@@ -140,7 +151,7 @@ public class Login extends JFrame {
 			btnOk.setText("Ok");
 			btnOk.setSize(new Dimension(90, 35));
 			btnOk.setIcon(new ImageIcon(getClass().getResource("/image/changepass1.png")));
-			btnOk.setLocation(new Point(76, 210));
+			btnOk.setLocation(new Point(45, 220));
 			btnOk.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					String username = txtUsername.getText();
@@ -150,7 +161,7 @@ public class Login extends JFrame {
 						loginResult result = service.loginUser(username, password);
 						if(result == loginResult.boss){
 							id = service.selectIdUser(username);
-							new MDControlPanel().setVisible(true);
+							new MDControlPanel(id).setVisible(true);
 							Login.this.dispose();
 							
 						}else if (result == loginResult.managerbusiness){
@@ -194,7 +205,7 @@ public class Login extends JFrame {
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(91, 35));
 			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/button-cancel-icon.png")));
-			btnExit.setLocation(new Point(196, 210));
+			btnExit.setLocation(new Point(165, 220));
 			btnExit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					Login.this.dispose();
