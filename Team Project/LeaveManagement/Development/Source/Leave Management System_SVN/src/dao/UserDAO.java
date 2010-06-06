@@ -132,15 +132,19 @@ public class UserDAO {
 		try{
 			ConnectionDB conn = new ConnectionDB();
 			conn.connect();
-			String sql = "SELECT FULLNAME,ADDRESS,EMAIL,PHONE FROM TBL_USER WHERE ID_USER  = " + id;
+			String sql = "SELECT USERNAME,FULLNAME,ADDRESS,EMAIL,BIRTHDAY,PHONE,POSITION_NAME,GENDER FROM TBL_USER INNER JOIN TBL_POSITION ON TBL_USER.ID_POSITION = TBL_POSITION.ID_POSITION WHERE ID_USER  = " + id;
 			Statement st = conn.getConn().createStatement();
 			ResultSet rs= st.executeQuery(sql);
 			
 			while(rs.next()){
+				user.setUsername(rs.getString("USERNAME"));
 				user.setFullname(rs.getString("FULLNAME"));
 				user.setAddress(rs.getString("ADDRESS"));
 				user.setEmail(rs.getString("EMAIL"));
 				user.setPhone(rs.getString("PHONE"));
+				user.setBirthday(rs.getDate("BIRTHDAY"));
+				user.setGender(rs.getString("GENDER"));
+				user.setPosition_name(rs.getString("POSITION_NAME"));
 			
 			}
 			return user;
