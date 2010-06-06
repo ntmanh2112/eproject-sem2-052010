@@ -19,6 +19,31 @@ public class LeaveappService {
 		dao.addLeaveapp(leave_app);
 		
 	}
+	//LOAD REPORT
+	public String[][] reportMonth()throws Exception{
+		ArrayList<Leaveapp> list = new ArrayList<Leaveapp>();
+		ResultSet rs = dao.reportMonth();
+		while (rs.next()){
+			Leaveapp leaveapp = new Leaveapp();
+			leaveapp.setFullname(rs.getString("FULLNAME"));
+			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
+			leaveapp.setDateto(rs.getDate("DATETO"));
+			leaveapp.setReason(rs.getString("REASON"));
+			list.add(leaveapp);
+		}
+		String[][] datarp = new String[list.size()][4];
+		int i = 0;
+		for(Leaveapp leaveapp : list){
+			datarp[i][0] = leaveapp.getFullname();
+			datarp[i][1] = leaveapp.getDatefrom().toString();
+			datarp[i][2] = leaveapp.getDateto().toString();
+			datarp[i][3] = leaveapp.getReason();
+			
+			i++;
+		}
+		return datarp;
+	}
+
 	//MANAGING DIRECTOR VIEW LEAVE APP VALID
 	public String[][] selectLeaveappMDvalid()throws Exception{
 		ArrayList<Leaveapp> list = new ArrayList<Leaveapp>();

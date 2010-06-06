@@ -1,16 +1,15 @@
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import java.awt.Dimension;
-import javax.swing.JLabel;
-import java.awt.Rectangle;
-import java.awt.Point;
-import java.awt.Font;
 
 public class Wellcome extends JFrame {
 

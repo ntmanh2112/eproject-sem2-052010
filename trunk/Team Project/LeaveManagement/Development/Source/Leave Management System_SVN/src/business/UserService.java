@@ -18,6 +18,7 @@ public class UserService {
 		loginResult result = dao.loginUser(username, password);
 		return result;
 	}
+	
 	public changeResult changePass(String oldpass,String newpass,String confirmpass){
 		changeResult result = dao.changePass(oldpass, newpass, confirmpass);
 		return result;
@@ -39,9 +40,8 @@ public class UserService {
 		dao.selectidposition(user);
 		return user;
 	}
-	public void addPositon(User user){
-		dao.addpostion(user);
-	}
+	
+	//LOAD USER
 	public User loadUser(int id){
 		User user = new User();
 		user = dao.loadUser(id);
@@ -50,6 +50,7 @@ public class UserService {
 	public void updateUser(User user)throws Exception{
 		dao.updateUser(user);
 	}
+	
 	//LOAD BUSINESS MANAGER
 	public String[][] selectAllUserBM()throws Exception{
 		ArrayList<User> list = new ArrayList<User>();
@@ -124,7 +125,6 @@ public class UserService {
 		}
 		return data;
 	}
-	
 	//LOAD MANAGER
 	public String[][] selectAllUserM()throws Exception{
 		ArrayList<User> list = new ArrayList<User>();
@@ -162,9 +162,6 @@ public class UserService {
 		}
 		return data;
 	}
-	
-	//LOAD USERLOCK
-	
 	//LOAD ENGINEER
 	public String[][] selectAllUserE()throws Exception{
 		ArrayList<User> list = new ArrayList<User>();
