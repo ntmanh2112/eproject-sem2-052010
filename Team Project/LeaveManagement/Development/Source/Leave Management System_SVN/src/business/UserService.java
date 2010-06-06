@@ -22,13 +22,18 @@ public class UserService {
 		changeResult result = dao.changePass(oldpass, newpass, confirmpass);
 		return result;
 	}
+	//ADD USER
 	public addResult addUser(User user){
 		addResult result = dao.addUser(user);
 		return result;
 	}
-	public void blockUser(User user)throws Exception{
-		dao.blockUser(user);
-		
+	//LOCK USER
+	public void lockUser(User user)throws Exception{
+		dao.lockUser(user);
+	}
+	//UNLOCK USER
+	public void unlockUser(User user)throws Exception{
+		dao.unlockUser(user);
 	}
 	public User selectPositon(User user){
 		dao.selectidposition(user);
@@ -45,7 +50,7 @@ public class UserService {
 	public void updateUser(User user)throws Exception{
 		dao.updateUser(user);
 	}
-	
+	//LOAD BUSINESS MANAGER
 	public String[][] selectAllUserBM()throws Exception{
 		ArrayList<User> list = new ArrayList<User>();
 		ResultSet rs = dao.selectAllUserBM();
@@ -82,6 +87,7 @@ public class UserService {
 		}
 		return data;
 	}
+	//LOAD MANAGER
 	public String[][] selectAllUserM()throws Exception{
 		ArrayList<User> list = new ArrayList<User>();
 		ResultSet rs = dao.selectAllUserM();
@@ -118,9 +124,10 @@ public class UserService {
 		}
 		return data;
 	}
-	public String[][] selectAllUserMD()throws Exception{
+	//LOAD ENGINEER
+	public String[][] selectAllUserE()throws Exception{
 		ArrayList<User> list = new ArrayList<User>();
-		ResultSet rs = dao.selectAllUserMD();
+		ResultSet rs = dao.selectAllUserE();
 		while (rs.next()){
 			User user = new User();
 			user.setId_user(rs.getInt("ID_USER"));

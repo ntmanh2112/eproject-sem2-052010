@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import model.User;
+
 import business.UserService;
 
 import common.Enumeration.loginResult;
@@ -32,6 +34,8 @@ public class Login extends JFrame {
 	private JLabel lbPasswordMess = null;
 	private JButton btnOk = null;
 	private JButton btnExit = null;
+	private int id = 0;
+	private User user = new User();
 		/**
 	 * This is the default constructor
 	 */
@@ -145,8 +149,10 @@ public class Login extends JFrame {
 						UserService service = new UserService();
 						loginResult result = service.loginUser(username, password);
 						if(result == loginResult.boss){
-							
+							id = service.selectIdUser(username);
+							new MDControlPanel().setVisible(true);
 							Login.this.dispose();
+							
 						}else if (result == loginResult.managerbusiness){
 							
 							
