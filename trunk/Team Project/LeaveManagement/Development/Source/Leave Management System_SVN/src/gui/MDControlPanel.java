@@ -1802,7 +1802,30 @@ public class MDControlPanel extends JFrame {
 			btnUnlock.setLocation(new Point(399, 328));
 			btnUnlock.setSize(new Dimension(159, 45));
 			btnUnlock.setIcon(new ImageIcon(getClass().getResource("/image/upload-icon.png")));
+			btnUnlock.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int i = tblUserlock.getSelectedRow();
+					int count = tblUserlock.getSelectedRowCount();
+					if(count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one user");
+					}else{
+						if (JOptionPane.showConfirmDialog(null, "Are you sure want to  "+tblUserlock.getValueAt(i, 1) +" this User??","UnLock User",JOptionPane.YES_NO_OPTION) == 0){
+							User user = new User();
+							user.setId_user(Integer.parseInt(tblUserlock.getValueAt(i, 0).toString()));
+							user.setStatus(tblUserlock.getValueAt(i, 2).toString());
+							try{
+								userservice.unlockUser(user);
+								
+							}catch (Exception ex) {
+								ex.printStackTrace();
+								JOptionPane.showMessageDialog(null, "error");
+							}
+						}
+					}
+				}
+			});
 		}
+		
 		return btnUnlock;
 	}
 
