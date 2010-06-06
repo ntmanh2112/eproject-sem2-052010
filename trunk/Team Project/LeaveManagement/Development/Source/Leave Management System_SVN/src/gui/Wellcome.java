@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
 import java.awt.Point;
+import java.awt.Font;
 
 public class Wellcome extends JFrame {
 
@@ -23,7 +24,6 @@ public class Wellcome extends JFrame {
 	private JMenuItem mnHelpcontent = null;
 	private JMenuItem mnAbout = null;
 	private JLabel lbBackground = null;
-
 	/**
 	 * This is the default constructor
 	 */
@@ -38,7 +38,7 @@ public class Wellcome extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(424, 333);
+		this.setSize(419, 342);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("JFrame");
@@ -53,9 +53,9 @@ public class Wellcome extends JFrame {
 		if (jContentPane == null) {
 			lbBackground = new JLabel();
 			lbBackground.setText("");
-			lbBackground.setSize(new Dimension(414, 281));
+			lbBackground.setSize(new Dimension(413, 288));
 			lbBackground.setIcon(new ImageIcon(getClass().getResource("/image/wellcome.jpg")));
-			lbBackground.setLocation(new Point(1, -1));
+			lbBackground.setLocation(new Point(-9, -2));
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(lbBackground, null);

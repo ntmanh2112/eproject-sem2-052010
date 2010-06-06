@@ -29,6 +29,7 @@ import model.User;
 import business.LeaveappService;
 import business.UserService;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 public class MDControlPanel extends JFrame {
 
@@ -83,7 +84,6 @@ public class MDControlPanel extends JFrame {
 	private JMenuItem mniSignout = null;
 	private JMenuItem mniAdduser = null;
 	private JMenuItem mniUnlockuser = null;
-	private JToolBar jJToolBarBar = null;
 	private JButton btnApprove = null;
 	private JButton btnReject = null;
 	private JButton btnFinish = null;
@@ -106,19 +106,16 @@ public class MDControlPanel extends JFrame {
 	private JTable tblLeaveappReject = null;
 	private JScrollPane jScrollPane3 = null;
 	private JTable tblLeaveappFinish = null;
-	private JToolBar jToolBar = null;
 	private JButton btnViewBusinessEdit = null;
 	private JButton btnViewBusinessLock = null;
 	private JPanel pnTableBusinessManager = null;
 	private JScrollPane jScrollPane4 = null;
 	private JTable tblBusinessManager = null;
-	private JToolBar jtbManager = null;
 	private JPanel pnManager = null;
 	private JButton btnViewManagerEdit = null;
 	private JButton btnViewManagerLock = null;
 	private JScrollPane jScrollPane5 = null;
 	private JTable tblManager = null;
-	private JToolBar jtbEngineer = null;
 	private JPanel pnEngineer = null;
 	private JButton btnViewEngineerEdit = null;
 	private JButton btnViewEngineerLock = null;
@@ -136,7 +133,6 @@ public class MDControlPanel extends JFrame {
 	private String[][]data = null;
 	private String[] column = {"ID","UserName","Status","Position","FullName","Birthday","Address","Gender","Phone","Email"};
 	private JPanel pnUserlock = null;
-	private JToolBar jtbUserlock = null;
 	private JPanel pnTableUserlock = null;
 	private JScrollPane jScrollPane7 = null;
 	private JTable tblUserlock = null;
@@ -154,6 +150,13 @@ public class MDControlPanel extends JFrame {
 	private JMenuItem mnViewReport = null;
 	private JMenuItem mnViewUserManager = null;
 	private JMenuItem mnViewHistory = null;
+	private JTextField txtTotaldaycanleave = null;
+	private JTextField txtTotaldaycannotleave = null;
+	private JLabel lbHistory = null;
+	private JLabel lbDayoff = null;
+	private JPanel pnTableDayoff = null;
+	private JButton btnViewUserunlockRefresh = null;
+	private JButton btnViewEnginerrRefresh = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -567,22 +570,30 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JPanel getJpnHistory() {
 		if (jpnHistory == null) {
+			lbDayoff = new JLabel();
+			lbDayoff.setBounds(new Rectangle(503, 1, 101, 43));
+			lbDayoff.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
+			lbDayoff.setText("Day Off");
+			lbHistory = new JLabel();
+			lbHistory.setBounds(new Rectangle(14, 4, 91, 31));
+			lbHistory.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
+			lbHistory.setText("History");
 			lbTotalnotapproveleave = new JLabel();
 			lbTotalnotapproveleave.setText("Total not approval leave ");
 			lbTotalnotapproveleave.setSize(new Dimension(155, 32));
-			lbTotalnotapproveleave.setLocation(new Point(44, 105));
+			lbTotalnotapproveleave.setLocation(new Point(15, 105));
 			lbDaycannotLeave = new JLabel();
 			lbDaycannotLeave.setText("Total day can not leave");
 			lbDaycannotLeave.setSize(new Dimension(155, 32));
-			lbDaycannotLeave.setLocation(new Point(44, 223));
+			lbDaycannotLeave.setLocation(new Point(15, 223));
 			lbDaycanLeave = new JLabel();
 			lbDaycanLeave.setText("Total day can leave");
 			lbDaycanLeave.setSize(new Dimension(155, 32));
-			lbDaycanLeave.setLocation(new Point(44, 164));
+			lbDaycanLeave.setLocation(new Point(15, 164));
 			lbTotalLeave = new JLabel();
 			lbTotalLeave.setText("Total approval leave ");
 			lbTotalLeave.setSize(new Dimension(155, 32));
-			lbTotalLeave.setLocation(new Point(44, 45));
+			lbTotalLeave.setLocation(new Point(15, 45));
 			jpnHistory = new JPanel();
 			jpnHistory.setLayout(null);
 			jpnHistory.add(lbTotalLeave, null);
@@ -591,6 +602,11 @@ public class MDControlPanel extends JFrame {
 			jpnHistory.add(lbTotalnotapproveleave, null);
 			jpnHistory.add(getTxtTotalApprovalLeave(), null);
 			jpnHistory.add(getTxtTotalNotApproveleave(), null);
+			jpnHistory.add(getTxtTotaldaycanleave(), null);
+			jpnHistory.add(getTxtTotaldaycannotleave(), null);
+			jpnHistory.add(lbHistory, null);
+			jpnHistory.add(lbDayoff, null);
+			jpnHistory.add(getPnTableDayoff(), null);
 		}
 		return jpnHistory;
 	}
@@ -686,8 +702,10 @@ public class MDControlPanel extends JFrame {
 		if (jpnBusinessmanager == null) {
 			jpnBusinessmanager = new JPanel();
 			jpnBusinessmanager.setLayout(null);
-			jpnBusinessmanager.add(getJToolBar(), null);
 			jpnBusinessmanager.add(getPnTableBusinessManager(), null);
+			jpnBusinessmanager.add(getBtnViewBusinessEdit(), null);
+			jpnBusinessmanager.add(getBtnViewBusinessLock(), null);
+			jpnBusinessmanager.add(getBtnRefresh(), null);
 		}
 		return jpnBusinessmanager;
 	}
@@ -701,8 +719,9 @@ public class MDControlPanel extends JFrame {
 		if (jpnManager == null) {
 			jpnManager = new JPanel();
 			jpnManager.setLayout(null);
-			jpnManager.add(getJtbManager(), null);
 			jpnManager.add(getPnManager(), null);
+			jpnManager.add(getBtnViewManagerEdit(), null);
+			jpnManager.add(getBtnViewManagerLock(), null);
 		}
 		return jpnManager;
 	}
@@ -716,8 +735,10 @@ public class MDControlPanel extends JFrame {
 		if (jpnEngineer == null) {
 			jpnEngineer = new JPanel();
 			jpnEngineer.setLayout(null);
-			jpnEngineer.add(getJtbEngineer(), null);
 			jpnEngineer.add(getPnEngineer(), null);
+			jpnEngineer.add(getBtnViewEngineerEdit(), null);
+			jpnEngineer.add(getBtnViewEngineerLock(), null);
+			jpnEngineer.add(getBtnViewEnginerrRefresh(), null);
 		}
 		return jpnEngineer;
 	}
@@ -787,8 +808,10 @@ public class MDControlPanel extends JFrame {
 		if (jpnValid == null) {
 			jpnValid = new JPanel();
 			jpnValid.setLayout(null);
-			jpnValid.add(getJJToolBarBar(), null);
 			jpnValid.add(getPnUser(), null);
+			jpnValid.add(getBtnFinish(), null);
+			jpnValid.add(getBtnReject(), null);
+			jpnValid.add(getBtnApprove(), null);
 		}
 		return jpnValid;
 	}
@@ -968,23 +991,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes jJToolBarBar	
-	 * 	
-	 * @return javax.swing.JToolBar	
-	 */
-	private JToolBar getJJToolBarBar() {
-		if (jJToolBarBar == null) {
-			jJToolBarBar = new JToolBar();
-			jJToolBarBar.setBounds(new Rectangle(-2, 347, 1265, 31));
-			jJToolBarBar.setBackground(new Color(153, 255, 153));
-			jJToolBarBar.add(getBtnApprove());
-			jJToolBarBar.add(getBtnReject());
-			jJToolBarBar.add(getBtnFinish());
-		}
-		return jJToolBarBar;
-	}
-
-	/**
 	 * This method initializes btnApprove	
 	 * 	
 	 * @return javax.swing.JButton	
@@ -993,7 +999,8 @@ public class MDControlPanel extends JFrame {
 		if (btnApprove == null) {
 			btnApprove = new JButton();
 			btnApprove.setText("Approve");
-			btnApprove.setLocation(new Point(16, 1));
+			btnApprove.setLocation(new Point(22, 328));
+			btnApprove.setSize(new Dimension(159, 45));
 			btnApprove.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
 		}
 		return btnApprove;
@@ -1008,6 +1015,8 @@ public class MDControlPanel extends JFrame {
 		if (btnReject == null) {
 			btnReject = new JButton();
 			btnReject.setText("Reject");
+			btnReject.setLocation(new Point(211, 328));
+			btnReject.setSize(new Dimension(159, 45));
 			btnReject.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
 		}
 		return btnReject;
@@ -1022,6 +1031,8 @@ public class MDControlPanel extends JFrame {
 		if (btnFinish == null) {
 			btnFinish = new JButton();
 			btnFinish.setText("Finish");
+			btnFinish.setLocation(new Point(399, 328));
+			btnFinish.setSize(new Dimension(159, 45));
 			btnFinish.setIcon(new ImageIcon(getClass().getResource("/image/info-icon.png")));
 		}
 		return btnFinish;
@@ -1042,7 +1053,7 @@ public class MDControlPanel extends JFrame {
 			gridBagConstraints4.gridx = 0;
 			pnUser = new JPanel();
 			pnUser.setLayout(new GridBagLayout());
-			pnUser.setBounds(new Rectangle(0, -1, 1261, 347));
+			pnUser.setBounds(new Rectangle(0, -1, 1261, 327));
 			pnUser.add(getJScrollPane(), gridBagConstraints4);
 		}
 		return pnUser;
@@ -1311,24 +1322,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes jToolBar	
-	 * 	
-	 * @return javax.swing.JToolBar	
-	 */
-	private JToolBar getJToolBar() {
-		if (jToolBar == null) {
-			jToolBar = new JToolBar();
-			jToolBar.setLocation(new Point(-6, 325));
-			jToolBar.setBackground(new Color(153, 255, 153));
-			jToolBar.setSize(new Dimension(1269, 51));
-			jToolBar.add(getBtnViewBusinessEdit());
-			jToolBar.add(getBtnViewBusinessLock());
-			jToolBar.add(getBtnRefresh());
-		}
-		return jToolBar;
-	}
-
-	/**
 	 * This method initializes btnViewBusinessEdit	
 	 * 	
 	 * @return javax.swing.JButton	
@@ -1337,6 +1330,7 @@ public class MDControlPanel extends JFrame {
 		if (btnViewBusinessEdit == null) {
 			btnViewBusinessEdit = new JButton();
 			btnViewBusinessEdit.setText("Edit User");
+			btnViewBusinessEdit.setBounds(new Rectangle(22, 328, 159, 45));
 			btnViewBusinessEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
 			btnViewBusinessEdit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1367,6 +1361,8 @@ public class MDControlPanel extends JFrame {
 		if (btnViewBusinessLock == null) {
 			btnViewBusinessLock = new JButton();
 			btnViewBusinessLock.setText("Lock User");
+			btnViewBusinessLock.setLocation(new Point(399, 328));
+			btnViewBusinessLock.setSize(new Dimension(159, 45));
 			btnViewBusinessLock.setIcon(new ImageIcon(getClass().getResource("/image/remove-user-icon.png")));
 			btnViewBusinessLock.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1447,23 +1443,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes jtbManager	
-	 * 	
-	 * @return javax.swing.JToolBar	
-	 */
-	private JToolBar getJtbManager() {
-		if (jtbManager == null) {
-			jtbManager = new JToolBar();
-			jtbManager.setLocation(new Point(-4, 325));
-			jtbManager.setBackground(new Color(153, 255, 153));
-			jtbManager.setSize(new Dimension(1269, 51));
-			jtbManager.add(getBtnViewManagerEdit());
-			jtbManager.add(getBtnViewManagerLock());
-		}
-		return jtbManager;
-	}
-
-	/**
 	 * This method initializes pnManager	
 	 * 	
 	 * @return javax.swing.JPanel	
@@ -1494,6 +1473,8 @@ public class MDControlPanel extends JFrame {
 		if (btnViewManagerEdit == null) {
 			btnViewManagerEdit = new JButton();
 			btnViewManagerEdit.setText("Edit User");
+			btnViewManagerEdit.setLocation(new Point(22, 328));
+			btnViewManagerEdit.setSize(new Dimension(159, 45));
 			btnViewManagerEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
 			btnViewManagerEdit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1524,6 +1505,8 @@ public class MDControlPanel extends JFrame {
 		if (btnViewManagerLock == null) {
 			btnViewManagerLock = new JButton();
 			btnViewManagerLock.setText("Lock User");
+			btnViewManagerLock.setSize(new Dimension(159, 45));
+			btnViewManagerLock.setLocation(new Point(211, 328));
 			btnViewManagerLock.setIcon(new ImageIcon(getClass().getResource("/image/remove-user-icon.png")));
 			btnViewManagerLock.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1583,23 +1566,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes jtbEngineer	
-	 * 	
-	 * @return javax.swing.JToolBar	
-	 */
-	private JToolBar getJtbEngineer() {
-		if (jtbEngineer == null) {
-			jtbEngineer = new JToolBar();
-			jtbEngineer.setLocation(new Point(-4, 325));
-			jtbEngineer.setBackground(new Color(153, 255, 153));
-			jtbEngineer.setSize(new Dimension(1269, 51));
-			jtbEngineer.add(getBtnViewEngineerEdit());
-			jtbEngineer.add(getBtnViewEngineerLock());
-		}
-		return jtbEngineer;
-	}
-
-	/**
 	 * This method initializes pnEngineer	
 	 * 	
 	 * @return javax.swing.JPanel	
@@ -1630,6 +1596,8 @@ public class MDControlPanel extends JFrame {
 		if (btnViewEngineerEdit == null) {
 			btnViewEngineerEdit = new JButton();
 			btnViewEngineerEdit.setText("Edit User");
+			btnViewEngineerEdit.setLocation(new Point(22, 328));
+			btnViewEngineerEdit.setSize(new Dimension(159, 45));
 			btnViewEngineerEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
 			btnViewEngineerEdit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1660,6 +1628,8 @@ public class MDControlPanel extends JFrame {
 		if (btnViewEngineerLock == null) {
 			btnViewEngineerLock = new JButton();
 			btnViewEngineerLock.setText("Lock User");
+			btnViewEngineerLock.setLocation(new Point(399, 328));
+			btnViewEngineerLock.setSize(new Dimension(159, 45));
 			btnViewEngineerLock.setIcon(new ImageIcon(getClass().getResource("/image/remove-user-icon.png")));
 			btnViewEngineerLock.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -1759,27 +1729,12 @@ public class MDControlPanel extends JFrame {
 		if (pnUserlock == null) {
 			pnUserlock = new JPanel();
 			pnUserlock.setLayout(null);
-			pnUserlock.add(getJtbUserlock(), null);
 			pnUserlock.add(getPnTableUserlock(), null);
+			pnUserlock.add(getBtnEdit(), null);
+			pnUserlock.add(getBtnUnlock(), null);
+			pnUserlock.add(getBtnViewUserunlockRefresh(), null);
 		}
 		return pnUserlock;
-	}
-
-	/**
-	 * This method initializes jtbUserlock	
-	 * 	
-	 * @return javax.swing.JToolBar	
-	 */
-	private JToolBar getJtbUserlock() {
-		if (jtbUserlock == null) {
-			jtbUserlock = new JToolBar();
-			jtbUserlock.setLocation(new Point(-4, 326));
-			jtbUserlock.setBackground(new Color(102, 255, 204));
-			jtbUserlock.setSize(new Dimension(1269, 51));
-			jtbUserlock.add(getBtnEdit());
-			jtbUserlock.add(getBtnUnlock());
-		}
-		return jtbUserlock;
 	}
 
 	/**
@@ -1837,6 +1792,8 @@ public class MDControlPanel extends JFrame {
 		if (btnUnlock == null) {
 			btnUnlock = new JButton();
 			btnUnlock.setText("Unlock User");
+			btnUnlock.setLocation(new Point(399, 328));
+			btnUnlock.setSize(new Dimension(159, 45));
 			btnUnlock.setIcon(new ImageIcon(getClass().getResource("/image/upload-icon.png")));
 		}
 		return btnUnlock;
@@ -1851,6 +1808,9 @@ public class MDControlPanel extends JFrame {
 		if (btnEdit == null) {
 			btnEdit = new JButton();
 			btnEdit.setText("Edit User");
+			btnEdit.setLocation(new Point(22, 328));
+			btnEdit.setSize(new Dimension(159, 45));
+			btnEdit.setMnemonic(KeyEvent.VK_UNDEFINED);
 			btnEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
 		}
 		return btnEdit;
@@ -1864,7 +1824,9 @@ public class MDControlPanel extends JFrame {
 	private JTextField getTxtTotalApprovalLeave() {
 		if (txtTotalApprovalLeave == null) {
 			txtTotalApprovalLeave = new JTextField();
-			txtTotalApprovalLeave.setBounds(new Rectangle(236, 49, 39, 20));
+			txtTotalApprovalLeave.setLocation(new Point(170, 45));
+			txtTotalApprovalLeave.setEnabled(false);
+			txtTotalApprovalLeave.setSize(new Dimension(51, 32));
 		}
 		return txtTotalApprovalLeave;
 	}
@@ -1877,7 +1839,9 @@ public class MDControlPanel extends JFrame {
 	private JTextField getTxtTotalNotApproveleave() {
 		if (txtTotalNotApproveleave == null) {
 			txtTotalNotApproveleave = new JTextField();
-			txtTotalNotApproveleave.setBounds(new Rectangle(222, 111, 41, 20));
+			txtTotalNotApproveleave.setLocation(new Point(170, 104));
+			txtTotalNotApproveleave.setEnabled(false);
+			txtTotalNotApproveleave.setSize(new Dimension(51, 32));
 		}
 		return txtTotalNotApproveleave;
 	}
@@ -1890,8 +1854,9 @@ public class MDControlPanel extends JFrame {
 		if (btnRefresh == null) {
 			btnRefresh = new JButton();
 			btnRefresh.setText("Refresh");
+			btnRefresh.setLocation(new Point(211, 328));
+			btnRefresh.setSize(new Dimension(159, 45));
 			btnRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
-			btnRefresh.setSize(new Dimension(122, 47));
 		}
 		return btnRefresh;
 	}
@@ -2019,6 +1984,77 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return mnViewHistory;
+	}
+	/**
+	 * This method initializes txtTotaldaycanleave	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtTotaldaycanleave() {
+		if (txtTotaldaycanleave == null) {
+			txtTotaldaycanleave = new JTextField();
+			txtTotaldaycanleave.setLocation(new Point(169, 164));
+			txtTotaldaycanleave.setEnabled(false);
+			txtTotaldaycanleave.setSize(new Dimension(51, 32));
+		}
+		return txtTotaldaycanleave;
+	}
+	/**
+	 * This method initializes txtTotaldaycannotleave	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtTotaldaycannotleave() {
+		if (txtTotaldaycannotleave == null) {
+			txtTotaldaycannotleave = new JTextField();
+			txtTotaldaycannotleave.setLocation(new Point(170, 223));
+			txtTotaldaycannotleave.setEnabled(false);
+			txtTotaldaycannotleave.setSize(new Dimension(51, 32));
+		}
+		return txtTotaldaycannotleave;
+	}
+	/**
+	 * This method initializes pnTableDayoff	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPnTableDayoff() {
+		if (pnTableDayoff == null) {
+			pnTableDayoff = new JPanel();
+			pnTableDayoff.setLayout(new GridBagLayout());
+			pnTableDayoff.setBounds(new Rectangle(503, 43, 763, 144));
+		}
+		return pnTableDayoff;
+	}
+	/**
+	 * This method initializes btnViewUserunlockRefresh	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnViewUserunlockRefresh() {
+		if (btnViewUserunlockRefresh == null) {
+			btnViewUserunlockRefresh = new JButton();
+			btnViewUserunlockRefresh.setText("Refresh");
+			btnViewUserunlockRefresh.setSize(new Dimension(159, 45));
+			btnViewUserunlockRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
+			btnViewUserunlockRefresh.setLocation(new Point(211, 328));
+		}
+		return btnViewUserunlockRefresh;
+	}
+	/**
+	 * This method initializes btnViewEnginerrRefresh	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnViewEnginerrRefresh() {
+		if (btnViewEnginerrRefresh == null) {
+			btnViewEnginerrRefresh = new JButton();
+			btnViewEnginerrRefresh.setText("Refresh");
+			btnViewEnginerrRefresh.setSize(new Dimension(159, 45));
+			btnViewEnginerrRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
+			btnViewEnginerrRefresh.setLocation(new Point(211, 328));
+		}
+		return btnViewEnginerrRefresh;
 	}
 
 }
