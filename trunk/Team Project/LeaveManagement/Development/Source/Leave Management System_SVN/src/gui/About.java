@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 public class About extends JDialog {
 
@@ -22,6 +23,8 @@ public class About extends JDialog {
 	private JLabel jLabel4 = null;
 	private JLabel jLabel5 = null;
 	private JButton btnOk = null;
+	private JLabel lbLogoAptech = null;
+	private JLabel lblogoJava = null;
 	/**
 	 * @param owner
 	 */
@@ -36,7 +39,7 @@ public class About extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(539, 280);
+		this.setSize(383, 280);
 		this.setTitle("About L.M.S");
 		this.setContentPane(getJContentPane());
 	}
@@ -48,33 +51,41 @@ public class About extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lblogoJava = new JLabel();
+			lblogoJava.setBounds(new Rectangle(-1, -4, 150, 162));
+			lblogoJava.setIcon(new ImageIcon(getClass().getResource("/image/java-logo-thumb.png")));
+			lblogoJava.setText("");
+			lbLogoAptech = new JLabel();
+			lbLogoAptech.setBounds(new Rectangle(-1, 156, 169, 87));
+			lbLogoAptech.setIcon(new ImageIcon(getClass().getResource("/image/logo_aptech.png")));
+			lbLogoAptech.setText("");
 			jLabel5 = new JLabel();
-			jLabel5.setText("Support By: Hung Vuong Aptech Center");
-			jLabel5.setSize(new Dimension(299, 26));
+			jLabel5.setText("Support By: Aptech Center");
+			jLabel5.setSize(new Dimension(200, 26));
 			jLabel5.setFont(new Font("Dialog", Font.BOLD, 14));
-			jLabel5.setLocation(new Point(225, 143));
+			jLabel5.setLocation(new Point(167, 157));
 			jLabel4 = new JLabel();
 			jLabel4.setText("Dinh Si Nguyen");
 			jLabel4.setSize(new Dimension(138, 26));
 			jLabel4.setFont(new Font("Dialog", Font.BOLD, 14));
-			jLabel4.setLocation(new Point(360, 114));
+			jLabel4.setLocation(new Point(166, 112));
 			jLabel3 = new JLabel();
 			jLabel3.setFont(new Font("Dialog", Font.BOLD, 14));
-			jLabel3.setLocation(new Point(360, 88));
+			jLabel3.setLocation(new Point(166, 86));
 			jLabel3.setSize(new Dimension(138, 26));
 			jLabel3.setText("Pham Trung Hieu");
 			jLabel2 = new JLabel();
 			jLabel2.setName("B");
 			jLabel2.setFont(new Font("Dialog", Font.BOLD, 14));
-			jLabel2.setLocation(new Point(360, 61));
+			jLabel2.setLocation(new Point(166, 59));
 			jLabel2.setSize(new Dimension(138, 26));
 			jLabel2.setText("Nguyen Dong Ho");
 			jLabel1 = new JLabel();
-			jLabel1.setBounds(new Rectangle(250, 61, 107, 26));
+			jLabel1.setBounds(new Rectangle(149, 34, 107, 26));
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 14));
 			jLabel1.setText("Developed by: ");
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(249, 31, 106, 28));
+			jLabel.setBounds(new Rectangle(150, 4, 106, 28));
 			jLabel.setFont(new Font("Dialog", Font.BOLD, 14));
 			jLabel.setText(" Version 1.0 ");
 			jContentPane = new JPanel();
@@ -86,6 +97,8 @@ public class About extends JDialog {
 			jContentPane.add(jLabel4, null);
 			jContentPane.add(jLabel5, null);
 			jContentPane.add(getBtnOk(), null);
+			jContentPane.add(lbLogoAptech, null);
+			jContentPane.add(lblogoJava, null);
 		}
 		return jContentPane;
 	}
@@ -98,7 +111,7 @@ public class About extends JDialog {
 	private JButton getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new JButton();
-			btnOk.setBounds(new Rectangle(165, 196, 101, 27));
+			btnOk.setBounds(new Rectangle(201, 200, 101, 27));
 			btnOk.setText("Ok");
 			btnOk.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
