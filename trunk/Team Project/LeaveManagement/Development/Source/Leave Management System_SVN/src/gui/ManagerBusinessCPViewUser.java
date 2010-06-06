@@ -39,6 +39,8 @@ public class ManagerBusinessCPViewUser extends JFrame {
 	private JButton btnRefresh = null;
 	private JButton btnExit = null;
 	private JScrollPane jScrollPane = null;
+	private int id = 0;
+	private User user = new User();
 	private JTable tblUser = null;
 	UserService service = new UserService();  //  @jve:decl-index=0:
 	private String[][]data = null;
@@ -378,7 +380,7 @@ public class ManagerBusinessCPViewUser extends JFrame {
 							user.setId_user(Integer.parseInt(tblUser.getValueAt(i, 0).toString()));
 							user.setStatus(tblUser.getValueAt(i, 2).toString());
 							try{
-								service.blockUser(user);
+								service.lockUser(user);
 								if (btnBlock.getText() == "Lock"){
 									btnBlock.setText("Unlock");
 								}else{

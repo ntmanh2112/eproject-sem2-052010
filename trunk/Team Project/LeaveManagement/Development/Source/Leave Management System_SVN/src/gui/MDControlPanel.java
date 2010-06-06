@@ -2,6 +2,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
@@ -15,12 +16,18 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+
+import model.User;
+
+import business.LeaveappService;
+import business.UserService;
 
 public class MDControlPanel extends JFrame {
 
@@ -112,7 +119,6 @@ public class MDControlPanel extends JFrame {
 	private JToolBar jToolBar = null;
 	private JButton btnViewBusinessEdit = null;
 	private JButton btnViewBusinessLock = null;
-	private JButton btnViewBusinessUnlock = null;
 	private JPanel pnTableBusinessManager = null;
 	private JScrollPane jScrollPane4 = null;
 	private JTable tblBusinessManager = null;
@@ -120,14 +126,12 @@ public class MDControlPanel extends JFrame {
 	private JPanel pnManager = null;
 	private JButton btnViewManagerEdit = null;
 	private JButton btnViewManagerLock = null;
-	private JButton btnViewManagerUnlock = null;
 	private JScrollPane jScrollPane5 = null;
 	private JTable tblManager = null;
 	private JToolBar jtbEngineer = null;
 	private JPanel pnEngineer = null;
 	private JButton btnViewEngineerEdit = null;
 	private JButton btnViewEngineerLock = null;
-	private JButton btnViewEngineerUnlock = null;
 	private JScrollPane jScrollPane6 = null;
 	private JTable tblEngineer = null;
 	private JButton btnAddgroup = null;
@@ -135,12 +139,35 @@ public class MDControlPanel extends JFrame {
 	private JLabel lbTotalLeave = null;
 	private JLabel lbDaycanLeave = null;
 	private JLabel lbDaycannotLeave = null;
+	User user = new User();
+	UserService userservice = new UserService();
+	private int id = 0;
+	LeaveappService leaveappservice = new LeaveappService();
+	private String[][]data = null;
+	private String[] column = {"ID","UserName","Status","Position","FullName","Birthday","Address","Gender","Phone","Email"};
+	private JPanel pnUserlock = null;
+	private JToolBar jtbUserlock = null;
+	private JPanel pnTableUserlock = null;
+	private JScrollPane jScrollPane7 = null;
+	private JTable tblUserlock = null;
+	private JButton btnUnlock = null;
+	private JButton btnEdit = null;
+	private JLabel lbTotalnotapproveleave = null;
+	private JTextField txtTotalApprovalLeave = null;
+	private JTextField txtTotalNotApproveleave = null;
 	/**
 	 * This is the default constructor
 	 */
 	public MDControlPanel() {
 		super();
 		initialize();
+	}
+	public MDControlPanel(int id){
+		super();
+		this.id = id;
+		this.user = userservice.loadUser(id);
+		initialize();
+		
 	}
 
 	/**
@@ -302,8 +329,9 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTextField getTxtUsername() {
 		if (txtUsername == null) {
-			txtUsername = new JTextField();
+			txtUsername = new JTextField(user.getUsername());
 			txtUsername.setLocation(new Point(105, 44));
+			txtUsername.setEnabled(false);
 			txtUsername.setSize(new Dimension(200, 23));
 		}
 		return txtUsername;
@@ -316,8 +344,9 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTextField getTxtFullname() {
 		if (txtFullname == null) {
-			txtFullname = new JTextField();
+			txtFullname = new JTextField(user.getFullname());
 			txtFullname.setLocation(new Point(105, 83));
+			txtFullname.setEnabled(false);
 			txtFullname.setSize(new Dimension(200, 23));
 		}
 		return txtFullname;
@@ -332,6 +361,7 @@ public class MDControlPanel extends JFrame {
 		if (txtPosition == null) {
 			txtPosition = new JTextField();
 			txtPosition.setLocation(new Point(105, 120));
+			txtPosition.setEnabled(false);
 			txtPosition.setSize(new Dimension(200, 23));
 		}
 		return txtPosition;
@@ -346,6 +376,7 @@ public class MDControlPanel extends JFrame {
 		if (txtBirthday == null) {
 			txtBirthday = new JTextField();
 			txtBirthday.setLocation(new Point(105, 158));
+			txtBirthday.setEnabled(false);
 			txtBirthday.setSize(new Dimension(200, 23));
 		}
 		return txtBirthday;
@@ -360,6 +391,7 @@ public class MDControlPanel extends JFrame {
 		if (txtPhone == null) {
 			txtPhone = new JTextField();
 			txtPhone.setLocation(new Point(406, 44));
+			txtPhone.setEnabled(false);
 			txtPhone.setSize(new Dimension(200, 23));
 		}
 		return txtPhone;
@@ -374,6 +406,7 @@ public class MDControlPanel extends JFrame {
 		if (txtGender == null) {
 			txtGender = new JTextField();
 			txtGender.setLocation(new Point(406, 83));
+			txtGender.setEnabled(false);
 			txtGender.setSize(new Dimension(200, 23));
 		}
 		return txtGender;
@@ -388,6 +421,7 @@ public class MDControlPanel extends JFrame {
 		if (txtAddress == null) {
 			txtAddress = new JTextField();
 			txtAddress.setLocation(new Point(406, 120));
+			txtAddress.setEnabled(false);
 			txtAddress.setSize(new Dimension(200, 23));
 		}
 		return txtAddress;
@@ -402,6 +436,7 @@ public class MDControlPanel extends JFrame {
 		if (txtEmail == null) {
 			txtEmail = new JTextField();
 			txtEmail.setLocation(new Point(406, 158));
+			txtEmail.setEnabled(false);
 			txtEmail.setSize(new Dimension(200, 23));
 		}
 		return txtEmail;
@@ -419,6 +454,11 @@ public class MDControlPanel extends JFrame {
 			btnAdduser.setLocation(new Point(809, 30));
 			btnAdduser.setSize(new Dimension(151, 40));
 			btnAdduser.setText("Add User");
+			btnAdduser.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Addmember(null).setVisible(true);
+				}
+			});
 		}
 		return btnAdduser;
 	}
@@ -434,6 +474,11 @@ public class MDControlPanel extends JFrame {
 			btnChangepass.setText("Change pass");
 			btnChangepass.setSize(new Dimension(138, 40));
 			btnChangepass.setLocation(new Point(632, 30));
+			btnChangepass.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Changepassword(null).setVisible(true);
+				}
+			});
 		}
 		return btnChangepass;
 	}
@@ -449,6 +494,11 @@ public class MDControlPanel extends JFrame {
 			btnEditProfile.setText("Edit Profile");
 			btnEditProfile.setSize(new Dimension(138, 40));
 			btnEditProfile.setLocation(new Point(632, 90));
+			btnEditProfile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(null).setVisible(true);
+				}
+			});
 		}
 		return btnEditProfile;
 	}
@@ -463,6 +513,11 @@ public class MDControlPanel extends JFrame {
 			btnCreatleaveapp = new JButton();
 			btnCreatleaveapp.setBounds(new Rectangle(632, 150, 138, 40));
 			btnCreatleaveapp.setText("Create Leaveapp");
+			btnCreatleaveapp.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(null).setVisible(true);
+				}
+			});
 		}
 		return btnCreatleaveapp;
 	}
@@ -479,6 +534,11 @@ public class MDControlPanel extends JFrame {
 			btnLogout.setText("Sign Out");
 			btnLogout.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
 			btnLogout.setSize(new Dimension(151, 40));
+			btnLogout.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					MDControlPanel.this.dispose();
+				}
+			});
 		}
 		return btnLogout;
 	}
@@ -527,20 +587,30 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JPanel getJpnHistory() {
 		if (jpnHistory == null) {
+			lbTotalnotapproveleave = new JLabel();
+			lbTotalnotapproveleave.setText("Total not approval leave ");
+			lbTotalnotapproveleave.setSize(new Dimension(155, 32));
+			lbTotalnotapproveleave.setLocation(new Point(44, 105));
 			lbDaycannotLeave = new JLabel();
-			lbDaycannotLeave.setBounds(new Rectangle(52, 276, 148, 39));
-			lbDaycannotLeave.setText("Day can't Leave");
+			lbDaycannotLeave.setText("Total day can not leave");
+			lbDaycannotLeave.setSize(new Dimension(155, 32));
+			lbDaycannotLeave.setLocation(new Point(44, 223));
 			lbDaycanLeave = new JLabel();
-			lbDaycanLeave.setBounds(new Rectangle(61, 204, 128, 33));
-			lbDaycanLeave.setText("Day can Leave");
+			lbDaycanLeave.setText("Total day can leave");
+			lbDaycanLeave.setSize(new Dimension(155, 32));
+			lbDaycanLeave.setLocation(new Point(44, 164));
 			lbTotalLeave = new JLabel();
-			lbTotalLeave.setBounds(new Rectangle(59, 15, 123, 32));
-			lbTotalLeave.setText("Total LeaveApp");
+			lbTotalLeave.setText("Total approval leave ");
+			lbTotalLeave.setSize(new Dimension(155, 32));
+			lbTotalLeave.setLocation(new Point(44, 45));
 			jpnHistory = new JPanel();
 			jpnHistory.setLayout(null);
 			jpnHistory.add(lbTotalLeave, null);
 			jpnHistory.add(lbDaycanLeave, null);
 			jpnHistory.add(lbDaycannotLeave, null);
+			jpnHistory.add(lbTotalnotapproveleave, null);
+			jpnHistory.add(getTxtTotalApprovalLeave(), null);
+			jpnHistory.add(getTxtTotalNotApproveleave(), null);
 		}
 		return jpnHistory;
 	}
@@ -617,6 +687,12 @@ public class MDControlPanel extends JFrame {
 			jtpnUsermanager.addTab("Business Manager", null, getJpnBusinessmanager(), null);
 			jtpnUsermanager.addTab("Manager", null, getJpnManager(), null);
 			jtpnUsermanager.addTab("Engineer", null, getJpnEngineer(), null);
+			jtpnUsermanager.addTab("User Lock", null, getPnUserlock(), null);
+			jtpnUsermanager.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+					System.out.println("mouseClicked()"); // TODO Auto-generated Event stub mouseClicked()
+				}
+			});
 		}
 		return jtpnUsermanager;
 	}
@@ -796,6 +872,11 @@ public class MDControlPanel extends JFrame {
 		if (mniEditprofile == null) {
 			mniEditprofile = new JMenuItem();
 			mniEditprofile.setText("Edit Profile");
+			mniEditprofile.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Editprofile(null).setVisible(true);
+				}
+			});
 		}
 		return mniEditprofile;
 	}
@@ -809,6 +890,11 @@ public class MDControlPanel extends JFrame {
 		if (mniChangepass == null) {
 			mniChangepass = new JMenuItem();
 			mniChangepass.setText("Change Password");
+			mniChangepass.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Changepassword(null).setVisible(true);
+				}
+			});
 		}
 		return mniChangepass;
 	}
@@ -822,6 +908,11 @@ public class MDControlPanel extends JFrame {
 		if (mniCreatleaveapp == null) {
 			mniCreatleaveapp = new JMenuItem();
 			mniCreatleaveapp.setText("Creat Leaveapp");
+			mniCreatleaveapp.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeaveapp(null).setVisible(true);
+				}
+			});
 		}
 		return mniCreatleaveapp;
 	}
@@ -862,6 +953,11 @@ public class MDControlPanel extends JFrame {
 			mniSignout = new JMenuItem();
 			mniSignout.setText("Sign Out");
 			mniSignout.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
+			mniSignout.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					MDControlPanel.this.dispose();
+				}
+			});
 		}
 		return mniSignout;
 	}
@@ -876,6 +972,11 @@ public class MDControlPanel extends JFrame {
 			mniAdduser = new JMenuItem();
 			mniAdduser.setText("Add User");
 			mniAdduser.setIcon(new ImageIcon(getClass().getResource("/image/button-ok-icon.png")));
+			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Addmember(null).setVisible(true);
+				}
+			});
 		}
 		return mniAdduser;
 	}
@@ -1377,7 +1478,6 @@ public class MDControlPanel extends JFrame {
 			jToolBar.setSize(new Dimension(1269, 51));
 			jToolBar.add(getBtnViewBusinessEdit());
 			jToolBar.add(getBtnViewBusinessLock());
-			jToolBar.add(getBtnViewBusinessUnlock());
 		}
 		return jToolBar;
 	}
@@ -1392,6 +1492,22 @@ public class MDControlPanel extends JFrame {
 			btnViewBusinessEdit = new JButton();
 			btnViewBusinessEdit.setText("Edit User");
 			btnViewBusinessEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
+			btnViewBusinessEdit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int count = tblBusinessManager.getSelectedRowCount();
+					int i = tblBusinessManager.getSelectedRow();
+					if (count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one User");
+					}else{
+						int id = Integer.parseInt(tblBusinessManager.getValueAt(i, 0).toString());
+						try{
+							new Editprofile(null,id).setVisible(true);
+						}catch(Exception ex){
+							ex.printStackTrace();
+						}
+					}
+				}
+			});
 		}
 		return btnViewBusinessEdit;
 	}
@@ -1408,20 +1524,6 @@ public class MDControlPanel extends JFrame {
 			btnViewBusinessLock.setIcon(new ImageIcon(getClass().getResource("/image/remove-user-icon.png")));
 		}
 		return btnViewBusinessLock;
-	}
-
-	/**
-	 * This method initializes btnViewBusinessUnlock	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnViewBusinessUnlock() {
-		if (btnViewBusinessUnlock == null) {
-			btnViewBusinessUnlock = new JButton();
-			btnViewBusinessUnlock.setText("Unlock User");
-			btnViewBusinessUnlock.setIcon(new ImageIcon(getClass().getResource("/image/upload-icon.png")));
-		}
-		return btnViewBusinessUnlock;
 	}
 
 	/**
@@ -1465,9 +1567,15 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTable getTblBusinessManager() {
 		if (tblBusinessManager == null) {
-			tblBusinessManager = new JTable();
+			try{
+				data = userservice.selectAllUserBM();
+				tblBusinessManager = new JTable(data, column);
+			}catch(Exception ex){
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error");
+			}
 		}
-		return tblBusinessManager;
+			return tblBusinessManager;
 	}
 
 	/**
@@ -1483,7 +1591,6 @@ public class MDControlPanel extends JFrame {
 			jtbManager.setSize(new Dimension(1269, 51));
 			jtbManager.add(getBtnViewManagerEdit());
 			jtbManager.add(getBtnViewManagerLock());
-			jtbManager.add(getBtnViewManagerUnlock());
 		}
 		return jtbManager;
 	}
@@ -1520,6 +1627,22 @@ public class MDControlPanel extends JFrame {
 			btnViewManagerEdit = new JButton();
 			btnViewManagerEdit.setText("Edit User");
 			btnViewManagerEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
+			btnViewManagerEdit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int count = tblManager.getSelectedRowCount();
+					int i = tblManager.getSelectedRow();
+					if (count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one User");
+					}else{
+						int id = Integer.parseInt(tblManager.getValueAt(i, 0).toString());
+						try{
+							new Editprofile(null,id).setVisible(true);
+						}catch(Exception ex){
+							ex.printStackTrace();
+						}
+					}
+				}
+			});
 		}
 		return btnViewManagerEdit;
 	}
@@ -1536,20 +1659,6 @@ public class MDControlPanel extends JFrame {
 			btnViewManagerLock.setIcon(new ImageIcon(getClass().getResource("/image/remove-user-icon.png")));
 		}
 		return btnViewManagerLock;
-	}
-
-	/**
-	 * This method initializes btnViewManagerUnlock	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnViewManagerUnlock() {
-		if (btnViewManagerUnlock == null) {
-			btnViewManagerUnlock = new JButton();
-			btnViewManagerUnlock.setText("Unlock User");
-			btnViewManagerUnlock.setIcon(new ImageIcon(getClass().getResource("/image/upload-icon.png")));
-		}
-		return btnViewManagerUnlock;
 	}
 
 	/**
@@ -1572,7 +1681,13 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTable getTblManager() {
 		if (tblManager == null) {
-			tblManager = new JTable();
+			try{
+				data = userservice.selectAllUserM();
+				tblManager = new JTable(data, column);
+			}catch(Exception ex){
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "error");
+			}
 		}
 		return tblManager;
 	}
@@ -1590,7 +1705,6 @@ public class MDControlPanel extends JFrame {
 			jtbEngineer.setSize(new Dimension(1269, 51));
 			jtbEngineer.add(getBtnViewEngineerEdit());
 			jtbEngineer.add(getBtnViewEngineerLock());
-			jtbEngineer.add(getBtnViewEngineerUnlock());
 		}
 		return jtbEngineer;
 	}
@@ -1627,6 +1741,22 @@ public class MDControlPanel extends JFrame {
 			btnViewEngineerEdit = new JButton();
 			btnViewEngineerEdit.setText("Edit User");
 			btnViewEngineerEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
+			btnViewEngineerEdit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int count = tblEngineer.getSelectedRowCount();
+					int i = tblEngineer.getSelectedRow();
+					if (count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one User");
+					}else{
+						int id = Integer.parseInt(tblEngineer.getValueAt(i, 0).toString());
+						try{
+							new Editprofile(null,id).setVisible(true);
+						}catch(Exception ex){
+							ex.printStackTrace();
+						}
+					}
+				}
+			});
 		}
 		return btnViewEngineerEdit;
 	}
@@ -1639,24 +1769,10 @@ public class MDControlPanel extends JFrame {
 	private JButton getBtnViewEngineerLock() {
 		if (btnViewEngineerLock == null) {
 			btnViewEngineerLock = new JButton();
-			btnViewEngineerLock.setText("Lock Uer");
+			btnViewEngineerLock.setText("Lock User");
 			btnViewEngineerLock.setIcon(new ImageIcon(getClass().getResource("/image/remove-user-icon.png")));
 		}
 		return btnViewEngineerLock;
-	}
-
-	/**
-	 * This method initializes btnViewEngineerUnlock	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnViewEngineerUnlock() {
-		if (btnViewEngineerUnlock == null) {
-			btnViewEngineerUnlock = new JButton();
-			btnViewEngineerUnlock.setText("Unlock User");
-			btnViewEngineerUnlock.setIcon(new ImageIcon(getClass().getResource("/image/upload-icon.png")));
-		}
-		return btnViewEngineerUnlock;
 	}
 
 	/**
@@ -1679,7 +1795,14 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTable getTblEngineer() {
 		if (tblEngineer == null) {
-			tblEngineer = new JTable();
+			try{
+				data = userservice.selectAllUserE();
+				tblEngineer = new JTable(data, column);
+			}catch(Exception ex){
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "error");
+			}
+			
 		}
 		return tblEngineer;
 	}
@@ -1713,6 +1836,138 @@ public class MDControlPanel extends JFrame {
 			cbxGroup.setSize(new Dimension(151, 40));
 		}
 		return cbxGroup;
+	}
+
+	/**
+	 * This method initializes pnUserlock	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPnUserlock() {
+		if (pnUserlock == null) {
+			pnUserlock = new JPanel();
+			pnUserlock.setLayout(null);
+			pnUserlock.add(getJtbUserlock(), null);
+			pnUserlock.add(getPnTableUserlock(), null);
+		}
+		return pnUserlock;
+	}
+
+	/**
+	 * This method initializes jtbUserlock	
+	 * 	
+	 * @return javax.swing.JToolBar	
+	 */
+	private JToolBar getJtbUserlock() {
+		if (jtbUserlock == null) {
+			jtbUserlock = new JToolBar();
+			jtbUserlock.setLocation(new Point(-4, 326));
+			jtbUserlock.setBackground(new Color(102, 255, 204));
+			jtbUserlock.setSize(new Dimension(1269, 51));
+			jtbUserlock.add(getBtnEdit());
+			jtbUserlock.add(getBtnUnlock());
+		}
+		return jtbUserlock;
+	}
+
+	/**
+	 * This method initializes pnTableUserlock	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPnTableUserlock() {
+		if (pnTableUserlock == null) {
+			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
+			gridBagConstraints11.fill = GridBagConstraints.BOTH;
+			gridBagConstraints11.gridy = 0;
+			gridBagConstraints11.weightx = 1.0;
+			gridBagConstraints11.weighty = 1.0;
+			gridBagConstraints11.gridx = 0;
+			pnTableUserlock = new JPanel();
+			pnTableUserlock.setLayout(new GridBagLayout());
+			pnTableUserlock.setBounds(new Rectangle(-1, 0, 1262, 325));
+			pnTableUserlock.add(getJScrollPane7(), gridBagConstraints11);
+		}
+		return pnTableUserlock;
+	}
+
+	/**
+	 * This method initializes jScrollPane7	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane7() {
+		if (jScrollPane7 == null) {
+			jScrollPane7 = new JScrollPane();
+			jScrollPane7.setViewportView(getTblUserlock());
+		}
+		return jScrollPane7;
+	}
+
+	/**
+	 * This method initializes tblUserlock	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblUserlock() {
+		if (tblUserlock == null) {
+			tblUserlock = new JTable();
+		}
+		return tblUserlock;
+	}
+
+	/**
+	 * This method initializes btnUnlock	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnUnlock() {
+		if (btnUnlock == null) {
+			btnUnlock = new JButton();
+			btnUnlock.setText("Unlock User");
+			btnUnlock.setIcon(new ImageIcon(getClass().getResource("/image/upload-icon.png")));
+		}
+		return btnUnlock;
+	}
+
+	/**
+	 * This method initializes btnEdit	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnEdit() {
+		if (btnEdit == null) {
+			btnEdit = new JButton();
+			btnEdit.setText("Edit User");
+			btnEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
+		}
+		return btnEdit;
+	}
+
+	/**
+	 * This method initializes txtTotalApprovalLeave	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtTotalApprovalLeave() {
+		if (txtTotalApprovalLeave == null) {
+			txtTotalApprovalLeave = new JTextField();
+			txtTotalApprovalLeave.setBounds(new Rectangle(236, 49, 39, 20));
+		}
+		return txtTotalApprovalLeave;
+	}
+
+	/**
+	 * This method initializes txtTotalNotApproveleave	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtTotalNotApproveleave() {
+		if (txtTotalNotApproveleave == null) {
+			txtTotalNotApproveleave = new JTextField();
+			txtTotalNotApproveleave.setBounds(new Rectangle(222, 111, 41, 20));
+		}
+		return txtTotalNotApproveleave;
 	}
 
 }

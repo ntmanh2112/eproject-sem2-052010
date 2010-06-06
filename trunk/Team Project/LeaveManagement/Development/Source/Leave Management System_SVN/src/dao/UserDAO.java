@@ -66,19 +66,23 @@ public class UserDAO {
 		
 	}
 	//LOCK USER
-	public void  blockUser(User user)throws Exception{
+	public void  lockUser(User user)throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
 		String lock = "UPDATE TBl_USER SET STATUS = 0 WHERE ID_USER = "+user.getId_user();
+		if (user.getStatus() == "1"){
+			Statement st = connection.getConn().createStatement();
+			st.executeUpdate(lock);
+		}
+	}
+	//UNLIOCK USER
+	public void  unlockUser(User user)throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
 		String unlock = "UPDATE TBl_USER SET STATUS = 1 WHERE ID_USER = "+user.getId_user();
-		
 		if (user.getStatus() == "0"){
 			Statement st = connection.getConn().createStatement();
 			st.executeUpdate(unlock);
-		}else{
-				Statement st = connection.getConn().createStatement();
-				st.executeUpdate(lock);
-				
 		}
 		
 	}
@@ -246,10 +250,10 @@ public class UserDAO {
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
 	}
-	public ResultSet selectAllUserMD() throws Exception{
+	public ResultSet selectAllUserE() throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		String sql = "SELECT * FROM viewUserMD";
+		String sql = "SELECT * FROM viewUserE";
 		Statement st = connection.getConn().createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
