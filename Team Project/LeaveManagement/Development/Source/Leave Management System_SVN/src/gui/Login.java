@@ -19,6 +19,7 @@ import model.User;
 
 import business.UserService;
 
+import common.Constant;
 import common.Enumeration.loginResult;
 import javax.swing.SwingConstants;
 
@@ -55,7 +56,7 @@ public class Login extends JFrame {
 		this.setSize(310, 293);
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Welcome to Login Form");
 	}
 
 	/**
@@ -162,20 +163,22 @@ public class Login extends JFrame {
 						if(result == loginResult.boss){
 							id = service.selectIdUser(username);
 							new MDControlPanel(id).setVisible(true);
-							Login.this.dispose();
-							
+							//Login.this.dispose();
+							Constant.exit();
 						}else if (result == loginResult.managerbusiness){
 							
 							
-							Login.this.dispose();
+							//Login.this.dispose();
+							Constant.exit();
 						}else if (result == loginResult.manager) {
 							
-							Login.this.dispose();
-							
+							//Login.this.dispose();
+							Constant.exit();
 						}
 						else if (result == loginResult.lock){
 							JOptionPane.showMessageDialog(null, "your permission is not enough for using this program");
-							Login.this.dispose();
+							//Login.this.dispose();
+							
 						}
 						else if (result == loginResult.fail){
 							JOptionPane.showMessageDialog(null, "this username or password is wrong");
