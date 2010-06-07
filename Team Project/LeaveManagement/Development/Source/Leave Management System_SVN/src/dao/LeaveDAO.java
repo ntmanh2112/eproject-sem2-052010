@@ -35,6 +35,7 @@ public class LeaveDAO {
 		public void  rejectLeave(Leaveapp leaveapp)throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
+		
 		String reject =  "UPDATE TBL_LEAVEAPP SET STATUSLEAVE = 'reject' WHERE ID_LEAVEAPP = "+leaveapp.getId_leaveapp();
 		Statement st = connection.getConn().createStatement();
 		st.executeUpdate(reject);

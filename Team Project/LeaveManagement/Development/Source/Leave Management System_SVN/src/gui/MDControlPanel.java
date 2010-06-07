@@ -28,6 +28,7 @@ import model.Leaveapp;
 import model.User;
 import business.LeaveappService;
 import business.UserService;
+import javax.swing.WindowConstants;
 
 public class MDControlPanel extends JFrame {
 
@@ -206,6 +207,8 @@ public class MDControlPanel extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(1280, 720);
+		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		this.setEnabled(true);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Administrator-icon.png")));
 		this.setJMenuBar(getJJMenuBar());
 		this.setResizable(false);
@@ -883,6 +886,16 @@ public class MDControlPanel extends JFrame {
 			jpnValid.add(getBtnReject(), null);
 			jpnValid.add(getBtnApprove(), null);
 			jpnValid.add(getBtnViewValidRefresh(), null);
+			jpnValid.addComponentListener(new java.awt.event.ComponentAdapter() {
+				public void componentShown(java.awt.event.ComponentEvent e) {
+					try{
+						data1 = leaveappservice.selectLeaveappMDvalid();
+						tableModelLeaveapp.setData(data1);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return jpnValid;
 	}
@@ -900,6 +913,16 @@ public class MDControlPanel extends JFrame {
 			jpnApprove.add(getBtnViewApprovefinish(), null);
 			jpnApprove.add(getBtnViewApprovereject(), null);
 			jpnApprove.add(getBtnViewApproveFrefresh(), null);
+			jpnApprove.addComponentListener(new java.awt.event.ComponentAdapter() {
+				public void componentShown(java.awt.event.ComponentEvent e) {
+					try{
+						data1 = leaveappservice.selectLeaveappMDapprove();
+						tableModelLeaveapp.setData(data1);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return jpnApprove;
 	}
@@ -916,6 +939,16 @@ public class MDControlPanel extends JFrame {
 			jpnReject.add(getPnTableViewLeaveappReject(), null);
 			jpnReject.add(getBtnViewLeaveappRejectApprove(), null);
 			jpnReject.add(getBtnViewLeaveappRejectReFresh(), null);
+			jpnReject.addComponentListener(new java.awt.event.ComponentAdapter() {
+				public void componentShown(java.awt.event.ComponentEvent e) {
+					try{
+						data1 = leaveappservice.selectLeaveappMDreject();
+						tableModelLeaveapp.setData(data1);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return jpnReject;
 	}
@@ -936,6 +969,16 @@ public class MDControlPanel extends JFrame {
 			jpnFinish = new JPanel();
 			jpnFinish.setLayout(new GridBagLayout());
 			jpnFinish.add(getJScrollPane3(), gridBagConstraints7);
+			jpnFinish.addComponentListener(new java.awt.event.ComponentAdapter() {
+				public void componentShown(java.awt.event.ComponentEvent e) {
+					try{
+						data1 = leaveappservice.selectLeaveappMDfinish();
+						tableModelLeaveapp.setData(data1);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return jpnFinish;
 	}
@@ -1083,7 +1126,7 @@ public class MDControlPanel extends JFrame {
 					if(count != 1){
 						JOptionPane.showMessageDialog(null, "Please select only one leave app");
 					}else{
-						if (JOptionPane.showConfirmDialog(null, "Are you sure want to "+tblLeaveappValid.getValueAt(i, 2) +" this LeaveApp??","Approve LeaveApp",JOptionPane.YES_NO_OPTION) == 0){
+						if (JOptionPane.showConfirmDialog(null, "Are you sure want to "+tblLeaveappValid.getValueAt(i, 1) +" this LeaveApp??","Approve LeaveApp",JOptionPane.YES_NO_OPTION) == 0){
 							Leaveapp leaveapp = new Leaveapp();
 							leaveapp.setId_leaveapp(Integer.parseInt(tblLeaveappValid.getValueAt(i, 0).toString()));
 							try{
@@ -1112,6 +1155,26 @@ public class MDControlPanel extends JFrame {
 			btnReject.setLocation(new Point(211, 328));
 			btnReject.setSize(new Dimension(159, 45));
 			btnReject.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+			btnReject.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int i = tblLeaveappValid.getSelectedRow();
+					int count = tblLeaveappValid.getSelectedRowCount();
+					if(count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one leave app");
+					}else{
+						if (JOptionPane.showConfirmDialog(null, "Are you sure want to "+tblLeaveappValid.getValueAt(i, 1) +" this LeaveApp??","Reject LeaveApp",JOptionPane.YES_NO_OPTION) == 0){
+							Leaveapp leaveapp = new Leaveapp();
+							leaveapp.setId_leaveapp(Integer.parseInt(tblLeaveappValid.getValueAt(i, 0).toString()));
+							try{
+								leaveappservice.rejectLeaveApp(leaveapp);
+							}catch (Exception ex) {
+								ex.printStackTrace();
+								JOptionPane.showMessageDialog(null, "error");
+							}
+						}
+					}
+				}
+			});
 		}
 		return btnReject;
 	}
@@ -1198,6 +1261,26 @@ public class MDControlPanel extends JFrame {
 			btnViewApprovefinish.setLocation(new Point(211, 328));
 			btnViewApprovefinish.setSize(new Dimension(159, 45));
 			btnViewApprovefinish.setIcon(new ImageIcon(getClass().getResource("/image/info-icon.png")));
+			btnViewApprovefinish.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int i = tblLeaveappApprove.getSelectedRow();
+					int count = tblLeaveappApprove.getSelectedRowCount();
+					if(count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one leave app");
+					}else{
+						if (JOptionPane.showConfirmDialog(null, "Are you sure want to "+tblLeaveappApprove.getValueAt(i, 1) +" this LeaveApp??","Approve LeaveApp",JOptionPane.YES_NO_OPTION) == 0){
+							Leaveapp leaveapp = new Leaveapp();
+							leaveapp.setId_leaveapp(Integer.parseInt(tblLeaveappApprove.getValueAt(i, 0).toString()));
+							try{
+								leaveappservice.finishLeaveApp(leaveapp);
+							}catch (Exception ex) {
+								ex.printStackTrace();
+								JOptionPane.showMessageDialog(null, "error");
+							}
+						}
+					}
+				}
+			});
 		}
 		return btnViewApprovefinish;
 	}
@@ -1245,7 +1328,8 @@ public class MDControlPanel extends JFrame {
 		if (tblLeaveappApprove == null) {
 			try{
 				data1 = leaveappservice.selectLeaveappMDapprove();
-				tblLeaveappApprove = new JTable(data1, column1);
+				tableModelLeaveapp.setData(data1);
+				tblLeaveappApprove = new JTable(tableModelLeaveapp);
 			}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error");
@@ -1266,7 +1350,28 @@ public class MDControlPanel extends JFrame {
 			btnViewLeaveappRejectApprove.setLocation(new Point(22, 328));
 			btnViewLeaveappRejectApprove.setSize(new Dimension(159, 45));
 			btnViewLeaveappRejectApprove.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
-		}
+			btnViewLeaveappRejectApprove
+					.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							int i = tblLeaveappReject.getSelectedRow();
+							int count = tblLeaveappReject.getSelectedRowCount();
+							if(count != 1){
+								JOptionPane.showMessageDialog(null, "Please select only one leave app");
+							}else{
+								if (JOptionPane.showConfirmDialog(null, "Are you sure want to "+tblLeaveappReject.getValueAt(i, 1) +" this LeaveApp??","Approve LeaveApp",JOptionPane.YES_NO_OPTION) == 0){
+									Leaveapp leaveapp = new Leaveapp();
+									leaveapp.setId_leaveapp(Integer.parseInt(tblLeaveappReject.getValueAt(i, 0).toString()));
+									try{
+										leaveappservice.approveLeaveApp(leaveapp);
+									}catch (Exception ex) {
+										ex.printStackTrace();
+										JOptionPane.showMessageDialog(null, "error");
+									}
+								}
+							}
+						}
+					});
+				}
 		return btnViewLeaveappRejectApprove;
 	}
 
@@ -1282,6 +1387,16 @@ public class MDControlPanel extends JFrame {
 			btnViewLeaveappRejectReFresh.setLocation(new Point(211, 328));
 			btnViewLeaveappRejectReFresh.setSize(new Dimension(159, 45));
 			btnViewLeaveappRejectReFresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
+			btnViewLeaveappRejectReFresh.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							try{
+								data1 = leaveappservice.selectLeaveappMDreject();
+								tableModelLeaveapp.setData(data1);
+							}catch (Exception ex) {
+								ex.printStackTrace();
+							}
+						}
+					});
 		}
 		return btnViewLeaveappRejectReFresh;
 	}
@@ -1329,7 +1444,8 @@ public class MDControlPanel extends JFrame {
 		if (tblLeaveappReject == null) {
 			try{
 				data1 = leaveappservice.selectLeaveappMDreject();
-				tblLeaveappReject = new JTable(data1, column1);
+				tableModelLeaveapp.setData(data1);
+				tblLeaveappReject = new JTable(tableModelLeaveapp);
 			}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error");
@@ -1360,7 +1476,8 @@ public class MDControlPanel extends JFrame {
 		if (tblLeaveappFinish == null) {
 			try{
 				data1 = leaveappservice.selectLeaveappMDfinish();
-				tblLeaveappFinish = new JTable(data1, column1);
+				tableModelLeaveapp.setData(data1);
+				tblLeaveappFinish = new JTable(tableModelLeaveapp);
 			}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error");
@@ -2188,7 +2305,18 @@ public class MDControlPanel extends JFrame {
 			btnViewApproveFrefresh.setSize(new Dimension(159, 45));
 			btnViewApproveFrefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
 			btnViewApproveFrefresh.setLocation(new Point(399, 328));
+			btnViewApproveFrefresh.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try{
+						data1 = leaveappservice.selectLeaveappMDapprove();
+						tableModelLeaveapp.setData(data1);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
+		
 		return btnViewApproveFrefresh;
 	}
 	/**
@@ -2207,8 +2335,7 @@ public class MDControlPanel extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try{
 						data1 = leaveappservice.selectLeaveappMDvalid();
-						tableModel = new common.TableModel(data1, column1);
-						tableModel.setData(data1);
+						tableModelLeaveapp.setData(data1);
 					}catch (Exception ex) {
 						ex.printStackTrace();
 					}
