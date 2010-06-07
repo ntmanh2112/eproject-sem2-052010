@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Point;
+import javax.swing.JButton;
 
 public class CreateLeave extends JDialog {
 
@@ -43,6 +44,9 @@ public class CreateLeave extends JDialog {
 	private JTextField txtPhone = null;
 	private JLabel lbAddressMess = null;
 	private JLabel lbPhoneMess = null;
+	private JButton btnSubmit = null;
+	private JButton btnReset = null;
+	private JButton btnExit = null;
 	/**
 	 * @param owner
 	 */
@@ -171,6 +175,9 @@ public class CreateLeave extends JDialog {
 			jContentPane.add(getTxtPhone(), null);
 			jContentPane.add(lbAddressMess, null);
 			jContentPane.add(lbPhoneMess, null);
+			jContentPane.add(getBtnSubmit(), null);
+			jContentPane.add(getBtnReset(), null);
+			jContentPane.add(getBtnExit(), null);
 		}
 		return jContentPane;
 	}
@@ -301,6 +308,54 @@ public class CreateLeave extends JDialog {
 			txtPhone.setSize(new Dimension(161, 25));
 		}
 		return txtPhone;
+	}
+
+	/**
+	 * This method initializes btnSubmit	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnSubmit() {
+		if (btnSubmit == null) {
+			btnSubmit = new JButton();
+			btnSubmit.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
+			btnSubmit.setLocation(new Point(45, 405));
+			btnSubmit.setSize(new Dimension(110, 35));
+			btnSubmit.setText("Submit");
+		}
+		return btnSubmit;
+	}
+
+	/**
+	 * This method initializes btnReset	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnReset() {
+		if (btnReset == null) {
+			btnReset = new JButton();
+			btnReset.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+			btnReset.setLocation(new Point(180, 405));
+			btnReset.setSize(new Dimension(110, 35));
+			btnReset.setText("Reset");
+		}
+		return btnReset;
+	}
+
+	/**
+	 * This method initializes btnExit	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnExit() {
+		if (btnExit == null) {
+			btnExit = new JButton();
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
+			btnExit.setLocation(new Point(317, 405));
+			btnExit.setSize(new Dimension(110, 35));
+			btnExit.setText("Exit");
+		}
+		return btnExit;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

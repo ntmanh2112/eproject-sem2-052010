@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -725,11 +726,6 @@ public class MDControlPanel extends JFrame {
 			jtpnUsermanager.addTab("Manager", null, getJpnManager(), null);
 			jtpnUsermanager.addTab("Engineer", null, getJpnEngineer(), null);
 			jtpnUsermanager.addTab("User Lock", null, getPnUserlock(), null);
-			jtpnUsermanager.addMouseListener(new java.awt.event.MouseAdapter() {
-				public void mouseClicked(java.awt.event.MouseEvent e) {
-					System.out.println("mouseClicked()"); // TODO Auto-generated Event stub mouseClicked()
-				}
-			});
 		}
 		return jtpnUsermanager;
 	}
@@ -749,6 +745,16 @@ public class MDControlPanel extends JFrame {
 			jpnBusinessmanager.add(getBtnRefresh(), null);
 			jpnBusinessmanager.add(getBtnViewBusinessmanagerAddgroup(), null);
 			jpnBusinessmanager.add(getCbxViewBusinessmanager(), null);
+			jpnBusinessmanager.addComponentListener(new java.awt.event.ComponentAdapter() {
+				public void componentShown(java.awt.event.ComponentEvent e) {
+					try{
+						data = userservice.selectAllUserBM();
+						tableModel.setData(data);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return jpnBusinessmanager;
 	}
@@ -768,6 +774,16 @@ public class MDControlPanel extends JFrame {
 			jpnManager.add(getBtnViewManagerRefresh(), null);
 			jpnManager.add(getBtnViewManagerAddgroup(), null);
 			jpnManager.add(getCbxViewManager(), null);
+			jpnManager.addComponentListener(new java.awt.event.ComponentAdapter() {
+				public void componentShown(java.awt.event.ComponentEvent e) {
+					try{
+						data = userservice.selectAllUserM();
+						tableModel.setData(data);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return jpnManager;
 	}
@@ -787,6 +803,16 @@ public class MDControlPanel extends JFrame {
 			jpnEngineer.add(getBtnViewEnginerrRefresh(), null);
 			jpnEngineer.add(getBtnViewEngineerAddgroup(), null);
 			jpnEngineer.add(getCbxViewEngineer(), null);
+			jpnEngineer.addComponentListener(new java.awt.event.ComponentAdapter() {
+				public void componentShown(java.awt.event.ComponentEvent e) {
+					try{
+						data = userservice.selectAllUserE();
+						tableModel.setData(data);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return jpnEngineer;
 	}
@@ -1562,7 +1588,9 @@ public class MDControlPanel extends JFrame {
 		if (tblManager == null) {
 			try{
 				data = userservice.selectAllUserM();
-				tblManager = new JTable(data, column);
+				tableModel.setData(data);
+				tblManager = new JTable(tableModel);
+				
 			}catch(Exception ex){
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "error");
@@ -1685,7 +1713,9 @@ public class MDControlPanel extends JFrame {
 		if (tblEngineer == null) {
 			try{
 				data = userservice.selectAllUserE();
-				tblEngineer = new JTable(data, column);
+				tableModel.setData(data);
+				tblEngineer = new JTable(tableModel);
+				
 			}catch(Exception ex){
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "error");
@@ -1707,6 +1737,11 @@ public class MDControlPanel extends JFrame {
 			btnCreatLeaveAppSystem.setSize(new Dimension(334, 40));
 			btnCreatLeaveAppSystem.setIcon(new ImageIcon(getClass().getResource("/image/Clients-icon.png")));
 			btnCreatLeaveAppSystem.setLocation(new Point(810, 90));
+			btnCreatLeaveAppSystem.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new CreateLeave(null).setVisible(true);
+				}
+			});
 		}
 		return btnCreatLeaveAppSystem;
 	}
@@ -1724,6 +1759,16 @@ public class MDControlPanel extends JFrame {
 			pnUserlock.add(getBtnEdit(), null);
 			pnUserlock.add(getBtnUnlock(), null);
 			pnUserlock.add(getBtnViewUserunlockRefresh(), null);
+			pnUserlock.addComponentListener(new java.awt.event.ComponentAdapter() {
+				public void componentShown(java.awt.event.ComponentEvent e) {
+					 try{
+						 data = userservice.selectAllUserlock();
+						 tableModel.setData(data);
+					 }catch(Exception ex){
+						 ex.printStackTrace();
+					 }
+				}
+			});
 		}
 		return pnUserlock;
 	}
@@ -1771,7 +1816,8 @@ public class MDControlPanel extends JFrame {
 		if (tblUserlock == null) {
 			try{
 					data = userservice.selectAllUserlock();
-					tblUserlock = new JTable(data, column);
+					tableModel.setData(data);
+					tblUserlock = new JTable(tableModel);
 				}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error");
@@ -2073,6 +2119,17 @@ public class MDControlPanel extends JFrame {
 			btnViewUserunlockRefresh.setSize(new Dimension(159, 45));
 			btnViewUserunlockRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
 			btnViewUserunlockRefresh.setLocation(new Point(211, 328));
+			btnViewUserunlockRefresh.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try{
+						data = userservice.selectAllUserlock();
+						tableModel.setData(data);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				
+				}
+			});
 		}
 		return btnViewUserunlockRefresh;
 	}
@@ -2088,6 +2145,17 @@ public class MDControlPanel extends JFrame {
 			btnViewEnginerrRefresh.setSize(new Dimension(159, 45));
 			btnViewEnginerrRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
 			btnViewEnginerrRefresh.setLocation(new Point(211, 328));
+			btnViewEnginerrRefresh.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try{
+						data = userservice.selectAllUserM();
+						tableModel.setData(data);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				
+				}
+			});
 		}
 		return btnViewEnginerrRefresh;
 	}
@@ -2163,6 +2231,17 @@ public class MDControlPanel extends JFrame {
 			btnViewManagerRefresh.setSize(new Dimension(159, 45));
 			btnViewManagerRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
 			btnViewManagerRefresh.setLocation(new Point(211, 328));
+			btnViewManagerRefresh.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try{
+						data = userservice.selectAllUserM();
+						tableModel.setData(data);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				
+				}
+			});
 		}
 		return btnViewManagerRefresh;
 	}
