@@ -15,9 +15,22 @@ import dao.LeaveDAO;
  */
 public class LeaveappService {
 	LeaveDAO dao = new LeaveDAO();
+	
 	public void addLeaveApp(Leaveapp leave_app){
 		dao.addLeaveapp(leave_app);
 		
+	}
+	//APPROVE 
+	public void approveLeaveApp(Leaveapp leaveapp)throws Exception{
+		dao.approveLeave(leaveapp);
+	}
+	//REJECT 
+	public void rejectLeaveApp(Leaveapp leaveapp)throws Exception{
+		dao.rejectLeave(leaveapp);
+	}
+	//FINISH 
+	public void finishLeaveApp(Leaveapp leaveapp)throws Exception{
+		dao.finishLeave(leaveapp);
 	}
 	//LOAD REPORT
 	public String[][] reportMonth()throws Exception{
@@ -50,7 +63,7 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappMDValid();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -63,8 +76,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -81,7 +94,7 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappMDApprove();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -94,8 +107,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -112,7 +125,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappMDReject();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+		
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -125,8 +139,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -143,7 +157,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappMDFinish();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -174,7 +189,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappBMValid();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -187,8 +203,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -205,7 +221,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappBMApprove();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -218,8 +235,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -236,7 +253,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappBMReject();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -249,8 +267,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -267,7 +285,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappBMFinish();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -280,8 +299,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -298,7 +317,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappMValid();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -311,8 +331,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -329,7 +349,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappMApprove();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+		
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -342,8 +363,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -360,7 +381,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappMReject();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -373,8 +395,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
@@ -391,7 +413,8 @@ public class LeaveappService {
 		ResultSet rs = dao.selectAllLeaveappMFinish();
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
-			leaveapp.setId_user(rs.getInt("ID_USER"));
+			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
+			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -404,8 +427,8 @@ public class LeaveappService {
 		String[][] data1 = new String[list.size()][8];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			data1[i][0] = String.valueOf(leaveapp.getId_user());
-			data1[i][1] = leaveapp.getFullname();
+			data1[i][0] = String.valueOf(leaveapp.getId_leaveapp());
+			data1[i][1] = leaveapp.getFullname().toString();
 			data1[i][2] = leaveapp.getDatefrom().toString();
 			data1[i][3] = leaveapp.getDateto().toString();
 			data1[i][4] = leaveapp.getReason();
