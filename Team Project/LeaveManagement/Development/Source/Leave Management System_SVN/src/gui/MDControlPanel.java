@@ -119,8 +119,7 @@ public class MDControlPanel extends JFrame {
 	private JButton btnViewEngineerLock = null;
 	private JScrollPane jScrollPane6 = null;
 	private JTable tblEngineer = null;
-	private JButton btnAddgroup = null;
-	private JComboBox cbxGroup = null;
+	private JButton btnCreatLeaveAppSystem = null;
 	private JLabel lbTotalLeave = null;
 	private JLabel lbDaycanLeave = null;
 	private JLabel lbDaycannotLeave = null;
@@ -297,8 +296,7 @@ public class MDControlPanel extends JFrame {
 			jContentPane.add(getBtnCreatleaveapp(), null);
 			jContentPane.add(getBtnLogout(), null);
 			jContentPane.add(getJPanel(), null);
-			jContentPane.add(getBtnAddgroup(), null);
-			jContentPane.add(getCbxGroup(), null);
+			jContentPane.add(getBtnCreatLeaveAppSystem(), null);
 		}
 		return jContentPane;
 	}
@@ -549,7 +547,7 @@ public class MDControlPanel extends JFrame {
 	private JButton getBtnLogout() {
 		if (btnLogout == null) {
 			btnLogout = new JButton();
-			btnLogout.setLocation(new Point(809, 143));
+			btnLogout.setLocation(new Point(990, 30));
 			btnLogout.setText("Sign Out");
 			btnLogout.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
 			btnLogout.setSize(new Dimension(151, 40));
@@ -1698,34 +1696,19 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes btnAddgroup	
+	 * This method initializes btnCreatLeaveAppSystem	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getBtnAddgroup() {
-		if (btnAddgroup == null) {
-			btnAddgroup = new JButton();
-			btnAddgroup.setText("Add Group");
-			btnAddgroup.setSize(new Dimension(151, 40));
-			btnAddgroup.setIcon(new ImageIcon(getClass().getResource("/image/Clients-icon.png")));
-			btnAddgroup.setLocation(new Point(809, 90));
+	private JButton getBtnCreatLeaveAppSystem() {
+		if (btnCreatLeaveAppSystem == null) {
+			btnCreatLeaveAppSystem = new JButton();
+			btnCreatLeaveAppSystem.setText("Create LeaveApp System");
+			btnCreatLeaveAppSystem.setSize(new Dimension(334, 40));
+			btnCreatLeaveAppSystem.setIcon(new ImageIcon(getClass().getResource("/image/Clients-icon.png")));
+			btnCreatLeaveAppSystem.setLocation(new Point(810, 90));
 		}
-		return btnAddgroup;
-	}
-
-	/**
-	 * This method initializes cbxGroup	
-	 * 	
-	 * @return javax.swing.JComboBox	
-	 */
-	private JComboBox getCbxGroup() {
-		if (cbxGroup == null) {
-			String data[] = {"","Engineer","Manager","Business Manager"};
-			cbxGroup = new JComboBox(data);
-			cbxGroup.setLocation(new Point(975, 90));
-			cbxGroup.setSize(new Dimension(151, 40));
-		}
-		return cbxGroup;
+		return btnCreatLeaveAppSystem;
 	}
 
 	/**
