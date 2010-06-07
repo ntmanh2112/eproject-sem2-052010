@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -428,14 +429,7 @@ public class CreateLeaveapp extends JDialog {
 			cbxYear = new JComboBox();
 			cbxYear.setSize(new Dimension(69, 20));
 			cbxYear.setLocation(new Point(179, 101));
-			for(int i=2010;i<2021;i++){
-				cbxYear.addItem(i);
-			}
-
-			for(int i = 2010 ;i< 2020;i++){
-				cbxYear.addItem(i);
-			}
-
+			cbxYear.addItem(Calendar.getInstance().get(Calendar.YEAR));
 		}
 		return cbxYear;
 	}
@@ -451,10 +445,7 @@ public class CreateLeaveapp extends JDialog {
 			cbxMonth.setSize(new Dimension(45, 20));
 			cbxMonth.setPreferredSize(new Dimension(31, 25));
 			cbxMonth.setLocation(new Point(314, 101));
-			for(int i=1;i<13;i++){
-				cbxMonth.addItem(i);
-			}
-			for(int i = 1 ;i< 13;i++){
+			for(int i = Calendar.getInstance().get(Calendar.MONTH) ;i< 13;i++){
 				cbxMonth.addItem(i);
 			}
 		}
@@ -494,9 +485,7 @@ public class CreateLeaveapp extends JDialog {
 			cbxYear1 = new JComboBox();
 			cbxYear1.setSize(new Dimension(69, 20));
 			cbxYear1.setLocation(new Point(179, 176));
-			for(int i = 2010 ;i< 2020;i++){
-				cbxYear1.addItem(i);
-			}
+			cbxYear1.addItem(Calendar.getInstance().get(Calendar.YEAR));
 		}
 		return cbxYear1;
 	}
@@ -511,7 +500,7 @@ public class CreateLeaveapp extends JDialog {
 			cbxMonth1 = new JComboBox();
 			cbxMonth1.setSize(new Dimension(45, 20));
 			cbxMonth1.setLocation(new Point(314, 176));
-			for(int i = 1 ;i< 13;i++){
+			for(int i = Calendar.getInstance().get(Calendar.MONTH) ;i< 13;i++){
 				cbxMonth1.addItem(i);
 			}
 		}

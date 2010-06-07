@@ -7,10 +7,10 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 import model.Leaveapp;
+
 import common.ConnectionDB;
 
 
@@ -22,13 +22,11 @@ import common.ConnectionDB;
 public class LeaveDAO {
 ////VIEW REPORT MONTH 
 	public ResultSet reportMonth() throws Exception{
-		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		 ConnectionDB connection = new ConnectionDB();
 		 connection.connect();
-		 int year = now.getYear() + 1900;
-		 int month = now.getMonth() + 1;
-		 String sql = "SELECT TBL_USER.USERNAME,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON FROM TBL_USER INNER JOIN TBL_LEAVEAPP ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE  DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)= '"+ year +"' AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM)= '"+ month+ "' ORDER BY DATEFROM" ;
+		 int year = Calendar.getInstance().get(Calendar.YEAR);
+		 int month = Calendar.getInstance().get(Calendar.MONTH);
+		 String sql = "SELECT TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON FROM TBL_USER INNER JOIN TBL_LEAVEAPP ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE  DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)= '"+ year +"' AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM)= '"+ month+ "' ORDER BY DATEFROM" ;
 		 Statement st = connection.getConn().createStatement();
 		 ResultSet rs = st.executeQuery(sql);
 		 return rs;
