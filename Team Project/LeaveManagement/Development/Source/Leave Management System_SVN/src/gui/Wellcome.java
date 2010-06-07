@@ -39,7 +39,8 @@ public class Wellcome extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(419, 342);
+		this.setSize(413, 346);
+		this.setResizable(false);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("Welcome to Leave Management System");
@@ -87,6 +88,7 @@ public class Wellcome extends JFrame {
 		if (mnFile == null) {
 			mnFile = new JMenu();
 			mnFile.setText("File");
+			mnFile.setIcon(new ImageIcon(getClass().getResource("/image/config.png")));
 			mnFile.add(getMnLogin());
 			mnFile.add(getMnExit());
 		}
@@ -136,6 +138,7 @@ public class Wellcome extends JFrame {
 		if (mnHelp == null) {
 			mnHelp = new JMenu();
 			mnHelp.setText("Help");
+			mnHelp.setIcon(new ImageIcon(getClass().getResource("/image/FAQ-icon.png")));
 			mnHelp.add(getMnHelpcontent());
 			mnHelp.add(getMnAbout());
 		}

@@ -588,7 +588,7 @@ public class MDControlPanel extends JFrame {
 	private JTabbedPane getJtpnManager() {
 		if (jtpnManager == null) {
 			jtpnManager = new JTabbedPane();
-			jtpnManager.addTab("History", null, getJpnHistory(), null);
+			jtpnManager.addTab("History", new ImageIcon(getClass().getResource("/image/data-server-icon.png")), getJpnHistory(), null);
 			jtpnManager.addTab("Manager LeaveApp", new ImageIcon(getClass().getResource("/image/Attach-icon.png")), getJpnLeaveapp(), null);
 			jtpnManager.addTab("Report", new ImageIcon(getClass().getResource("/image/Document-icon.png")), getJpnReport(), null);
 			jtpnManager.addTab("User Manager", new ImageIcon(getClass().getResource("/image/user-group-icon.png")), getJpmUsermanager(), "");
