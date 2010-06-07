@@ -23,6 +23,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.TableModel;
 
 import model.Leaveapp;
 import model.User;
@@ -132,7 +134,7 @@ public class MDControlPanel extends JFrame {
 	private String[][]data1 = null;
 	private String[] column1 = {"ID","FullName","DateFrom","Dateto","Reason","Status","Address","Phone"};
 	private String[][]datarp = null;
-	private String[] columnrp = {"UserName","FullName","DateFrom","Dateto","Reason","Status","Address"};
+	private String[] columnrp = {"FullName","DateFrom","Dateto","Reason"};
 	private JPanel pnUserlock = null;
 	private JPanel pnTableUserlock = null;
 	private JScrollPane jScrollPane7 = null;
@@ -186,6 +188,7 @@ public class MDControlPanel extends JFrame {
 	private JPanel pnTableReportMonth = null;
 	private JScrollPane jScrollPane8 = null;
 	private JTable tblReportMonth = null;
+	private common.TableModel tableModel = new common.TableModel(data, column);
 	/**
 	 * This is the default constructor
 	 */
@@ -308,6 +311,10 @@ public class MDControlPanel extends JFrame {
 	private JMenuBar getJJMenuBar() {
 		if (jJMenuBar == null) {
 			jJMenuBar = new JMenuBar();
+			jJMenuBar.setBackground(Color.lightGray);
+			jJMenuBar.setBorder(null);
+			jJMenuBar.setAutoscrolls(true);
+			jJMenuBar.setBackground(new Color(204, 204, 204));
 			jJMenuBar.add(getMnUser());
 			jJMenuBar.add(getMnModeration());
 			jJMenuBar.add(getMnView());
@@ -925,7 +932,7 @@ public class MDControlPanel extends JFrame {
 			mniEditprofile.setText("Edit Profile");
 			mniEditprofile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Editprofile(null).setVisible(true);
+					new Editprofile(null,id).setVisible(true);
 				}
 			});
 		}
@@ -1433,7 +1440,8 @@ public class MDControlPanel extends JFrame {
 		if (tblBusinessManager == null) {
 			try{
 				data = userservice.selectAllUserBM();
-				tblBusinessManager = new JTable(data, column);
+				tableModel.setData(data);
+				tblBusinessManager = new JTable(tableModel);
 			}catch(Exception ex){
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error");
@@ -1887,6 +1895,17 @@ public class MDControlPanel extends JFrame {
 			btnRefresh.setLocation(new Point(211, 328));
 			btnRefresh.setSize(new Dimension(159, 45));
 			btnRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
+			btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try{
+						data = userservice.selectAllUserBM();
+						tableModel.setData(data);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				
+				}
+			});
 		}
 		return btnRefresh;
 	}
@@ -1899,6 +1918,7 @@ public class MDControlPanel extends JFrame {
 		if (mnModeration == null) {
 			mnModeration = new JMenu();
 			mnModeration.setText("Moderation");
+			mnModeration.setIcon(new ImageIcon(getClass().getResource("/image/config.png")));
 			mnModeration.add(getMniAdduser());
 			mnModeration.add(getMniUnlockuser());
 		}
@@ -1913,6 +1933,7 @@ public class MDControlPanel extends JFrame {
 		if (mnView == null) {
 			mnView = new JMenu();
 			mnView.setText("View");
+			mnView.setIcon(new ImageIcon(getClass().getResource("/image/zoom.png")));
 			mnView.add(getMniViewManagerleaveapp());
 			mnView.add(getMnViewReport());
 			mnView.add(getMnViewUserManager());
@@ -1929,6 +1950,7 @@ public class MDControlPanel extends JFrame {
 		if (mnHelp == null) {
 			mnHelp = new JMenu();
 			mnHelp.setText("Help");
+			mnHelp.setIcon(new ImageIcon(getClass().getResource("/image/FAQ-icon.png")));
 			mnHelp.add(getMnHelpcontent());
 			mnHelp.add(getMnAbout());
 		}
