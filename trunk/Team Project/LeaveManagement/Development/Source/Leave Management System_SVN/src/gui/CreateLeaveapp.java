@@ -23,6 +23,7 @@ import model.User;
 import business.LeaveappService;
 import business.Method;
 import business.UserService;
+import javax.swing.ImageIcon;
 
 
 
@@ -47,13 +48,10 @@ public class CreateLeaveapp extends JDialog {
 	private JButton btnExit = null;
 	private JLabel lbDateto = null;
 	private JLabel lbYear = null;
-	private JComboBox cbxYear = null;
 	private JLabel lbDay = null;
 	private JLabel lbMonth = null;
-	private JComboBox cbxMonth = null;
 	private JComboBox cbxDay = null;
 	private JLabel lbYear1 = null;
-	private JComboBox cbxYear1 = null;
 	private JLabel lbMonth1 = null;
 	private JComboBox cbxMonth1 = null;
 	private JLabel lbDay1 = null;
@@ -67,6 +65,10 @@ public class CreateLeaveapp extends JDialog {
 	private JLabel lbReasonMess = null;
 	private JLabel lbAddressMess = null;
 	private JLabel lbPhoneMess = null;
+	private JLabel lbIcon = null;
+	private JTextField txtDateFromYear = null;
+	private JTextField txtDateFromMonth = null;
+	private JTextField txtDateToYear = null;
 	/**
 	 * @param owner
 	 */
@@ -98,6 +100,10 @@ public class CreateLeaveapp extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbIcon = new JLabel();
+			lbIcon.setBounds(new Rectangle(126, 1, 46, 52));
+			lbIcon.setIcon(new ImageIcon(getClass().getResource("/image/Document-Write-icon.png")));
+			lbIcon.setText("");
 			lbPhoneMess = new JLabel();
 			lbPhoneMess.setText("");
 			lbPhoneMess.setSize(new Dimension(307, 20));
@@ -177,13 +183,13 @@ public class CreateLeaveapp extends JDialog {
 			jLabel2.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel2.setLocation(new Point(13, 101));
 			jLabel1 = new JLabel();
-			jLabel1.setText("ID_USERNAME");
+			jLabel1.setText("ID_USER");
 			jLabel1.setSize(new Dimension(135, 20));
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel1.setLocation(new Point(15, 56));
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(172, 3, 111, 37));
-			jLabel.setFont(new Font("Dialog", Font.BOLD, 24));
+			jLabel.setBounds(new Rectangle(172, 3, 180, 50));
+			jLabel.setFont(new Font("Dialog", Font.BOLD, 36));
 			jLabel.setText("Leav app");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
@@ -201,13 +207,10 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(getBtnExit(), null);
 			jContentPane.add(lbDateto, null);
 			jContentPane.add(lbYear, null);
-			jContentPane.add(getCbxYear(), null);
 			jContentPane.add(lbDay, null);
 			jContentPane.add(lbMonth, null);
-			jContentPane.add(getCbxMonth(), null);
 			jContentPane.add(getCbxDay(), null);
 			jContentPane.add(lbYear1, null);
-			jContentPane.add(getCbxYear1(), null);
 			jContentPane.add(lbMonth1, null);
 			jContentPane.add(getCbxMonth1(), null);
 			jContentPane.add(lbDay1, null);
@@ -218,6 +221,10 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(lbReasonMess, null);
 			jContentPane.add(lbAddressMess, null);
 			jContentPane.add(lbPhoneMess, null);
+			jContentPane.add(lbIcon, null);
+			jContentPane.add(getTxtDateFromYear(), null);
+			jContentPane.add(getTxtDateFromMonth(), null);
+			jContentPane.add(getTxtDateToYear(), null);
 		}
 		return jContentPane;
 	}
@@ -334,10 +341,8 @@ public class CreateLeaveapp extends JDialog {
 							txtPhone.getText().isEmpty()||
 							cbxDay.getSelectedItem().toString().isEmpty()||
 							cbxDay1.getSelectedItem().toString().isEmpty()||
-							cbxMonth.getSelectedItem().toString().isEmpty()||
-							cbxMonth1.getSelectedItem().toString().isEmpty()||
-							cbxYear.getSelectedItem().toString().isEmpty()||
-							cbxYear1.getSelectedItem().toString().isEmpty()
+							cbxMonth1.getSelectedItem().toString().isEmpty()
+							
 						){
 						JOptionPane.showMessageDialog(null, "Please input full of column!!");
 					}else{
@@ -345,9 +350,9 @@ public class CreateLeaveapp extends JDialog {
 						leave_app.setId_user(id);
 						SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 						try{
-							java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
+							java.util.Date date = format.parse(txtDateFromYear.getText().toString()+"/"+txtDateFromMonth.getText().toString()+"/"+cbxDay.getSelectedItem().toString());
 							Date datefrom = new Date(date.getTime());
-							java.util.Date date1 = format.parse(cbxYear1.getSelectedItem().toString()+"/"+cbxMonth1.getSelectedItem().toString()+"/"+cbxDay1.getSelectedItem().toString());
+							java.util.Date date1 = format.parse(txtDateToYear.toString()+"/"+cbxMonth1.getSelectedItem().toString()+"/"+cbxDay1.getSelectedItem().toString());
 							Date dateto = new Date(date1.getTime());
 							leave_app.setDatefrom(datefrom);
 							leave_app.setDateto(dateto);
@@ -420,39 +425,6 @@ public class CreateLeaveapp extends JDialog {
 	}
 	
 	/**
-	 * This method initializes cbxYear	
-	 * 	
-	 * @return javax.swing.JComboBox	
-	 */
-	private JComboBox getCbxYear() {
-		if (cbxYear == null) {
-			cbxYear = new JComboBox();
-			cbxYear.setSize(new Dimension(69, 20));
-			cbxYear.setLocation(new Point(179, 101));
-			cbxYear.addItem(Calendar.getInstance().get(Calendar.YEAR));
-		}
-		return cbxYear;
-	}
-
-	/**
-	 * This method initializes cbxMonth	
-	 * 	
-	 * @return javax.swing.JComboBox	
-	 */
-	private JComboBox getCbxMonth() {
-		if (cbxMonth == null) {
-			cbxMonth = new JComboBox();
-			cbxMonth.setSize(new Dimension(45, 20));
-			cbxMonth.setPreferredSize(new Dimension(31, 25));
-			cbxMonth.setLocation(new Point(314, 101));
-			for(int i = Calendar.getInstance().get(Calendar.MONTH) ;i< 13;i++){
-				cbxMonth.addItem(i);
-			}
-		}
-		return cbxMonth;
-	}
-
-	/**
 	 * This method initializes cbxDay	
 	 * 	
 	 * @return javax.swing.JComboBox	
@@ -462,7 +434,7 @@ public class CreateLeaveapp extends JDialog {
 			cbxDay = new JComboBox();
 			cbxDay.setLocation(new Point(399, 101));
 			cbxDay.setSize(new Dimension(45, 20));
-			for(int i=1;i<32;i++){
+			for(int i=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);i<32;i++){
 				cbxDay.addItem(i);
 			}
 			for(int i = 1 ;i< 32;i++){
@@ -471,23 +443,53 @@ public class CreateLeaveapp extends JDialog {
 		}
 		return cbxDay;
 	}
+	/**
+	 * This method initializes txtDateFromYear	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtDateFromYear() {
+		if (txtDateFromYear == null) {
+			txtDateFromYear = new JTextField();
+			txtDateFromYear.setText(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+			txtDateFromYear.setLocation(new Point(179, 101));
+			txtDateFromYear.setEnabled(false);
+			txtDateFromYear.setSize(new Dimension(69, 20));
+		}
+		return txtDateFromYear;
+	}
+	/**
+	 * This method initializes txtDateFromMonth	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtDateFromMonth() {
+		if (txtDateFromMonth == null) {
+			txtDateFromMonth = new JTextField();
+			txtDateFromMonth.setText(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)));
+			txtDateFromMonth.setLocation(new Point(310, 101));
+			txtDateFromMonth.setEnabled(false);
+			txtDateFromMonth.setSize(new Dimension(45, 20));
+		}
+		return txtDateFromMonth;
+	}
+	/**
+	 * This method initializes txtDateToYear	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtDateToYear() {
+		if (txtDateToYear == null) {
+			txtDateToYear = new JTextField();
+			txtDateToYear.setText(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+			txtDateToYear.setLocation(new Point(179, 176));
+			txtDateToYear.setEnabled(false);
+			txtDateToYear.setSize(new Dimension(69, 20));
+		}
+		return txtDateToYear;
+	}
 	public static void main(String [] args){
 		new CreateLeaveapp(null).setVisible(true);
-	}
-
-	/**
-	 * This method initializes cbxYear1	
-	 * 	
-	 * @return javax.swing.JComboBox	
-	 */
-	private JComboBox getCbxYear1() {
-		if (cbxYear1 == null) {
-			cbxYear1 = new JComboBox();
-			cbxYear1.setSize(new Dimension(69, 20));
-			cbxYear1.setLocation(new Point(179, 176));
-			cbxYear1.addItem(Calendar.getInstance().get(Calendar.YEAR));
-		}
-		return cbxYear1;
 	}
 
 	/**
@@ -517,7 +519,7 @@ public class CreateLeaveapp extends JDialog {
 			cbxDay1 = new JComboBox();
 			cbxDay1.setLocation(new Point(399, 176));
 			cbxDay1.setSize(new Dimension(45, 20));
-			for(int i = 1 ;i< 32;i++){
+			for(int i=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);i<32;i++){
 				cbxDay1.addItem(i);
 			}
 		}
