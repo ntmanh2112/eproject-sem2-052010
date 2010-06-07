@@ -2,16 +2,16 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -23,17 +23,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.TableModel;
 
 import model.Leaveapp;
 import model.User;
-
 import business.LeaveappService;
 import business.UserService;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 
 public class MDControlPanel extends JFrame {
 
@@ -126,13 +120,13 @@ public class MDControlPanel extends JFrame {
 	private JLabel lbDaycannotLeave = null;
 	User user = new User();
 	UserService userservice = new UserService();  //  @jve:decl-index=0:
-	Leaveapp leaveapp = new Leaveapp();
+	Leaveapp leaveapp = new Leaveapp();  //  @jve:decl-index=0:
 	private int id = 0;
 	LeaveappService leaveappservice = new LeaveappService();  //  @jve:decl-index=0:
 	private String[][]data = null;
 	private String[] column = {"ID","UserName","Status","Position","FullName","Birthday","Address","Gender","Phone","Email"};
 	private String[][]data1 = null;
-	private String[] column1 = {"ID","FullName","DateFrom","Dateto","Reason","Status","Address","Phone"};
+	private String[] column1 = {"ID_LEAVE","FullName","DateFrom","Dateto","Reason","Status","Address","Phone"};
 	private String[][]datarp = null;
 	private String[] columnrp = {"FullName","DateFrom","Dateto","Reason"};
 	private JPanel pnUserlock = null;
@@ -189,6 +183,7 @@ public class MDControlPanel extends JFrame {
 	private JScrollPane jScrollPane8 = null;
 	private JTable tblReportMonth = null;
 	private common.TableModel tableModel = new common.TableModel(data, column);
+	private common.TableModel tableModelLeaveapp = new common.TableModel(data1, column1);
 	/**
 	 * This is the default constructor
 	 */
@@ -1081,6 +1076,26 @@ public class MDControlPanel extends JFrame {
 			btnApprove.setLocation(new Point(22, 328));
 			btnApprove.setSize(new Dimension(159, 45));
 			btnApprove.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
+			btnApprove.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int i = tblLeaveappValid.getSelectedRow();
+					int count = tblLeaveappValid.getSelectedRowCount();
+					if(count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one leave app");
+					}else{
+						if (JOptionPane.showConfirmDialog(null, "Are you sure want to "+tblLeaveappValid.getValueAt(i, 2) +" this LeaveApp??","Approve LeaveApp",JOptionPane.YES_NO_OPTION) == 0){
+							Leaveapp leaveapp = new Leaveapp();
+							leaveapp.setId_leaveapp(Integer.parseInt(tblLeaveappValid.getValueAt(i, 0).toString()));
+							try{
+								leaveappservice.approveLeaveApp(leaveapp);
+							}catch (Exception ex) {
+								ex.printStackTrace();
+								JOptionPane.showMessageDialog(null, "error");
+							}
+						}
+					}
+				}
+			});
 		}
 		return btnApprove;
 	}
@@ -1143,8 +1158,10 @@ public class MDControlPanel extends JFrame {
 	private JTable getTblLeaveappValid() {
 		if (tblLeaveappValid == null) {
 			try{
+				
 				data1 = leaveappservice.selectLeaveappMDvalid();
-				tblLeaveappValid = new JTable(data1, column1);
+				tableModelLeaveapp.setData(data1);
+				tblLeaveappValid = new JTable(tableModelLeaveapp);
 			}catch(Exception ex){
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error");
@@ -2186,6 +2203,17 @@ public class MDControlPanel extends JFrame {
 			btnViewValidRefresh.setLocation(new Point(399, 328));
 			btnViewValidRefresh.setSize(new Dimension(159, 45));
 			btnViewValidRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon_2.png")));
+			btnViewValidRefresh.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try{
+						data1 = leaveappservice.selectLeaveappMDvalid();
+						tableModel = new common.TableModel(data1, column1);
+						tableModel.setData(data1);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 		}
 		return btnViewValidRefresh;
 	}
