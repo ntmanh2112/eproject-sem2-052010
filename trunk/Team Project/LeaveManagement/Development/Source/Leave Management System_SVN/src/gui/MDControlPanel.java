@@ -215,7 +215,7 @@ public class MDControlPanel extends JFrame {
 		this.setJMenuBar(getJJMenuBar());
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Welcome to Managing Director");
 		this.setVisible(false);
 	}
 

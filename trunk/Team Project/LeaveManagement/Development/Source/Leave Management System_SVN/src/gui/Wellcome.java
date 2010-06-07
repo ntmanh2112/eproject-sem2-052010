@@ -11,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import common.Constant;
+
 public class Wellcome extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -40,7 +42,7 @@ public class Wellcome extends JFrame {
 		this.setSize(419, 342);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("JFrame");
+		this.setTitle("Welcome to Leave Management System");
 	}
 
 	/**
@@ -104,6 +106,7 @@ public class Wellcome extends JFrame {
 			mnLogin.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Login().setVisible(true);
+					Constant.exit();
 				}
 			});
 		}
