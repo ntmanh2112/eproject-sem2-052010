@@ -84,7 +84,7 @@ public class ViewJFrame_Login extends JFrame{
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("images/1.jpg"));
+			image = ImageIO.read(new File("images/1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -137,7 +137,7 @@ public class ViewJFrame_Login extends JFrame{
 		contraints.gridx = 0;
 		contraints.gridy = 1;
 		contraints.gridwidth = 1;
-		contraints.insets = new Insets(10, 50, 10, 0);
+		contraints.insets = new Insets(0, 40, 10, 0);
 		ip.add(lbTenDangNhap, contraints);
 		contraints.insets = new Insets(0, 0, 0, 0);
 		
@@ -145,7 +145,7 @@ public class ViewJFrame_Login extends JFrame{
 		contraints.gridx = 0;
 		contraints.gridy = 2;
 		contraints.gridwidth = 1;
-		contraints.insets = new Insets(0, 50, 10, 0);
+		contraints.insets = new Insets(0, 40, 10, 0);
 		ip.add(lbMatKhau, contraints);
 		contraints.insets = new Insets(0, 0, 0, 0);
 	}
@@ -163,6 +163,7 @@ public class ViewJFrame_Login extends JFrame{
 	private void initTextfield() {
 		txtTenDangNhap =  new JTextField();
 		txtTenDangNhap.setPreferredSize(new Dimension(150, 25));
+		txtTenDangNhap.setBackground(getForeground());
 		contraints.gridx = 1;
 		contraints.gridy = 1;
 		contraints.gridwidth = 1;
@@ -173,6 +174,7 @@ public class ViewJFrame_Login extends JFrame{
 		//txtMatKhau =  new JPasswordField();
 		txtMatKhau =  new JTextField();
 		txtMatKhau.setPreferredSize(new Dimension(150, 25));
+		txtMatKhau.setBackground(getForeground());
 		contraints.gridx = 1;
 		contraints.gridy = 2;
 		contraints.gridwidth = 1;
@@ -207,8 +209,8 @@ public class ViewJFrame_Login extends JFrame{
 		});
 		contraints.gridx = 0;
 		contraints.gridy = 4;
-		contraints.gridwidth = 1;
-		contraints.insets = new Insets(0, 50, 10, 0);
+		contraints.gridwidth = 2;
+		contraints.insets = new Insets(0, 0, 10, 0);
 		//contraints.anchor = GridBagConstraints.CENTER;
 		ip.add(btnDangNhap, contraints);
 		contraints.insets = new Insets(0, 0, 0, 0);
@@ -225,7 +227,7 @@ public class ViewJFrame_Login extends JFrame{
 		contraints.gridx = 1;
 		contraints.gridy = 4;
 		contraints.gridwidth = 1;
-		contraints.insets = new Insets(0, 50, 10, 50);
+		contraints.insets = new Insets(0, 50, 10, 0);
 		//contraints.anchor = GridBagConstraints.CENTER;
 		ip.add(btnThoat, contraints);
 		contraints.insets = new Insets(0, 0, 0, 0);
@@ -239,8 +241,8 @@ public class ViewJFrame_Login extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			if(Common_Constant.LANGUAGE==0){
-				Common_Constant.LANGUAGE=1;
+			if(Common_Constant.LANGUAGE == 0){
+				Common_Constant.LANGUAGE = 1;
 			new ViewJFrame_Login();
 			Exit();
 			}else{
