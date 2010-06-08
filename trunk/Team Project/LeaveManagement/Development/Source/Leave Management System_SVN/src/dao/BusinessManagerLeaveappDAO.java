@@ -10,35 +10,8 @@ import model.Leaveapp;
 import common.ConnectionDB;
 
 public class BusinessManagerLeaveappDAO {
-	//APPROVE LEAVEAPP
-	public void  BMapproveLeave(Leaveapp leaveapp)throws Exception{
-	ConnectionDB connection = new ConnectionDB();
-	connection.connect();
-	@SuppressWarnings("unused")
-	int i = leaveapp.getId_leaveapp();
-	String approve = "UPDATE TBL_LEAVEAPP SET STATUSLEAVE = 'approve' WHERE ID_LEAVEAPP = "+leaveapp.getId_leaveapp();
-	Statement st = connection.getConn().createStatement();
-	st.executeUpdate(approve);
 	
-}
-	//REJECT LEAVEAPP
-	public void  BMrejectLeave(Leaveapp leaveapp)throws Exception{
-	ConnectionDB connection = new ConnectionDB();
-	connection.connect();
-	
-	String reject =  "UPDATE TBL_LEAVEAPP SET STATUSLEAVE = 'reject' WHERE ID_LEAVEAPP = "+leaveapp.getId_leaveapp();
-	Statement st = connection.getConn().createStatement();
-	st.executeUpdate(reject);
-}
-	//finish LEAVEAPP
-	public void  BMfinishLeave(Leaveapp leaveapp)throws Exception{
-	ConnectionDB connection = new ConnectionDB();
-	connection.connect();
-	String finish =  "UPDATE TBL_LEAVEAPP SET STATUSLEAVE = 'finish' WHERE ID_LEAVEAPP = "+leaveapp.getId_leaveapp();
-	Statement st = connection.getConn().createStatement();
-	st.executeUpdate(finish);
-}
-////VIEW REPORT MONTH 
+//VIEW REPORT MONTH 
 public ResultSet BMreportMonth() throws Exception{
 	 ConnectionDB connection = new ConnectionDB();
 	 connection.connect();
