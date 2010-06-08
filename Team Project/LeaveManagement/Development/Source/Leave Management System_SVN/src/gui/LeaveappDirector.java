@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +17,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class CreateLeave extends JDialog {
+import model.LeaveDirector;
+
+import business.ManagingDirectorUserService;
+
+public class LeaveappDirector extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -51,7 +57,7 @@ public class CreateLeave extends JDialog {
 	/**
 	 * @param owner
 	 */
-	public CreateLeave(Frame owner) {
+	public LeaveappDirector(Frame owner) {
 		super(owner);
 		initialize();
 	}
@@ -275,7 +281,7 @@ public class CreateLeave extends JDialog {
 			cbxDateToDay = new JComboBox();
 			cbxDateToDay.setLocation(new Point(384, 159));
 			cbxDateToDay.setSize(new Dimension(57, 25));
-			for ( int i = 0 ;i <14;i++){
+			for ( int i = 1 ;i <32;i++){
 				cbxDateToDay.addItem(i);
 			}
 		}
@@ -347,31 +353,31 @@ public class CreateLeave extends JDialog {
 							JOptionPane.showMessageDialog(null, "Please input full of column!!");
 						}else if(Integer.valueOf(cbxDayDateFrom.getSelectedItem().toString())> Integer.valueOf(cbxDateToDay.getSelectedItem().toString()) && String.valueOf(cbxDatetoMonth.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText())){
 							JOptionPane.showMessageDialog(null, " dateto must be larger than datefrom");
-						}/*else{
-							
-							SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-							try{
-								java.util.Date date = format.parse(txtDateFromYear.getText().toString()+"/"+txtDateFromMonth.getText().toString()+"/"+cbxDay.getSelectedItem().toString());
-								Date datefrom = new Date(date.getTime());
-								java.util.Date date1 = format.parse(txtDateToYear.toString()+"/"+cbxMonth1.getSelectedItem().toString()+"/"+cbxDay1.getSelectedItem().toString());
-								Date dateto = new Date(date1.getTime());
-								leave_app.setDatefrom(datefrom);
-								leave_app.setDateto(dateto);
-								leave_app.setReason(txtReason.getText());
-								leave_app.setAddress(txtAddress.getText());
-								leave_app.setPhone(txtPhone.getText());
-							}catch (Exception ex) {
-								ex.printStackTrace();
-							}try {
-								LeaveappService service = new LeaveappService();
-								service.addLeaveApp(leave_app);
-								JOptionPane.showMessageDialog(null, "Add member successfully!!");
-								CreateLeaveapp.this.dispose();
-							} catch (Exception e2) {
-								e2.printStackTrace();
-							}
+						}else{
+								LeaveDirector leavedirector = new LeaveDirector();
+								SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+								try{
+									java.util.Date date = format.parse(txtYearDateFrom.getText().toString()+"/"+txtDateFromMonth.getText().toString()+"/"+cbxDayDateFrom.getSelectedItem().toString());
+									Date datefrom = new Date(date.getTime());
+									java.util.Date date1 = format.parse(txtDateToYear.toString()+"/"+cbxDatetoMonth.getSelectedItem().toString()+"/"+cbxDateToDay.getSelectedItem().toString());
+									Date dateto = new Date(date1.getTime());
+									leavedirector.setDatefrom(datefrom);
+									leavedirector.setDateto(dateto);
+									leavedirector.setReason(txtReason.getText());
 								
-						}*/
+								}catch (Exception ex) {
+									ex.printStackTrace();
+								}try {
+									
+									ManagingDirectorUserService service = new ManagingDirectorUserService();
+									service.creatLeaveDirector(leavedirector);
+									JOptionPane.showMessageDialog(null, "Create LeaveApp successfully!!");
+									LeaveappDirector.this.dispose();
+								} catch (Exception e2) {
+									e2.printStackTrace();
+								}
+							
+						}
 										
 					}
 				});
@@ -388,7 +394,7 @@ public class CreateLeave extends JDialog {
 	private JButton getBtnReset() {
 		if (btnReset == null) {
 			btnReset = new JButton();
-			btnReset.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+			btnReset.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
 			btnReset.setLocation(new Point(180, 405));
 			btnReset.setSize(new Dimension(110, 35));
 			btnReset.setText("Reset");
@@ -404,7 +410,7 @@ public class CreateLeave extends JDialog {
 	private JButton getBtnExit() {
 		if (btnExit == null) {
 			btnExit = new JButton();
-			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Cancel-2-icon.png")));
 			btnExit.setLocation(new Point(317, 405));
 			btnExit.setSize(new Dimension(110, 35));
 			btnExit.setText("Exit");
