@@ -214,7 +214,7 @@ public class MDControlPanel extends JFrame {
 	private void initialize() {
 		
 		this.setSize(1280, 720);
-		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setEnabled(true);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Administrator-icon.png")));
 		this.setJMenuBar(getJJMenuBar());

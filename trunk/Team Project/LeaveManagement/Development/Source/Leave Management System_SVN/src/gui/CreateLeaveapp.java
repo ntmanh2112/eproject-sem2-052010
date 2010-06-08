@@ -345,6 +345,8 @@ public class CreateLeaveapp extends JDialog {
 							
 						){
 						JOptionPane.showMessageDialog(null, "Please input full of column!!");
+					}else if(Integer.valueOf(cbxDay1.getSelectedItem().toString())< Integer.valueOf(cbxDay.getSelectedItem().toString()) && String.valueOf(cbxMonth1.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText())){
+						JOptionPane.showMessageDialog(null, " dateto must be larger than datefrom");
 					}else{
 						Leaveapp leave_app = new Leaveapp();
 						leave_app.setId_user(id);
@@ -437,9 +439,7 @@ public class CreateLeaveapp extends JDialog {
 			for(int i=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);i<32;i++){
 				cbxDay.addItem(i);
 			}
-			for(int i = 1 ;i< 32;i++){
-				cbxDay.addItem(i);
-			}
+			
 		}
 		return cbxDay;
 	}
@@ -466,7 +466,7 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtDateFromMonth() {
 		if (txtDateFromMonth == null) {
 			txtDateFromMonth = new JTextField();
-			txtDateFromMonth.setText(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)));
+			txtDateFromMonth.setText(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1));
 			txtDateFromMonth.setLocation(new Point(310, 101));
 			txtDateFromMonth.setEnabled(false);
 			txtDateFromMonth.setSize(new Dimension(45, 20));
@@ -502,9 +502,9 @@ public class CreateLeaveapp extends JDialog {
 			cbxMonth1 = new JComboBox();
 			cbxMonth1.setSize(new Dimension(45, 20));
 			cbxMonth1.setLocation(new Point(314, 176));
-			for(int i = Calendar.getInstance().get(Calendar.MONTH) ;i< 13;i++){
-				cbxMonth1.addItem(i);
-			}
+			int i = Calendar.getInstance().get(Calendar.MONTH)+1;
+			cbxMonth1.addItem(i);
+			cbxMonth1.addItem(i+1);
 		}
 		return cbxMonth1;
 	}
@@ -519,7 +519,7 @@ public class CreateLeaveapp extends JDialog {
 			cbxDay1 = new JComboBox();
 			cbxDay1.setLocation(new Point(399, 176));
 			cbxDay1.setSize(new Dimension(45, 20));
-			for(int i=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);i<32;i++){
+			for(int i = 0;i<32;i++){
 				cbxDay1.addItem(i);
 			}
 		}

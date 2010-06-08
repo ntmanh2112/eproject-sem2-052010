@@ -12,6 +12,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Point;
+import java.util.Calendar;
+
 import javax.swing.JButton;
 
 public class CreateLeave extends JDialog {
@@ -190,6 +192,7 @@ public class CreateLeave extends JDialog {
 	private JTextField getTxtYearDateFrom() {
 		if (txtYearDateFrom == null) {
 			txtYearDateFrom = new JTextField();
+			txtYearDateFrom.setText(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 			txtYearDateFrom.setEnabled(false);
 			txtYearDateFrom.setSize(new Dimension(70, 25));
 			txtYearDateFrom.setLocation(new Point(157, 110));
@@ -206,6 +209,10 @@ public class CreateLeave extends JDialog {
 		if (cbxDayDateFrom == null) {
 			cbxDayDateFrom = new JComboBox();
 			cbxDayDateFrom.setBounds(new Rectangle(384, 110, 57, 25));
+			for(int i=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);i<32;i++){
+				cbxDayDateFrom.addItem(i);
+			}
+			
 		}
 		return cbxDayDateFrom;
 	}
@@ -218,6 +225,7 @@ public class CreateLeave extends JDialog {
 	private JTextField getTxtDateFromMonth() {
 		if (txtDateFromMonth == null) {
 			txtDateFromMonth = new JTextField();
+			txtDateFromMonth.setText(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)));
 			txtDateFromMonth.setEnabled(false);
 			txtDateFromMonth.setSize(new Dimension(70, 25));
 			txtDateFromMonth.setLocation(new Point(276, 110));
@@ -233,6 +241,7 @@ public class CreateLeave extends JDialog {
 	private JTextField getTxtDateToYear() {
 		if (txtDateToYear == null) {
 			txtDateToYear = new JTextField();
+			txtDateToYear.setText(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 			txtDateToYear.setEnabled(false);
 			txtDateToYear.setSize(new Dimension(70, 25));
 			txtDateToYear.setLocation(new Point(158, 159));
@@ -250,6 +259,9 @@ public class CreateLeave extends JDialog {
 			cbxDatetoMonth = new JComboBox();
 			cbxDatetoMonth.setLocation(new Point(275, 159));
 			cbxDatetoMonth.setSize(new Dimension(70, 25));
+			for(int i=Calendar.getInstance().get(Calendar.MONTH);i<32;i++){
+				cbxDatetoMonth.addItem(i);
+			}
 		}
 		return cbxDatetoMonth;
 	}
@@ -264,6 +276,9 @@ public class CreateLeave extends JDialog {
 			cbxDateToDay = new JComboBox();
 			cbxDateToDay.setLocation(new Point(384, 159));
 			cbxDateToDay.setSize(new Dimension(57, 25));
+			for ( int i = 0 ;i <14;i++){
+				cbxDateToDay.addItem(i);
+			}
 		}
 		return cbxDateToDay;
 	}
