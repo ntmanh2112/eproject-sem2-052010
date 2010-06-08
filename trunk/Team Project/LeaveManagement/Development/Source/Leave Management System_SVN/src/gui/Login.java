@@ -165,18 +165,13 @@ public class Login extends JFrame {
 							new MDControlPanel(id).setVisible(true);
 							Constant.exit();
 						}else if (result == loginResult.managerbusiness){
-							id = service.selectIdUser(username);
-							new MBControlPanel(id).setVisible(true);
+							
 							Constant.exit();
 						}else if (result == loginResult.manager) {
-							id = service.selectIdUser(username);
-							new ManagerControlPanel(id).setVisible(true);
-							Constant.exit();
-						}else if(result == loginResult.enginerr){
-							id = service.selectIdUser(username);
-							new Engineer(id).setVisible(true);
+							
 							Constant.exit();
 						}
+						
 						else if (result == loginResult.lock){	
 							JOptionPane.showMessageDialog(null, "your permission is not enough for using this program");					
 						}
