@@ -17,7 +17,6 @@ public class LeaveManagementSystem {
                 } catch (Exception e) {
                 	e.printStackTrace();
                 }
-               
               new  Wellcome().setVisible(true);
              
             }
