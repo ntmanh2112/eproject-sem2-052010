@@ -163,32 +163,30 @@ public class Login extends JFrame {
 						if(result == loginResult.boss){
 							id = service.selectIdUser(username);
 							new MDControlPanel(id).setVisible(true);
-							//Login.this.dispose();
 							Constant.exit();
 						}else if (result == loginResult.managerbusiness){
-							
-							
-							//Login.this.dispose();
+							id = service.selectIdUser(username);
+							new MBControlPanel(id).setVisible(true);
 							Constant.exit();
 						}else if (result == loginResult.manager) {
-							
-							//Login.this.dispose();
+							id = service.selectIdUser(username);
+							new ManagerControlPanel(id).setVisible(true);
+							Constant.exit();
+						}else if(result == loginResult.enginerr){
+							id = service.selectIdUser(username);
+							new Engineer(id).setVisible(true);
 							Constant.exit();
 						}
-						else if (result == loginResult.lock){
-							JOptionPane.showMessageDialog(null, "your permission is not enough for using this program");
-							//Login.this.dispose();
-							
+						else if (result == loginResult.lock){	
+							JOptionPane.showMessageDialog(null, "your permission is not enough for using this program");					
 						}
 						else if (result == loginResult.fail){
 							JOptionPane.showMessageDialog(null, "this username or password is wrong");
 						}
-					}
-							
+					}		
 					catch(Exception E){
 						JOptionPane.showMessageDialog(null,"CONECTION FAIL");
 						E.printStackTrace();
-						
 					}
 				}
 

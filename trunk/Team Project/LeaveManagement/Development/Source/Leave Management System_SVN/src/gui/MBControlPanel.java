@@ -1,4 +1,8 @@
+/**
+ * 
+ */
 package gui;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -25,17 +29,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import model.Leaveapp;
 import model.User;
 import business.LeaveappService;
 import business.UserService;
-import javax.swing.WindowConstants;
 
-
-
-public class MDControlPanel extends JFrame {
-
+/**
+ * @author HIEU
+ *
+ */
+public class MBControlPanel extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
 	private JLabel lbUserinformation = null;
@@ -192,11 +197,11 @@ public class MDControlPanel extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public MDControlPanel() {
+	public MBControlPanel() {
 		super();
 		initialize();
 	}
-	public MDControlPanel(int id){
+	public MBControlPanel(int id){
 		super();
 		this.id = id;
 		this.user = userservice.loadUser(id);
@@ -217,7 +222,7 @@ public class MDControlPanel extends JFrame {
 		this.setJMenuBar(getJJMenuBar());
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Welcome to Managing Director");
+		this.setTitle("Welcome to Business Managing");
 		this.setVisible(false);
 	}
 
@@ -299,7 +304,7 @@ public class MDControlPanel extends JFrame {
 			jContentPane.add(getBtnCreatleaveapp(), null);
 			jContentPane.add(getBtnLogout(), null);
 			jContentPane.add(getJPanel(), null);
-			jContentPane.add(getBtnCreatLeaveAppSystem(), null);
+			//jContentPane.add(getBtnCreatLeaveAppSystem(), null);
 		}
 		return jContentPane;
 	}
@@ -566,7 +571,7 @@ public class MDControlPanel extends JFrame {
 			btnLogout.setSize(new Dimension(151, 40));
 			btnLogout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					MDControlPanel.this.dispose();
+					MBControlPanel.this.dispose();
 				}
 			});
 		}
@@ -734,7 +739,7 @@ public class MDControlPanel extends JFrame {
 	private JTabbedPane getJtpnUsermanager() {
 		if (jtpnUsermanager == null) {
 			jtpnUsermanager = new JTabbedPane();
-			jtpnUsermanager.addTab("Business Manager", null, getJpnBusinessmanager(), null);
+			//jtpnUsermanager.addTab("Business Manager", null, getJpnBusinessmanager(), null);
 			jtpnUsermanager.addTab("Manager", null, getJpnManager(), null);
 			jtpnUsermanager.addTab("Engineer", null, getJpnEngineer(), null);
 			jtpnUsermanager.addTab("User Lock", null, getPnUserlock(), null);
@@ -747,7 +752,7 @@ public class MDControlPanel extends JFrame {
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */
-	private JPanel getJpnBusinessmanager() {
+	/*private JPanel getJpnBusinessmanager() {
 		if (jpnBusinessmanager == null) {
 			jpnBusinessmanager = new JPanel();
 			jpnBusinessmanager.setLayout(null);
@@ -769,7 +774,7 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return jpnBusinessmanager;
-	}
+	}*/
 
 	/**
 	 * This method initializes jpnManager	
@@ -1081,7 +1086,7 @@ public class MDControlPanel extends JFrame {
 			mniSignout.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
 			mniSignout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					MDControlPanel.this.dispose();
+					MBControlPanel.this.dispose();
 				}
 			});
 		}
@@ -1878,7 +1883,7 @@ public class MDControlPanel extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getBtnCreatLeaveAppSystem() {
+	/*private JButton getBtnCreatLeaveAppSystem() {
 		if (btnCreatLeaveAppSystem == null) {
 			btnCreatLeaveAppSystem = new JButton();
 			btnCreatLeaveAppSystem.setText("Create LeaveApp System");
@@ -1892,7 +1897,7 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return btnCreatLeaveAppSystem;
-	}
+	}*/
 
 	/**
 	 * This method initializes pnUserlock	
@@ -2722,5 +2727,7 @@ public class MDControlPanel extends JFrame {
 		}
 		return tblReportMonth;
 	}
-
+	public static void main(){
+		new MBControlPanel();
+	}
 }

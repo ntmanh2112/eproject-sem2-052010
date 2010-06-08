@@ -22,6 +22,8 @@ import business.Method;
 import business.UserService;
 import javax.swing.ImageIcon;
 
+import common.Constant;
+
 public class Editprofile extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -310,7 +312,11 @@ public class Editprofile extends JDialog {
 								UserService service = new UserService();
 								service.updateUser(user);
 								JOptionPane.showMessageDialog(null, "edit successfull");
+								
 								Editprofile.this.dispose();
+								//new MDControlPanel();
+								//Constant.exit();
+							
 							}catch(Exception ex){
 								ex.printStackTrace();
 								JOptionPane.showMessageDialog(null, "edit fail");
@@ -363,7 +369,9 @@ public class Editprofile extends JDialog {
 			btnExit.setSize(new Dimension(106, 30));
 			btnExit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+				
 					Editprofile.this.dispose();
+					
 				}
 			});
 		}
