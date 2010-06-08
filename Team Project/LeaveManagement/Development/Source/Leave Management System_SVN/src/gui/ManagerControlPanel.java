@@ -1,4 +1,8 @@
+/**
+ * 
+ */
 package gui;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -25,17 +29,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import model.Leaveapp;
 import model.User;
 import business.LeaveappService;
 import business.UserService;
-import javax.swing.WindowConstants;
 
-
-
-public class MDControlPanel extends JFrame {
-
+/**
+ * @author HIEU
+ *
+ */
+public class ManagerControlPanel extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
 	private JLabel lbUserinformation = null;
@@ -192,11 +197,11 @@ public class MDControlPanel extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public MDControlPanel() {
+	public ManagerControlPanel() {
 		super();
 		initialize();
 	}
-	public MDControlPanel(int id){
+	public ManagerControlPanel(int id){
 		super();
 		this.id = id;
 		this.user = userservice.loadUser(id);
@@ -217,7 +222,7 @@ public class MDControlPanel extends JFrame {
 		this.setJMenuBar(getJJMenuBar());
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Welcome to Managing Director");
+		this.setTitle("Welcome to Manager");
 		this.setVisible(false);
 	}
 
@@ -293,13 +298,13 @@ public class MDControlPanel extends JFrame {
 			jContentPane.add(getTxtGender(), null);
 			jContentPane.add(getTxtAddress(), null);
 			jContentPane.add(getTxtEmail(), null);
-			jContentPane.add(getBtnAdduser(), null);
+			//jContentPane.add(getBtnAdduser(), null);
 			jContentPane.add(getBtnChangepass(), null);
 			jContentPane.add(getBtnEditProfile(), null);
 			jContentPane.add(getBtnCreatleaveapp(), null);
 			jContentPane.add(getBtnLogout(), null);
 			jContentPane.add(getJPanel(), null);
-			jContentPane.add(getBtnCreatLeaveAppSystem(), null);
+			//jContentPane.add(getBtnCreatLeaveAppSystem(), null);
 		}
 		return jContentPane;
 	}
@@ -317,7 +322,7 @@ public class MDControlPanel extends JFrame {
 			jJMenuBar.setAutoscrolls(true);
 			jJMenuBar.setBackground(new Color(204, 204, 204));
 			jJMenuBar.add(getMnUser());
-			jJMenuBar.add(getMnModeration());
+			//jJMenuBar.add(getMnModeration());
 			jJMenuBar.add(getMnView());
 			jJMenuBar.add(getMnHelp());
 		}
@@ -467,7 +472,7 @@ public class MDControlPanel extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getBtnAdduser() {
+	/*private JButton getBtnAdduser() {
 		if (btnAdduser == null) {
 			btnAdduser = new JButton();
 			btnAdduser.setIcon(new ImageIcon(getClass().getResource("/image/add-user-icon.png")));
@@ -481,7 +486,7 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return btnAdduser;
-	}
+	}*/
 
 	/**
 	 * This method initializes btnChangepass	
@@ -566,7 +571,7 @@ public class MDControlPanel extends JFrame {
 			btnLogout.setSize(new Dimension(151, 40));
 			btnLogout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					MDControlPanel.this.dispose();
+					ManagerControlPanel.this.dispose();
 				}
 			});
 		}
@@ -734,8 +739,8 @@ public class MDControlPanel extends JFrame {
 	private JTabbedPane getJtpnUsermanager() {
 		if (jtpnUsermanager == null) {
 			jtpnUsermanager = new JTabbedPane();
-			jtpnUsermanager.addTab("Business Manager", null, getJpnBusinessmanager(), null);
-			jtpnUsermanager.addTab("Manager", null, getJpnManager(), null);
+			//jtpnUsermanager.addTab("Business Manager", null, getJpnBusinessmanager(), null);
+			//jtpnUsermanager.addTab("Manager", null, getJpnManager(), null);
 			jtpnUsermanager.addTab("Engineer", null, getJpnEngineer(), null);
 			jtpnUsermanager.addTab("User Lock", null, getPnUserlock(), null);
 		}
@@ -747,7 +752,7 @@ public class MDControlPanel extends JFrame {
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */
-	private JPanel getJpnBusinessmanager() {
+	/*private JPanel getJpnBusinessmanager() {
 		if (jpnBusinessmanager == null) {
 			jpnBusinessmanager = new JPanel();
 			jpnBusinessmanager.setLayout(null);
@@ -769,14 +774,14 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return jpnBusinessmanager;
-	}
+	}*/
 
 	/**
 	 * This method initializes jpnManager	
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */
-	private JPanel getJpnManager() {
+	/*private JPanel getJpnManager() {
 		if (jpnManager == null) {
 			jpnManager = new JPanel();
 			jpnManager.setLayout(null);
@@ -799,7 +804,7 @@ public class MDControlPanel extends JFrame {
 		}
 		return jpnManager;
 	}
-
+*/
 	/**
 	 * This method initializes jpnEngineer	
 	 * 	
@@ -1081,7 +1086,7 @@ public class MDControlPanel extends JFrame {
 			mniSignout.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
 			mniSignout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					MDControlPanel.this.dispose();
+					ManagerControlPanel.this.dispose();
 				}
 			});
 		}
@@ -1878,7 +1883,7 @@ public class MDControlPanel extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getBtnCreatLeaveAppSystem() {
+	/*private JButton getBtnCreatLeaveAppSystem() {
 		if (btnCreatLeaveAppSystem == null) {
 			btnCreatLeaveAppSystem = new JButton();
 			btnCreatLeaveAppSystem.setText("Create LeaveApp System");
@@ -1892,7 +1897,7 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return btnCreatLeaveAppSystem;
-	}
+	}*/
 
 	/**
 	 * This method initializes pnUserlock	
@@ -2091,7 +2096,7 @@ public class MDControlPanel extends JFrame {
 	 * 	
 	 * @return javax.swing.JMenu	
 	 */
-	private JMenu getMnModeration() {
+	/*private JMenu getMnModeration() {
 		if (mnModeration == null) {
 			mnModeration = new JMenu();
 			mnModeration.setText("Moderation");
@@ -2100,7 +2105,7 @@ public class MDControlPanel extends JFrame {
 			mnModeration.add(getMniUnlockuser());
 		}
 		return mnModeration;
-	}
+	}*/
 	/**
 	 * This method initializes mnView	
 	 * 	
@@ -2722,5 +2727,7 @@ public class MDControlPanel extends JFrame {
 		}
 		return tblReportMonth;
 	}
-
+	public static void main(){
+		new MBControlPanel();
+	}
 }
