@@ -169,6 +169,12 @@ public class Wellcome extends JFrame {
 			mnAbout = new JMenuItem();
 			mnAbout.setText("About");
 			mnAbout.setIcon(new ImageIcon(getClass().getResource("/image/user-info-icon.png")));
+			mnAbout.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new About(null).setVisible(true);
+					//Constant.exit();
+				}
+			});
 		}
 		return mnAbout;
 	}
