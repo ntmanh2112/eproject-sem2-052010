@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,8 +29,8 @@ import javax.swing.JTextField;
 
 import model.Leaveapp;
 import model.User;
-import business.ManagingDirectorLeaveappService;
-import business.ManagingDirectorUserService;
+import business.LeaveappService;
+import business.UserService;
 
 
 
@@ -71,9 +72,6 @@ public class MDControlPanel extends JFrame {
 	private JPanel jpnBusinessmanager = null;
 	private JPanel jpnManager = null;
 	private JPanel jpnEngineer = null;
-	private JTabbedPane jtpnReport = null;
-	private JPanel jpnReportmonth = null;
-	private JPanel jpnReportYear = null;
 	private JTabbedPane jtbnLeaveapp = null;
 	private JPanel jpnValid = null;
 	private JPanel jpnApprove = null;
@@ -123,10 +121,10 @@ public class MDControlPanel extends JFrame {
 	private JLabel lbDaycanLeave = null;
 	private JLabel lbDaycannotLeave = null;
 	User user = new User();
-	ManagingDirectorUserService userservice = new ManagingDirectorUserService();  //  @jve:decl-index=0:
+	UserService userservice = new UserService();  //  @jve:decl-index=0:
 	Leaveapp leaveapp = new Leaveapp();  //  @jve:decl-index=0:
 	private int id = 0;
-	ManagingDirectorLeaveappService leaveappservice = new ManagingDirectorLeaveappService();  //  @jve:decl-index=0:
+	LeaveappService leaveappservice = new LeaveappService();  //  @jve:decl-index=0:
 	private String[][]data = null;
 	private String[] column = {"ID","UserName","Status","Position","FullName","Birthday","Address","Gender","Phone","Email"};
 	private String[][]data1 = null;
@@ -167,31 +165,20 @@ public class MDControlPanel extends JFrame {
 	private JComboBox cbxViewManager = null;
 	private JButton btnViewEngineerAddgroup = null;
 	private JComboBox cbxViewEngineer = null;
-	private JPanel pnReportYearMonth = null;
-	private JTabbedPane jtpnReportYearMonth = null;
-	private JPanel pnReportYearMonth1 = null;
-	private JPanel pnReportYearMonth2 = null;
-	private JPanel pnReportYearMonth3 = null;
-	private JPanel pnReportYearMonth4 = null;
-	private JPanel pnReportYearMonth5 = null;
-	private JPanel pnReporthYearMonth6 = null;
-	private JPanel pnReportYearMonth7 = null;
-	private JPanel pnReportYearMonth8 = null;
-	private JPanel pnReportYearMonth9 = null;
-	private JPanel pnReportYearMonth10 = null;
-	private JPanel pnReportYearMonth11 = null;
-	private JPanel pnReportYearMonth12 = null;
 	private JLabel lbMyLeaveApp = null;
 	private JPanel pnTableMyLeaveApp = null;
-	private JPanel pnTableReportMonth = null;
-	private JScrollPane jScrollPane8 = null;
-	private JTable tblReportMonth = null;
 	private common.TableModel tableModel = new common.TableModel(data, column);
 	private common.TableModel tableModelLeaveapp = new common.TableModel(data1, column1);
 	private JScrollPane jScrollPane9 = null;
 	private JTable tblMyleaveapp = null;
 	private JScrollPane tblDayofSystem = null;
 	private JTable tblDayOfSystem = null;
+	private JLabel lbMonth = null;
+	private JLabel lbYeat = null;
+	private JLabel lbGroup = null;
+	private JTextField txtYear = null;
+	private JComboBox cbxMonth = null;
+	private JComboBox cbxGroupname = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -701,15 +688,26 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JPanel getJpnReport() {
 		if (jpnReport == null) {
-			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
-			gridBagConstraints2.fill = GridBagConstraints.BOTH;
-			gridBagConstraints2.gridy = 0;
-			gridBagConstraints2.weightx = 1.0;
-			gridBagConstraints2.weighty = 1.0;
-			gridBagConstraints2.gridx = 0;
+			lbGroup = new JLabel();
+			lbGroup.setText("Group Name");
+			lbGroup.setSize(new Dimension(77, 25));
+			lbGroup.setLocation(new Point(15, 105));
+			lbYeat = new JLabel();
+			lbYeat.setText("Year");
+			lbYeat.setSize(new Dimension(62, 25));
+			lbYeat.setLocation(new Point(15, 29));
+			lbMonth = new JLabel();
+			lbMonth.setText("Month");
+			lbMonth.setSize(new Dimension(62, 25));
+			lbMonth.setLocation(new Point(15, 66));
 			jpnReport = new JPanel();
-			jpnReport.setLayout(new GridBagLayout());
-			jpnReport.add(getJtpnReport(), gridBagConstraints2);
+			jpnReport.setLayout(null);
+			jpnReport.add(lbMonth, null);
+			jpnReport.add(lbYeat, null);
+			jpnReport.add(lbGroup, null);
+			jpnReport.add(getTxtYear(), null);
+			jpnReport.add(getCbxMonth(), null);
+			jpnReport.add(getCbxGroupname(), null);
 		}
 		return jpnReport;
 	}
@@ -836,48 +834,6 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return jpnEngineer;
-	}
-
-	/**
-	 * This method initializes jtpnReport	
-	 * 	
-	 * @return javax.swing.JTabbedPane	
-	 */
-	private JTabbedPane getJtpnReport() {
-		if (jtpnReport == null) {
-			jtpnReport = new JTabbedPane();
-			jtpnReport.addTab("Report Month", null, getJpnReportmonth(), null);
-			jtpnReport.addTab("Report Year", null, getJpnReportYear(), null);
-		}
-		return jtpnReport;
-	}
-
-	/**
-	 * This method initializes jpnReportmonth	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getJpnReportmonth() {
-		if (jpnReportmonth == null) {
-			jpnReportmonth = new JPanel();
-			jpnReportmonth.setLayout(null);
-			jpnReportmonth.add(getPnTableReportMonth(), null);
-		}
-		return jpnReportmonth;
-	}
-
-	/**
-	 * This method initializes jpnReportYear	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getJpnReportYear() {
-		if (jpnReportYear == null) {
-			jpnReportYear = new JPanel();
-			jpnReportYear.setLayout(null);
-			jpnReportYear.add(getPnReportYearMonth(), null);
-		}
-		return jpnReportYear;
 	}
 
 	/**
@@ -2498,194 +2454,6 @@ public class MDControlPanel extends JFrame {
 		return cbxViewEngineer;
 	}
 	/**
-	 * This method initializes pnReportYearMonth	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth() {
-		if (pnReportYearMonth == null) {
-			GridBagConstraints gridBagConstraints12 = new GridBagConstraints();
-			gridBagConstraints12.fill = GridBagConstraints.BOTH;
-			gridBagConstraints12.gridy = 0;
-			gridBagConstraints12.weightx = 1.0;
-			gridBagConstraints12.weighty = 1.0;
-			gridBagConstraints12.gridx = 0;
-			pnReportYearMonth = new JPanel();
-			pnReportYearMonth.setLayout(new GridBagLayout());
-			pnReportYearMonth.setBounds(new Rectangle(1, -1, 1261, 377));
-			pnReportYearMonth.add(getJtpnReportYearMonth(), gridBagConstraints12);
-		}
-		return pnReportYearMonth;
-	}
-	/**
-	 * This method initializes jtpnReportYearMonth	
-	 * 	
-	 * @return javax.swing.JTabbedPane	
-	 */
-	private JTabbedPane getJtpnReportYearMonth() {
-		if (jtpnReportYearMonth == null) {
-			jtpnReportYearMonth = new JTabbedPane();
-			jtpnReportYearMonth.setToolTipText("");
-			jtpnReportYearMonth.addTab("Month 1", null, getPnReportYearMonth1(), null);
-			jtpnReportYearMonth.addTab("Month 2", null, getPnReportYearMonth2(), null);
-			jtpnReportYearMonth.addTab("Month 3", null, getPnReportYearMonth3(), null);
-			jtpnReportYearMonth.addTab("Month 4", null, getPnReportYearMonth4(), null);
-			jtpnReportYearMonth.addTab("Month 5", null, getPnReportYearMonth5(), null);
-			jtpnReportYearMonth.addTab("Month 6", null, getPnReporthYearMonth6(), null);
-			jtpnReportYearMonth.addTab("Month 7", null, getPnReportYearMonth7(), null);
-			jtpnReportYearMonth.addTab("Month 8", null, getPnReportYearMonth8(), null);
-			jtpnReportYearMonth.addTab("Month 9", null, getPnReportYearMonth9(), null);
-			jtpnReportYearMonth.addTab("Month 10", null, getPnReportYearMonth10(), null);
-			jtpnReportYearMonth.addTab("Month 11", null, getPnReportYearMonth11(), null);
-			jtpnReportYearMonth.addTab("Month 12", null, getPnReportYearMonth12(), null);
-		}
-		return jtpnReportYearMonth;
-	}
-	/**
-	 * This method initializes pnReportYearMonth1	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth1() {
-		if (pnReportYearMonth1 == null) {
-			pnReportYearMonth1 = new JPanel();
-			pnReportYearMonth1.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth1;
-	}
-	/**
-	 * This method initializes pnReportYearMonth2	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth2() {
-		if (pnReportYearMonth2 == null) {
-			pnReportYearMonth2 = new JPanel();
-			pnReportYearMonth2.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth2;
-	}
-	/**
-	 * This method initializes pnReportYearMonth3	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth3() {
-		if (pnReportYearMonth3 == null) {
-			pnReportYearMonth3 = new JPanel();
-			pnReportYearMonth3.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth3;
-	}
-	/**
-	 * This method initializes pnReportYearMonth4	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth4() {
-		if (pnReportYearMonth4 == null) {
-			pnReportYearMonth4 = new JPanel();
-			pnReportYearMonth4.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth4;
-	}
-	/**
-	 * This method initializes pnReportYearMonth5	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth5() {
-		if (pnReportYearMonth5 == null) {
-			pnReportYearMonth5 = new JPanel();
-			pnReportYearMonth5.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth5;
-	}
-	/**
-	 * This method initializes pnReporthYearMonth6	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReporthYearMonth6() {
-		if (pnReporthYearMonth6 == null) {
-			pnReporthYearMonth6 = new JPanel();
-			pnReporthYearMonth6.setLayout(new GridBagLayout());
-		}
-		return pnReporthYearMonth6;
-	}
-	/**
-	 * This method initializes pnReportYearMonth7	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth7() {
-		if (pnReportYearMonth7 == null) {
-			pnReportYearMonth7 = new JPanel();
-			pnReportYearMonth7.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth7;
-	}
-	/**
-	 * This method initializes pnReportYearMonth8	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth8() {
-		if (pnReportYearMonth8 == null) {
-			pnReportYearMonth8 = new JPanel();
-			pnReportYearMonth8.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth8;
-	}
-	/**
-	 * This method initializes pnReportYearMonth9	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth9() {
-		if (pnReportYearMonth9 == null) {
-			pnReportYearMonth9 = new JPanel();
-			pnReportYearMonth9.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth9;
-	}
-	/**
-	 * This method initializes pnReportYearMonth10	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth10() {
-		if (pnReportYearMonth10 == null) {
-			pnReportYearMonth10 = new JPanel();
-			pnReportYearMonth10.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth10;
-	}
-	/**
-	 * This method initializes pnReportYearMonth11	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth11() {
-		if (pnReportYearMonth11 == null) {
-			pnReportYearMonth11 = new JPanel();
-			pnReportYearMonth11.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth11;
-	}
-	/**
-	 * This method initializes pnReportYearMonth12	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReportYearMonth12() {
-		if (pnReportYearMonth12 == null) {
-			pnReportYearMonth12 = new JPanel();
-			pnReportYearMonth12.setLayout(new GridBagLayout());
-		}
-		return pnReportYearMonth12;
-	}
-	/**
 	 * This method initializes pnTableMyLeaveApp	
 	 * 	
 	 * @return javax.swing.JPanel	
@@ -2704,55 +2472,6 @@ public class MDControlPanel extends JFrame {
 			pnTableMyLeaveApp.add(getJScrollPane9(), gridBagConstraints14);
 		}
 		return pnTableMyLeaveApp;
-	}
-	/**
-	 * This method initializes pnTableReportMonth	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnTableReportMonth() {
-		if (pnTableReportMonth == null) {
-			GridBagConstraints gridBagConstraints13 = new GridBagConstraints();
-			gridBagConstraints13.fill = GridBagConstraints.BOTH;
-			gridBagConstraints13.gridy = 0;
-			gridBagConstraints13.weightx = 1.0;
-			gridBagConstraints13.weighty = 1.0;
-			gridBagConstraints13.gridx = 0;
-			pnTableReportMonth = new JPanel();
-			pnTableReportMonth.setLayout(new GridBagLayout());
-			pnTableReportMonth.setBounds(new Rectangle(-2, 0, 874, 326));
-			pnTableReportMonth.add(getJScrollPane8(), gridBagConstraints13);
-		}
-		return pnTableReportMonth;
-	}
-	/**
-	 * This method initializes jScrollPane8	
-	 * 	
-	 * @return javax.swing.JScrollPane	
-	 */
-	private JScrollPane getJScrollPane8() {
-		if (jScrollPane8 == null) {
-			jScrollPane8 = new JScrollPane();
-			jScrollPane8.setViewportView(getTblReportMonth());
-		}
-		return jScrollPane8;
-	}
-	/**
-	 * This method initializes tblReportMonth	
-	 * 	
-	 * @return javax.swing.JTable	
-	 */
-	private JTable getTblReportMonth() {
-		if (tblReportMonth == null) {
-			try{
-				datarp = leaveappservice.reportMonth();
-				tblReportMonth = new JTable(datarp, columnrp);
-			}catch(Exception ex){
-					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Error");
-			}
-		}
-		return tblReportMonth;
 	}
 	/**
 	 * This method initializes jScrollPane9	
@@ -2799,6 +2518,52 @@ public class MDControlPanel extends JFrame {
 			tblDayOfSystem = new JTable();
 		}
 		return tblDayOfSystem;
+	}
+	/**
+	 * This method initializes txtYear	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtYear() {
+		if (txtYear == null) {
+			txtYear = new JTextField();
+			txtYear.setText(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+			txtYear.setLocation(new Point(91, 29));
+			txtYear.setEnabled(false);
+			txtYear.setSize(new Dimension(62, 25));
+			
+		}
+		return txtYear;
+	}
+	/**
+	 * This method initializes cbxMonth	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxMonth() {
+		if (cbxMonth == null) {
+			cbxMonth = new JComboBox();
+			cbxMonth.setLocation(new Point(91, 68));
+			cbxMonth.setSize(new Dimension(62, 25));
+			for(int i = 1;i<13;i++){
+				cbxMonth.addItem(i);
+			}
+		}
+		return cbxMonth;
+	}
+	/**
+	 * This method initializes cbxGroupname	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getCbxGroupname() {
+		if (cbxGroupname == null) {
+			String [] data = {"","Engineer","Manager","Business Manager"};
+			cbxGroupname = new JComboBox(data);
+			cbxGroupname.setLocation(new Point(91, 105));
+			cbxGroupname.setSize(new Dimension(62, 25));
+		}
+		return cbxGroupname;
 	}
 
 }

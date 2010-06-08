@@ -11,10 +11,10 @@ import common.AddUser.addResult;
 import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
 
-import dao.ManagingDirectorUserDAO;
+import dao.UserDAO;
 
-public class ManagingDirectorUserService {
-	ManagingDirectorUserDAO dao = new ManagingDirectorUserDAO();  //  @jve:decl-index=0:
+public class UserService {
+	UserDAO dao = new UserDAO();  //  @jve:decl-index=0:
 	public loginResult loginUser(String username,String password){
 		loginResult result = dao.loginUser(username, password);
 		return result;

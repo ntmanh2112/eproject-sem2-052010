@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 import model.LeaveDirector;
 
-import business.ManagingDirectorUserService;
+import business.UserService;
 
 public class LeaveappDirector extends JDialog {
 
@@ -369,7 +369,7 @@ public class LeaveappDirector extends JDialog {
 									ex.printStackTrace();
 								}try {
 									
-									ManagingDirectorUserService service = new ManagingDirectorUserService();
+									UserService service = new UserService();
 									service.creatLeaveDirector(leavedirector);
 									JOptionPane.showMessageDialog(null, "Create LeaveApp successfully!!");
 									LeaveappDirector.this.dispose();

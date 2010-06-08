@@ -16,7 +16,7 @@ import common.Enumeration.loginResult;
 
 
 
-public class ManagingDirectorUserDAO {
+public class UserDAO {
 	//ADD LEAVEEDITOR
 	public void createleavedirector(LeaveDirector leavedirector){
 		try {

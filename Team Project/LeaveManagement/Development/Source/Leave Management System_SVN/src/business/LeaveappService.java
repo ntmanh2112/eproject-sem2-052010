@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Leaveapp;
-import dao.ManagingDirectorLeaveDAO;
+import dao.LeaveDAO;
 
 /**
  * @author HIEU
  *
  */
-public class ManagingDirectorLeaveappService {
-	ManagingDirectorLeaveDAO dao = new ManagingDirectorLeaveDAO();
+public class LeaveappService {
+	LeaveDAO dao = new LeaveDAO();
 	
 	public void addLeaveApp(Leaveapp leave_app){
 		dao.addLeaveapp(leave_app);
