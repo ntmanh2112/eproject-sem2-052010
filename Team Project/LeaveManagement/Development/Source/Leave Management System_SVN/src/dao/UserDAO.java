@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+import model.LeaveDirector;
 import model.User;
 
 import common.ConnectionDB;
@@ -16,6 +17,24 @@ import common.Enumeration.loginResult;
 
 //ADD GROUP
 public class UserDAO {
+	//ADD USER
+	public void createleavedirector(LeaveDirector leavedirector){
+		try {
+			ConnectionDB conn = new ConnectionDB();
+			conn.connect();
+			String sql1 = "INSERT INTO TBL_LEAVEDIRECTOR (DATEFROM,DATETO,REASON) VALUES (?,?,?)";
+			PreparedStatement psmt1 = conn.getConn().prepareStatement(sql1);
+			psmt1.setDate(1, leavedirector.getDatefrom());
+			psmt1.setDate(2, leavedirector.getDateto());
+			psmt1.setString(3, leavedirector.getReason());
+			psmt1.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
 	
 	public User selectidposition(User user){
 			try{

@@ -3,6 +3,7 @@ package business;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import model.LeaveDirector;
 import model.User;
 
 
@@ -13,10 +14,13 @@ import common.Enumeration.loginResult;
 import dao.UserDAO;
 
 public class UserService {
-	UserDAO dao = new UserDAO();
+	UserDAO dao = new UserDAO();  //  @jve:decl-index=0:
 	public loginResult loginUser(String username,String password){
 		loginResult result = dao.loginUser(username, password);
 		return result;
+	}
+	public void creatLeaveDirector(LeaveDirector leavedirector){
+		dao.createleavedirector(leavedirector);
 	}
 	
 	public changeResult changePass(String oldpass,String newpass,String confirmpass){
