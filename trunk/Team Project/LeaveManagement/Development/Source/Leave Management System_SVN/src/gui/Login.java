@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 import model.User;
 
-import business.ManagingDirectorUserService;
+import business.UserService;
 
 import common.Constant;
 import common.Enumeration.loginResult;
@@ -158,7 +158,7 @@ public class Login extends JFrame {
 					String username = txtUsername.getText();
 					String password = String.valueOf(txtPassword.getPassword());
 					try{
-						ManagingDirectorUserService service = new ManagingDirectorUserService();
+						UserService service = new UserService();
 						loginResult result = service.loginUser(username, password);
 						if(result == loginResult.boss){
 							id = service.selectIdUser(username);

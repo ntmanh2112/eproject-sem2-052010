@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 
 import model.User;
 import business.Method;
-import business.ManagingDirectorUserService;
+import business.UserService;
 
 import common.AddUser.addResult;
 
@@ -438,7 +438,7 @@ public class Addmember extends JDialog {
 								ex.printStackTrace();
 							}
 							try{
-								ManagingDirectorUserService service = new ManagingDirectorUserService();
+								UserService service = new UserService();
 								addResult result = service.addUser(user);
 								 if (result == addResult.incorrect) {
 									JOptionPane.showMessageDialog(null, "This USERNAME is exist!!");
