@@ -16,7 +16,7 @@ import common.Enumeration.loginResult;
 
 
 //ADD GROUP
-public class UserDAO {
+public class ManagingDirectorUserDAO {
 	//ADD USER
 	public void createleavedirector(LeaveDirector leavedirector){
 		try {

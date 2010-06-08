@@ -28,8 +28,8 @@ import javax.swing.JTextField;
 
 import model.Leaveapp;
 import model.User;
-import business.LeaveappService;
-import business.UserService;
+import business.ManagingDirectorLeaveappService;
+import business.ManagingDirectorUserService;
 
 
 
@@ -123,10 +123,10 @@ public class MDControlPanel extends JFrame {
 	private JLabel lbDaycanLeave = null;
 	private JLabel lbDaycannotLeave = null;
 	User user = new User();
-	UserService userservice = new UserService();  //  @jve:decl-index=0:
+	ManagingDirectorUserService userservice = new ManagingDirectorUserService();  //  @jve:decl-index=0:
 	Leaveapp leaveapp = new Leaveapp();  //  @jve:decl-index=0:
 	private int id = 0;
-	LeaveappService leaveappservice = new LeaveappService();  //  @jve:decl-index=0:
+	ManagingDirectorLeaveappService leaveappservice = new ManagingDirectorLeaveappService();  //  @jve:decl-index=0:
 	private String[][]data = null;
 	private String[] column = {"ID","UserName","Status","Position","FullName","Birthday","Address","Gender","Phone","Email"};
 	private String[][]data1 = null;

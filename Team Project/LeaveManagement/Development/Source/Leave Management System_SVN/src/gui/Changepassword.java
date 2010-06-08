@@ -16,7 +16,7 @@ import javax.swing.JPasswordField;
 
 import common.ChangeUser.changeResult;
 
-import business.UserService;
+import business.ManagingDirectorUserService;
 
 public class Changepassword extends JDialog {
 
@@ -154,7 +154,7 @@ public class Changepassword extends JDialog {
 					String newpass = String.valueOf(txtNewpassword.getPassword());
 					String confirmpass = String.valueOf(txtConfirmpassword.getPassword());
 					try{
-						UserService changepass = new UserService();
+						ManagingDirectorUserService changepass = new ManagingDirectorUserService();
 						changeResult cpresult = changepass.changePass(oldpass, newpass, confirmpass);
 						if(cpresult == changeResult.sucessful){
 							JOptionPane.showMessageDialog(null, "Change Password Success!!!");

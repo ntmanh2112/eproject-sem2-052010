@@ -9,7 +9,7 @@ import model.Leaveapp;
 
 import common.ConnectionDB;
 
-public class BMLeaveappDAO {
+public class BusinessManagerLeaveappDAO {
 	//APPROVE LEAVEAPP
 	public void  BMapproveLeave(Leaveapp leaveapp)throws Exception{
 	ConnectionDB connection = new ConnectionDB();
