@@ -1,20 +1,19 @@
 package gui;
 
-import javax.swing.JPanel;
-import java.awt.Frame;
-import java.awt.BorderLayout;
-import javax.swing.JDialog;
 import java.awt.Dimension;
-import javax.swing.JLabel;
-import java.awt.Rectangle;
-import javax.swing.ImageIcon;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
+import java.awt.Frame;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.Calendar;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class CreateLeave extends JDialog {
 

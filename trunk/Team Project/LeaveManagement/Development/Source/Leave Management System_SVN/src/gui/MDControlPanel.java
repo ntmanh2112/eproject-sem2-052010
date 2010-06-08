@@ -30,7 +30,6 @@ import model.Leaveapp;
 import model.User;
 import business.LeaveappService;
 import business.UserService;
-import javax.swing.WindowConstants;
 
 
 
@@ -2452,7 +2451,7 @@ public class MDControlPanel extends JFrame {
 	private JComboBox getCbxViewManager() {
 		if (cbxViewManager == null) {
 			String [] data = {"","Business Manager" ,"Engineer"};
-			cbxViewManager = new JComboBox();
+			cbxViewManager = new JComboBox(data);
 			cbxViewManager.setLocation(new Point(755, 328));
 			cbxViewManager.setSize(new Dimension(159, 45));
 		}

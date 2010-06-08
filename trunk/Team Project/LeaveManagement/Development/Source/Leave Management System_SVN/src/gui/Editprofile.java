@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -20,9 +21,6 @@ import javax.swing.JTextField;
 import model.User;
 import business.Method;
 import business.UserService;
-import javax.swing.ImageIcon;
-
-import common.Constant;
 
 public class Editprofile extends JDialog {
 
