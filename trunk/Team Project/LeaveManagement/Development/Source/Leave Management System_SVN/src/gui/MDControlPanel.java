@@ -188,6 +188,10 @@ public class MDControlPanel extends JFrame {
 	private JTable tblReportMonth = null;
 	private common.TableModel tableModel = new common.TableModel(data, column);
 	private common.TableModel tableModelLeaveapp = new common.TableModel(data1, column1);
+	private JScrollPane jScrollPane9 = null;
+	private JTable tblMyleaveapp = null;
+	private JScrollPane tblDayofSystem = null;
+	private JTable tblDayOfSystem = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -628,9 +632,9 @@ public class MDControlPanel extends JFrame {
 			lbMyLeaveApp.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
 			lbMyLeaveApp.setLocation(new Point(371, 5));
 			lbDayoff = new JLabel();
-			lbDayoff.setBounds(new Rectangle(371, 216, 101, 43));
+			lbDayoff.setBounds(new Rectangle(371, 216, 230, 43));
 			lbDayoff.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
-			lbDayoff.setText("Day Off");
+			lbDayoff.setText("Day Off System");
 			lbHistory = new JLabel();
 			lbHistory.setBounds(new Rectangle(14, 4, 91, 31));
 			lbHistory.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
@@ -1896,7 +1900,7 @@ public class MDControlPanel extends JFrame {
 			btnCreatLeaveAppSystem.setLocation(new Point(810, 90));
 			btnCreatLeaveAppSystem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeave(null).setVisible(true);
+					new LeaveappDirector(null).setVisible(true);
 				}
 			});
 		}
@@ -2263,9 +2267,16 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JPanel getPnTableDayoff() {
 		if (pnTableDayoff == null) {
+			GridBagConstraints gridBagConstraints15 = new GridBagConstraints();
+			gridBagConstraints15.fill = GridBagConstraints.BOTH;
+			gridBagConstraints15.gridy = 0;
+			gridBagConstraints15.weightx = 1.0;
+			gridBagConstraints15.weighty = 1.0;
+			gridBagConstraints15.gridx = 0;
 			pnTableDayoff = new JPanel();
 			pnTableDayoff.setLayout(new GridBagLayout());
 			pnTableDayoff.setBounds(new Rectangle(372, 258, 763, 144));
+			pnTableDayoff.add(getTblDayofSystem(), gridBagConstraints15);
 		}
 		return pnTableDayoff;
 	}
@@ -2681,9 +2692,16 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JPanel getPnTableMyLeaveApp() {
 		if (pnTableMyLeaveApp == null) {
+			GridBagConstraints gridBagConstraints14 = new GridBagConstraints();
+			gridBagConstraints14.fill = GridBagConstraints.BOTH;
+			gridBagConstraints14.gridy = 0;
+			gridBagConstraints14.weightx = 1.0;
+			gridBagConstraints14.weighty = 1.0;
+			gridBagConstraints14.gridx = 0;
 			pnTableMyLeaveApp = new JPanel();
 			pnTableMyLeaveApp.setLayout(new GridBagLayout());
 			pnTableMyLeaveApp.setBounds(new Rectangle(371, 47, 773, 142));
+			pnTableMyLeaveApp.add(getJScrollPane9(), gridBagConstraints14);
 		}
 		return pnTableMyLeaveApp;
 	}
@@ -2735,6 +2753,52 @@ public class MDControlPanel extends JFrame {
 			}
 		}
 		return tblReportMonth;
+	}
+	/**
+	 * This method initializes jScrollPane9	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane9() {
+		if (jScrollPane9 == null) {
+			jScrollPane9 = new JScrollPane();
+			jScrollPane9.setViewportView(getTblMyleaveapp());
+		}
+		return jScrollPane9;
+	}
+	/**
+	 * This method initializes tblMyleaveapp	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblMyleaveapp() {
+		if (tblMyleaveapp == null) {
+			tblMyleaveapp = new JTable();
+		}
+		return tblMyleaveapp;
+	}
+	/**
+	 * This method initializes tblDayofSystem	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getTblDayofSystem() {
+		if (tblDayofSystem == null) {
+			tblDayofSystem = new JScrollPane();
+			tblDayofSystem.setViewportView(getTblDayOfSystem());
+		}
+		return tblDayofSystem;
+	}
+	/**
+	 * This method initializes tblDayOfSystem	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblDayOfSystem() {
+		if (tblDayOfSystem == null) {
+			tblDayOfSystem = new JTable();
+		}
+		return tblDayOfSystem;
 	}
 
 }

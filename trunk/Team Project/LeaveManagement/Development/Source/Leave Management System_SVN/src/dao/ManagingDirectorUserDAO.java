@@ -17,7 +17,7 @@ import common.Enumeration.loginResult;
 
 
 public class ManagingDirectorUserDAO {
-	//ADD USER
+	//ADD LEAVEEDITOR
 	public void createleavedirector(LeaveDirector leavedirector){
 		try {
 			ConnectionDB conn = new ConnectionDB();
