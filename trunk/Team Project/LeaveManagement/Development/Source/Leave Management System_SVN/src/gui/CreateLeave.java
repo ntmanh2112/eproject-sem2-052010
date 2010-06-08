@@ -6,12 +6,12 @@ import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Calendar;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -224,7 +224,7 @@ public class CreateLeave extends JDialog {
 	private JTextField getTxtDateFromMonth() {
 		if (txtDateFromMonth == null) {
 			txtDateFromMonth = new JTextField();
-			txtDateFromMonth.setText(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)));
+			txtDateFromMonth.setText(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1 ));
 			txtDateFromMonth.setEnabled(false);
 			txtDateFromMonth.setSize(new Dimension(70, 25));
 			txtDateFromMonth.setLocation(new Point(276, 110));
@@ -258,9 +258,9 @@ public class CreateLeave extends JDialog {
 			cbxDatetoMonth = new JComboBox();
 			cbxDatetoMonth.setLocation(new Point(275, 159));
 			cbxDatetoMonth.setSize(new Dimension(70, 25));
-			for(int i=Calendar.getInstance().get(Calendar.MONTH);i<32;i++){
-				cbxDatetoMonth.addItem(i);
-			}
+			int i = Calendar.getInstance().get(Calendar.MONTH)+1;
+			cbxDatetoMonth.addItem(i);
+			cbxDatetoMonth.addItem(i+1);
 		}
 		return cbxDatetoMonth;
 	}
@@ -336,7 +336,47 @@ public class CreateLeave extends JDialog {
 			btnSubmit.setLocation(new Point(45, 405));
 			btnSubmit.setSize(new Dimension(110, 35));
 			btnSubmit.setText("Submit");
-		}
+			btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					if(
+								txtReason.getText().isEmpty()||
+								txtAddress.getText().isEmpty()||
+								txtPhone.getText().isEmpty()
+								
+							){
+							JOptionPane.showMessageDialog(null, "Please input full of column!!");
+						}else if(Integer.valueOf(cbxDayDateFrom.getSelectedItem().toString())> Integer.valueOf(cbxDateToDay.getSelectedItem().toString()) && String.valueOf(cbxDatetoMonth.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText())){
+							JOptionPane.showMessageDialog(null, " dateto must be larger than datefrom");
+						}/*else{
+							
+							SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+							try{
+								java.util.Date date = format.parse(txtDateFromYear.getText().toString()+"/"+txtDateFromMonth.getText().toString()+"/"+cbxDay.getSelectedItem().toString());
+								Date datefrom = new Date(date.getTime());
+								java.util.Date date1 = format.parse(txtDateToYear.toString()+"/"+cbxMonth1.getSelectedItem().toString()+"/"+cbxDay1.getSelectedItem().toString());
+								Date dateto = new Date(date1.getTime());
+								leave_app.setDatefrom(datefrom);
+								leave_app.setDateto(dateto);
+								leave_app.setReason(txtReason.getText());
+								leave_app.setAddress(txtAddress.getText());
+								leave_app.setPhone(txtPhone.getText());
+							}catch (Exception ex) {
+								ex.printStackTrace();
+							}try {
+								LeaveappService service = new LeaveappService();
+								service.addLeaveApp(leave_app);
+								JOptionPane.showMessageDialog(null, "Add member successfully!!");
+								CreateLeaveapp.this.dispose();
+							} catch (Exception e2) {
+								e2.printStackTrace();
+							}
+								
+						}*/
+										
+					}
+				});
+				
+			}
 		return btnSubmit;
 	}
 

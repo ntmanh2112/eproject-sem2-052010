@@ -338,11 +338,7 @@ public class CreateLeaveapp extends JDialog {
 					if(
 							txtReason.getText().isEmpty()||
 							txtAddress.getText().isEmpty()||
-							txtPhone.getText().isEmpty()||
-							cbxDay.getSelectedItem().toString().isEmpty()||
-							cbxDay1.getSelectedItem().toString().isEmpty()||
-							cbxMonth1.getSelectedItem().toString().isEmpty()
-							
+							txtPhone.getText().isEmpty()
 						){
 						JOptionPane.showMessageDialog(null, "Please input full of column!!");
 					}else if(Integer.valueOf(cbxDay1.getSelectedItem().toString())< Integer.valueOf(cbxDay.getSelectedItem().toString()) && String.valueOf(cbxMonth1.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText())){
