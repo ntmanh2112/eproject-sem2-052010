@@ -193,8 +193,10 @@ public class MDControlPanel extends JFrame {
 	 * This is the default constructor
 	 */
 	public MDControlPanel() {
+		
 		super();
 		initialize();
+		
 	}
 	public MDControlPanel(int id){
 		super();
@@ -210,6 +212,7 @@ public class MDControlPanel extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
+		
 		this.setSize(1280, 720);
 		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		this.setEnabled(true);
@@ -493,6 +496,7 @@ public class MDControlPanel extends JFrame {
 			btnChangepass = new JButton();
 			btnChangepass.setText("Change pass");
 			btnChangepass.setSize(new Dimension(138, 40));
+			btnChangepass.setIcon(new ImageIcon(getClass().getResource("/image/changepass.jpg")));
 			btnChangepass.setLocation(new Point(632, 30));
 			btnChangepass.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -512,6 +516,7 @@ public class MDControlPanel extends JFrame {
 		if (btnEditProfile == null) {
 			btnEditProfile = new JButton();
 			btnEditProfile.setText("Edit Profile");
+			btnEditProfile.setIcon(new ImageIcon(getClass().getResource("/image/Edit-icon.png")));
 			btnEditProfile.setSize(new Dimension(138, 40));
 			btnEditProfile.setLocation(new Point(632, 90));
 			/*btnEditProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -543,6 +548,7 @@ public class MDControlPanel extends JFrame {
 			btnCreatleaveapp = new JButton();
 			btnCreatleaveapp.setBounds(new Rectangle(632, 150, 138, 40));
 			btnCreatleaveapp.setText("Create Leaveapp");
+			btnCreatleaveapp.setIcon(new ImageIcon(getClass().getResource("/image/Emp.png")));
 			btnCreatleaveapp.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new CreateLeaveapp(null).setVisible(true);
@@ -1006,6 +1012,7 @@ public class MDControlPanel extends JFrame {
 		if (mniEditprofile == null) {
 			mniEditprofile = new JMenuItem();
 			mniEditprofile.setText("Edit Profile");
+			mniEditprofile.setIcon(new ImageIcon(getClass().getResource("/image/Edit-icon.png")));
 			mniEditprofile.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Editprofile(null,id).setVisible(true);
@@ -1024,6 +1031,7 @@ public class MDControlPanel extends JFrame {
 		if (mniChangepass == null) {
 			mniChangepass = new JMenuItem();
 			mniChangepass.setText("Change Password");
+			mniChangepass.setIcon(new ImageIcon(getClass().getResource("/image/changepass.jpg")));
 			mniChangepass.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Changepassword(null).setVisible(true);
@@ -1042,6 +1050,7 @@ public class MDControlPanel extends JFrame {
 		if (mniCreatleaveapp == null) {
 			mniCreatleaveapp = new JMenuItem();
 			mniCreatleaveapp.setText("Creat Leaveapp");
+			mniCreatleaveapp.setIcon(new ImageIcon(getClass().getResource("/image/Emp.png")));
 			mniCreatleaveapp.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new CreateLeaveapp(null).setVisible(true);
@@ -1060,6 +1069,7 @@ public class MDControlPanel extends JFrame {
 		if (mniViewManagerleaveapp == null) {
 			mniViewManagerleaveapp = new JMenuItem();
 			mniViewManagerleaveapp.setText("View Manager Leave App");
+			mniViewManagerleaveapp.setIcon(new ImageIcon(getClass().getResource("/image/report.png")));
 			mniViewManagerleaveapp.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					jtpnManager.setSelectedIndex(1);
@@ -2142,6 +2152,7 @@ public class MDControlPanel extends JFrame {
 		if (mnHelpcontent == null) {
 			mnHelpcontent = new JMenuItem();
 			mnHelpcontent.setText("Help Content");
+			mnHelpcontent.setIcon(new ImageIcon(getClass().getResource("/image/Help.png")));
 		}
 		return mnHelpcontent;
 	}
@@ -2154,6 +2165,7 @@ public class MDControlPanel extends JFrame {
 		if (mnAbout == null) {
 			mnAbout = new JMenuItem();
 			mnAbout.setText("About");
+			mnAbout.setIcon(new ImageIcon(getClass().getResource("/image/about.png")));
 			mnAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new About(null).setVisible(true);
@@ -2171,6 +2183,7 @@ public class MDControlPanel extends JFrame {
 		if (mnViewReport == null) {
 			mnViewReport = new JMenuItem();
 			mnViewReport.setText("View Report");
+			mnViewReport.setIcon(new ImageIcon(getClass().getResource("/image/report.png")));
 			mnViewReport.addActionListener(new java.awt.event.ActionListener() {   
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					jtpnManager.setSelectedIndex(2);
@@ -2189,6 +2202,7 @@ public class MDControlPanel extends JFrame {
 		if (mnViewUserManager == null) {
 			mnViewUserManager = new JMenuItem();
 			mnViewUserManager.setText("View User Manager");
+			mnViewUserManager.setIcon(new ImageIcon(getClass().getResource("/image/report.png")));
 			mnViewUserManager.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					jtpnManager.setSelectedIndex(3);
@@ -2206,6 +2220,7 @@ public class MDControlPanel extends JFrame {
 		if (mnViewHistory == null) {
 			mnViewHistory = new JMenuItem();
 			mnViewHistory.setText("View History");
+			mnViewHistory.setIcon(new ImageIcon(getClass().getResource("/image/report.png")));
 			mnViewHistory.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					jtpnManager.setSelectedIndex(0);
