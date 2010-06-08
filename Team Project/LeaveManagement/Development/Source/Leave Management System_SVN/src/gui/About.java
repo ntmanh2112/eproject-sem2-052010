@@ -29,7 +29,7 @@ public class About extends JDialog {
 	 * @param owner
 	 */
 	public About(Frame owner) {
-		super(owner);
+		super(owner,true);
 		initialize();
 	}
 
