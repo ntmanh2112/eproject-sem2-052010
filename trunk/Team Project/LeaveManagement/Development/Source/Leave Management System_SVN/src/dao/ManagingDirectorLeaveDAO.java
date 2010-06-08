@@ -19,7 +19,7 @@ import common.ConnectionDB;
  * @author HIEU
  *
  */
-public class LeaveDAO {
+public class ManagingDirectorLeaveDAO {
 	//APPROVE LEAVEAPP
 		public void  approveLeave(Leaveapp leaveapp)throws Exception{
 		ConnectionDB connection = new ConnectionDB();

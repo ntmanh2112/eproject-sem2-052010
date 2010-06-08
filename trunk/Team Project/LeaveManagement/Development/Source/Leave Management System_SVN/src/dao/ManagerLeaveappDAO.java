@@ -9,7 +9,7 @@ import model.Leaveapp;
 
 import common.ConnectionDB;
 
-public class MLeaveappDAO {
+public class ManagerLeaveappDAO {
 	//APPROVE LEAVEAPP
 	public void  MapproveLeave(Leaveapp leaveapp)throws Exception{
 	ConnectionDB connection = new ConnectionDB();
@@ -50,7 +50,7 @@ public ResultSet MreportMonth() throws Exception{
 	 return rs;
 }
 
-//SELECT LEAVEAPP OF BUSINESSMANAGER = VALID
+//SELECT LEAVEAPP OF MANAGER = VALID
 public ResultSet MselectAllLeaveappValid() throws Exception{
 	ConnectionDB connection = new ConnectionDB();
 	connection.connect();
@@ -59,7 +59,7 @@ public ResultSet MselectAllLeaveappValid() throws Exception{
 	ResultSet rs = st.executeQuery(sql);
 	return rs;
 }
-//SELECT LEAVEAPP OF BUSINESSMANAGER = APPROVE
+//SELECT LEAVEAPP OF MANAGER = APPROVE
 public ResultSet MselectAllLeaveappApprove() throws Exception{
 	ConnectionDB connection = new ConnectionDB();
 	connection.connect();
@@ -68,7 +68,7 @@ public ResultSet MselectAllLeaveappApprove() throws Exception{
 	ResultSet rs = st.executeQuery(sql);
 	return rs;
 }
-//SELECT LEAVEAPP OF BUSINESSMANAGER = REJECT
+//SELECT LEAVEAPP OF MANAGER = REJECT
 public ResultSet MselectAllLeaveappReject() throws Exception{
 	ConnectionDB connection = new ConnectionDB();
 	connection.connect();
@@ -77,7 +77,7 @@ public ResultSet MselectAllLeaveappReject() throws Exception{
 	ResultSet rs = st.executeQuery(sql);
 	return rs;
 }
-//SELECT LEAVEAPP OF BUSINESSMANAGER = FINISH
+//SELECT LEAVEAPP OF MANAGER = FINISH
 public ResultSet MselectAllLeaveappFinish() throws Exception{
 	ConnectionDB connection = new ConnectionDB();
 	connection.connect();

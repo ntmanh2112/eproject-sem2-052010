@@ -20,9 +20,9 @@ import javax.swing.JTextField;
 
 import model.Leaveapp;
 import model.User;
-import business.LeaveappService;
+import business.ManagingDirectorLeaveappService;
 import business.Method;
-import business.UserService;
+import business.ManagingDirectorUserService;
 import javax.swing.ImageIcon;
 
 
@@ -58,7 +58,7 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox cbxDay1 = null;
 	private int id = 0;
 	private User user = new User();  //  @jve:decl-index=0:
-	private UserService service = new  UserService();
+	private ManagingDirectorUserService service = new  ManagingDirectorUserService();
 	private JLabel lbId_user = null;
 	private JLabel lbDatefromMess = null;
 	private JLabel lbDatetoMess = null;
@@ -360,7 +360,7 @@ public class CreateLeaveapp extends JDialog {
 						}catch (Exception ex) {
 							ex.printStackTrace();
 						}try {
-							LeaveappService service = new LeaveappService();
+							ManagingDirectorLeaveappService service = new ManagingDirectorLeaveappService();
 							service.addLeaveApp(leave_app);
 							JOptionPane.showMessageDialog(null, "Add member successfully!!");
 							CreateLeaveapp.this.dispose();

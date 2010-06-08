@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 import model.User;
 import business.Method;
-import business.UserService;
+import business.ManagingDirectorUserService;
 
 public class Editprofile extends JDialog {
 
@@ -48,7 +48,7 @@ public class Editprofile extends JDialog {
 	private JTextField txtPhone = null;
 	private int id = 0;
 	private User user = new User();
-	private UserService service = new  UserService();
+	private ManagingDirectorUserService service = new  ManagingDirectorUserService();
 	private JLabel lbFullnamemess = null;
 	private JLabel lbBirthdaymess = null;
 	private JComboBox cbxSex = null;
@@ -307,7 +307,7 @@ public class Editprofile extends JDialog {
 								ex.printStackTrace();
 							}
 							try{
-								UserService service = new UserService();
+								ManagingDirectorUserService service = new ManagingDirectorUserService();
 								service.updateUser(user);
 								JOptionPane.showMessageDialog(null, "edit successfull");
 								
