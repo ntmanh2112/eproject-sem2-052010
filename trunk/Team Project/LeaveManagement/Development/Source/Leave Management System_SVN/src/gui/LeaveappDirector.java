@@ -45,12 +45,6 @@ public class LeaveappDirector extends JDialog {
 	private JLabel lbDateToMess = null;
 	private JTextField txtReason = null;
 	private JLabel lbReasonMess = null;
-	private JLabel lbAddress = null;
-	private JTextField txtAddress = null;
-	private JLabel lbPhone = null;
-	private JTextField txtPhone = null;
-	private JLabel lbAddressMess = null;
-	private JLabel lbPhoneMess = null;
 	private JButton btnSubmit = null;
 	private JButton btnReset = null;
 	private JButton btnExit = null;
@@ -80,24 +74,6 @@ public class LeaveappDirector extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			lbPhoneMess = new JLabel();
-			lbPhoneMess.setText("");
-			lbPhoneMess.setSize(new Dimension(321, 25));
-			lbPhoneMess.setLocation(new Point(120, 356));
-			lbAddressMess = new JLabel();
-			lbAddressMess.setText("");
-			lbAddressMess.setSize(new Dimension(321, 25));
-			lbAddressMess.setLocation(new Point(120, 307));
-			lbPhone = new JLabel();
-			lbPhone.setFont(new Font("Dialog", Font.BOLD, 14));
-			lbPhone.setLocation(new Point(15, 332));
-			lbPhone.setSize(new Dimension(106, 25));
-			lbPhone.setText("Phone");
-			lbAddress = new JLabel();
-			lbAddress.setFont(new Font("Dialog", Font.BOLD, 14));
-			lbAddress.setLocation(new Point(15, 284));
-			lbAddress.setSize(new Dimension(106, 25));
-			lbAddress.setText("Address");
 			lbReasonMess = new JLabel();
 			lbReasonMess.setText("");
 			lbReasonMess.setSize(new Dimension(321, 25));
@@ -176,12 +152,6 @@ public class LeaveappDirector extends JDialog {
 			jContentPane.add(lbDateToMess, null);
 			jContentPane.add(getTxtReason(), null);
 			jContentPane.add(lbReasonMess, null);
-			jContentPane.add(lbAddress, null);
-			jContentPane.add(getTxtAddress(), null);
-			jContentPane.add(lbPhone, null);
-			jContentPane.add(getTxtPhone(), null);
-			jContentPane.add(lbAddressMess, null);
-			jContentPane.add(lbPhoneMess, null);
 			jContentPane.add(getBtnSubmit(), null);
 			jContentPane.add(getBtnReset(), null);
 			jContentPane.add(getBtnExit(), null);
@@ -303,34 +273,6 @@ public class LeaveappDirector extends JDialog {
 	}
 
 	/**
-	 * This method initializes txtAddress	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getTxtAddress() {
-		if (txtAddress == null) {
-			txtAddress = new JTextField();
-			txtAddress.setLocation(new Point(120, 284));
-			txtAddress.setSize(new Dimension(321, 25));
-		}
-		return txtAddress;
-	}
-
-	/**
-	 * This method initializes txtPhone	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getTxtPhone() {
-		if (txtPhone == null) {
-			txtPhone = new JTextField();
-			txtPhone.setLocation(new Point(120, 332));
-			txtPhone.setSize(new Dimension(161, 25));
-		}
-		return txtPhone;
-	}
-
-	/**
 	 * This method initializes btnSubmit	
 	 * 	
 	 * @return javax.swing.JButton	
@@ -339,27 +281,22 @@ public class LeaveappDirector extends JDialog {
 		if (btnSubmit == null) {
 			btnSubmit = new JButton();
 			btnSubmit.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
-			btnSubmit.setLocation(new Point(45, 405));
+			btnSubmit.setLocation(new Point(30, 314));
 			btnSubmit.setSize(new Dimension(110, 35));
 			btnSubmit.setText("Submit");
 			btnSubmit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					if(
-								txtReason.getText().isEmpty()||
-								txtAddress.getText().isEmpty()||
-								txtPhone.getText().isEmpty()
-								
-							){
+					if(txtReason.getText().isEmpty()){
 							JOptionPane.showMessageDialog(null, "Please input full of column!!");
-						}else if(Integer.valueOf(cbxDayDateFrom.getSelectedItem().toString())> Integer.valueOf(cbxDateToDay.getSelectedItem().toString()) && String.valueOf(cbxDatetoMonth.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText())){
-							JOptionPane.showMessageDialog(null, " dateto must be larger than datefrom");
+						//}else if(Integer.valueOf(cbxDayDateFrom.getSelectedItem().toString())> Integer.valueOf(cbxDateToDay.getSelectedItem().toString()) && String.valueOf(cbxDatetoMonth.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText().toString())){
+							//JOptionPane.showMessageDialog(null, " dateto must be larger than datefrom");
 						}else{
 								LeaveDirector leavedirector = new LeaveDirector();
 								SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 								try{
 									java.util.Date date = format.parse(txtYearDateFrom.getText().toString()+"/"+txtDateFromMonth.getText().toString()+"/"+cbxDayDateFrom.getSelectedItem().toString());
 									Date datefrom = new Date(date.getTime());
-									java.util.Date date1 = format.parse(txtDateToYear.toString()+"/"+cbxDatetoMonth.getSelectedItem().toString()+"/"+cbxDateToDay.getSelectedItem().toString());
+									java.util.Date date1 = format.parse(txtDateToYear.getText().toString()+"/"+cbxDatetoMonth.getSelectedItem().toString()+"/"+cbxDateToDay.getSelectedItem().toString());
 									Date dateto = new Date(date1.getTime());
 									leavedirector.setDatefrom(datefrom);
 									leavedirector.setDateto(dateto);
@@ -395,9 +332,14 @@ public class LeaveappDirector extends JDialog {
 		if (btnReset == null) {
 			btnReset = new JButton();
 			btnReset.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
-			btnReset.setLocation(new Point(180, 405));
+			btnReset.setLocation(new Point(178, 313));
 			btnReset.setSize(new Dimension(110, 35));
 			btnReset.setText("Reset");
+			btnReset.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txtReason.setText("");
+				}
+			});
 		}
 		return btnReset;
 	}
@@ -411,9 +353,14 @@ public class LeaveappDirector extends JDialog {
 		if (btnExit == null) {
 			btnExit = new JButton();
 			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Cancel-2-icon.png")));
-			btnExit.setLocation(new Point(317, 405));
+			btnExit.setLocation(new Point(331, 315));
 			btnExit.setSize(new Dimension(110, 35));
 			btnExit.setText("Exit");
+			btnExit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					LeaveappDirector.this.dispose();
+				}
+			});
 		}
 		return btnExit;
 	}

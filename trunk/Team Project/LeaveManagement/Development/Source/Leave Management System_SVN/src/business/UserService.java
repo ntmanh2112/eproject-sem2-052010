@@ -22,10 +22,13 @@ public class UserService {
 	public void creatLeaveDirector(LeaveDirector leavedirector){
 		dao.createleavedirector(leavedirector);
 	}
-	
-	public changeResult changePass(String oldpass,String newpass,String confirmpass){
-		changeResult result = dao.changePass(oldpass, newpass, confirmpass);
-		return result;
+	//get pass
+	public String selectPass(int id)throws Exception{
+		return dao.getpass(id);
+	}
+	//change pass
+	public void changePass(String pass,int id){
+		dao.changePass(pass, id);
 	}
 	//ADD USER
 	public addResult addUser(User user){

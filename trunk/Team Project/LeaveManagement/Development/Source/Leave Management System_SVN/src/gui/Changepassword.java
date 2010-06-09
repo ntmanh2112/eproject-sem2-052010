@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import model.User;
+
 
 import common.ChangeUser.changeResult;
 
@@ -32,6 +34,9 @@ public class Changepassword extends JDialog {
 	private JButton btnChange = null;
 	private JButton btnReset = null;
 	private JButton btnExit = null;
+	private int id = 0;
+	private User user = new User();  //  @jve:decl-index=0:
+	private UserService service = new  UserService();  //  @jve:decl-index=0:
 
 	/**
 	 * @param owner
@@ -40,7 +45,13 @@ public class Changepassword extends JDialog {
 		super(owner);
 		initialize();
 	}
-
+	public Changepassword(Frame owner,int id){
+		super(owner);
+		this.id = id;
+		this.user = service.loadUser(id);
+		initialize();
+		
+	}
 	/**
 	 * This method initializes this
 	 * 
@@ -153,22 +164,33 @@ public class Changepassword extends JDialog {
 					String oldpass = String.valueOf(txtOldpassword.getPassword());
 					String newpass = String.valueOf(txtNewpassword.getPassword());
 					String confirmpass = String.valueOf(txtConfirmpassword.getPassword());
-					try{
-						UserService changepass = new UserService();
-						changeResult cpresult = changepass.changePass(oldpass, newpass, confirmpass);
-						if(cpresult == changeResult.sucessful){
-							JOptionPane.showMessageDialog(null, "Change Password Success!!!");
-	        				 Changepassword.this.dispose();
+					
+					if(oldpass.isEmpty()||newpass.isEmpty()||confirmpass.isEmpty()){
+						JOptionPane.showMessageDialog(null, "Please input full of column!!");
+					}
+					
+					else {
+						if(newpass.equalsIgnoreCase(confirmpass)){
+							try {
+								String pass = service.selectPass(id);
+								if(oldpass.equalsIgnoreCase(pass)) {
+									try{
+										service.changePass(confirmpass, id);
+										JOptionPane.showMessageDialog(null, "change pass successfull");
+									}catch (Exception e2) {
+										e2.printStackTrace();
+									}
+								}else {
+									JOptionPane.showMessageDialog(null, "old password is wrong!!");
+								}
+							} catch (Exception e2) {
+								e2.printStackTrace();
+							}
 						}
-						else if (cpresult == changeResult.fail) {
-							 JOptionPane.showMessageDialog(null, "Confirm pass is different from new pass!!!");
-							
+						
+						else {
+							JOptionPane.showMessageDialog(null, "new pass va confirm pass ko giong nhau");
 						}
-						else if (cpresult == changeResult.incorrect) {
-							JOptionPane.showMessageDialog(null, "Old password is incorrect!!!");
-						}
-					}catch (Exception ex) {
-						ex.printStackTrace();
 					}
 				}
 			});

@@ -22,12 +22,12 @@ public class UserDAO {
 		try {
 			ConnectionDB conn = new ConnectionDB();
 			conn.connect();
-			String sql1 = "INSERT INTO TBL_LEAVEDIRECTOR (DATEFROM,DATETO,REASON) VALUES (?,?,?)";
-			PreparedStatement psmt1 = conn.getConn().prepareStatement(sql1);
-			psmt1.setDate(1, leavedirector.getDatefrom());
-			psmt1.setDate(2, leavedirector.getDateto());
-			psmt1.setString(3, leavedirector.getReason());
-			psmt1.executeUpdate();
+			String sql = "INSERT INTO TBL_LEAVEDIRECTOR (DATEFROM,DATETO,REASON) VALUES (?,?,?)";
+			PreparedStatement psmt = conn.getConn().prepareStatement(sql);
+			psmt.setDate(1, leavedirector.getDatefrom());
+			psmt.setDate(2, leavedirector.getDateto());
+			psmt.setString(3, leavedirector.getReason());
+			psmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -203,46 +203,37 @@ public class UserDAO {
 		}
 		
 	}
-	//CHANGE PASSWORD
-	public changeResult changePass(String oldpass,String newpass,String confirmpass ){
-		changeResult cpresult = null;
+
+	//Select pass
+	public String getpass(int id){
+		ConnectionDB conn = new ConnectionDB();
+		conn.connect();
+		String pass = null;
+		try{
+			String sql =  "SELECT PASSWORD FROM TBL_USER WHERE ID_USER = " + id;
+			Statement st = conn.getConn().createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				pass = rs.getString("PASSWORD");
+			}
+			return pass;
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return pass;
+	}
+
+	public void changePass(String pass,int id){
 		try {
 			ConnectionDB conn = new ConnectionDB();
 			conn.connect();
-			String sql = "update Users set PASSWORD = ? where USERNAME =?";
-			String sql1 = "SELECT PASSWORD FROM USER WHERE ID = ?";
-			PreparedStatement psmt = conn.getConn().prepareStatement(sql1);
-			psmt.setString(1, oldpass);
-			psmt.setString(2, newpass);
-			psmt.setString(3,confirmpass);
-			ResultSet rs =psmt.executeQuery();
-			String pass = null;
-			while(rs.next()){
-				 pass = rs.getString("PASSWORD");
-			}
-			if(oldpass.isEmpty()||newpass.isEmpty()||confirmpass.isEmpty()){
-				 JOptionPane.showMessageDialog(null,"Please input all of column!");
-			}
-			else {
-				if(pass.equalsIgnoreCase(oldpass)){
-					if(newpass.equalsIgnoreCase(oldpass)){
-						psmt = conn.getConn().prepareStatement(sql);
-	   				 	cpresult = changeResult.sucessful;
-	   				}
-					else {
-						 cpresult = changeResult.fail;
-					}
-				}
-				else{
-					 cpresult = changeResult.incorrect;
-				}
-			}
-			
-		} catch (Exception e) {
+			String sql = "UPDATE TBL_USER SET PASSWORD = '"+pass+"' where ID_USER = '"+ id + "'";
+			Statement st = conn.getConn().createStatement();
+			st.executeUpdate(sql);
+		}catch (Exception e) {
 			e.printStackTrace();
-			return cpresult;
 		}
-		return cpresult;
+			
 	}
 	
 	//SELECT USER

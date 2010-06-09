@@ -488,4 +488,4 @@ public class Editprofile extends JDialog {
 		return cbxSex;
 	}
 
-}  //  @jve:decl-index=0:visual-constraint="10,-12"
+} 
