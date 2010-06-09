@@ -69,6 +69,7 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField txtDateFromYear = null;
 	private JTextField txtDateFromMonth = null;
 	private JTextField txtDateToYear = null;
+	private JTextField txtId_user = null;
 	/**
 	 * @param owner
 	 */
@@ -225,6 +226,7 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(getTxtDateFromYear(), null);
 			jContentPane.add(getTxtDateFromMonth(), null);
 			jContentPane.add(getTxtDateToYear(), null);
+			jContentPane.add(getTxtId_user(), null);
 		}
 		return jContentPane;
 	}
@@ -332,7 +334,8 @@ public class CreateLeaveapp extends JDialog {
 			btnSend.setFont(new Font("Dialog", Font.BOLD, 14));
 			btnSend.setLocation(new Point(15, 436));
 			btnSend.setSize(new Dimension(106, 30));
-			btnSend.setText("Send");
+			btnSend.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
+			btnSend.setText("Submit");
 			btnSend.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					if(
@@ -350,7 +353,7 @@ public class CreateLeaveapp extends JDialog {
 						try{
 							java.util.Date date = format.parse(txtDateFromYear.getText().toString()+"/"+txtDateFromMonth.getText().toString()+"/"+cbxDay.getSelectedItem().toString());
 							Date datefrom = new Date(date.getTime());
-							java.util.Date date1 = format.parse(txtDateToYear.toString()+"/"+cbxMonth1.getSelectedItem().toString()+"/"+cbxDay1.getSelectedItem().toString());
+							java.util.Date date1 = format.parse(txtDateToYear.getText().toString()+"/"+cbxMonth1.getSelectedItem().toString()+"/"+cbxDay1.getSelectedItem().toString());
 							Date dateto = new Date(date1.getTime());
 							leave_app.setDatefrom(datefrom);
 							leave_app.setDateto(dateto);
@@ -362,7 +365,7 @@ public class CreateLeaveapp extends JDialog {
 						}try {
 							LeaveappService service = new LeaveappService();
 							service.addLeaveApp(leave_app);
-							JOptionPane.showMessageDialog(null, "Add member successfully!!");
+							JOptionPane.showMessageDialog(null, "Create Leaveapp successfully!!");
 							CreateLeaveapp.this.dispose();
 						} catch (Exception e2) {
 							e2.printStackTrace();
@@ -387,6 +390,7 @@ public class CreateLeaveapp extends JDialog {
 			btnReset = new JButton();
 			btnReset.setText("Reset");
 			btnReset.setSize(new Dimension(106, 30));
+			btnReset.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
 			btnReset.setLocation(new Point(173, 436));
 			btnReset.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -411,6 +415,7 @@ public class CreateLeaveapp extends JDialog {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(106, 30));
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Shutdown-32.png")));
 			btnExit.setLocation(new Point(330, 436));
 			btnExit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -483,6 +488,19 @@ public class CreateLeaveapp extends JDialog {
 			txtDateToYear.setSize(new Dimension(69, 20));
 		}
 		return txtDateToYear;
+	}
+	/**
+	 * This method initializes txtId_user	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtId_user() {
+		if (txtId_user == null) {
+			txtId_user = new JTextField(String.valueOf(id));
+			txtId_user.setBounds(new Rectangle(148, 55, 115, 20));
+			txtId_user.setEnabled(false);
+		}
+		return txtId_user;
 	}
 	public static void main(String [] args){
 		new CreateLeaveapp(null).setVisible(true);

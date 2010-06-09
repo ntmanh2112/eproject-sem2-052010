@@ -195,6 +195,8 @@ public class MDControlPanel extends JFrame {
 		initialize();
 		
 	}
+	
+
 
 	/**
 	 * This method initializes this
@@ -490,7 +492,7 @@ public class MDControlPanel extends JFrame {
 			btnChangepass.setLocation(new Point(632, 30));
 			btnChangepass.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Changepassword(null).setVisible(true);
+					new Changepassword(null,id).setVisible(true);
 				}
 			});
 		}
@@ -509,14 +511,6 @@ public class MDControlPanel extends JFrame {
 			btnEditProfile.setIcon(new ImageIcon(getClass().getResource("/image/Edit-icon.png")));
 			btnEditProfile.setSize(new Dimension(138, 40));
 			btnEditProfile.setLocation(new Point(632, 90));
-			/*btnEditProfile.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					setEnabled(false);
-					new Editprofile(null,id).setVisible(true);
-					
-				}
-			});*/
-			
 			btnEditProfile.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {		
@@ -541,7 +535,7 @@ public class MDControlPanel extends JFrame {
 			btnCreatleaveapp.setIcon(new ImageIcon(getClass().getResource("/image/Emp.png")));
 			btnCreatleaveapp.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new CreateLeaveapp(null).setVisible(true);
+					new CreateLeaveapp(null,id).setVisible(true);
 				}
 			});
 		}
