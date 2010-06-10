@@ -19,15 +19,7 @@ import common.ConnectionDB;
  *
  */
 public class LeaveDAO {
-	//total leave
-	//public ResultSet totalleave(int month,int year,int id_user) throws Exception{
-	//	ConnectionDB connection = new ConnectionDB();
-	//	connection.connect();
-	//	String sql = "SELECT count(TBL_LEAVEAPP.DATEFROM) as TOTAL FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_USER.ID_USER = '1' AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM)=5 AND DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)=2010 AND STATUSLEAVE='finish' "'";
-	//	Statement st = connection.getConn().createStatement();
-	//	ResultSet rs = st.executeQuery(sql);
-	//	return rs;
-	//}
+	
 	//History User
 	public ResultSet history(int month,int year,int id_user) throws Exception{
 		ConnectionDB connection = new ConnectionDB();
