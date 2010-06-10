@@ -133,6 +133,8 @@ public class MDControlPanel extends JFrame {
 	private String[] columnrp = {"FullName","DateFrom","Dateto","Reason","Address","Phone"};
 	private String[][]datah = null;
 	private String[] columnh = {"FullName","DateFrom","Dateto","Reason","Status","Address","Phone"};
+	private String[][]dataday = null;
+	private String[] columnday = {"DateFrom","Dateto","Reason"};
 	private JPanel pnUserlock = null;
 	private JPanel pnTableUserlock = null;
 	private JScrollPane jScrollPane7 = null;
@@ -173,6 +175,7 @@ public class MDControlPanel extends JFrame {
 	private common.TableModel tableModelLeaveapp = new common.TableModel(data1, column1);
 	private common.TableModel tableModelReport = new common.TableModel(datarp, columnrp);
 	private common.TableModel tableModelHistory = new common.TableModel(datah, columnh);
+	private common.TableModel tableModelDayoff = new common.TableModel(dataday, columnday);
 	private JScrollPane jScrollPane9 = null;
 	private JTable tblMyleaveapp = null;
 	private JScrollPane tblDayofSystem = null;
@@ -2572,7 +2575,15 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTable getTblDayOfSystem() {
 		if (tblDayOfSystem == null) {
-			tblDayOfSystem = new JTable();
+			try{
+				
+				dataday= leaveappservice.loadDayOff(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)+ 1),Integer.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+				tableModelDayoff.setData(dataday);
+				tblDayOfSystem = new JTable(tableModelDayoff);
+			}catch(Exception ex){
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error");
+			}
 		}
 		return tblDayOfSystem;
 	}
