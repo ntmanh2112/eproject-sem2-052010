@@ -129,8 +129,6 @@ public class MDControlPanel extends JFrame {
 	private String[] column = {"ID","UserName","Status","Position","FullName","Birthday","Address","Gender","Phone","Email"};
 	private String[][]data1 = null;
 	private String[] column1 = {"ID_LEAVE","FullName","DateFrom","Dateto","Reason","Status","Address","Phone"};
-	private String[][]datarp = null;
-	private String[] columnrp = {"FullName","DateFrom","Dateto","Reason","Address","Phone"};
 	private String[][]datah = null;
 	private String[] columnh = {"FullName","DateFrom","Dateto","Reason","Status","Address","Phone"};
 	private String[][]dataday = null;
@@ -150,7 +148,6 @@ public class MDControlPanel extends JFrame {
 	private JMenu mnHelp = null;
 	private JMenuItem mnHelpcontent = null;
 	private JMenuItem mnAbout = null;
-	private JMenuItem mnViewReport = null;
 	private JMenuItem mnViewUserManager = null;
 	private JMenuItem mnViewHistory = null;
 	private JTextField txtTotaldaycanleave = null;
@@ -173,7 +170,7 @@ public class MDControlPanel extends JFrame {
 	private JPanel pnTableMyLeaveApp = null;
 	private common.TableModel tableModel = new common.TableModel(data, column);
 	private common.TableModel tableModelLeaveapp = new common.TableModel(data1, column1);
-	private common.TableModel tableModelReport = new common.TableModel(datarp, columnrp);
+	
 	private common.TableModel tableModelHistory = new common.TableModel(datah, columnh);
 	private common.TableModel tableModelDayoff = new common.TableModel(dataday, columnday);
 	private JScrollPane jScrollPane9 = null;
@@ -1170,7 +1167,18 @@ public class MDControlPanel extends JFrame {
 				
 				data1 = leaveappservice.selectLeaveappMDvalid();
 				tableModelLeaveapp.setData(data1);
-				tblLeaveappValid = new JTable(tableModelLeaveapp);
+				tblLeaveappValid = new JTable(tableModelLeaveapp){
+
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex,int vColIndex) {
+						return false;
+					}
+				};
 			}catch(Exception ex){
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error");
@@ -1295,7 +1303,18 @@ public class MDControlPanel extends JFrame {
 			try{
 				data1 = leaveappservice.selectLeaveappMDapprove();
 				tableModelLeaveapp.setData(data1);
-				tblLeaveappApprove = new JTable(tableModelLeaveapp);
+				tblLeaveappApprove = new JTable(tableModelLeaveapp){
+
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex,int vColIndex) {
+						return false;
+					}
+				};
 			}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error");
@@ -1411,7 +1430,18 @@ public class MDControlPanel extends JFrame {
 			try{
 				data1 = leaveappservice.selectLeaveappMDreject();
 				tableModelLeaveapp.setData(data1);
-				tblLeaveappReject = new JTable(tableModelLeaveapp);
+				tblLeaveappReject = new JTable(tableModelLeaveapp){
+
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex,int vColIndex) {
+						return false;
+					}
+				};
 			}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error");
@@ -1443,7 +1473,18 @@ public class MDControlPanel extends JFrame {
 			try{
 				data1 = leaveappservice.selectLeaveappMDfinish();
 				tableModelLeaveapp.setData(data1);
-				tblLeaveappFinish = new JTable(tableModelLeaveapp);
+				tblLeaveappFinish = new JTable(tableModelLeaveapp){
+
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex,int vColIndex) {
+						return false;
+					}
+				};
 			}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error");
@@ -1565,7 +1606,18 @@ public class MDControlPanel extends JFrame {
 			try{
 				data = userservice.selectAllUserBM();
 				tableModel.setData(data);
-				tblBusinessManager = new JTable(tableModel);
+				tblBusinessManager = new JTable(tableModel){
+
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex,int vColIndex) {
+						return false;
+					}
+				};
 			}catch(Exception ex){
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error");
@@ -1689,7 +1741,18 @@ public class MDControlPanel extends JFrame {
 			try{
 				data = userservice.selectAllUserM();
 				tableModel.setData(data);
-				tblManager = new JTable(tableModel);
+				tblManager = new JTable(tableModel){
+
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex,int vColIndex) {
+						return false;
+					}
+				};
 				
 			}catch(Exception ex){
 				ex.printStackTrace();
@@ -1814,7 +1877,18 @@ public class MDControlPanel extends JFrame {
 			try{
 				data = userservice.selectAllUserE();
 				tableModel.setData(data);
-				tblEngineer = new JTable(tableModel);
+				tblEngineer = new JTable(tableModel){
+
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex,int vColIndex) {
+						return false;
+					}
+				};
 				
 			}catch(Exception ex){
 				ex.printStackTrace();
@@ -1917,7 +1991,18 @@ public class MDControlPanel extends JFrame {
 			try{
 					data = userservice.selectAllUserlock();
 					tableModel.setData(data);
-					tblUserlock = new JTable(tableModel);
+					tblUserlock = new JTable(tableModel){
+
+
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
+
+						public boolean isCellEditable(int rowIndex,int vColIndex) {
+							return false;
+						}
+					};
 				}catch(Exception ex){
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Error");
@@ -2080,7 +2165,6 @@ public class MDControlPanel extends JFrame {
 			mnView.setText("View");
 			mnView.setIcon(new ImageIcon(getClass().getResource("/image/zoom.png")));
 			mnView.add(getMniViewManagerleaveapp());
-			mnView.add(getMnViewReport());
 			mnView.add(getMnViewUserManager());
 			mnView.add(getMnViewHistory());
 		}
@@ -2131,25 +2215,6 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return mnAbout;
-	}
-	/**
-	 * This method initializes mnViewReport	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMnViewReport() {
-		if (mnViewReport == null) {
-			mnViewReport = new JMenuItem();
-			mnViewReport.setText("View Report");
-			mnViewReport.setIcon(new ImageIcon(getClass().getResource("/image/report.png")));
-			mnViewReport.addActionListener(new java.awt.event.ActionListener() {   
-				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					jtpnManager.setSelectedIndex(2);
-				}
-			
-			});
-		}
-		return mnViewReport;
 	}
 	/**
 	 * This method initializes mnViewUserManager	
@@ -2549,10 +2614,20 @@ public class MDControlPanel extends JFrame {
 			try{
 				datah = leaveappservice.History(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1),Integer.valueOf( Calendar.getInstance().get(Calendar.YEAR)), id);
 				tableModelHistory.setData(datah);
-				tblMyleaveapp = new JTable(tableModelHistory);
+				tblMyleaveapp = new JTable(tableModelHistory){
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex, int vColIndex) {
+						return false;
+					}
+				};
 			}catch (Exception ex) {
 				ex.printStackTrace();
 			}
+			
 		}
 		return tblMyleaveapp;
 	}
@@ -2579,7 +2654,17 @@ public class MDControlPanel extends JFrame {
 				
 				dataday= leaveappservice.loadDayOff(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)+ 1),Integer.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 				tableModelDayoff.setData(dataday);
-				tblDayOfSystem = new JTable(tableModelDayoff);
+				tblDayOfSystem = new JTable(tableModelDayoff){
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex,int vColIndex) {
+						return false;
+					}
+				};
 			}catch(Exception ex){
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error");
