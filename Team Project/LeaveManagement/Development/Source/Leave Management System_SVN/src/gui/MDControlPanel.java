@@ -1976,6 +1976,22 @@ public class MDControlPanel extends JFrame {
 			btnEdit.setSize(new Dimension(159, 45));
 			btnEdit.setMnemonic(KeyEvent.VK_UNDEFINED);
 			btnEdit.setIcon(new ImageIcon(getClass().getResource("/image/edit-user-icon.png")));
+			btnEdit.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int count = tblUserlock.getSelectedRowCount();
+					int i = tblUserlock.getSelectedRow();
+					if (count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one User");
+					}else{
+						int id = Integer.parseInt(tblUserlock.getValueAt(i, 0).toString());
+						try{
+							new Editprofile(null,id).setVisible(true);
+						}catch(Exception ex){
+							ex.printStackTrace();
+						}
+					}
+				}
+			});
 		}
 		return btnEdit;
 	}
@@ -2257,7 +2273,7 @@ public class MDControlPanel extends JFrame {
 			btnViewEnginerrRefresh.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try{
-						data = userservice.selectAllUserM();
+						data = userservice.selectAllUserE();
 						tableModel.setData(data);
 					}catch (Exception ex) {
 						ex.printStackTrace();
@@ -2360,7 +2376,7 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JComboBox getCbxViewBusinessmanager() {
 		if (cbxViewBusinessmanager == null) {
-			String[] data = {"","Manager","Engineer"};
+			String[] data = {"Manager","Engineer"};
 			cbxViewBusinessmanager = new JComboBox(data);
 			cbxViewBusinessmanager.setLocation(new Point(755, 328));
 			cbxViewBusinessmanager.setSize(new Dimension(159, 45));
@@ -2433,7 +2449,7 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JComboBox getCbxViewManager() {
 		if (cbxViewManager == null) {
-			String [] data = {"","Business Manager" ,"Engineer"};
+			String [] data = {"Business Manager" ,"Engineer"};
 			cbxViewManager = new JComboBox(data);
 			cbxViewManager.setLocation(new Point(755, 328));
 			cbxViewManager.setSize(new Dimension(159, 45));
@@ -2480,7 +2496,7 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JComboBox getCbxViewEngineer() {
 		if (cbxViewEngineer == null) {
-			String [] data = {"","Business Manager","Manager"};
+			String [] data = {"Business Manager","Manager"};
 			cbxViewEngineer = new JComboBox(data);
 			cbxViewEngineer.setLocation(new Point(755, 328));
 			cbxViewEngineer.setSize(new Dimension(159, 45));
@@ -2528,7 +2544,7 @@ public class MDControlPanel extends JFrame {
 		if (tblMyleaveapp == null) {
 			
 			try{
-				datah = leaveappservice.History(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)),Integer.valueOf( Calendar.getInstance().get(Calendar.YEAR)), id);
+				datah = leaveappservice.History(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1),Integer.valueOf( Calendar.getInstance().get(Calendar.YEAR)), id);
 				tableModelHistory.setData(datah);
 				tblMyleaveapp = new JTable(tableModelHistory);
 			}catch (Exception ex) {
