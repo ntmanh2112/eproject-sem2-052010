@@ -74,7 +74,7 @@ public class CreateLeaveapp extends JDialog {
 	 * @param owner
 	 */
 	public CreateLeaveapp(Frame owner) {
-		super(owner);
+		super(owner,true);
 		initialize();
 	}
 	public CreateLeaveapp(Frame owner,int id) {

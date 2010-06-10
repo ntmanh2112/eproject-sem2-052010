@@ -65,7 +65,7 @@ public class Addmember extends JDialog {
 	 * @param owner
 	 */
 	public Addmember(Frame owner) {
-		super(owner);
+		super(owner,true);
 		initialize();
 	}
 

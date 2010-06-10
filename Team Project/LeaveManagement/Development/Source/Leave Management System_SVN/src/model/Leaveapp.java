@@ -14,11 +14,18 @@ public class Leaveapp {
 	String phone;
 	String address;
 	String fullname;
+	String username;
 	public String getFullname() {
 		return fullname;
 	}
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public int getId_leaveapp() {
 		return id_leaveapp;

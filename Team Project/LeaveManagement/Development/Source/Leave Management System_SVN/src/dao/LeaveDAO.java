@@ -7,7 +7,6 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Calendar;
 
 import model.Leaveapp;
 
@@ -20,6 +19,33 @@ import common.ConnectionDB;
  *
  */
 public class LeaveDAO {
+	//total leave
+	//public ResultSet totalleave(int month,int year,int id_user) throws Exception{
+	//	ConnectionDB connection = new ConnectionDB();
+	//	connection.connect();
+	//	String sql = "SELECT count(TBL_LEAVEAPP.DATEFROM) as TOTAL FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_USER.ID_USER = '1' AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM)=5 AND DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)=2010 AND STATUSLEAVE='finish' "'";
+	//	Statement st = connection.getConn().createStatement();
+	//	ResultSet rs = st.executeQuery(sql);
+	//	return rs;
+	//}
+	//History User
+	public ResultSet history(int month,int year,int id_user) throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM)= '"+ month+"' AND DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)='"+ year + "' AND TBL_USER.ID_USER = "+ id_user;
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	//REPORT
+	public ResultSet report(int month,int year,int id_position) throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT USERNAME ,FULLNAME,DATEFROM,DATETO,REASON,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE  FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM)= '" + month+"' AND DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)= '"+ year + "' AND STATUSLEAVE = 'FINISH' AND ID_POSITION = '" +id_position; 
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
 	//APPROVE LEAVEAPP
 		public void  approveLeave(Leaveapp leaveapp)throws Exception{
 		ConnectionDB connection = new ConnectionDB();
@@ -48,17 +74,7 @@ public class LeaveDAO {
 		Statement st = connection.getConn().createStatement();
 		st.executeUpdate(finish);
 	}
-////VIEW REPORT MONTH 
-	public ResultSet reportMonth() throws Exception{
-		 ConnectionDB connection = new ConnectionDB();
-		 connection.connect();
-		 int year = Calendar.getInstance().get(Calendar.YEAR);
-		 int month = Calendar.getInstance().get(Calendar.MONTH);
-		 String sql = "SELECT TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON FROM TBL_USER INNER JOIN TBL_LEAVEAPP ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE  DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)= '"+ year +"' AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM)= '"+ month+ "' ORDER BY DATEFROM" ;
-		 Statement st = connection.getConn().createStatement();
-		 ResultSet rs = st.executeQuery(sql);
-		 return rs;
-	}
+
 	//SELECT LEAVEAPP OF MANAGING DIRECTOR = VALID
 	public ResultSet selectAllLeaveappMDValid() throws Exception{
 		ConnectionDB connection = new ConnectionDB();
