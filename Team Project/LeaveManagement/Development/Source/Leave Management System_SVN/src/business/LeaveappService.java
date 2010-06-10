@@ -47,19 +47,19 @@ public class LeaveappService {
 			leaveapp.setPhone(rs.getString("PHONE"));
 			list.add(leaveapp);
 		}
-		String[][] datah = new String[list.size()][7];
+		String[][] data = new String[list.size()][7];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			datah[i][0] = leaveapp.getFullname();
-			datah[i][1] = leaveapp.getDatefrom().toString();
-			datah[i][2] = leaveapp.getDateto().toString();
-			datah[i][3] = leaveapp.getReason();
-			datah[i][4] = leaveapp.getStatusleave();
-			datah[i][5] = leaveapp.getAddress();
-			datah[i][6] = leaveapp.getPhone();			
+			data[i][0] = leaveapp.getFullname();
+			data[i][1] = leaveapp.getDatefrom().toString();
+			data[i][2] = leaveapp.getDateto().toString();
+			data[i][3] = leaveapp.getReason();
+			data[i][4] = leaveapp.getStatusleave();
+			data[i][5] = leaveapp.getAddress();
+			data[i][6] = leaveapp.getPhone();			
 			i++;
 		}
-		return datah;
+		return data;
 	}
 	//LOAD REPORT
 	public String[][] report(int month,int year,int id_position)throws Exception{

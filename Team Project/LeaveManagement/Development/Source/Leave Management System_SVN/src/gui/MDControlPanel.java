@@ -67,7 +67,6 @@ public class MDControlPanel extends JFrame {
 	private JTabbedPane jtpnManager = null;
 	private JPanel jpnHistory = null;
 	private JPanel jpnLeaveapp = null;
-	private JPanel jpnReport = null;
 	private JPanel jpmUsermanager = null;
 	private JTabbedPane jtpnUsermanager = null;
 	private JPanel jpnBusinessmanager = null;
@@ -178,18 +177,6 @@ public class MDControlPanel extends JFrame {
 	private JTable tblMyleaveapp = null;
 	private JScrollPane tblDayofSystem = null;
 	private JTable tblDayOfSystem = null;
-	private JLabel lbMonth = null;
-	private JLabel lbYeat = null;
-	private JLabel lbGroup = null;
-	private JTextField txtYear = null;
-	private JComboBox cbxMonth = null;
-	private JComboBox cbxGroupname = null;
-	private JButton btnHistoryViewReport = null;
-	private JPanel pnReport = null;
-	private JButton btnReportRefresh = null;
-	private JLabel lbReport = null;
-	private JScrollPane jScrollPane8 = null;
-	private JTable tblReport = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -605,7 +592,6 @@ public class MDControlPanel extends JFrame {
 			jtpnManager = new JTabbedPane();
 			jtpnManager.addTab("History", new ImageIcon(getClass().getResource("/image/data-server-icon.png")), getJpnHistory(), null);
 			jtpnManager.addTab("Manager LeaveApp", new ImageIcon(getClass().getResource("/image/Attach-icon.png")), getJpnLeaveapp(), null);
-			jtpnManager.addTab("Report", new ImageIcon(getClass().getResource("/image/Document-icon.png")), getJpnReport(), null);
 			jtpnManager.addTab("User Manager", new ImageIcon(getClass().getResource("/image/user-group-icon.png")), getJpmUsermanager(), "");
 		}
 		return jtpnManager;
@@ -684,45 +670,6 @@ public class MDControlPanel extends JFrame {
 			jpnLeaveapp.add(getJtbnLeaveapp(), gridBagConstraints3);
 		}
 		return jpnLeaveapp;
-	}
-
-	/**
-	 * This method initializes jpnReport	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getJpnReport() {
-		if (jpnReport == null) {
-			lbReport = new JLabel();
-			lbReport.setBounds(new Rectangle(254, 30, 169, 31));
-			lbReport.setFont(new Font("Dialog", Font.BOLD, 24));
-			lbReport.setText("Report ");
-			lbGroup = new JLabel();
-			lbGroup.setText("Group Name");
-			lbGroup.setSize(new Dimension(77, 25));
-			lbGroup.setLocation(new Point(15, 105));
-			lbYeat = new JLabel();
-			lbYeat.setText("Year");
-			lbYeat.setSize(new Dimension(62, 25));
-			lbYeat.setLocation(new Point(15, 29));
-			lbMonth = new JLabel();
-			lbMonth.setText("Month");
-			lbMonth.setSize(new Dimension(62, 25));
-			lbMonth.setLocation(new Point(15, 66));
-			jpnReport = new JPanel();
-			jpnReport.setLayout(null);
-			jpnReport.add(lbMonth, null);
-			jpnReport.add(lbYeat, null);
-			jpnReport.add(lbGroup, null);
-			jpnReport.add(getTxtYear(), null);
-			jpnReport.add(getCbxMonth(), null);
-			jpnReport.add(getCbxGroupname(), null);
-			jpnReport.add(getBtnHistoryViewReport(), null);
-			jpnReport.add(getPnReport(), null);
-			jpnReport.add(getBtnReportRefresh(), null);
-			jpnReport.add(lbReport, null);
-		}
-		return jpnReport;
 	}
 
 	/**
@@ -2581,7 +2528,7 @@ public class MDControlPanel extends JFrame {
 		if (tblMyleaveapp == null) {
 			
 			try{
-				datah = leaveappservice.History(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)),Integer.valueOf( Calendar.getInstance().get(Calendar.MONTH)), id);
+				datah = leaveappservice.History(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)),Integer.valueOf( Calendar.getInstance().get(Calendar.YEAR)), id);
 				tableModelHistory.setData(datah);
 				tblMyleaveapp = new JTable(tableModelHistory);
 			}catch (Exception ex) {
@@ -2612,145 +2559,6 @@ public class MDControlPanel extends JFrame {
 			tblDayOfSystem = new JTable();
 		}
 		return tblDayOfSystem;
-	}
-	/**
-	 * This method initializes txtYear	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getTxtYear() {
-		if (txtYear == null) {
-			txtYear = new JTextField();
-			txtYear.setText(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
-			txtYear.setLocation(new Point(91, 29));
-			txtYear.setEnabled(false);
-			txtYear.setSize(new Dimension(97, 25));
-			
-		}
-		return txtYear;
-	}
-	/**
-	 * This method initializes cbxMonth	
-	 * 	
-	 * @return javax.swing.JComboBox	
-	 */
-	private JComboBox getCbxMonth() {
-		if (cbxMonth == null) {
-			cbxMonth = new JComboBox();
-			cbxMonth.setLocation(new Point(91, 68));
-			cbxMonth.setSize(new Dimension(97, 25));
-			for(int i = 1;i<Calendar.getInstance().get(Calendar.MONTH)+2;i++){
-				cbxMonth.addItem(i);
-			}
-		}
-		return cbxMonth;
-	}
-	/**
-	 * This method initializes cbxGroupname	
-	 * 	
-	 * @return javax.swing.JComboBox	
-	 */
-	private JComboBox getCbxGroupname() {
-		if (cbxGroupname == null) {
-			String [] data = {"","Engineer","Manager","Business Manager"};
-			cbxGroupname = new JComboBox(data);
-			cbxGroupname.setLocation(new Point(91, 105));
-			cbxGroupname.setSize(new Dimension(98, 25));
-		}
-		return cbxGroupname;
-	}
-	/**
-	 * This method initializes btnHistoryViewReport	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnHistoryViewReport() {
-		if (btnHistoryViewReport == null) {
-			btnHistoryViewReport = new JButton();
-			btnHistoryViewReport.setBounds(new Rectangle(15, 149, 173, 33));
-			btnHistoryViewReport.setIcon(new ImageIcon(getClass().getResource("/image/zoom.png")));
-			btnHistoryViewReport.setText("View Report");
-			btnHistoryViewReport.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					if(cbxGroupname.getSelectedItem().toString().isEmpty()){
-						JOptionPane.showMessageDialog(null, "Please input full colum");
-					}else {
-						int month = Calendar.getInstance().get(Calendar.MONTH);
-						int year = Calendar.getInstance().get(Calendar.YEAR);
-						if(cbxGroupname.getSelectedItem().toString().equalsIgnoreCase("Engineer")){
-							try{
-								datarp =leaveappservice.report(month, year, 1);
-								tableModelReport.setData(datarp);
-								tblReport = new JTable(tableModelReport);
-							}catch (Exception ex) {
-								ex.printStackTrace();
-							}
-						}
-					}
-				}
-			});
-		}
-		return btnHistoryViewReport;
-	}
-	/**
-	 * This method initializes pnReport	
-	 * 	
-	 * @return javax.swing.JPanel	
-	 */
-	private JPanel getPnReport() {
-		if (pnReport == null) {
-			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
-			gridBagConstraints2.fill = GridBagConstraints.BOTH;
-			gridBagConstraints2.gridy = 0;
-			gridBagConstraints2.weightx = 1.0;
-			gridBagConstraints2.weighty = 1.0;
-			gridBagConstraints2.gridx = 0;
-			pnReport = new JPanel();
-			pnReport.setLayout(new GridBagLayout());
-			pnReport.setBounds(new Rectangle(211, 69, 1057, 334));
-			pnReport.add(getJScrollPane8(), gridBagConstraints2);
-		}
-		return pnReport;
-	}
-	/**
-	 * This method initializes btnReportRefresh	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnReportRefresh() {
-		if (btnReportRefresh == null) {
-			btnReportRefresh = new JButton();
-			btnReportRefresh.setLocation(new Point(15, 210));
-			btnReportRefresh.setText("Refresh");
-			btnReportRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
-			btnReportRefresh.setSize(new Dimension(173, 33));
-		}
-		return btnReportRefresh;
-	}
-	/**
-	 * This method initializes jScrollPane8	
-	 * 	
-	 * @return javax.swing.JScrollPane	
-	 */
-	private JScrollPane getJScrollPane8() {
-		if (jScrollPane8 == null) {
-			jScrollPane8 = new JScrollPane();
-			jScrollPane8.setViewportView(getTblReport());
-		}
-		return jScrollPane8;
-	}
-	/**
-	 * This method initializes tblReport	
-	 * 	
-	 * @return javax.swing.JTable	
-	 */
-	private JTable getTblReport() {
-		if (tblReport == null) {
-			
-				tblReport = new JTable(tableModelReport);
-		
-		}
-		return tblReport;
 	}
 
 }
