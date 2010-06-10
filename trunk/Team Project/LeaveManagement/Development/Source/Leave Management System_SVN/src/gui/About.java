@@ -22,9 +22,9 @@ public class About extends JDialog {
 	private JLabel jLabel3 = null;
 	private JLabel jLabel4 = null;
 	private JLabel jLabel5 = null;
-	private JButton btnOk = null;
 	private JLabel lbLogoAptech = null;
 	private JLabel lblogoJava = null;
+	private JLabel jLabel6 = null;
 	/**
 	 * @param owner
 	 */
@@ -39,7 +39,7 @@ public class About extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(383, 280);
+		this.setSize(429, 276);
 		this.setTitle("About L.M.S");
 		this.setContentPane(getJContentPane());
 	}
@@ -51,19 +51,23 @@ public class About extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			jLabel6 = new JLabel();
+			jLabel6.setBounds(new Rectangle(303, 8, 103, 131));
+			jLabel6.setIcon(new ImageIcon(getClass().getResource("/image/419_transforming_teams_logo.png")));
+			jLabel6.setText("");
 			lblogoJava = new JLabel();
-			lblogoJava.setBounds(new Rectangle(-1, -4, 150, 162));
+			lblogoJava.setBounds(new Rectangle(-1, 2, 150, 147));
 			lblogoJava.setIcon(new ImageIcon(getClass().getResource("/image/java-logo-thumb.png")));
 			lblogoJava.setText("");
 			lbLogoAptech = new JLabel();
-			lbLogoAptech.setBounds(new Rectangle(-1, 156, 169, 87));
+			lbLogoAptech.setBounds(new Rectangle(0, 148, 169, 87));
 			lbLogoAptech.setIcon(new ImageIcon(getClass().getResource("/image/logo_aptech.png")));
 			lbLogoAptech.setText("");
 			jLabel5 = new JLabel();
 			jLabel5.setText("Support By: Aptech Center");
 			jLabel5.setSize(new Dimension(200, 26));
 			jLabel5.setFont(new Font("Dialog", Font.BOLD, 14));
-			jLabel5.setLocation(new Point(167, 157));
+			jLabel5.setLocation(new Point(169, 208));
 			jLabel4 = new JLabel();
 			jLabel4.setText("Dinh Si Nguyen");
 			jLabel4.setSize(new Dimension(138, 26));
@@ -96,31 +100,12 @@ public class About extends JDialog {
 			jContentPane.add(jLabel3, null);
 			jContentPane.add(jLabel4, null);
 			jContentPane.add(jLabel5, null);
-			jContentPane.add(getBtnOk(), null);
 			jContentPane.add(lbLogoAptech, null);
 			jContentPane.add(lblogoJava, null);
+			jContentPane.add(jLabel6, null);
 		}
 		return jContentPane;
 	}
 
-	/**
-	 * This method initializes btnOk	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnOk() {
-		if (btnOk == null) {
-			btnOk = new JButton();
-			btnOk.setBounds(new Rectangle(201, 200, 101, 27));
-			btnOk.setText("Ok");
-			btnOk.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					About.this.dispose();
-				}
-			});
-		}
-		return btnOk;
-	}
 
-
-}  //  @jve:decl-index=0:visual-constraint="10,43"
+}  //  @jve:decl-index=0:visual-constraint="36,35"

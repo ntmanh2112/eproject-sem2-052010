@@ -4,19 +4,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import javax.swing.JOptionPane;
-
 import model.LeaveDirector;
 import model.User;
 
 import common.ConnectionDB;
 import common.AddUser.addResult;
-import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
 
 
 
 public class UserDAO {
+	//ADDGROUP
+	public void addGroup(int id_position,int id){
+		try {
+			ConnectionDB conn = new ConnectionDB();
+			conn.connect();
+			String sql = "UPDATE TBL_USER SET ID_POSITION = '"+id_position+"' where ID_USER = '"+ id + "'";
+			Statement st = conn.getConn().createStatement();
+			st.executeUpdate(sql);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+	}
 	//ADD LEAVEEDITOR
 	public void createleavedirector(LeaveDirector leavedirector){
 		try {
@@ -91,7 +101,6 @@ public class UserDAO {
 		
 		
 	}
-	//ADD LEAVE DIRECTOR
 	
 	//ADD USER
 	public addResult addUser(User  user){

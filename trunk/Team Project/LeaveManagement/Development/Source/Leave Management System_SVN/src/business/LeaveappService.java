@@ -32,26 +32,60 @@ public class LeaveappService {
 	public void finishLeaveApp(Leaveapp leaveapp)throws Exception{
 		dao.finishLeave(leaveapp);
 	}
-	//LOAD REPORT
-	public String[][] reportMonth()throws Exception{
+	//LOAD History 
+	public String[][] History(int month,int year,int id_user)throws Exception{
 		ArrayList<Leaveapp> list = new ArrayList<Leaveapp>();
-		ResultSet rs = dao.reportMonth();
+		ResultSet rs = dao.history(month, year, id_user);
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
 			leaveapp.setReason(rs.getString("REASON"));
+			leaveapp.setStatusleave(rs.getString("STATUSLEAVE"));
+			leaveapp.setAddress(rs.getString("ADDRESS"));
+			leaveapp.setPhone(rs.getString("PHONE"));
 			list.add(leaveapp);
 		}
-		String[][] datarp = new String[list.size()][4];
+		String[][] datah = new String[list.size()][7];
 		int i = 0;
 		for(Leaveapp leaveapp : list){
-			datarp[i][0] = leaveapp.getFullname();
-			datarp[i][1] = leaveapp.getDatefrom().toString();
-			datarp[i][2] = leaveapp.getDateto().toString();
-			datarp[i][3] = leaveapp.getReason();
-			
+			datah[i][0] = leaveapp.getFullname();
+			datah[i][1] = leaveapp.getDatefrom().toString();
+			datah[i][2] = leaveapp.getDateto().toString();
+			datah[i][3] = leaveapp.getReason();
+			datah[i][4] = leaveapp.getStatusleave();
+			datah[i][5] = leaveapp.getAddress();
+			datah[i][6] = leaveapp.getPhone();			
+			i++;
+		}
+		return datah;
+	}
+	//LOAD REPORT
+	public String[][] report(int month,int year,int id_position)throws Exception{
+		ArrayList<Leaveapp> list = new ArrayList<Leaveapp>();
+		ResultSet rs = dao.report(month, year, id_position);
+		while (rs.next()){ 
+			Leaveapp leaveapp = new Leaveapp();
+			leaveapp.setUsername(rs.getString("USERNAME"));
+			leaveapp.setFullname(rs.getString("FULLNAME"));
+			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
+			leaveapp.setDateto(rs.getDate("DATETO"));
+			leaveapp.setReason(rs.getString("REASON"));
+			leaveapp.setAddress(rs.getString("ADDRESS"));
+			leaveapp.setPhone(rs.getString("PHONE"));
+			list.add(leaveapp);
+		}
+		String[][] datarp = new String[list.size()][7];
+		int i = 0;
+		for(Leaveapp leaveapp : list){
+			datarp[i][0] = leaveapp.getUsername();
+			datarp[i][1] = leaveapp.getFullname();
+			datarp[i][2] = leaveapp.getDatefrom().toString();
+			datarp[i][3] = leaveapp.getDateto().toString();
+			datarp[i][4] = leaveapp.getReason();
+			datarp[i][5] = leaveapp.getAddress();
+			datarp[i][6] = leaveapp.getPhone();			
 			i++;
 		}
 		return datarp;

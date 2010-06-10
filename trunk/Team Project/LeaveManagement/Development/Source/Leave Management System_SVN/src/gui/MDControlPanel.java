@@ -31,6 +31,7 @@ import model.Leaveapp;
 import model.User;
 import business.LeaveappService;
 import business.UserService;
+import javax.swing.WindowConstants;
 
 
 
@@ -130,7 +131,9 @@ public class MDControlPanel extends JFrame {
 	private String[][]data1 = null;
 	private String[] column1 = {"ID_LEAVE","FullName","DateFrom","Dateto","Reason","Status","Address","Phone"};
 	private String[][]datarp = null;
-	private String[] columnrp = {"FullName","DateFrom","Dateto","Reason"};
+	private String[] columnrp = {"FullName","DateFrom","Dateto","Reason","Address","Phone"};
+	private String[][]datah = null;
+	private String[] columnh = {"FullName","DateFrom","Dateto","Reason","Status","Address","Phone"};
 	private JPanel pnUserlock = null;
 	private JPanel pnTableUserlock = null;
 	private JScrollPane jScrollPane7 = null;
@@ -169,6 +172,8 @@ public class MDControlPanel extends JFrame {
 	private JPanel pnTableMyLeaveApp = null;
 	private common.TableModel tableModel = new common.TableModel(data, column);
 	private common.TableModel tableModelLeaveapp = new common.TableModel(data1, column1);
+	private common.TableModel tableModelReport = new common.TableModel(datarp, columnrp);
+	private common.TableModel tableModelHistory = new common.TableModel(datah, columnh);
 	private JScrollPane jScrollPane9 = null;
 	private JTable tblMyleaveapp = null;
 	private JScrollPane tblDayofSystem = null;
@@ -179,6 +184,12 @@ public class MDControlPanel extends JFrame {
 	private JTextField txtYear = null;
 	private JComboBox cbxMonth = null;
 	private JComboBox cbxGroupname = null;
+	private JButton btnHistoryViewReport = null;
+	private JPanel pnReport = null;
+	private JButton btnReportRefresh = null;
+	private JLabel lbReport = null;
+	private JScrollPane jScrollPane8 = null;
+	private JTable tblReport = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -206,7 +217,7 @@ public class MDControlPanel extends JFrame {
 	private void initialize() {
 		
 		this.setSize(1280, 720);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setEnabled(true);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Administrator-icon.png")));
 		this.setJMenuBar(getJJMenuBar());
@@ -682,6 +693,10 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JPanel getJpnReport() {
 		if (jpnReport == null) {
+			lbReport = new JLabel();
+			lbReport.setBounds(new Rectangle(254, 30, 169, 31));
+			lbReport.setFont(new Font("Dialog", Font.BOLD, 24));
+			lbReport.setText("Report ");
 			lbGroup = new JLabel();
 			lbGroup.setText("Group Name");
 			lbGroup.setSize(new Dimension(77, 25));
@@ -702,6 +717,10 @@ public class MDControlPanel extends JFrame {
 			jpnReport.add(getTxtYear(), null);
 			jpnReport.add(getCbxMonth(), null);
 			jpnReport.add(getCbxGroupname(), null);
+			jpnReport.add(getBtnHistoryViewReport(), null);
+			jpnReport.add(getPnReport(), null);
+			jpnReport.add(getBtnReportRefresh(), null);
+			jpnReport.add(lbReport, null);
 		}
 		return jpnReport;
 	}
@@ -1222,6 +1241,26 @@ public class MDControlPanel extends JFrame {
 			btnViewApprovereject.setLocation(new Point(22, 328));
 			btnViewApprovereject.setSize(new Dimension(159, 45));
 			btnViewApprovereject.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+			btnViewApprovereject.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int i = tblLeaveappApprove.getSelectedRow();
+					int count = tblLeaveappApprove.getSelectedRowCount();
+					if(count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one leave app");
+					}else{
+						if (JOptionPane.showConfirmDialog(null, "Are you sure want to "+tblLeaveappValid.getValueAt(i, 1) +" this LeaveApp??","Reject LeaveApp",JOptionPane.YES_NO_OPTION) == 0){
+							Leaveapp leaveapp = new Leaveapp();
+							leaveapp.setId_leaveapp(Integer.parseInt(tblLeaveappApprove.getValueAt(i, 0).toString()));
+							try{
+								leaveappservice.rejectLeaveApp(leaveapp);
+							}catch (Exception ex) {
+								ex.printStackTrace();
+								JOptionPane.showMessageDialog(null, "error");
+							}
+						}
+					}
+				}
+			});
 		}
 		return btnViewApprovereject;
 	}
@@ -2346,6 +2385,24 @@ public class MDControlPanel extends JFrame {
 			btnViewBusinessmanagerAddgroup.setText("Add Group");
 			btnViewBusinessmanagerAddgroup.setIcon(new ImageIcon(getClass().getResource("/image/Clients-icon.png")));
 			btnViewBusinessmanagerAddgroup.setLocation(new Point(588, 328));
+			btnViewBusinessmanagerAddgroup.addActionListener(new java.awt.event.ActionListener() {
+						public void actionPerformed(java.awt.event.ActionEvent e) {
+							int count = tblBusinessManager.getSelectedRowCount();
+							int i = tblBusinessManager.getSelectedRow();
+							if (count != 1){
+								JOptionPane.showMessageDialog(null, "Please select only one User");
+							}else{
+								int id = Integer.parseInt(tblBusinessManager.getValueAt(i, 0).toString());
+								if(cbxViewBusinessmanager.getSelectedItem().toString().equalsIgnoreCase("Engineer")){
+									userservice.addgroup(1, id);
+									JOptionPane.showMessageDialog(null, "Addgroup successfull");
+								}else if(cbxViewBusinessmanager.getSelectedItem().toString().equalsIgnoreCase("Manager")){
+									userservice.addgroup(2, id);
+									JOptionPane.showMessageDialog(null, "Addgroup successfull");
+								}
+							}
+						}
+					});
 		}
 		return btnViewBusinessmanagerAddgroup;
 	}
@@ -2401,7 +2458,25 @@ public class MDControlPanel extends JFrame {
 			btnViewManagerAddgroup.setText("Add Group");
 			btnViewManagerAddgroup.setIcon(new ImageIcon(getClass().getResource("/image/Clients-icon.png")));
 			btnViewManagerAddgroup.setSize(new Dimension(159, 45));
-		}
+			btnViewManagerAddgroup.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int count = tblManager.getSelectedRowCount();
+					int i = tblManager.getSelectedRow();
+					if (count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one User");
+					}else{
+						int id = Integer.parseInt(tblManager.getValueAt(i, 0).toString());
+						if(cbxViewManager.getSelectedItem().toString().equalsIgnoreCase("Engineer")){
+							userservice.addgroup(1, id);
+							JOptionPane.showMessageDialog(null, "Addgroup successfull");
+						}else if(cbxViewManager.getSelectedItem().toString().equalsIgnoreCase("Business Manager")){
+							userservice.addgroup(3, id);
+							JOptionPane.showMessageDialog(null, "Addgroup successfull");
+						}
+					}
+				}
+			});
+}
 		return btnViewManagerAddgroup;
 	}
 	/**
@@ -2430,7 +2505,25 @@ public class MDControlPanel extends JFrame {
 			btnViewEngineerAddgroup.setLocation(new Point(588, 328));
 			btnViewEngineerAddgroup.setSize(new Dimension(159, 45));
 			btnViewEngineerAddgroup.setText("Add Group");
-		}
+			btnViewEngineerAddgroup.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int count = tblEngineer.getSelectedRowCount();
+					int i = tblEngineer.getSelectedRow();
+					if (count != 1){
+						JOptionPane.showMessageDialog(null, "Please select only one User");
+					}else{
+						int id = Integer.parseInt(tblEngineer.getValueAt(i, 0).toString());
+						if(cbxViewEngineer.getSelectedItem().toString().equalsIgnoreCase("Manager")){
+							userservice.addgroup(2, id);
+							JOptionPane.showMessageDialog(null, "Addgroup successfull");
+						}else if(cbxViewEngineer.getSelectedItem().toString().equalsIgnoreCase("Business Manager")){
+							userservice.addgroup(3, id);
+							JOptionPane.showMessageDialog(null, "Addgroup successfull");
+						}
+					}
+				}
+			});
+}
 		return btnViewEngineerAddgroup;
 	}
 	/**
@@ -2486,7 +2579,14 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTable getTblMyleaveapp() {
 		if (tblMyleaveapp == null) {
-			tblMyleaveapp = new JTable();
+			
+			try{
+				datah = leaveappservice.History(Integer.valueOf(Calendar.getInstance().get(Calendar.MONTH)),Integer.valueOf( Calendar.getInstance().get(Calendar.MONTH)), id);
+				tableModelHistory.setData(datah);
+				tblMyleaveapp = new JTable(tableModelHistory);
+			}catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 		return tblMyleaveapp;
 	}
@@ -2524,7 +2624,7 @@ public class MDControlPanel extends JFrame {
 			txtYear.setText(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 			txtYear.setLocation(new Point(91, 29));
 			txtYear.setEnabled(false);
-			txtYear.setSize(new Dimension(62, 25));
+			txtYear.setSize(new Dimension(97, 25));
 			
 		}
 		return txtYear;
@@ -2538,8 +2638,8 @@ public class MDControlPanel extends JFrame {
 		if (cbxMonth == null) {
 			cbxMonth = new JComboBox();
 			cbxMonth.setLocation(new Point(91, 68));
-			cbxMonth.setSize(new Dimension(62, 25));
-			for(int i = 1;i<13;i++){
+			cbxMonth.setSize(new Dimension(97, 25));
+			for(int i = 1;i<Calendar.getInstance().get(Calendar.MONTH)+2;i++){
 				cbxMonth.addItem(i);
 			}
 		}
@@ -2555,9 +2655,102 @@ public class MDControlPanel extends JFrame {
 			String [] data = {"","Engineer","Manager","Business Manager"};
 			cbxGroupname = new JComboBox(data);
 			cbxGroupname.setLocation(new Point(91, 105));
-			cbxGroupname.setSize(new Dimension(62, 25));
+			cbxGroupname.setSize(new Dimension(98, 25));
 		}
 		return cbxGroupname;
+	}
+	/**
+	 * This method initializes btnHistoryViewReport	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnHistoryViewReport() {
+		if (btnHistoryViewReport == null) {
+			btnHistoryViewReport = new JButton();
+			btnHistoryViewReport.setBounds(new Rectangle(15, 149, 173, 33));
+			btnHistoryViewReport.setIcon(new ImageIcon(getClass().getResource("/image/zoom.png")));
+			btnHistoryViewReport.setText("View Report");
+			btnHistoryViewReport.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					if(cbxGroupname.getSelectedItem().toString().isEmpty()){
+						JOptionPane.showMessageDialog(null, "Please input full colum");
+					}else {
+						int month = Calendar.getInstance().get(Calendar.MONTH);
+						int year = Calendar.getInstance().get(Calendar.YEAR);
+						if(cbxGroupname.getSelectedItem().toString().equalsIgnoreCase("Engineer")){
+							try{
+								datarp =leaveappservice.report(month, year, 1);
+								tableModelReport.setData(datarp);
+								tblReport = new JTable(tableModelReport);
+							}catch (Exception ex) {
+								ex.printStackTrace();
+							}
+						}
+					}
+				}
+			});
+		}
+		return btnHistoryViewReport;
+	}
+	/**
+	 * This method initializes pnReport	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPnReport() {
+		if (pnReport == null) {
+			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
+			gridBagConstraints2.fill = GridBagConstraints.BOTH;
+			gridBagConstraints2.gridy = 0;
+			gridBagConstraints2.weightx = 1.0;
+			gridBagConstraints2.weighty = 1.0;
+			gridBagConstraints2.gridx = 0;
+			pnReport = new JPanel();
+			pnReport.setLayout(new GridBagLayout());
+			pnReport.setBounds(new Rectangle(211, 69, 1057, 334));
+			pnReport.add(getJScrollPane8(), gridBagConstraints2);
+		}
+		return pnReport;
+	}
+	/**
+	 * This method initializes btnReportRefresh	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnReportRefresh() {
+		if (btnReportRefresh == null) {
+			btnReportRefresh = new JButton();
+			btnReportRefresh.setLocation(new Point(15, 210));
+			btnReportRefresh.setText("Refresh");
+			btnReportRefresh.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
+			btnReportRefresh.setSize(new Dimension(173, 33));
+		}
+		return btnReportRefresh;
+	}
+	/**
+	 * This method initializes jScrollPane8	
+	 * 	
+	 * @return javax.swing.JScrollPane	
+	 */
+	private JScrollPane getJScrollPane8() {
+		if (jScrollPane8 == null) {
+			jScrollPane8 = new JScrollPane();
+			jScrollPane8.setViewportView(getTblReport());
+		}
+		return jScrollPane8;
+	}
+	/**
+	 * This method initializes tblReport	
+	 * 	
+	 * @return javax.swing.JTable	
+	 */
+	private JTable getTblReport() {
+		if (tblReport == null) {
+			
+				tblReport = new JTable(tableModelReport);
+		
+		}
+		return tblReport;
 	}
 
 }

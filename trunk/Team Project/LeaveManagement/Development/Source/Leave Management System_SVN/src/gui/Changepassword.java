@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -14,10 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 import model.User;
-
-
-import common.ChangeUser.changeResult;
-
+import business.Method;
 import business.UserService;
 
 public class Changepassword extends JDialog {
@@ -37,12 +35,15 @@ public class Changepassword extends JDialog {
 	private int id = 0;
 	private User user = new User();  //  @jve:decl-index=0:
 	private UserService service = new  UserService();  //  @jve:decl-index=0:
+	private JLabel lbOldPassMess = null;
+	private JLabel lbNewPassMess = null;
+	private JLabel lbConfirmPassMess = null;
 
 	/**
 	 * @param owner
 	 */
 	public Changepassword(Frame owner) {
-		super(owner);
+		super(owner,true);
 		initialize();
 	}
 	public Changepassword(Frame owner,int id){
@@ -70,6 +71,18 @@ public class Changepassword extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			lbConfirmPassMess = new JLabel();
+			lbConfirmPassMess.setText("");
+			lbConfirmPassMess.setSize(new Dimension(254, 23));
+			lbConfirmPassMess.setLocation(new Point(210, 217));
+			lbNewPassMess = new JLabel();
+			lbNewPassMess.setText("");
+			lbNewPassMess.setSize(new Dimension(254, 23));
+			lbNewPassMess.setLocation(new Point(210, 158));
+			lbOldPassMess = new JLabel();
+			lbOldPassMess.setText("");
+			lbOldPassMess.setSize(new Dimension(254, 23));
+			lbOldPassMess.setLocation(new Point(210, 98));
 			jLabel3 = new JLabel();
 			jLabel3.setText("Confirm Password");
 			jLabel3.setSize(new Dimension(186, 23));
@@ -102,6 +115,9 @@ public class Changepassword extends JDialog {
 			jContentPane.add(getBtnChange(), null);
 			jContentPane.add(getBtnReset(), null);
 			jContentPane.add(getBtnExit(), null);
+			jContentPane.add(lbOldPassMess, null);
+			jContentPane.add(lbNewPassMess, null);
+			jContentPane.add(lbConfirmPassMess, null);
 		}
 		return jContentPane;
 	}
@@ -116,6 +132,24 @@ public class Changepassword extends JDialog {
 			txtOldpassword = new JPasswordField();
 			txtOldpassword.setLocation(new Point(210, 75));
 			txtOldpassword.setSize(new Dimension(254, 23));
+			txtOldpassword.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = String.valueOf(txtOldpassword.getPassword());
+					if (a.length()>20 || a.length()<8) {
+						lbOldPassMess.setText("8-20 chars!! Please type again");
+						lbOldPassMess.setForeground(Color.red);
+						txtOldpassword.setText("");
+					}
+					else {
+						if(Method.CheckSpecialCharacter(a)) {
+							JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+							txtOldpassword.setText(null);
+						}else {
+							lbOldPassMess.setText("OK");
+							lbOldPassMess.setForeground(Color.green);
+					}
+				}}
+			});
 		}
 		return txtOldpassword;
 	}
@@ -130,6 +164,24 @@ public class Changepassword extends JDialog {
 			txtNewpassword = new JPasswordField();
 			txtNewpassword.setLocation(new Point(210, 135));
 			txtNewpassword.setSize(new Dimension(254, 23));
+			txtNewpassword.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = String.valueOf(txtNewpassword.getPassword());
+					if (a.length()>20 || a.length()<8) {
+						lbNewPassMess.setText("8-20 chars!! Please type again");
+						lbNewPassMess.setForeground(Color.red);
+						txtNewpassword.setText("");
+					}
+					else {
+						if(Method.CheckSpecialCharacter(a)) {
+							JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+							txtNewpassword.setText(null);
+						}else {
+							lbNewPassMess.setText("OK");
+							lbNewPassMess.setForeground(Color.green);
+					}
+				}}
+			});
 		}
 		return txtNewpassword;
 	}
@@ -144,6 +196,24 @@ public class Changepassword extends JDialog {
 			txtConfirmpassword = new JPasswordField();
 			txtConfirmpassword.setLocation(new Point(210, 194));
 			txtConfirmpassword.setSize(new Dimension(254, 23));
+			txtConfirmpassword.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = String.valueOf(txtConfirmpassword.getPassword());
+					if (a.length()>20 || a.length()<8) {
+						lbConfirmPassMess.setText("8-20 chars!! Please type again");
+						lbConfirmPassMess.setForeground(Color.red);
+						txtConfirmpassword.setText("");
+					}
+					else {
+						if(Method.CheckSpecialCharacter(a)) {
+							JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+							txtConfirmpassword.setText(null);
+						}else {
+							lbConfirmPassMess.setText("OK");
+							lbConfirmPassMess.setForeground(Color.green);
+					}
+				}}
+			});
 		}
 		return txtConfirmpassword;
 	}

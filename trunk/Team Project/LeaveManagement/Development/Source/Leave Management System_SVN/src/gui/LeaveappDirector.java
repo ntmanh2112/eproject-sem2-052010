@@ -52,7 +52,7 @@ public class LeaveappDirector extends JDialog {
 	 * @param owner
 	 */
 	public LeaveappDirector(Frame owner) {
-		super(owner);
+		super(owner,true);
 		initialize();
 	}
 

@@ -59,7 +59,7 @@ public class Editprofile extends JDialog {
 	 * @param owner
 	 */
 	public Editprofile(Frame owner) {
-		super(owner);
+		super(owner,true);
 		initialize();
 	}
 	
@@ -112,6 +112,7 @@ public class Editprofile extends JDialog {
 			lbPhone = new JLabel();
 			lbPhone.setText("Phone");
 			lbPhone.setSize(new Dimension(121, 25));
+			lbPhone.setFont(new Font("Dialog", Font.BOLD, 18));
 			lbPhone.setLocation(new Point(15, 394));
 			lbDay = new JLabel();
 			lbDay.setText("Day");
@@ -229,6 +230,32 @@ public class Editprofile extends JDialog {
 			txtEmail = new JTextField(user.getEmail());
 			txtEmail.setLocation(new Point(150, 330));
 			txtEmail.setSize(new Dimension(228, 25));
+			txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtEmail.getText();
+					if (txtEmail.getText().length()>30) {
+						lbEmailmess.setForeground(Color.red);
+						lbEmailmess.setText("Max chars is 30!!!");
+						txtEmail.setText("");
+					}else {
+						if(!Method.checkEmail(a)){
+						lbEmailmess.setText("Email is not correct syntax!!");
+						lbEmailmess.setForeground(Color.red);
+						txtEmail.setText("");
+					}
+						else {
+							if(Method.CheckSpecialCharacter(a)) {
+								JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+								txtEmail.setText(null);
+							}else {
+								lbEmailmess.setText("OK");
+								lbEmailmess.setForeground(Color.green);
+							}
+						}
+					}		
+				}
+					
+			});
 		}
 		return txtEmail;
 	}
@@ -438,8 +465,8 @@ public class Editprofile extends JDialog {
 			txtPhone = new JTextField(user.getPhone());
 			txtPhone.setLocation(new Point(150, 394));
 			txtPhone.setSize(new Dimension(228, 25));
-			txtPhone.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
+			txtPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
 					String a = txtPhone.getText();
 					char[] array = a.toCharArray();
 					int t = 0;

@@ -30,6 +30,10 @@ public class UserService {
 	public void changePass(String pass,int id){
 		dao.changePass(pass, id);
 	}
+	//add group
+	public void addgroup(int id_position,int id){
+		dao.addGroup(id_position, id);
+	}
 	//ADD USER
 	public addResult addUser(User user){
 		addResult result = dao.addUser(user);
