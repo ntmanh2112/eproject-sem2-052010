@@ -6,6 +6,7 @@ package business;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import model.LeaveDirector;
 import model.Leaveapp;
 import dao.LeaveDAO;
 
@@ -473,5 +474,27 @@ public class LeaveappService {
 		}
 		return data1;
 	}
-
+	//LOAD LEAVE APPLICATION MANAGINGDIRETOR ******************************hieu********************
+	public String[][] loadDayOff(int month,int year)throws Exception{
+		ArrayList<LeaveDirector> list = new ArrayList<LeaveDirector>();
+		ResultSet rs = dao.selectAllDayOff(month, year);
+		while (rs.next()){
+			LeaveDirector leaveDirec = new LeaveDirector();
+			leaveDirec.setDatefrom(rs.getDate("DATEFROM"));
+			leaveDirec.setDateto(rs.getDate("DATETO"));
+			leaveDirec.setReason(rs.getString("REASON"));
+			list.add(leaveDirec);
+		}
+		String [][] dataday = new String[list.size()][3];
+		int i = 0;
+		for(LeaveDirector leaveadirector : list){
+			
+			dataday[i][0] = leaveadirector.getDatefrom().toString();
+			dataday[i][1] = leaveadirector.getDateto().toString();
+			dataday[i][2] = leaveadirector.getReason();	
+			i++;
+		}
+		return dataday;
+	}
+	//LOAD LEAVE APPLICATION MANAGINGDIRETOR ******************************hieu********************
 }

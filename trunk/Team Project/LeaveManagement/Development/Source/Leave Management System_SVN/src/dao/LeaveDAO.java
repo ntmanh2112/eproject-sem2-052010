@@ -194,7 +194,16 @@ public class LeaveDAO {
 			
 		}
 	}
-	
+	// LOAD LEAVE APPLICATION MANAGING DIRECTOR***************************hieu*************************
+	public ResultSet selectAllDayOff(int month,int year) throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT DATEFROM,DATETO,REASON FROM TBL_LEAVEDIRECTOR WHERE DATEPART(MONTH,DATEFROM)= '"+ month+"' AND DATEPART(YEAR,DATEFROM)='"+ year+"'";
+		Statement st = connection.getConn().createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	// LOAD LEAVE APPLICATION MANAGING DIRECTOR***************************hieu*************************
 
 }
 
