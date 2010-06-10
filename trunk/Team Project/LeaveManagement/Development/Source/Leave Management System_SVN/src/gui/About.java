@@ -6,11 +6,10 @@ import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.ImageIcon;
 
 public class About extends JDialog {
 
