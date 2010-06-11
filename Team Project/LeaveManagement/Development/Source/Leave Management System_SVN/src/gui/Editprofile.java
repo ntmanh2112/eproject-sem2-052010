@@ -337,11 +337,11 @@ public class Editprofile extends JDialog {
 								ex.printStackTrace();
 							}
 							try{
-								int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to edit ?");
+								int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to update ?");
 								if(sr==0){
 									UserService service = new UserService();
 									service.updateUser(user);
-									JOptionPane.showMessageDialog(null, "edit successfull");	
+									JOptionPane.showMessageDialog(null, "Update successfull");	
 									Editprofile.this.dispose();
 								}
 							

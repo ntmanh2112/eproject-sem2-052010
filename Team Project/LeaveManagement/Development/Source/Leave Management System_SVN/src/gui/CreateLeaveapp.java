@@ -134,12 +134,12 @@ public class CreateLeaveapp extends JDialog {
 			lbDay1.setText("Day");
 			lbDay1.setSize(new Dimension(37, 20));
 			lbDay1.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbDay1.setLocation(new Point(360, 176));
+			lbDay1.setLocation(new Point(356, 177));
 			lbMonth1 = new JLabel();
 			lbMonth1.setText("Month");
 			lbMonth1.setSize(new Dimension(57, 20));
 			lbMonth1.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbMonth1.setLocation(new Point(253, 176));
+			lbMonth1.setLocation(new Point(249, 177));
 			lbYear1 = new JLabel();
 			lbYear1.setText("Year");
 			lbYear1.setSize(new Dimension(47, 20));
@@ -442,7 +442,7 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxDay() {
 		if (cbxDay == null) {
 			cbxDay = new JComboBox();
-			cbxDay.setLocation(new Point(398, 117));
+			cbxDay.setLocation(new Point(396, 117));
 			cbxDay.setSize(new Dimension(45, 20));
 			for(int i=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);i<32;i++){
 				cbxDay.addItem(i);
@@ -522,7 +522,7 @@ public class CreateLeaveapp extends JDialog {
 		if (cbxMonth1 == null) {
 			cbxMonth1 = new JComboBox();
 			cbxMonth1.setSize(new Dimension(45, 20));
-			cbxMonth1.setLocation(new Point(314, 176));
+			cbxMonth1.setLocation(new Point(308, 178));
 			int i = Calendar.getInstance().get(Calendar.MONTH)+1;
 			cbxMonth1.addItem(i);
 			cbxMonth1.addItem(i+1);
@@ -538,7 +538,7 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxDay1() {
 		if (cbxDay1 == null) {
 			cbxDay1 = new JComboBox();
-			cbxDay1.setLocation(new Point(399, 176));
+			cbxDay1.setLocation(new Point(396, 177));
 			cbxDay1.setSize(new Dimension(45, 20));
 			for(int i = 0;i<32;i++){
 				cbxDay1.addItem(i);
