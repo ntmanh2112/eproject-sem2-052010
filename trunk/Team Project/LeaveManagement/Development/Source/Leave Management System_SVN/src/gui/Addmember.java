@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -25,6 +27,7 @@ import business.Method;
 import business.UserService;
 
 import common.AddUser.addResult;
+import javax.swing.ImageIcon;
 
 public class Addmember extends JDialog {
 
@@ -121,7 +124,7 @@ public class Addmember extends JDialog {
 			lbIDmess.setSize(new Dimension(228, 20));
 			lbIDmess.setLocation(new Point(150, 95));
 			jLabel1 = new JLabel();
-			jLabel1.setText("Email");
+			jLabel1.setText("Email(*)");
 			jLabel1.setSize(new Dimension(108, 20));
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel1.setLocation(new Point(15, 390));
@@ -409,6 +412,7 @@ public class Addmember extends JDialog {
 			btnAdd = new JButton();
 			btnAdd.setText("Add");
 			btnAdd.setSize(new Dimension(106, 30));
+			btnAdd.setIcon(new ImageIcon(getClass().getResource("/image/Add.png")));
 			btnAdd.setLocation(new Point(16, 435));
 			btnAdd.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -422,6 +426,10 @@ public class Addmember extends JDialog {
 							cbxSex.getSelectedItem().toString().isEmpty() ){
 						JOptionPane.showMessageDialog(null, "Please input full of column!!");
 						}else{
+							int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to Add User");
+							if(sr==0){
+							
+							
 							User user = new User();
 							user.setUsername(txtUsername.getText())  ;
 							user.setPassword(String.valueOf(txtPassword.getPassword())) ;
@@ -451,7 +459,7 @@ public class Addmember extends JDialog {
 							}catch (Exception ex) {
 								ex.printStackTrace();
 							}
-							
+							}
 						}
 				}
 			});
@@ -469,6 +477,7 @@ public class Addmember extends JDialog {
 			btnReset = new JButton();
 			btnReset.setText("Reset");
 			btnReset.setSize(new Dimension(106, 30));
+			btnReset.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
 			btnReset.setLocation(new Point(145, 435));
 		}
 		return btnReset;
@@ -484,10 +493,15 @@ public class Addmember extends JDialog {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(106, 30));
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
 			btnExit.setLocation(new Point(270, 435));
-			btnExit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					Addmember.this.dispose();
+			btnExit.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit");
+					if(sr==0){
+						Addmember.this.dispose();
+					}
 				}
 			});
 		}

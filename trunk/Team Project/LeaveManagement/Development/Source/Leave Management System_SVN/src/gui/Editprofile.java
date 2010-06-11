@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -322,6 +324,7 @@ public class Editprofile extends JDialog {
 						JOptionPane.showMessageDialog(null, "Please input full of column!!");
 						}else{
 							try {
+								
 								java.util.Date date = format.parse(cbxYear.getSelectedItem().toString()+"/"+cbxMonth.getSelectedItem().toString()+"/"+cbxDay.getSelectedItem().toString());
 								Date birthday = new Date(date.getTime());
 								user.setFullname(txtFullname.getText());
@@ -334,19 +337,20 @@ public class Editprofile extends JDialog {
 								ex.printStackTrace();
 							}
 							try{
-								UserService service = new UserService();
-								service.updateUser(user);
-								JOptionPane.showMessageDialog(null, "edit successfull");
-								
-								Editprofile.this.dispose();
-								//new MDControlPanel();
-								//Constant.exit();
+								int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to edit ?");
+								if(sr==0){
+									UserService service = new UserService();
+									service.updateUser(user);
+									JOptionPane.showMessageDialog(null, "edit successfull");	
+									Editprofile.this.dispose();
+								}
 							
 							}catch(Exception ex){
 								ex.printStackTrace();
 								JOptionPane.showMessageDialog(null, "edit fail");
 							}
 						}
+							
 				}
 				
 			});
@@ -392,11 +396,13 @@ public class Editprofile extends JDialog {
 			btnExit.setText("Exit");
 			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Cancel-2-icon.png")));
 			btnExit.setSize(new Dimension(106, 30));
-			btnExit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-				
-					Editprofile.this.dispose();
-					
+			btnExit.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit ?");
+					if(sr==0){
+						Editprofile.this.dispose();
+					}
 				}
 			});
 		}

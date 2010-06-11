@@ -10,6 +10,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Calendar;
 
 import javax.swing.ImageIcon;
@@ -32,6 +34,10 @@ import model.User;
 import business.LeaveappService;
 import business.UserService;
 import javax.swing.WindowConstants;
+
+import common.ConnectionDB;
+
+import dao.LeaveDAO;
 
 
 
@@ -552,9 +558,13 @@ public class MDControlPanel extends JFrame {
 			btnLogout.setText("Sign Out");
 			btnLogout.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
 			btnLogout.setSize(new Dimension(151, 40));
-			btnLogout.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					MDControlPanel.this.dispose();
+			btnLogout.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit ?");
+					if(sr==0){
+					System.exit(1);
+					}
 				}
 			});
 		}
@@ -1008,14 +1018,26 @@ public class MDControlPanel extends JFrame {
 			mniSignout = new JMenuItem();
 			mniSignout.setText("Sign Out");
 			mniSignout.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
-			mniSignout.addActionListener(new java.awt.event.ActionListener() {
+			mniSignout.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit ?");
+					if(sr==0){
+					System.exit(1);
+					}
+				}
+			});
+		}return  mniSignout; 
+			
+			/*mniSignout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					MDControlPanel.this.dispose();
 				}
-			});
+			});*/
 		}
-		return mniSignout;
-	}
+	
+
+	
 
 	/**
 	 * This method initializes mniAdduser	
@@ -2095,8 +2117,18 @@ public class MDControlPanel extends JFrame {
 			txtTotalApprovalLeave.setLocation(new Point(170, 45));
 			txtTotalApprovalLeave.setEnabled(false);
 			txtTotalApprovalLeave.setSize(new Dimension(51, 32));
+
+			
 		}
 		return txtTotalApprovalLeave;
+	}
+	public ResultSet selectAllDayApprove() throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT COUNT(STATUSLEAVE) FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE DATEPART(MONTH,DATEFROM)= '"+Calendar.getInstance().get(Calendar.MONTH)+ 1+"' AND DATEPART(YEAR,DATEFROM)='"+ Calendar.getInstance().get(Calendar.YEAR)+"' AND STATUSLEAVE = 'FINISH' AND USERNAME = '"+user.getUsername()+"' ";
+		Statement st = connection.getConn().createStatement();																																																					
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
 	}
 
 	/**
@@ -2423,6 +2455,7 @@ public class MDControlPanel extends JFrame {
 							if (count != 1){
 								JOptionPane.showMessageDialog(null, "Please select only one User");
 							}else{
+								
 								int id = Integer.parseInt(tblBusinessManager.getValueAt(i, 0).toString());
 								if(cbxViewBusinessmanager.getSelectedItem().toString().equalsIgnoreCase("Engineer")){
 									userservice.addgroup(1, id);
@@ -2624,6 +2657,7 @@ public class MDControlPanel extends JFrame {
 						return false;
 					}
 				};
+				repaint();
 			}catch (Exception ex) {
 				ex.printStackTrace();
 			}

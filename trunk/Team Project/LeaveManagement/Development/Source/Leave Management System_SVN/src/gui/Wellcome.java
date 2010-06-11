@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import common.Constant;
@@ -125,6 +128,16 @@ public class Wellcome extends JFrame {
 			mnExit = new JMenuItem();
 			mnExit.setText("Exit");
 			mnExit.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
+			mnExit.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit ?");
+					if(sr==0){
+					System.exit(1);
+					}
+				}
+			});
+		
 		}
 		return mnExit;
 	}

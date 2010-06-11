@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -202,9 +204,13 @@ public class Login extends JFrame {
 			btnExit.setSize(new Dimension(91, 35));
 			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/button-cancel-icon.png")));
 			btnExit.setLocation(new Point(165, 220));
-			btnExit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					Login.this.dispose();
+			btnExit.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit ?");
+					if(sr==0){
+						Login.this.dispose();
+					}
 				}
 			});
 		}

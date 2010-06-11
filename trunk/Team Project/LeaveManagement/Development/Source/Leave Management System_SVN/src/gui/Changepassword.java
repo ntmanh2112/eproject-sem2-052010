@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,6 +19,7 @@ import javax.swing.JPasswordField;
 import model.User;
 import business.Method;
 import business.UserService;
+import javax.swing.ImageIcon;
 
 public class Changepassword extends JDialog {
 
@@ -228,6 +231,7 @@ public class Changepassword extends JDialog {
 			btnChange = new JButton();
 			btnChange.setText("Change");
 			btnChange.setSize(new Dimension(107, 27));
+			btnChange.setIcon(new ImageIcon(getClass().getResource("/image/Ok-icon.png")));
 			btnChange.setLocation(new Point(44, 244));
 			btnChange.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -244,11 +248,16 @@ public class Changepassword extends JDialog {
 							try {
 								String pass = service.selectPass(id);
 								if(oldpass.equalsIgnoreCase(pass)) {
-									try{
-										service.changePass(confirmpass, id);
-										JOptionPane.showMessageDialog(null, "change pass successfull");
-									}catch (Exception e2) {
-										e2.printStackTrace();
+									int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to Change Password ?");
+									if(sr==0){
+							
+										try{
+											service.changePass(confirmpass, id);
+											JOptionPane.showMessageDialog(null, "change pass successfull");
+											Changepassword.this.dispose();
+										}catch (Exception e2) {
+											e2.printStackTrace();
+										}
 									}
 								}else {
 									JOptionPane.showMessageDialog(null, "old password is wrong!!");
@@ -261,7 +270,8 @@ public class Changepassword extends JDialog {
 						else {
 							JOptionPane.showMessageDialog(null, "new pass va confirm pass ko giong nhau");
 						}
-					}
+						}	
+					
 				}
 			});
 		}
@@ -278,6 +288,7 @@ public class Changepassword extends JDialog {
 			btnReset = new JButton();
 			btnReset.setText("Reset");
 			btnReset.setSize(new Dimension(107, 27));
+			btnReset.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
 			btnReset.setLocation(new Point(185, 244));
 			btnReset.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -300,10 +311,15 @@ public class Changepassword extends JDialog {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(107, 27));
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
 			btnExit.setLocation(new Point(330, 244));
-			btnExit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					Changepassword.this.dispose();
+			btnExit.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit ?");
+					if(sr==0){
+						Changepassword.this.dispose();
+					}
 				}
 			});
 		}
