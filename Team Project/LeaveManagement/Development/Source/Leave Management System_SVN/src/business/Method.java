@@ -51,4 +51,13 @@ public class Method {
 		return false;
 	}
 	
+	public static boolean CheckDayOff(){
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+		return false;
+	}
+	
 }

@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,6 +21,7 @@ import javax.swing.JTextField;
 
 import model.LeaveDirector;
 
+import business.Method;
 import business.UserService;
 
 public class LeaveappDirector extends JDialog {
@@ -236,7 +239,7 @@ public class LeaveappDirector extends JDialog {
 			cbxDatetoMonth.setSize(new Dimension(70, 25));
 			int i = Calendar.getInstance().get(Calendar.MONTH)+1;
 			cbxDatetoMonth.addItem(i);
-			cbxDatetoMonth.addItem(i+1);
+			//cbxDatetoMonth.addItem(i+1);
 		}
 		return cbxDatetoMonth;
 	}
@@ -251,7 +254,7 @@ public class LeaveappDirector extends JDialog {
 			cbxDateToDay = new JComboBox();
 			cbxDateToDay.setLocation(new Point(384, 159));
 			cbxDateToDay.setSize(new Dimension(57, 25));
-			for ( int i = 1 ;i <32;i++){
+			for (int i=Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+1;i <32;i++){
 				cbxDateToDay.addItem(i);
 			}
 		}
@@ -286,11 +289,10 @@ public class LeaveappDirector extends JDialog {
 			btnSubmit.setText("Submit");
 			btnSubmit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+			
 					if(txtReason.getText().isEmpty()){
 							JOptionPane.showMessageDialog(null, "Please input full of column!!");
-						//}else if(Integer.valueOf(cbxDayDateFrom.getSelectedItem().toString())> Integer.valueOf(cbxDateToDay.getSelectedItem().toString()) && String.valueOf(cbxDatetoMonth.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText().toString())){
-							//JOptionPane.showMessageDialog(null, " dateto must be larger than datefrom");
-						}else{
+					}else if(Method.CheckSpecialCharacter(txtReason.getText())==false){
 								LeaveDirector leavedirector = new LeaveDirector();
 								SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 								try{
@@ -305,15 +307,23 @@ public class LeaveappDirector extends JDialog {
 								}catch (Exception ex) {
 									ex.printStackTrace();
 								}try {
-									
+									int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to Add leave system ?");
+									if(sr==0){
+							
+							
 									UserService service = new UserService();
 									service.creatLeaveDirector(leavedirector);
 									JOptionPane.showMessageDialog(null, "Create LeaveApp successfully!!");
 									LeaveappDirector.this.dispose();
+									}
+								
 								} catch (Exception e2) {
+									
 									e2.printStackTrace();
 								}
 							
+						}else {
+							JOptionPane.showMessageDialog(null,"Khong nhap ky tu dac biet");
 						}
 										
 					}
@@ -356,13 +366,18 @@ public class LeaveappDirector extends JDialog {
 			btnExit.setLocation(new Point(331, 315));
 			btnExit.setSize(new Dimension(110, 35));
 			btnExit.setText("Exit");
-			btnExit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					LeaveappDirector.this.dispose();
+			btnExit.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit ?");
+					if(sr==0){
+						LeaveappDirector.this.dispose();
+					}
 				}
 			});
 		}
 		return btnExit;
 	}
-
+	
+	
 }  //  @jve:decl-index=0:visual-constraint="10,10"

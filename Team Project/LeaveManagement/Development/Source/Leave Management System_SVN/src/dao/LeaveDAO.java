@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import model.Leaveapp;
+import model.User;
 
 import common.ConnectionDB;
 
@@ -198,13 +199,20 @@ public class LeaveDAO {
 	public ResultSet selectAllDayOff(int month,int year) throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		String sql = "SELECT DATEFROM,DATETO,REASON FROM TBL_LEAVEDIRECTOR WHERE DATEPART(MONTH,DATEFROM)= '"+ month+"' AND DATEPART(YEAR,DATEFROM)='"+ year+"'";
+		String sql = "SELECT DATEFROM,DATETO,REASON FROM TBL_LEAVEDIRECTOR WHERE DATEPART(MONTH,DATEFROM)= '"+ month+"' AND DATEPART(YEAR,DATEFROM)='"+ year+ "' order by dateto";
 		Statement st = connection.getConn().createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
 	}
 	// LOAD LEAVE APPLICATION MANAGING DIRECTOR***************************hieu*************************
-
+	public ResultSet selectAllDayApprove(User user,int month,int year) throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT COUNT(STATUSLEAVE) FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE DATEPART(MONTH,DATEFROM)= '"+ month+"' AND DATEPART(YEAR,DATEFROM)='"+ year+ "' AND STATUSLEAVE = 'FINISH' AND USERNAME = '"+user.getUsername()+"' ";
+		Statement st = connection.getConn().createStatement();																																																					
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
 }
 
 

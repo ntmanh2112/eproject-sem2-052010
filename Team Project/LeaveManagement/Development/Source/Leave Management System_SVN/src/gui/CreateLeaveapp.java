@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -347,30 +349,32 @@ public class CreateLeaveapp extends JDialog {
 					}else if(Integer.valueOf(cbxDay1.getSelectedItem().toString())< Integer.valueOf(cbxDay.getSelectedItem().toString()) && String.valueOf(cbxMonth1.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText())){
 						JOptionPane.showMessageDialog(null, " dateto must be larger than datefrom");
 					}else{
-						Leaveapp leave_app = new Leaveapp();
-						leave_app.setId_user(id);
-						SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-						try{
-							java.util.Date date = format.parse(txtDateFromYear.getText().toString()+"/"+txtDateFromMonth.getText().toString()+"/"+cbxDay.getSelectedItem().toString());
-							Date datefrom = new Date(date.getTime());
-							java.util.Date date1 = format.parse(txtDateToYear.getText().toString()+"/"+cbxMonth1.getSelectedItem().toString()+"/"+cbxDay1.getSelectedItem().toString());
-							Date dateto = new Date(date1.getTime());
-							leave_app.setDatefrom(datefrom);
-							leave_app.setDateto(dateto);
-							leave_app.setReason(txtReason.getText());
-							leave_app.setAddress(txtAddress.getText());
-							leave_app.setPhone(txtPhone.getText());
-						}catch (Exception ex) {
-							ex.printStackTrace();
-						}try {
-							LeaveappService service = new LeaveappService();
-							service.addLeaveApp(leave_app);
-							JOptionPane.showMessageDialog(null, "Create Leaveapp successfully!!");
-							CreateLeaveapp.this.dispose();
-						} catch (Exception e2) {
-							e2.printStackTrace();
-						}
-							
+						int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to Add User");
+						if(sr==0){
+							Leaveapp leave_app = new Leaveapp();
+							leave_app.setId_user(id);
+							SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+							try{
+								java.util.Date date = format.parse(txtDateFromYear.getText().toString()+"/"+txtDateFromMonth.getText().toString()+"/"+cbxDay.getSelectedItem().toString());
+								Date datefrom = new Date(date.getTime());
+								java.util.Date date1 = format.parse(txtDateToYear.getText().toString()+"/"+cbxMonth1.getSelectedItem().toString()+"/"+cbxDay1.getSelectedItem().toString());
+								Date dateto = new Date(date1.getTime());
+								leave_app.setDatefrom(datefrom);
+								leave_app.setDateto(dateto);
+								leave_app.setReason(txtReason.getText());
+								leave_app.setAddress(txtAddress.getText());
+								leave_app.setPhone(txtPhone.getText());
+							}catch (Exception ex) {
+								ex.printStackTrace();
+							}try {
+								LeaveappService service = new LeaveappService();
+								service.addLeaveApp(leave_app);
+								JOptionPane.showMessageDialog(null, "Create Leaveapp successfully!!");
+								CreateLeaveapp.this.dispose();
+							} catch (Exception e2) {
+								e2.printStackTrace();
+							}
+						}	
 					}
 									
 				}
@@ -417,10 +421,13 @@ public class CreateLeaveapp extends JDialog {
 			btnExit.setSize(new Dimension(106, 30));
 			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Shutdown-32.png")));
 			btnExit.setLocation(new Point(330, 436));
-			btnExit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
+			btnExit.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to quit ?");
+					if(sr==0){
 					CreateLeaveapp.this.dispose();
-					
+					}
 				}
 			});
 		}
