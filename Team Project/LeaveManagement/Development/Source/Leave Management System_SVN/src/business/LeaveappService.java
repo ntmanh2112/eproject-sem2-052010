@@ -497,7 +497,10 @@ public class LeaveappService {
 		return dataday;
 	}
 	//LOAD LEAVE APPLICATION MANAGINGDIRETOR ******************************hieu********************
-
+	public void allDayAprove(){
+		
+		
+	}
 
 
 }

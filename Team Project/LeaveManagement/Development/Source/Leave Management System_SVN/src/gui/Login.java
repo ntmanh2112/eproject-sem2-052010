@@ -24,6 +24,7 @@ import business.UserService;
 import common.Constant;
 import common.Enumeration.loginResult;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class Login extends JFrame {
 
@@ -56,6 +57,7 @@ public class Login extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(310, 293);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/lock-icon.png")));
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Welcome to Login Form");
@@ -83,12 +85,12 @@ public class Login extends JFrame {
 			lbUsernameMess.setLocation(new Point(125, 151));
 			lbPassword = new JLabel();
 			lbPassword.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbPassword.setLocation(new Point(15, 170));
-			lbPassword.setSize(new Dimension(110, 31));
+			lbPassword.setLocation(new Point(15, 178));
+			lbPassword.setSize(new Dimension(110, 23));
 			lbPassword.setText("Password");
 			lbUsername = new JLabel();
 			lbUsername.setText("User Name");
-			lbUsername.setSize(new Dimension(110, 31));
+			lbUsername.setSize(new Dimension(110, 23));
 			lbUsername.setFont(new Font("Dialog", Font.BOLD, 18));
 			lbUsername.setLocation(new Point(15, 122));
 			lbLogin = new JLabel();
@@ -124,7 +126,7 @@ public class Login extends JFrame {
 		if (txtUsername == null) {
 			txtUsername = new JTextField();
 			txtUsername.setLocation(new Point(125, 122));
-			txtUsername.setSize(new Dimension(165, 31));
+			txtUsername.setSize(new Dimension(165, 24));
 		}
 		return txtUsername;
 	}
@@ -137,8 +139,8 @@ public class Login extends JFrame {
 	private JPasswordField getTxtPassword() {
 		if (txtPassword == null) {
 			txtPassword = new JPasswordField();
-			txtPassword.setLocation(new Point(125, 170));
-			txtPassword.setSize(new Dimension(165, 31));
+			txtPassword.setLocation(new Point(124, 178));
+			txtPassword.setSize(new Dimension(165, 24));
 		}
 		return txtPassword;
 	}
@@ -175,10 +177,10 @@ public class Login extends JFrame {
 						}
 						
 						else if (result == loginResult.lock){	
-							JOptionPane.showMessageDialog(null, "your permission is not enough for using this program");					
+							JOptionPane.showMessageDialog(null, "Your permission is not enough for using this program");					
 						}
 						else if (result == loginResult.fail){
-							JOptionPane.showMessageDialog(null, "this username or password is wrong");
+							JOptionPane.showMessageDialog(null, " Username or password is wrong ! Please try again.");
 						}
 					}		
 					catch(Exception E){

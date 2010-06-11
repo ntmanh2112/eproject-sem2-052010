@@ -56,7 +56,7 @@ public class Viewhistory extends JDialog {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			jLabel5 = new JLabel();
-			jLabel5.setBounds(new Rectangle(151, -1, 145, 37));
+			jLabel5.setBounds(new Rectangle(128, 9, 145, 37));
 			jLabel5.setFont(new Font("Dialog", Font.BOLD, 24));
 			jLabel5.setText("View History");
 			jLabel4 = new JLabel();
@@ -179,7 +179,7 @@ public class Viewhistory extends JDialog {
 	private JButton getBtnExit() {
 		if (btnExit == null) {
 			btnExit = new JButton();
-			btnExit.setBounds(new Rectangle(230, 301, 86, 24));
+			btnExit.setBounds(new Rectangle(143, 280, 86, 24));
 			btnExit.setText("Exit");
 			btnExit.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {

@@ -139,12 +139,12 @@ public class Editprofile extends JDialog {
 			jLabel4.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel4.setLocation(new Point(14, 266));
 			jLabel3 = new JLabel();
-			jLabel3.setText("Sex");
+			jLabel3.setText("Gender");
 			jLabel3.setSize(new Dimension(121, 25));
 			jLabel3.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel3.setLocation(new Point(15, 221));
+			jLabel3.setLocation(new Point(14, 210));
 			jLabel2 = new JLabel();
-			jLabel2.setText(" Birthday");
+			jLabel2.setText("Birthday");
 			jLabel2.setSize(new Dimension(121, 25));
 			jLabel2.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel2.setLocation(new Point(15, 121));
@@ -513,10 +513,10 @@ public class Editprofile extends JDialog {
 	 */
 	private JComboBox getCbxSex() {
 		if (cbxSex == null) {
-			String data[] ={"","Male","Female"};
+			String data[] ={"Male","Female"};
 			cbxSex = new JComboBox(data);
-			cbxSex.setSize(new Dimension(115, 25));
-			cbxSex.setLocation(new Point(150, 221));
+			cbxSex.setSize(new Dimension(121, 25));
+			cbxSex.setLocation(new Point(150, 210));
 		}
 		return cbxSex;
 	}

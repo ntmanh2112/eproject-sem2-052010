@@ -104,21 +104,21 @@ public class CreateLeaveapp extends JDialog {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			lbIcon = new JLabel();
-			lbIcon.setBounds(new Rectangle(126, 1, 46, 52));
+			lbIcon.setBounds(new Rectangle(50, 0, 46, 52));
 			lbIcon.setIcon(new ImageIcon(getClass().getResource("/image/Document-Write-icon.png")));
 			lbIcon.setText("");
 			lbPhoneMess = new JLabel();
 			lbPhoneMess.setText("");
 			lbPhoneMess.setSize(new Dimension(307, 20));
-			lbPhoneMess.setLocation(new Point(133, 394));
+			lbPhoneMess.setLocation(new Point(134, 380));
 			lbAddressMess = new JLabel();
 			lbAddressMess.setText("");
 			lbAddressMess.setSize(new Dimension(307, 20));
-			lbAddressMess.setLocation(new Point(133, 333));
+			lbAddressMess.setLocation(new Point(134, 321));
 			lbReasonMess = new JLabel();
 			lbReasonMess.setText("");
 			lbReasonMess.setSize(new Dimension(307, 20));
-			lbReasonMess.setLocation(new Point(133, 279));
+			lbReasonMess.setLocation(new Point(134, 260));
 			lbDatetoMess = new JLabel();
 			lbDatetoMess.setText("");
 			lbDatetoMess.setSize(new Dimension(307, 20));
@@ -126,7 +126,7 @@ public class CreateLeaveapp extends JDialog {
 			lbDatefromMess = new JLabel();
 			lbDatefromMess.setText("");
 			lbDatefromMess.setSize(new Dimension(307, 20));
-			lbDatefromMess.setLocation(new Point(133, 131));
+			lbDatefromMess.setLocation(new Point(133, 145));
 			lbId_user = new JLabel(String.valueOf(id));
 			lbId_user.setBounds(new Rectangle(163, 59, 92, 16));
 			lbId_user.setText("");
@@ -147,17 +147,17 @@ public class CreateLeaveapp extends JDialog {
 			lbYear1.setLocation(new Point(133, 176));
 			lbMonth = new JLabel();
 			lbMonth.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbMonth.setLocation(new Point(253, 101));
+			lbMonth.setLocation(new Point(250, 116));
 			lbMonth.setSize(new Dimension(57, 20));
 			lbMonth.setText("Month");
 			lbDay = new JLabel();
 			lbDay.setText("Day");
-			lbDay.setLocation(new Point(360, 101));
+			lbDay.setLocation(new Point(357, 117));
 			lbDay.setFont(new Font("Dialog", Font.BOLD, 18));
 			lbDay.setSize(new Dimension(37, 20));
 			lbYear = new JLabel();
 			lbYear.setText("Year");
-			lbYear.setLocation(new Point(133, 101));
+			lbYear.setLocation(new Point(134, 116));
 			lbYear.setFont(new Font("Dialog", Font.BOLD, 18));
 			lbYear.setSize(new Dimension(47, 20));
 			lbDateto = new JLabel();
@@ -169,12 +169,12 @@ public class CreateLeaveapp extends JDialog {
 			jLabel6.setText("Phone(*)");
 			jLabel6.setSize(new Dimension(121, 20));
 			jLabel6.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel6.setLocation(new Point(13, 375));
+			jLabel6.setLocation(new Point(14, 360));
 			jLabel5 = new JLabel();
 			jLabel5.setText("Address(*)");
 			jLabel5.setSize(new Dimension(121, 20));
 			jLabel5.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel5.setLocation(new Point(13, 314));
+			jLabel5.setLocation(new Point(14, 301));
 			jLabel4 = new JLabel();
 			jLabel4.setText("Reason(*)");
 			jLabel4.setSize(new Dimension(121, 20));
@@ -184,16 +184,16 @@ public class CreateLeaveapp extends JDialog {
 			jLabel2.setText("Date from(*)");
 			jLabel2.setSize(new Dimension(121, 20));
 			jLabel2.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel2.setLocation(new Point(13, 101));
+			jLabel2.setLocation(new Point(13, 116));
 			jLabel1 = new JLabel();
 			jLabel1.setText("ID_USER");
-			jLabel1.setSize(new Dimension(135, 20));
+			jLabel1.setSize(new Dimension(118, 20));
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
-			jLabel1.setLocation(new Point(15, 56));
+			jLabel1.setLocation(new Point(14, 71));
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(172, 3, 180, 50));
+			jLabel.setBounds(new Rectangle(96, 3, 304, 50));
 			jLabel.setFont(new Font("Dialog", Font.BOLD, 36));
-			jLabel.setText("Leav app");
+			jLabel.setText("Leave Application");
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(jLabel, null);
@@ -242,7 +242,7 @@ public class CreateLeaveapp extends JDialog {
 		if (txtReason == null) {
 			txtReason = new JTextField();
 			txtReason.setLocation(new Point(133, 240));
-			txtReason.setSize(new Dimension(307, 40));
+			txtReason.setSize(new Dimension(307, 20));
 			txtReason.addFocusListener(new java.awt.event.FocusAdapter() {
 				public void focusLost(java.awt.event.FocusEvent e) {
 					String a = txtReason.getText();
@@ -274,7 +274,7 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtAddress() {
 		if (txtAddress == null) {
 			txtAddress = new JTextField();
-			txtAddress.setLocation(new Point(133, 314));
+			txtAddress.setLocation(new Point(134, 301));
 			txtAddress.setSize(new Dimension(307, 20));
 			txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
 				public void focusLost(java.awt.event.FocusEvent e) {
@@ -319,7 +319,7 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtPhone() {
 		if (txtPhone == null) {
 			txtPhone = new JTextField();
-			txtPhone.setLocation(new Point(133, 375));
+			txtPhone.setLocation(new Point(135, 360));
 			txtPhone.setSize(new Dimension(135, 20));
 		}
 		return txtPhone;
@@ -419,7 +419,7 @@ public class CreateLeaveapp extends JDialog {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(106, 30));
-			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Shutdown-32.png")));
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Cancel-2-icon.png")));
 			btnExit.setLocation(new Point(330, 436));
 			btnExit.addActionListener(new ActionListener() {			
 				@Override
@@ -442,7 +442,7 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox getCbxDay() {
 		if (cbxDay == null) {
 			cbxDay = new JComboBox();
-			cbxDay.setLocation(new Point(399, 101));
+			cbxDay.setLocation(new Point(398, 117));
 			cbxDay.setSize(new Dimension(45, 20));
 			for(int i=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);i<32;i++){
 				cbxDay.addItem(i);
@@ -460,7 +460,7 @@ public class CreateLeaveapp extends JDialog {
 		if (txtDateFromYear == null) {
 			txtDateFromYear = new JTextField();
 			txtDateFromYear.setText(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
-			txtDateFromYear.setLocation(new Point(179, 101));
+			txtDateFromYear.setLocation(new Point(180, 116));
 			txtDateFromYear.setEnabled(false);
 			txtDateFromYear.setSize(new Dimension(69, 20));
 		}
@@ -475,7 +475,7 @@ public class CreateLeaveapp extends JDialog {
 		if (txtDateFromMonth == null) {
 			txtDateFromMonth = new JTextField();
 			txtDateFromMonth.setText(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1));
-			txtDateFromMonth.setLocation(new Point(310, 101));
+			txtDateFromMonth.setLocation(new Point(308, 116));
 			txtDateFromMonth.setEnabled(false);
 			txtDateFromMonth.setSize(new Dimension(45, 20));
 		}
@@ -504,7 +504,7 @@ public class CreateLeaveapp extends JDialog {
 	private JTextField getTxtId_user() {
 		if (txtId_user == null) {
 			txtId_user = new JTextField(String.valueOf(id));
-			txtId_user.setBounds(new Rectangle(148, 55, 115, 20));
+			txtId_user.setBounds(new Rectangle(133, 71, 115, 20));
 			txtId_user.setEnabled(false);
 		}
 		return txtId_user;

@@ -2111,26 +2111,17 @@ public class MDControlPanel extends JFrame {
 	 * 	
 	 * @return javax.swing.JTextField	
 	 */
-	private JTextField getTxtTotalApprovalLeave() {
+	private JTextField getTxtTotalApprovalLeave() {	
 		if (txtTotalApprovalLeave == null) {
 			txtTotalApprovalLeave = new JTextField();
 			txtTotalApprovalLeave.setLocation(new Point(170, 45));
 			txtTotalApprovalLeave.setEnabled(false);
 			txtTotalApprovalLeave.setSize(new Dimension(51, 32));
-
 			
 		}
 		return txtTotalApprovalLeave;
 	}
-	public ResultSet selectAllDayApprove() throws Exception{
-		ConnectionDB connection = new ConnectionDB();
-		connection.connect();
-		String sql = "SELECT COUNT(STATUSLEAVE) FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE DATEPART(MONTH,DATEFROM)= '"+Calendar.getInstance().get(Calendar.MONTH)+ 1+"' AND DATEPART(YEAR,DATEFROM)='"+ Calendar.getInstance().get(Calendar.YEAR)+"' AND STATUSLEAVE = 'FINISH' AND USERNAME = '"+user.getUsername()+"' ";
-		Statement st = connection.getConn().createStatement();																																																					
-		ResultSet rs = st.executeQuery(sql);
-		return rs;
-	}
-
+	
 	/**
 	 * This method initializes txtTotalNotApproveleave	
 	 * 	
@@ -2292,7 +2283,7 @@ public class MDControlPanel extends JFrame {
 	private JTextField getTxtTotaldaycanleave() {
 		if (txtTotaldaycanleave == null) {
 			txtTotaldaycanleave = new JTextField();
-			txtTotaldaycanleave.setLocation(new Point(169, 164));
+			txtTotaldaycanleave.setLocation(new Point(169, 170));
 			txtTotaldaycanleave.setEnabled(false);
 			txtTotaldaycanleave.setSize(new Dimension(51, 32));
 		}
