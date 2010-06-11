@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import common.Constant;
+import java.awt.Toolkit;
 
 public class Wellcome extends JFrame {
 
@@ -43,6 +44,7 @@ public class Wellcome extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(413, 346);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Sign In.png")));
 		this.setResizable(false);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());

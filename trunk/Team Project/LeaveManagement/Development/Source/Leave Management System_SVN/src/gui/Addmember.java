@@ -91,13 +91,13 @@ public class Addmember extends JDialog {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			lbDay = new JLabel();
-			lbDay.setBounds(new Rectangle(348, 226, 31, 16));
+			lbDay.setBounds(new Rectangle(324, 229, 31, 16));
 			lbDay.setText("Day");
 			lbMonth = new JLabel();
-			lbMonth.setBounds(new Rectangle(254, 226, 38, 16));
+			lbMonth.setBounds(new Rectangle(240, 228, 38, 16));
 			lbMonth.setText("Month");
 			jLabel2 = new JLabel();
-			jLabel2.setBounds(new Rectangle(158, 226, 38, 16));
+			jLabel2.setBounds(new Rectangle(150, 227, 38, 16));
 			jLabel2.setText("Year");
 			lbNamemess = new JLabel();
 			lbNamemess.setText("");
@@ -132,7 +132,7 @@ public class Addmember extends JDialog {
 			lbSex.setText("Gender(*)");
 			lbSex.setSize(new Dimension(89, 20));
 			lbSex.setFont(new Font("Dialog", Font.BOLD, 18));
-			lbSex.setLocation(new Point(15, 255));
+			lbSex.setLocation(new Point(15, 262));
 			lbAddress = new JLabel();
 			lbAddress.setText("Address(*)");
 			lbAddress.setSize(new Dimension(108, 20));
@@ -164,7 +164,7 @@ public class Addmember extends JDialog {
 			lbUsername.setFont(new Font("Dialog", Font.BOLD, 18));
 			lbUsername.setLocation(new Point(15, 71));
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(112, 19, 167, 28));
+			jLabel.setBounds(new Rectangle(150, 22, 167, 28));
 			jLabel.setFont(new Font("Dialog", Font.BOLD, 24));
 			jLabel.setHorizontalTextPosition(SwingConstants.TRAILING);
 			jLabel.setText("Add User");
@@ -394,8 +394,8 @@ public class Addmember extends JDialog {
 		if (cbxSex == null) {
 			String[] data = {"Male","Female"};
 			cbxSex = new JComboBox(data);
-			cbxSex.setLocation(new Point(150, 255));
-			cbxSex.setSize(new Dimension(65, 20));
+			cbxSex.setLocation(new Point(150, 262));
+			cbxSex.setSize(new Dimension(89, 20));
 			
 			
 		}
@@ -493,7 +493,7 @@ public class Addmember extends JDialog {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(106, 30));
-			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Cancel-2-icon.png")));
 			btnExit.setLocation(new Point(270, 435));
 			btnExit.addActionListener(new ActionListener() {			
 				@Override
@@ -556,7 +556,7 @@ public class Addmember extends JDialog {
 	private JComboBox getCbxYear() {
 		if (cbxYear == null) {
 			cbxYear = new JComboBox();
-			cbxYear.setBounds(new Rectangle(196, 224, 51, 25));
+			cbxYear.setBounds(new Rectangle(187, 223, 51, 25));
 			for (int i = 1975; i < 1995; i++){
 				cbxYear.addItem(i);
 			}
@@ -572,7 +572,7 @@ public class Addmember extends JDialog {
 	private JComboBox getCbxMonth() {
 		if (cbxMonth == null) {
 			cbxMonth = new JComboBox();
-			cbxMonth.setBounds(new Rectangle(295, 226, 45, 25));
+			cbxMonth.setBounds(new Rectangle(278, 224, 45, 25));
 			for(int j=1;j<13;j++){
 				cbxMonth.addItem(j);
 			}
@@ -588,7 +588,7 @@ public class Addmember extends JDialog {
 	private JComboBox getCbxDay() {
 		if (cbxDay == null) {
 			cbxDay = new JComboBox();
-			cbxDay.setBounds(new Rectangle(385, 226, 43, 25));
+			cbxDay.setBounds(new Rectangle(357, 224, 43, 25));
 			for(int i = 1 ; i<32;i++){
 				cbxDay.addItem(i);
 			}

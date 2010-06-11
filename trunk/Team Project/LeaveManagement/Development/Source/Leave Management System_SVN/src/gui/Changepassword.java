@@ -102,7 +102,7 @@ public class Changepassword extends JDialog {
 			jLabel1.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel1.setLocation(new Point(15, 75));
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(145, 9, 211, 39));
+			jLabel.setBounds(new Rectangle(145, 14, 211, 39));
 			jLabel.setFont(new Font("Dialog", Font.BOLD, 24));
 			jLabel.setText("Change Password");
 			jContentPane = new JPanel();
@@ -311,7 +311,7 @@ public class Changepassword extends JDialog {
 			btnExit = new JButton();
 			btnExit.setText("Exit");
 			btnExit.setSize(new Dimension(107, 27));
-			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
+			btnExit.setIcon(new ImageIcon(getClass().getResource("/image/Cancel-2-icon.png")));
 			btnExit.setLocation(new Point(330, 244));
 			btnExit.addActionListener(new ActionListener() {			
 				@Override
