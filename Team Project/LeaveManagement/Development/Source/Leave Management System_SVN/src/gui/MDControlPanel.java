@@ -32,13 +32,11 @@ import javax.swing.WindowConstants;
 import model.Leaveapp;
 import model.User;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.export.JExcelApiExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import business.LeaveappService;
@@ -199,7 +197,6 @@ public class MDControlPanel extends JFrame {
 	 * This is the default constructor
 	 */
 	public MDControlPanel() {
-
 		super();
 		initialize();
 
@@ -210,6 +207,7 @@ public class MDControlPanel extends JFrame {
 		this.id = id;
 		this.user = userservice.loadUser(id);
 		initialize();
+		
 
 	}
 
@@ -407,7 +405,8 @@ public class MDControlPanel extends JFrame {
 	 */
 	private JTextField getTxtBirthday() {
 		if (txtBirthday == null) {
-			txtBirthday = new JTextField(user.getBirthday().toString());
+			txtBirthday = new JTextField();
+			txtBirthday.setText(user.getBirthday().toString());
 			txtBirthday.setLocation(new Point(105, 158));
 			txtBirthday.setEnabled(false);
 			txtBirthday.setSize(new Dimension(200, 23));
@@ -490,7 +489,7 @@ public class MDControlPanel extends JFrame {
 			btnAdduser.setText("Add User");
 			btnAdduser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(null).setVisible(true);
+					new Addmember(new MDControlPanel(id)).setVisible(true);
 				}
 			});
 		}
@@ -513,7 +512,7 @@ public class MDControlPanel extends JFrame {
 			btnChangepass
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new Changepassword(null, id).setVisible(true);
+							new Changepassword(new MDControlPanel(id)).setVisible(true);
 						}
 					});
 		}
@@ -536,7 +535,7 @@ public class MDControlPanel extends JFrame {
 			btnEditProfile.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					new Editprofile(null, id).setVisible(true);
+					new Editprofile(new MDControlPanel(id)).setVisible(true);
 				}
 
 			});
@@ -559,7 +558,7 @@ public class MDControlPanel extends JFrame {
 			btnCreatleaveapp
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new CreateLeaveapp(null, id).setVisible(true);
+							new CreateLeaveapp(new MDControlPanel(id)).setVisible(true);
 						}
 					});
 		}
@@ -992,7 +991,7 @@ public class MDControlPanel extends JFrame {
 			mniEditprofile
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new Editprofile(null, id).setVisible(true);
+							new Editprofile(new MDControlPanel(id)).setVisible(true);
 						}
 					});
 		}
@@ -1034,7 +1033,7 @@ public class MDControlPanel extends JFrame {
 			mniCreatleaveapp
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new CreateLeaveapp(null).setVisible(true);
+							new CreateLeaveapp(new MDControlPanel(id)).setVisible(true);
 						}
 					});
 		}
@@ -1106,7 +1105,7 @@ public class MDControlPanel extends JFrame {
 					"/image/button-ok-icon.png")));
 			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(null).setVisible(true);
+					new Addmember(new MDControlPanel(id)).setVisible(true);
 				}
 			});
 		}
@@ -2083,7 +2082,7 @@ public class MDControlPanel extends JFrame {
 			btnCreatLeaveAppSystem
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new LeaveappDirector(null).setVisible(true);
+							new LeaveappDirector(new MDControlPanel(id)).setVisible(true);
 						}
 					});
 		}
@@ -2405,7 +2404,7 @@ public class MDControlPanel extends JFrame {
 					"/image/about.png")));
 			mnAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(null).setVisible(true);
+					new About(new MDControlPanel(id)).setVisible(true);
 				}
 			});
 		}
@@ -2949,26 +2948,13 @@ public class MDControlPanel extends JFrame {
 		if (mnExportReport == null) {
 			mnExportReport = new JMenuItem();
 			mnExportReport.setText("Export Report");
-			mnExportReport
-					.addActionListener(new java.awt.event.ActionListener() {
+			mnExportReport.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 
 							ConnectionDB conn = new ConnectionDB();
-							
+							conn.connect();
 							try {
-								/*JasperPrint print = JasperFillManager
-										.fillReport("D:/report1.jasper",
-												null, conn.getConn());
-								JExcelApiExporter xlsExporter = new JExcelApiExporter();
-								xlsExporter
-										.setParameter(
-												JRExporterParameter.JASPER_PRINT,
-												print);
-								xlsExporter.setParameter(
-										JRExporterParameter.OUTPUT_FILE_NAME,
-										"D:/Report1ddd.xls");
-								xlsExporter.exportReport();*/
-								  JasperDesign jasperDesign = JRXmlLoader.load("src/Report/reportLMSMD.jrxml");
+									JasperDesign jasperDesign = JRXmlLoader.load("src/Report/reportLMSMD.jrxml");
 							         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 							         
 							         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn.getConn());
