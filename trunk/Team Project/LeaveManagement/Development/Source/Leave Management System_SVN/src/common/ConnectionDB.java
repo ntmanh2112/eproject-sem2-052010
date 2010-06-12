@@ -49,6 +49,10 @@ public class ConnectionDB {
     }
 
     public Connection getConn() {
+    	if( conn ==null){
+    		connect();
+    		
+    	}
 		return conn;
 	}
 	public void setConn(Connection conn) {
