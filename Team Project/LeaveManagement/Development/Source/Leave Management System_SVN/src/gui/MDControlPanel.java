@@ -192,6 +192,7 @@ public class MDControlPanel extends JFrame {
 	private JScrollPane tblDayofSystem = null;
 	private JTable tblDayOfSystem = null;
 	private JMenuItem mnExportReport = null;
+	private JButton btnRefreshHistory = null;
 
 	/**
 	 * This is the default constructor
@@ -685,6 +686,7 @@ public class MDControlPanel extends JFrame {
 			jpnHistory.add(getPnTableDayoff(), null);
 			jpnHistory.add(lbMyLeaveApp, null);
 			jpnHistory.add(getPnTableMyLeaveApp(), null);
+			jpnHistory.add(getBtnRefreshHistory(), null);
 		}
 		return jpnHistory;
 	}
@@ -1144,6 +1146,7 @@ public class MDControlPanel extends JFrame {
 											.toString()));
 							try {
 								leaveappservice.approveLeaveApp(leaveapp);
+								tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDvalid());
 							} catch (Exception ex) {
 								ex.printStackTrace();
 								JOptionPane.showMessageDialog(null, "error");
@@ -1188,6 +1191,7 @@ public class MDControlPanel extends JFrame {
 											.toString()));
 							try {
 								leaveappservice.rejectLeaveApp(leaveapp);
+								tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDvalid());
 							} catch (Exception ex) {
 								ex.printStackTrace();
 								JOptionPane.showMessageDialog(null, "error");
@@ -1300,8 +1304,8 @@ public class MDControlPanel extends JFrame {
 													.getValueAt(i, 0)
 													.toString()));
 									try {
-										leaveappservice
-												.rejectLeaveApp(leaveapp);
+										leaveappservice.rejectLeaveApp(leaveapp);
+										tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDapprove());
 									} catch (Exception ex) {
 										ex.printStackTrace();
 										JOptionPane.showMessageDialog(null,
@@ -1353,6 +1357,7 @@ public class MDControlPanel extends JFrame {
 									try {
 										leaveappservice
 												.finishLeaveApp(leaveapp);
+										tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDapprove());
 									} catch (Exception ex) {
 										ex.printStackTrace();
 										JOptionPane.showMessageDialog(null,
@@ -1466,6 +1471,7 @@ public class MDControlPanel extends JFrame {
 									try {
 										leaveappservice
 												.approveLeaveApp(leaveapp);
+										tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDreject());
 									} catch (Exception ex) {
 										ex.printStackTrace();
 										JOptionPane.showMessageDialog(null,
@@ -1689,7 +1695,7 @@ public class MDControlPanel extends JFrame {
 											.getValueAt(i, 2).toString());
 									try {
 										userservice.lockUser(user);
-
+										tableModel.setData(userservice.selectAllUserBM());
 									} catch (Exception ex) {
 										ex.printStackTrace();
 										JOptionPane.showMessageDialog(null,
@@ -1858,6 +1864,7 @@ public class MDControlPanel extends JFrame {
 											.toString());
 									try {
 										userservice.lockUser(user);
+										tableModel.setData(userservice.selectAllUserM());
 
 									} catch (Exception ex) {
 										ex.printStackTrace();
@@ -2008,6 +2015,7 @@ public class MDControlPanel extends JFrame {
 											.toString());
 									try {
 										userservice.lockUser(user);
+										tableModel.setData(userservice.selectAllUserE());
 
 									} catch (Exception ex) {
 										ex.printStackTrace();
@@ -2215,6 +2223,7 @@ public class MDControlPanel extends JFrame {
 									.toString());
 							try {
 								userservice.unlockUser(user);
+								tableModel.setData(userservice.selectAllUserlock());
 
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -2966,6 +2975,34 @@ public class MDControlPanel extends JFrame {
 					});
 		}
 		return mnExportReport;
+	}
+
+	/**
+	 * This method initializes btnRefreshHistory	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getBtnRefreshHistory() {
+		if (btnRefreshHistory == null) {
+			btnRefreshHistory = new JButton();
+			btnRefreshHistory.setBounds(new Rectangle(15, 270, 158, 33));
+			btnRefreshHistory.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
+			btnRefreshHistory.setText("Refresh");
+			btnRefreshHistory.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try{
+						dataday = leaveappservice.loadDayOff(Integer.valueOf(Calendar
+								.getInstance().get(Calendar.MONTH) + 1), Integer
+								.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+						tableModelDayoff.setData(dataday);
+						tblDayOfSystem = new JTable(tableModelDayoff);
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
+		}
+		return btnRefreshHistory;
 	}
 
 }
