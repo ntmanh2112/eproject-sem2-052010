@@ -18,7 +18,7 @@ begin
 			ISNULL(Statuts,'') AS Statuts
 		FROM Employee
 	end
-	else if (@UserName = '' and @FullName != '')
+	else if (@UserName = '' and @FullName <> '')
 	begin
 		SELECT ISNULL(UserName,'') AS UserName,
 			ISNULL(FullName,'') AS FullName,
@@ -27,8 +27,8 @@ begin
 			ISNULL(Department,'') AS Department,
 			ISNULL(Statuts,'') AS Statuts
 		FROM Employee 
-		where FullName LIKE '%' + @FullName + '%'		
+		where FullName LIKE '%a%'		
 	end
 end
-
-exec searchEmployeeByID '','a'
+select * from Employee
+--exec searchEmployeeByID '','a'

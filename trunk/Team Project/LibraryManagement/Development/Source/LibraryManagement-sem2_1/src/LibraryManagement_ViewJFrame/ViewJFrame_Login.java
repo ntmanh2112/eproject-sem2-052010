@@ -82,7 +82,7 @@ public class ViewJFrame_Login extends JFrame{
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("images/1.jpg"));
+			image = ImageIO.read(new File("images/1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -199,9 +199,9 @@ public class ViewJFrame_Login extends JFrame{
 				String password = txtMatKhau.getText();
 				boolean rs = Dao_Users.connectUsing(username, password);
 				if(rs == true){
+					JOptionPane.showMessageDialog(null,"Login Success");
 					new ViewJFrame_Employee();
 					setVisible(false);
-					JOptionPane.showMessageDialog(null,"Login Success");
 				}
 				else
 				{
