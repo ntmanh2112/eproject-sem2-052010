@@ -10,7 +10,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +29,19 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import common.ConnectionDB;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+
+
+
 
 import model.Leaveapp;
 import model.User;
@@ -2231,7 +2246,7 @@ public class MDControlPanel extends JFrame {
 			mnViewUserManager.setIcon(new ImageIcon(getClass().getResource("/image/report.png")));
 			mnViewUserManager.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					jtpnManager.setSelectedIndex(3);
+					jtpnManager.setSelectedIndex(2);
 				}
 			});
 		}
@@ -2685,6 +2700,24 @@ public class MDControlPanel extends JFrame {
 	private JMenuItem getMnExportReport() {
 		if (mnExportReport == null) {
 			mnExportReport = new JMenuItem();
+			mnExportReport.setText("Export Report");
+			mnExportReport.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					JasperReport jasperReport;
+					JasperPrint jasperPrint;
+					try {
+						ConnectionDB conn = new ConnectionDB();
+						conn.getConn();
+						HashMap jasperParameter = new HashMap();
+						jasperReport = JasperCompileManager.compileReport("src/Report/reportLMSMD.jasper");
+						jasperPrint = JasperFillManager.fillReport(jasperReport,jasperParameter, conn.getConn()); 
+						//JasperExportManager.exportReportToHtmlFile(jasperPrint,"src/Report/reportLMSMD.html" ); 
+						JOptionPane.showMessageDialog(null, "The report has been saved in Report folder!!!");
+						}catch (JRException ex) {
+							ex.printStackTrace();
+					} 
+				}
+			});
 		}
 		return mnExportReport;
 	}
