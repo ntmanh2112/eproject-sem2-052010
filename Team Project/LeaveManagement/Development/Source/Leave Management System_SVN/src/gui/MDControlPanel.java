@@ -10,8 +10,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Calendar;
 
 import javax.swing.ImageIcon;
@@ -28,16 +26,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import model.Leaveapp;
 import model.User;
 import business.LeaveappService;
 import business.UserService;
-import javax.swing.WindowConstants;
-
-import common.ConnectionDB;
-
-import dao.LeaveDAO;
 
 
 
@@ -89,7 +83,6 @@ public class MDControlPanel extends JFrame {
 	private JMenuItem mniViewManagerleaveapp = null;
 	private JMenuItem mniSignout = null;
 	private JMenuItem mniAdduser = null;
-	private JMenuItem mniUnlockuser = null;
 	private JButton btnApprove = null;
 	private JButton btnReject = null;
 	private JPanel pnUser = null;
@@ -183,6 +176,7 @@ public class MDControlPanel extends JFrame {
 	private JTable tblMyleaveapp = null;
 	private JScrollPane tblDayofSystem = null;
 	private JTable tblDayOfSystem = null;
+	private JMenuItem mnExportReport = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -1056,20 +1050,6 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return mniAdduser;
-	}
-
-	/**
-	 * This method initializes mniUnlockuser	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMniUnlockuser() {
-		if (mniUnlockuser == null) {
-			mniUnlockuser = new JMenuItem();
-			mniUnlockuser.setText("Unlock User");
-			mniUnlockuser.setIcon(new ImageIcon(getClass().getResource("/image/lock-off-icon.png")));
-		}
-		return mniUnlockuser;
 	}
 
 	/**
@@ -2173,7 +2153,7 @@ public class MDControlPanel extends JFrame {
 			mnModeration.setText("Moderation");
 			mnModeration.setIcon(new ImageIcon(getClass().getResource("/image/config.png")));
 			mnModeration.add(getMniAdduser());
-			mnModeration.add(getMniUnlockuser());
+			mnModeration.add(getMnExportReport());
 		}
 		return mnModeration;
 	}
@@ -2696,6 +2676,17 @@ public class MDControlPanel extends JFrame {
 			}
 		}
 		return tblDayOfSystem;
+	}
+	/**
+	 * This method initializes mnExportReport	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getMnExportReport() {
+		if (mnExportReport == null) {
+			mnExportReport = new JMenuItem();
+		}
+		return mnExportReport;
 	}
 
 }
