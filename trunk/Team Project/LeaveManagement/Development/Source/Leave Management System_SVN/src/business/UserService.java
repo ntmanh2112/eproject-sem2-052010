@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import model.LeaveDirector;
 import model.User;
 
-
 import common.AddUser.addResult;
-import common.ChangeUser.changeResult;
 import common.Enumeration.loginResult;
 
 import dao.UserDAO;

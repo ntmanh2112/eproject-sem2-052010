@@ -16,13 +16,13 @@ import javax.swing.JOptionPane;
  */
 public class ConnectionDB {
     // Declare local variables
-	private Connection conn = null;
-    private String source = null;
-    private String uid = null;
-    private String pwd = null;
+	private Connection conn;
+    private String source;
+    private String uid;
+    private String pwd;
 
     public ConnectionDB(){
-    	this.source = "jdbc:sqlserver://STEVEN-PC;Databasename = LeaveManagementSystem";
+    	this.source = "jdbc:sqlserver://STEVEN-PC:1433;Databasename = LeaveManagementSystem";
     	this.uid = "sa";
     	this.pwd = "123456";
     }
@@ -33,8 +33,6 @@ public class ConnectionDB {
             this.conn = DriverManager.getConnection(this.source, this.uid, this.pwd);
         } catch (Exception e){
             e.printStackTrace();
-             
-            
         }
     }
     
@@ -49,10 +47,6 @@ public class ConnectionDB {
     }
 
     public Connection getConn() {
-    	if( conn ==null){
-    		connect();
-    		
-    	}
 		return conn;
 	}
 	public void setConn(Connection conn) {
