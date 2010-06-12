@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportLMSMD" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="91"/>
+	<subDataset name="Table Dataset 1">
+		<queryString>
+			<![CDATA[SELECT
+     TBL_LEAVEAPP."ID_USER",
+     TBL_USER."USERNAME",
+     TBL_LEAVEAPP."DATEFROM",
+     TBL_LEAVEAPP."DATETO",
+     TBL_LEAVEAPP."REASON"
+FROM
+     "TBL_USER" TBL_USER INNER JOIN "TBL_LEAVEAPP" TBL_LEAVEAPP ON TBL_USER."ID_USER" = TBL_LEAVEAPP."ID_USER"
+WHERE
+     TBL_LEAVEAPP.STATUSLEAVE = 'FINISH'
+ AND TBL_USER.ID_POSITION = '1'
+ AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM) = DATEPART(MONTH,GETDATE())
+ AND DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM) = DATEPART(YEAR,GETDATE())]]>
+		</queryString>
+		<field name="ID_USER" class="java.lang.Integer"/>
+		<field name="USERNAME" class="java.lang.String"/>
+		<field name="DATEFROM" class="java.sql.Timestamp"/>
+		<field name="DATETO" class="java.sql.Timestamp"/>
+		<field name="REASON" class="java.lang.String"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT TBL_LEAVEAPP.ID_USER,TBL_USER.USERNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='FINISH' AND TBL_USER.ID_POSITION = '3' AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM)=  DATEPART(MONTH,GETDATE()) AND  DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)=  DATEPART(YEAR,GETDATE())]]>
+	</queryString>
+	<field name="ID_USER" class="java.lang.Integer"/>
+	<field name="USERNAME" class="java.lang.String"/>
+	<field name="DATEFROM" class="java.sql.Timestamp"/>
+	<field name="DATETO" class="java.sql.Timestamp"/>
+	<field name="REASON" class="java.lang.String"/>
+	<background>
+		<band height="802"/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="596" height="92" backcolor="#006699"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[L.M.S Report]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="414" y="72" width="180" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Add a description here]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="717">
+			<staticText>
+				<reportElement x="0" y="0" width="216" height="36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Engineer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="36" width="71" height="36" backcolor="#FFCC66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID_USER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="71" y="37" width="145" height="35" backcolor="#FFCC66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USERNAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="216" y="37" width="144" height="35" backcolor="#FFCC66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE FROM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="360" y="37" width="143" height="35" backcolor="#FFCC66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE TO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="503" y="37" width="220" height="35" backcolor="#FFCC66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REASON]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="73" width="71" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ID_USER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="72" width="145" height="36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{USERNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="73" width="144" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{DATEFROM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="73" width="143" height="37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{DATETO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="503" y="73" width="220" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{REASON}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
