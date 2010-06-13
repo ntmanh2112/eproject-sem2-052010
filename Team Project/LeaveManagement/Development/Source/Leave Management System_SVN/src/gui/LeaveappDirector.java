@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.LeaveDirector;
-
 import business.Method;
 import business.UserService;
 

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
-import model.User;
+import model.*;
 import business.Method;
 import business.UserService;
 import javax.swing.ImageIcon;
