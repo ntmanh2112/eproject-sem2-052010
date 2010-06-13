@@ -41,6 +41,9 @@ public class About extends JDialog {
 		this.setSize(429, 276);
 		this.setTitle("About L.M.S");
 		this.setContentPane(getJContentPane());
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		Dimension dialogSize = this.getSize();
+		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
 	}
 
 	/**

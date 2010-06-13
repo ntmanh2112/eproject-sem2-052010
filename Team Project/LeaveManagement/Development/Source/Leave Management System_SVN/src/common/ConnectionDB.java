@@ -22,7 +22,7 @@ public class ConnectionDB {
     private String pwd;
 
     public ConnectionDB(){
-    	this.source = "jdbc:sqlserver://STEVEN-PC:1433;Databasename = LeaveManagementSystem";
+    	this.source = "jdbc:sqlserver://HIEU-PC;Databasename = LeaveManagementSystem";
     	this.uid = "sa";
     	this.pwd = "123456";
     }

@@ -63,8 +63,11 @@ public class Changepassword extends JDialog {
 	 */
 	private void initialize() {
 		this.setSize(503, 344);
-		this.setTitle("Change Password");
+		this.setTitle("Welcome to Change Password");
 		this.setContentPane(getJContentPane());
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		Dimension dialogSize = this.getSize();
+		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
 	}
 
 	/**

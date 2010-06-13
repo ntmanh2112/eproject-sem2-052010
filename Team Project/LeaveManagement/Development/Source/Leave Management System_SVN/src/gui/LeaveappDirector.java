@@ -68,6 +68,9 @@ public class LeaveappDirector extends JDialog {
 		this.setSize(486, 512);
 		this.setTitle("Create LeaveApp");
 		this.setContentPane(getJContentPane());
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		Dimension dialogSize = this.getSize();
+		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
 	}
 
 	/**
@@ -315,6 +318,7 @@ public class LeaveappDirector extends JDialog {
 									service.creatLeaveDirector(leavedirector);
 									JOptionPane.showMessageDialog(null, "Create LeaveApp successfully!!");
 									LeaveappDirector.this.dispose();
+									repaint();
 									}
 								
 								} catch (Exception e2) {

@@ -79,8 +79,11 @@ public class Addmember extends JDialog {
 	 */
 	private void initialize() {
 		this.setSize(462, 535);
-		this.setTitle("Add User");
+		this.setTitle("Welcome to Add User");
 		this.setContentPane(getJContentPane());
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		Dimension dialogSize = this.getSize();
+		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
 	}
 
 	/**

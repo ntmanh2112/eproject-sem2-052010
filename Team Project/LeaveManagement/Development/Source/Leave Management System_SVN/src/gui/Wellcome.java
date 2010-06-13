@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import common.Constant;
 import java.awt.Toolkit;
@@ -48,6 +50,9 @@ public class Wellcome extends JFrame {
 		this.setResizable(false);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		Dimension dialogSize = this.getSize();
+		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
 		this.setTitle("Welcome to Leave Management System");
 	}
 
@@ -61,6 +66,7 @@ public class Wellcome extends JFrame {
 			lbBackground = new JLabel();
 			lbBackground.setText("");
 			lbBackground.setSize(new Dimension(413, 288));
+			
 			lbBackground.setIcon(new ImageIcon(getClass().getResource("/image/wellcome.jpg")));
 			lbBackground.setLocation(new Point(-9, -2));
 			jContentPane = new JPanel();
@@ -108,7 +114,10 @@ public class Wellcome extends JFrame {
 	private JMenuItem getMnLogin() {
 		if (mnLogin == null) {
 			mnLogin = new JMenuItem();
-			mnLogin.setText("LogIn");
+			mnLogin.setText("Login");
+			mnLogin.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control L");
+			mnLogin.setAccelerator(keyStroke);
 			mnLogin.setIcon(new ImageIcon(getClass().getResource("/image/Preppy-icon.png")));
 			mnLogin.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -129,6 +138,9 @@ public class Wellcome extends JFrame {
 		if (mnExit == null) {
 			mnExit = new JMenuItem();
 			mnExit.setText("Exit");
+			mnExit.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control Q");
+			mnExit.setAccelerator(keyStroke);
 			mnExit.setIcon(new ImageIcon(getClass().getResource("/image/Log-Out-icon.png")));
 			mnExit.addActionListener(new ActionListener() {			
 				@Override
@@ -169,6 +181,9 @@ public class Wellcome extends JFrame {
 		if (mnHelpcontent == null) {
 			mnHelpcontent = new JMenuItem();
 			mnHelpcontent.setText("Help Content");
+			mnHelpcontent.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("F1");
+			mnHelpcontent.setAccelerator(keyStroke);
 			mnHelpcontent.setIcon(new ImageIcon(getClass().getResource("/image/FAQ-icon.png")));
 		}
 		return mnHelpcontent;
@@ -183,6 +198,9 @@ public class Wellcome extends JFrame {
 		if (mnAbout == null) {
 			mnAbout = new JMenuItem();
 			mnAbout.setText("About");
+			mnAbout.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("F12");
+			mnAbout.setAccelerator(keyStroke);
 			mnAbout.setIcon(new ImageIcon(getClass().getResource("/image/user-info-icon.png")));
 			mnAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
