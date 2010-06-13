@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
@@ -11,6 +12,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
 import java.util.Calendar;
 
 import javax.swing.ImageIcon;
@@ -27,7 +29,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
+
+import org.omg.CORBA.FREE_MEM;
 
 import model.Leaveapp;
 import model.User;
@@ -43,6 +48,7 @@ import business.LeaveappService;
 import business.UserService;
 
 import common.ConnectionDB;
+import dao.LeaveDAO;
 
 public class MDControlPanel extends JFrame {
 
@@ -127,7 +133,6 @@ public class MDControlPanel extends JFrame {
 	private JButton btnCreatLeaveAppSystem = null;
 	private JLabel lbTotalLeave = null;
 	private JLabel lbDaycanLeave = null;
-	private JLabel lbDaycannotLeave = null;
 	User user = new User();
 	UserService userservice = new UserService(); // @jve:decl-index=0:
 	Leaveapp leaveapp = new Leaveapp(); // @jve:decl-index=0:
@@ -150,9 +155,7 @@ public class MDControlPanel extends JFrame {
 	private JTable tblUserlock = null;
 	private JButton btnUnlock = null;
 	private JButton btnEdit = null;
-	private JLabel lbTotalnotapproveleave = null;
 	private JTextField txtTotalApprovalLeave = null;
-	private JTextField txtTotalNotApproveleave = null;
 	private JButton btnRefresh = null;
 	private JMenu mnModeration = null;
 	private JMenu mnView = null;
@@ -162,7 +165,6 @@ public class MDControlPanel extends JFrame {
 	private JMenuItem mnViewUserManager = null;
 	private JMenuItem mnViewHistory = null;
 	private JTextField txtTotaldaycanleave = null;
-	private JTextField txtTotaldaycannotleave = null;
 	private JLabel lbHistory = null;
 	private JLabel lbDayoff = null;
 	private JPanel pnTableDayoff = null;
@@ -193,11 +195,12 @@ public class MDControlPanel extends JFrame {
 	private JTable tblDayOfSystem = null;
 	private JMenuItem mnExportReport = null;
 	private JButton btnRefreshHistory = null;
+	private JButton jButton = null;
 
 	/**
 	 * This is the default constructor
 	 */
-	public MDControlPanel() {
+	public MDControlPanel(Frame owner) {
 		super();
 		initialize();
 
@@ -219,7 +222,7 @@ public class MDControlPanel extends JFrame {
 	 */
 	private void initialize() {
 
-		this.setSize(1280, 720);
+		this.setSize(1280, 780);
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setEnabled(true);
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(
@@ -228,6 +231,8 @@ public class MDControlPanel extends JFrame {
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Welcome to Managing Director");
+		totalDayOff();
+		totalCanDayOff();
 		this.setVisible(false);
 	}
 
@@ -311,6 +316,7 @@ public class MDControlPanel extends JFrame {
 			jContentPane.add(getBtnLogout(), null);
 			jContentPane.add(getJPanel(), null);
 			jContentPane.add(getBtnCreatLeaveAppSystem(), null);
+			jContentPane.add(getJButton(), null);
 		}
 		return jContentPane;
 	}
@@ -655,18 +661,10 @@ public class MDControlPanel extends JFrame {
 			lbHistory.setBounds(new Rectangle(14, 4, 91, 31));
 			lbHistory.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
 			lbHistory.setText("History");
-			lbTotalnotapproveleave = new JLabel();
-			lbTotalnotapproveleave.setText("Total not approval leave ");
-			lbTotalnotapproveleave.setSize(new Dimension(155, 32));
-			lbTotalnotapproveleave.setLocation(new Point(15, 105));
-			lbDaycannotLeave = new JLabel();
-			lbDaycannotLeave.setText("Total day can not leave");
-			lbDaycannotLeave.setSize(new Dimension(155, 32));
-			lbDaycannotLeave.setLocation(new Point(15, 223));
 			lbDaycanLeave = new JLabel();
 			lbDaycanLeave.setText("Total day can leave");
 			lbDaycanLeave.setSize(new Dimension(155, 32));
-			lbDaycanLeave.setLocation(new Point(15, 164));
+			lbDaycanLeave.setLocation(new Point(14, 105));
 			lbTotalLeave = new JLabel();
 			lbTotalLeave.setText("Total approval leave ");
 			lbTotalLeave.setSize(new Dimension(155, 32));
@@ -675,12 +673,8 @@ public class MDControlPanel extends JFrame {
 			jpnHistory.setLayout(null);
 			jpnHistory.add(lbTotalLeave, null);
 			jpnHistory.add(lbDaycanLeave, null);
-			jpnHistory.add(lbDaycannotLeave, null);
-			jpnHistory.add(lbTotalnotapproveleave, null);
 			jpnHistory.add(getTxtTotalApprovalLeave(), null);
-			jpnHistory.add(getTxtTotalNotApproveleave(), null);
 			jpnHistory.add(getTxtTotaldaycanleave(), null);
-			jpnHistory.add(getTxtTotaldaycannotleave(), null);
 			jpnHistory.add(lbHistory, null);
 			jpnHistory.add(lbDayoff, null);
 			jpnHistory.add(getPnTableDayoff(), null);
@@ -987,7 +981,10 @@ public class MDControlPanel extends JFrame {
 	private JMenuItem getMniEditprofile() {
 		if (mniEditprofile == null) {
 			mniEditprofile = new JMenuItem();
-			mniEditprofile.setText("Edit Profile");
+			mniEditprofile.setText("Edit Profile");	
+			mniEditprofile.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control E");
+			mniEditprofile.setAccelerator(keyStroke);
 			mniEditprofile.setIcon(new ImageIcon(getClass().getResource(
 					"/image/Edit-icon.png")));
 			mniEditprofile
@@ -1009,6 +1006,9 @@ public class MDControlPanel extends JFrame {
 		if (mniChangepass == null) {
 			mniChangepass = new JMenuItem();
 			mniChangepass.setText("Change Password");
+			mniChangepass.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control P");
+			mniChangepass.setAccelerator(keyStroke);
 			mniChangepass.setIcon(new ImageIcon(getClass().getResource(
 					"/image/changepass.jpg")));
 			mniChangepass
@@ -1030,6 +1030,9 @@ public class MDControlPanel extends JFrame {
 		if (mniCreatleaveapp == null) {
 			mniCreatleaveapp = new JMenuItem();
 			mniCreatleaveapp.setText("Creat Leaveapp");
+			mniCreatleaveapp.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control C");
+			mniCreatleaveapp.setAccelerator(keyStroke);
 			mniCreatleaveapp.setIcon(new ImageIcon(getClass().getResource(
 					"/image/Emp.png")));
 			mniCreatleaveapp
@@ -1051,6 +1054,9 @@ public class MDControlPanel extends JFrame {
 		if (mniViewManagerleaveapp == null) {
 			mniViewManagerleaveapp = new JMenuItem();
 			mniViewManagerleaveapp.setText("View Manager Leave App");
+			mniViewManagerleaveapp.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control M");
+			mniViewManagerleaveapp.setAccelerator(keyStroke);
 			mniViewManagerleaveapp.setIcon(new ImageIcon(getClass()
 					.getResource("/image/report.png")));
 			mniViewManagerleaveapp
@@ -1072,6 +1078,9 @@ public class MDControlPanel extends JFrame {
 		if (mniSignout == null) {
 			mniSignout = new JMenuItem();
 			mniSignout.setText("Sign Out");
+			mniSignout.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control Q");
+			mniSignout.setAccelerator(keyStroke);
 			mniSignout.setIcon(new ImageIcon(getClass().getResource(
 					"/image/Log-Out-icon.png")));
 			mniSignout.addActionListener(new ActionListener() {
@@ -1103,6 +1112,9 @@ public class MDControlPanel extends JFrame {
 		if (mniAdduser == null) {
 			mniAdduser = new JMenuItem();
 			mniAdduser.setText("Add User");
+			mniAdduser.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control A");
+			mniAdduser.setAccelerator(keyStroke);
 			mniAdduser.setIcon(new ImageIcon(getClass().getResource(
 					"/image/button-ok-icon.png")));
 			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
@@ -2086,7 +2098,7 @@ public class MDControlPanel extends JFrame {
 			btnCreatLeaveAppSystem.setSize(new Dimension(334, 40));
 			btnCreatLeaveAppSystem.setIcon(new ImageIcon(getClass()
 					.getResource("/image/Clients-icon.png")));
-			btnCreatLeaveAppSystem.setLocation(new Point(810, 90));
+			btnCreatLeaveAppSystem.setLocation(new Point(808, 150));
 			btnCreatLeaveAppSystem
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -2291,21 +2303,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes txtTotalNotApproveleave
-	 * 
-	 * @return javax.swing.JTextField
-	 */
-	private JTextField getTxtTotalNotApproveleave() {
-		if (txtTotalNotApproveleave == null) {
-			txtTotalNotApproveleave = new JTextField();
-			txtTotalNotApproveleave.setLocation(new Point(170, 104));
-			txtTotalNotApproveleave.setEnabled(false);
-			txtTotalNotApproveleave.setSize(new Dimension(51, 32));
-		}
-		return txtTotalNotApproveleave;
-	}
-
-	/**
 	 * This method initializes btnRefresh
 	 * 
 	 * @return javax.swing.JButton
@@ -2394,6 +2391,9 @@ public class MDControlPanel extends JFrame {
 		if (mnHelpcontent == null) {
 			mnHelpcontent = new JMenuItem();
 			mnHelpcontent.setText("Help Content");
+			mnHelpcontent.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("F1");
+			mnHelpcontent.setAccelerator(keyStroke);
 			mnHelpcontent.setIcon(new ImageIcon(getClass().getResource(
 					"/image/Help.png")));
 		}
@@ -2409,6 +2409,9 @@ public class MDControlPanel extends JFrame {
 		if (mnAbout == null) {
 			mnAbout = new JMenuItem();
 			mnAbout.setText("About");
+			mnAbout.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("F12");
+			mnAbout.setAccelerator(keyStroke);
 			mnAbout.setIcon(new ImageIcon(getClass().getResource(
 					"/image/about.png")));
 			mnAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -2429,6 +2432,9 @@ public class MDControlPanel extends JFrame {
 		if (mnViewUserManager == null) {
 			mnViewUserManager = new JMenuItem();
 			mnViewUserManager.setText("View User Manager");
+			mnViewUserManager.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control U");
+			mnViewUserManager.setAccelerator(keyStroke);
 			mnViewUserManager.setIcon(new ImageIcon(getClass().getResource(
 					"/image/report.png")));
 			mnViewUserManager
@@ -2450,6 +2456,9 @@ public class MDControlPanel extends JFrame {
 		if (mnViewHistory == null) {
 			mnViewHistory = new JMenuItem();
 			mnViewHistory.setText("View History");
+			mnViewHistory.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control H");
+			mnViewHistory.setAccelerator(keyStroke);
 			mnViewHistory.setIcon(new ImageIcon(getClass().getResource(
 					"/image/report.png")));
 			mnViewHistory
@@ -2470,26 +2479,11 @@ public class MDControlPanel extends JFrame {
 	private JTextField getTxtTotaldaycanleave() {
 		if (txtTotaldaycanleave == null) {
 			txtTotaldaycanleave = new JTextField();
-			txtTotaldaycanleave.setLocation(new Point(169, 170));
+			txtTotaldaycanleave.setLocation(new Point(169, 105));
 			txtTotaldaycanleave.setEnabled(false);
 			txtTotaldaycanleave.setSize(new Dimension(51, 32));
 		}
 		return txtTotaldaycanleave;
-	}
-
-	/**
-	 * This method initializes txtTotaldaycannotleave
-	 * 
-	 * @return javax.swing.JTextField
-	 */
-	private JTextField getTxtTotaldaycannotleave() {
-		if (txtTotaldaycannotleave == null) {
-			txtTotaldaycannotleave = new JTextField();
-			txtTotaldaycannotleave.setLocation(new Point(170, 223));
-			txtTotaldaycannotleave.setEnabled(false);
-			txtTotaldaycannotleave.setSize(new Dimension(51, 32));
-		}
-		return txtTotaldaycannotleave;
 	}
 
 	/**
@@ -2929,17 +2923,8 @@ public class MDControlPanel extends JFrame {
 						.getInstance().get(Calendar.MONTH) + 1), Integer
 						.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 				tableModelDayoff.setData(dataday);
-				tblDayOfSystem = new JTable(tableModelDayoff) {
-
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
-
-					public boolean isCellEditable(int rowIndex, int vColIndex) {
-						return false;
-					}
-				};
+				tblDayOfSystem = new JTable(tableModelDayoff);
+			
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error");
@@ -2957,6 +2942,9 @@ public class MDControlPanel extends JFrame {
 		if (mnExportReport == null) {
 			mnExportReport = new JMenuItem();
 			mnExportReport.setText("Export Report");
+			mnExportReport.setMnemonic(KeyEvent.VK_E);
+			KeyStroke keyStroke = KeyStroke.getKeyStroke("control R");
+			mnExportReport.setAccelerator(keyStroke);
 			mnExportReport.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 
@@ -2985,7 +2973,7 @@ public class MDControlPanel extends JFrame {
 	private JButton getBtnRefreshHistory() {
 		if (btnRefreshHistory == null) {
 			btnRefreshHistory = new JButton();
-			btnRefreshHistory.setBounds(new Rectangle(15, 270, 158, 33));
+			btnRefreshHistory.setBounds(new Rectangle(14, 165, 154, 33));
 			btnRefreshHistory.setIcon(new ImageIcon(getClass().getResource("/image/Refresh-icon.png")));
 			btnRefreshHistory.setText("Refresh");
 			btnRefreshHistory.addActionListener(new java.awt.event.ActionListener() {
@@ -3003,6 +2991,51 @@ public class MDControlPanel extends JFrame {
 			});
 		}
 		return btnRefreshHistory;
+	}
+
+	/**
+	 * This method initializes jButton	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getJButton() {
+		if (jButton == null) {
+			jButton = new JButton();
+			jButton.setText("View History");
+			jButton.setSize(new Dimension(151, 40));
+			jButton.setIcon(new ImageIcon(getClass().getResource("/image/zoom.png")));
+			jButton.setLocation(new Point(809, 91));
+			jButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					new Viewhistory(id).setVisible(true);
+				}
+
+			});
+		}
+		return jButton;
+	}
+	
+	public void totalDayOff(){
+		try {
+			ResultSet rs = LeaveDAO.selectAllDayApprove(this.user);
+			if (rs.next()) {
+				txtTotalApprovalLeave.setText(rs.getString("TOTALDAYOFF"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void totalCanDayOff(){
+		try {
+			ResultSet rs = LeaveDAO.selectAllCanDayApprove(this.user);
+			if(rs.next()){
+				txtTotaldaycanleave.setText(rs.getString("TOTALCANDAYOFF"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

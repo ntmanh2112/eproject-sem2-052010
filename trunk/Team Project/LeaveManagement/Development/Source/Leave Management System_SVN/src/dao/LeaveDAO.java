@@ -205,14 +205,24 @@ public class LeaveDAO {
 		return rs;
 	}
 	// LOAD LEAVE APPLICATION MANAGING DIRECTOR***************************hieu*************************
-	public ResultSet selectAllDayApprove(User user,int month,int year) throws Exception{
+	public static ResultSet selectAllDayApprove(User user) throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		String sql = "SELECT COUNT(STATUSLEAVE) FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE DATEPART(MONTH,DATEFROM)= '"+ month+"' AND DATEPART(YEAR,DATEFROM)='"+ year+ "' AND STATUSLEAVE = 'FINISH' AND USERNAME = '"+user.getUsername()+"' ";
+		String sql = "SELECT COUNT(STATUSLEAVE) AS TOTALDAYOFF FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE DATEPART(MONTH,DATEFROM)= DATEPART(MONTH,getdate()) AND DATEPART(YEAR,DATEFROM)=DATEPART(YEAR,getdate()) AND STATUSLEAVE = 'FINISH' AND USERNAME = '"+user.getUsername()+"' ";
 		Statement st = connection.getConn().createStatement();																																																					
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
 	}
+	
+	public static ResultSet selectAllCanDayApprove(User user) throws Exception{
+		ConnectionDB connection = new ConnectionDB();
+		connection.connect();
+		String sql = "SELECT 2-(COUNT(STATUSLEAVE)) AS TOTALCANDAYOFF FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER = TBL_LEAVEAPP.ID_USER WHERE DATEPART(MONTH,DATEFROM)= DATEPART(MONTH,getdate()) AND DATEPART(YEAR,DATEFROM)=DATEPART(YEAR,getdate()) AND STATUSLEAVE = 'FINISH' AND USERNAME = '"+user.getUsername()+"' ";
+		Statement st = connection.getConn().createStatement();																																																					
+		ResultSet rs = st.executeQuery(sql);
+		return rs;
+	}
+	
 }
 
 

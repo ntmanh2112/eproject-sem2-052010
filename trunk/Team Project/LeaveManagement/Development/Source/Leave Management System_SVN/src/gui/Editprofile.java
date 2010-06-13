@@ -50,7 +50,7 @@ public class Editprofile extends JDialog {
 	private JTextField txtPhone = null;
 	private int id = 0;
 	private User user = new User();
-	private UserService service = new  UserService();
+	private UserService service = new  UserService();  
 	private JLabel lbFullnamemess = null;
 	private JLabel lbBirthdaymess = null;
 	private JComboBox cbxSex = null;
@@ -80,8 +80,11 @@ public class Editprofile extends JDialog {
 	 */
 	private void initialize() {
 		this.setSize(505, 542);
-		this.setTitle("Edit Profile");
+		this.setTitle("Welcome to Edit Profile");
 		this.setContentPane(getJContentPane());
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
+		Dimension dialogSize = this.getSize();
+		this.setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
 	}
 
 	/**
