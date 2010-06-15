@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,15 +17,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import model.User;
+import javax.swing.SwingConstants;
 
 import business.UserService;
 
 import common.Constant;
 import common.Enumeration.loginResult;
-import javax.swing.SwingConstants;
-import java.awt.Toolkit;
 
 public class Login extends JFrame {
 
@@ -59,6 +57,7 @@ public class Login extends JFrame {
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/lock-icon.png")));
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
+		this.getRootPane().setDefaultButton(btnOk);
 		this.setTitle("Welcome to Login Form");
 		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize().getSize();
 		Dimension dialogSize = this.getSize();
