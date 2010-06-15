@@ -40,7 +40,6 @@ public class Login extends JFrame {
 	private JButton btnOk = null;
 	private JButton btnExit = null;
 	private int id = 0;
-	private User user = new User();
 	private JLabel lbIcon = null;
 	/**
 	 * This is the default constructor
