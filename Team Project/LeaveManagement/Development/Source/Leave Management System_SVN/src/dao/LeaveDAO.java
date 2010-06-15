@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import model.LeaveDirector;
 import model.Leaveapp;
 import model.User;
 

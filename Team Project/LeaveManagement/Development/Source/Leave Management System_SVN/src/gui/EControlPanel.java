@@ -16,7 +16,6 @@ import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -33,19 +32,8 @@ import javax.swing.WindowConstants;
 
 import model.Leaveapp;
 import model.User;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 import business.LeaveappService;
 import business.UserService;
-
-import common.ConnectionDB;
-
 import dao.LeaveDAO;
 
 public class EControlPanel extends JFrame {
@@ -89,12 +77,7 @@ public class EControlPanel extends JFrame {
 	Leaveapp leaveapp = new Leaveapp(); // @jve:decl-index=0:
 	private int id = 0;
 	LeaveappService leaveappservice = new LeaveappService(); // @jve:decl-index=0:
-	private String[][] data = null;
-	private String[] column = { "ID", "UserName", "Status", "Position",
-			"FullName", "Birthday", "Address", "Gender", "Phone", "Email" };
-	private String[][] data1 = null;
-	private String[] column1 = { "ID_LEAVE", "FullName", "DateFrom", "Dateto",
-			"Reason", "Status", "Address", "Phone" };
+	
 	private String[][] datah = null;
 	private String[] columnh = { "FullName", "DateFrom", "Dateto", "Reason",
 			"Status", "Address", "Phone" };
@@ -110,9 +93,7 @@ public class EControlPanel extends JFrame {
 	private JPanel pnTableDayoff = null;
 	private JLabel lbMyLeaveApp = null;
 	private JPanel pnTableMyLeaveApp = null;
-	private common.TableModel tableModel = new common.TableModel(data, column);
-	private common.TableModel tableModelLeaveapp = new common.TableModel(data1,
-			column1);
+	
 
 	private common.TableModel tableModelHistory = new common.TableModel(datah,
 			columnh);
