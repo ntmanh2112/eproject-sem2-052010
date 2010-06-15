@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -19,18 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import model.Leaveapp;
-import model.User;
 import business.LeaveappService;
 import business.Method;
-import business.UserService;
-import javax.swing.ImageIcon;
-
-
-
-
-
+import common.leaveappResult.addleaveResult;
 
 public class CreateLeaveapp extends JDialog {
 
@@ -58,10 +50,7 @@ public class CreateLeaveapp extends JDialog {
 	private JComboBox cbxMonth1 = null;
 	private JLabel lbDay1 = null;
 	private JComboBox cbxDay1 = null;
-	private int id = 0;
-	private User user = new User();  //  @jve:decl-index=0:
-	private UserService service = new  UserService();
-	private JLabel lbId_user = null;
+	private int id = 0;  //  @jve:decl-index=0:
 	private JLabel lbDatefromMess = null;
 	private JLabel lbDatetoMess = null;
 	private JLabel lbReasonMess = null;
@@ -75,14 +64,9 @@ public class CreateLeaveapp extends JDialog {
 	/**
 	 * @param owner
 	 */
-	public CreateLeaveapp(Frame owner) {
-		super(owner,true);
-		initialize();
-	}
 	public CreateLeaveapp(Frame owner,int id) {
-		super(owner);
+		super(owner,true);
 		this.id = id;
-		this.user = service.loadUser(id);
 		initialize();
 	}
 
@@ -131,9 +115,6 @@ public class CreateLeaveapp extends JDialog {
 			lbDatefromMess.setText("");
 			lbDatefromMess.setSize(new Dimension(307, 20));
 			lbDatefromMess.setLocation(new Point(133, 145));
-			lbId_user = new JLabel(String.valueOf(id));
-			lbId_user.setBounds(new Rectangle(163, 59, 92, 16));
-			lbId_user.setText("");
 			lbDay1 = new JLabel();
 			lbDay1.setText("Day");
 			lbDay1.setSize(new Dimension(37, 20));
@@ -222,7 +203,6 @@ public class CreateLeaveapp extends JDialog {
 			jContentPane.add(getCbxMonth1(), null);
 			jContentPane.add(lbDay1, null);
 			jContentPane.add(getCbxDay1(), null);
-			jContentPane.add(lbId_user, null);
 			jContentPane.add(lbDatefromMess, null);
 			jContentPane.add(lbDatetoMess, null);
 			jContentPane.add(lbReasonMess, null);
@@ -282,6 +262,43 @@ public class CreateLeaveapp extends JDialog {
 			txtAddress.setSize(new Dimension(307, 20));
 			txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
 				public void focusLost(java.awt.event.FocusEvent e) {
+					String a = txtAddress.getText();
+					if (a.length()<20) {
+						lbReasonMess.setText("Reason is not more than 30 chars!!");
+						lbReasonMess.setForeground(Color.red);
+						lbReasonMess.setText("");
+					}else if(a.length()>50){
+						lbReasonMess.setText("Reason is not more than 50 chars!!");
+						lbReasonMess.setForeground(Color.red);
+						lbReasonMess.setText("");
+					}
+					else {
+						if(Method.CheckSpecialCharacter(a)) {
+							JOptionPane.showMessageDialog(null, "Don't input special character!!!");
+							lbReasonMess.setText(null);
+						}else {
+							lbReasonMess.setText("OK");
+							lbReasonMess.setForeground(Color.green);
+						}
+					}
+				}
+			});
+		}
+		return txtAddress;
+	}
+
+	/**
+	 * This method initializes txtPhone	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getTxtPhone() {
+		if (txtPhone == null) {
+			txtPhone = new JTextField();
+			txtPhone.setLocation(new Point(135, 360));
+			txtPhone.setSize(new Dimension(135, 20));
+			txtPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+				public void focusLost(java.awt.event.FocusEvent e) {
 					String a = txtPhone.getText();
 					char[] array = a.toCharArray();
 					int t = 0;
@@ -312,20 +329,6 @@ public class CreateLeaveapp extends JDialog {
 				}
 			});
 		}
-		return txtAddress;
-	}
-
-	/**
-	 * This method initializes txtPhone	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getTxtPhone() {
-		if (txtPhone == null) {
-			txtPhone = new JTextField();
-			txtPhone.setLocation(new Point(135, 360));
-			txtPhone.setSize(new Dimension(135, 20));
-		}
 		return txtPhone;
 	}
 
@@ -353,7 +356,7 @@ public class CreateLeaveapp extends JDialog {
 					}else if(Integer.valueOf(cbxDay1.getSelectedItem().toString())< Integer.valueOf(cbxDay.getSelectedItem().toString()) && String.valueOf(cbxMonth1.getSelectedItem().toString()).equalsIgnoreCase(txtDateFromMonth.getText())){
 						JOptionPane.showMessageDialog(null, " dateto must be larger than datefrom");
 					}else{
-						int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to Add User");
+						int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to Create leave app");
 						if(sr==0){
 							Leaveapp leave_app = new Leaveapp();
 							leave_app.setId_user(id);
@@ -372,9 +375,14 @@ public class CreateLeaveapp extends JDialog {
 								ex.printStackTrace();
 							}try {
 								LeaveappService service = new LeaveappService();
-								service.addLeaveApp(leave_app);
-								JOptionPane.showMessageDialog(null, "Create Leaveapp successfully!!");
-								CreateLeaveapp.this.dispose();
+								addleaveResult addleaveresult = service.addLeaveApp(leave_app,Integer.valueOf(txtDateFromYear.getText().toString()),Integer.valueOf(txtDateFromMonth.getText().toString()),Integer.valueOf(cbxDay.getSelectedItem().toString()));
+								if(addleaveresult == addleaveResult.sucessful){
+									JOptionPane.showMessageDialog(null, "Create Leaveapp successfully!!");
+									CreateLeaveapp.this.dispose();
+								}
+								else if (addleaveresult == addleaveResult.incorrect) {
+									JOptionPane.showMessageDialog(null, "This DATEFROM  is exist!!");
+								}
 								repaint();
 							} catch (Exception e2) {
 								e2.printStackTrace();
@@ -514,9 +522,7 @@ public class CreateLeaveapp extends JDialog {
 		}
 		return txtId_user;
 	}
-	public static void main(String [] args){
-		new CreateLeaveapp(null).setVisible(true);
-	}
+	
 
 	/**
 	 * This method initializes cbxMonth1	
@@ -545,7 +551,7 @@ public class CreateLeaveapp extends JDialog {
 			cbxDay1 = new JComboBox();
 			cbxDay1.setLocation(new Point(396, 177));
 			cbxDay1.setSize(new Dimension(45, 20));
-			for(int i = 0;i<32;i++){
+			for(int i = 1;i<32;i++){
 				cbxDay1.addItem(i);
 			}
 		}

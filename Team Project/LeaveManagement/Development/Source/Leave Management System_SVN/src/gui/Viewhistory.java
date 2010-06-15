@@ -7,17 +7,16 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.sql.ResultSet;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-
-import dao.LeaveDAO;
 
 import model.User;
 import business.UserService;
+import dao.LeaveDAO;
 
 public class Viewhistory extends JDialog {
 
@@ -40,20 +39,17 @@ public class Viewhistory extends JDialog {
 	private JLabel jLabel6 = null;
 	private JTextField txtAddress = null;
 	private JTextField jTextField = null;
-	private JLabel jLabel7 = null;
-	
-
 	/**
 	 * @param owner
 	 */
-	public Viewhistory() {
-		super();
+	public Viewhistory(Frame owner) {
+		super(owner,true);
 		initialize();
 
 	}
 
-	public Viewhistory(int id) {
-		super();
+	public Viewhistory(Frame owner,int id) {
+		super(owner ,true);
 		this.id = id;
 		this.user = service.loadUser(id);
 		initialize();
@@ -85,9 +81,6 @@ public class Viewhistory extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			jLabel7 = new JLabel();
-			jLabel7.setBounds(new Rectangle(39, 12, 66, 56));
-			jLabel7.setText("");
 			jLabel6 = new JLabel();
 			jLabel6.setFont(new Font("Dialog", Font.BOLD, 18));
 			jLabel6.setLocation(new Point(15, 222));
@@ -139,7 +132,6 @@ public class Viewhistory extends JDialog {
 			jContentPane.add(jLabel6, null);
 			jContentPane.add(getTxtAddress(), null);
 			jContentPane.add(getJTextField(), null);
-			jContentPane.add(jLabel7, null);
 		}
 		return jContentPane;
 	}
@@ -153,6 +145,7 @@ public class Viewhistory extends JDialog {
 		if (txtFullname == null) {
 			txtFullname = new JTextField(this.user.getFullname());
 			txtFullname.setLocation(new Point(149, 85));
+			txtFullname.setEnabled(false);
 			txtFullname.setSize(new Dimension(229, 20));
 		}
 		return txtFullname;
@@ -167,6 +160,7 @@ public class Viewhistory extends JDialog {
 		if (txtTotalappleave == null) {
 			txtTotalappleave = new JTextField();
 			txtTotalappleave.setBounds(new Rectangle(253, 266, 122, 20));
+			txtTotalappleave.setEnabled(false);
 		}
 		return txtTotalappleave;
 	}
@@ -180,6 +174,7 @@ public class Viewhistory extends JDialog {
 		if (txtTotaldaycanleave == null) {
 			txtTotaldaycanleave = new JTextField();
 			txtTotaldaycanleave.setLocation(new Point(253, 310));
+			txtTotaldaycanleave.setEnabled(false);
 			txtTotaldaycanleave.setSize(new Dimension(122, 20));
 		}
 		return txtTotaldaycanleave;
@@ -215,6 +210,7 @@ public class Viewhistory extends JDialog {
 			txtPisitionname = new JTextField(user.getPosition_name());
 	
 			txtPisitionname.setLocation(new Point(148, 130));
+			txtPisitionname.setEnabled(false);
 			txtPisitionname.setSize(new Dimension(228, 20));
 		}
 		return txtPisitionname;
@@ -229,6 +225,7 @@ public class Viewhistory extends JDialog {
 		if (txtAddress == null) {
 			txtAddress = new JTextField(user.getAddress());
 			txtAddress.setSize(new Dimension(228, 20));
+			txtAddress.setEnabled(false);
 			txtAddress.setLocation(new Point(148, 174));
 		}
 		return txtAddress;
@@ -243,6 +240,7 @@ public class Viewhistory extends JDialog {
 		if (jTextField == null) {
 			jTextField = new JTextField(user.getPhone());
 			jTextField.setBounds(new Rectangle(148, 223, 123, 20));
+			jTextField.setEnabled(false);
 		}
 		return jTextField;
 	}

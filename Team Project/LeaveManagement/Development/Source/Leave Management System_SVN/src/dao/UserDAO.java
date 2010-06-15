@@ -10,10 +10,21 @@ import model.User;
 import common.ConnectionDB;
 import common.AddUser.addResult;
 import common.Enumeration.loginResult;
+import common.leaveappResult.addleaveResult;
 
 
 
 public class UserDAO {
+	//delete day of system
+	public void delete(LeaveDirector leavedirector )throws Exception{
+		ConnectionDB conn = new ConnectionDB();
+		conn.connect();
+		String sql = "DELETE TBL_LEAVEDIRECTOR WHERE TBL_LEAVEDIRECTOR = " + leavedirector.getId_leavedirector();
+		Statement st = conn.getConn().createStatement();
+		st.executeUpdate(sql);
+		
+		
+	}
 	//ADDGROUP
 	public void addGroup(int id_position,int id){
 		try {
@@ -28,22 +39,37 @@ public class UserDAO {
 			
 	}
 	//ADD LEAVEEDITOR
-	public void createleavedirector(LeaveDirector leavedirector){
+	public addleaveResult createleavedirector(LeaveDirector leavedirector,int year,int month,int day){
+		addleaveResult addleaveresult = null;
 		try {
 			ConnectionDB conn = new ConnectionDB();
 			conn.connect();
+			String check = "SELECT DATEFROM FROM TBL_LEAVEDIRECTOR WHERE DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)= '"+ year + "' AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM) = '" + month + "' AND DATEPART(DAY,TBL_LEAVEAPP.DATEFROM) ='"+ day + "'";
 			String sql = "INSERT INTO TBL_LEAVEDIRECTOR (DATEFROM,DATETO,REASON) VALUES (?,?,?)";
 			PreparedStatement psmt = conn.getConn().prepareStatement(sql);
 			psmt.setDate(1, leavedirector.getDatefrom());
 			psmt.setDate(2, leavedirector.getDateto());
 			psmt.setString(3, leavedirector.getReason());
-			psmt.executeUpdate();
+			Statement st = conn.getConn().createStatement();
+			ResultSet rs = st.executeQuery(check);
+			int i = 0;
+			while (rs.next()) {
+				leavedirector.setDatefrom(rs.getDate("DATEFROM"));
+				i++;
+			}
+			if(i>0){
+				addleaveresult = addleaveResult.incorrect;
+			}
+			else {
+				psmt.executeUpdate();
+				addleaveresult = addleaveResult.sucessful;
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+			return addleaveresult;
 		}
-		
+		return addleaveresult;
 	}
 	
 	public User selectidposition(User user){
@@ -124,10 +150,13 @@ public class UserDAO {
 			psmt1.setString(6, user.getGender());
 			psmt1.setString(7, user.getPhone());
 			psmt1.setString(8, user.getEmail());
-			
+			int i = 0;
 			ResultSet rs = psmt.executeQuery();
-			
-			if (rs.wasNull()){
+			while(rs.next()){
+				user.setUsername(rs.getString("USERNAME"));
+				i ++;
+			}
+			if (i>0){
 				addresult = addResult.incorrect;
 			}
 			
@@ -198,6 +227,9 @@ public class UserDAO {
 			}
 			else if(i!= 0 && idposition == 2 && status == 1){
 				result = loginResult.manager;
+			}
+			else if(i!= 0 && idposition == 1 && status == 1){
+				result = loginResult.engineer;
 			}
 			else if (i!= 0 && status == 0 ) {
 				result = loginResult.lock;

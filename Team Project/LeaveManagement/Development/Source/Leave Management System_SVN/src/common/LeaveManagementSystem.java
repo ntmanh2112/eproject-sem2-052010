@@ -1,7 +1,7 @@
 package common;
 
-import gui.MDControlPanel;
 import gui.Wellcome;
+
 import javax.swing.UIManager;
 
 public class LeaveManagementSystem {

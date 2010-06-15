@@ -8,17 +8,24 @@ import model.User;
 
 import common.AddUser.addResult;
 import common.Enumeration.loginResult;
+import common.leaveappResult.addleaveResult;
 
 import dao.UserDAO;
 
 public class UserService {
+	public void deleteLeave(LeaveDirector leavedirector)throws Exception{
+		LeaveDirector leaveDirector = new LeaveDirector();
+		UserDAO dao = new UserDAO();
+		dao.delete(leaveDirector);
+	}
 	UserDAO dao = new UserDAO();  //  @jve:decl-index=0:
 	public loginResult loginUser(String username,String password){
 		loginResult result = dao.loginUser(username, password);
 		return result;
 	}
-	public void creatLeaveDirector(LeaveDirector leavedirector){
-		dao.createleavedirector(leavedirector);
+	public addleaveResult creatLeaveDirector(LeaveDirector leavedirector,int year,int month,int day){
+		addleaveResult result =dao.createleavedirector(leavedirector,year,month,day);
+		return result;
 	}
 	//get pass
 	public String selectPass(int id)throws Exception{

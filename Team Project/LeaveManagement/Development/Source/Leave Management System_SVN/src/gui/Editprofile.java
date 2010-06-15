@@ -66,7 +66,7 @@ public class Editprofile extends JDialog {
 	}
 	
 	public Editprofile(Frame owner,int id){
-		super(owner);
+		super(owner,true);
 		this.id = id;
 		this.user = service.loadUser(id);
 		initialize();

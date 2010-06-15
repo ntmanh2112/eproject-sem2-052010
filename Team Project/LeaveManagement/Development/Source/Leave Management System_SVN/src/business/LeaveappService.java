@@ -6,21 +6,20 @@ package business;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import common.leaveappResult.addleaveResult;
+
 import model.LeaveDirector;
 import model.Leaveapp;
 import dao.LeaveDAO;
 
-/**
- * @author HIEU
- *
- */
 public class LeaveappService {
 	LeaveDAO dao = new LeaveDAO();
-	
-	public void addLeaveApp(Leaveapp leave_app){
-		dao.addLeaveapp(leave_app);
-		
+	//add leaveapp
+	public addleaveResult addLeaveApp(Leaveapp leave_app,int year ,int month,int day){
+		addleaveResult result = dao.addLeaveapp(leave_app,year ,month,day);
+		return result;
 	}
+	
 	//APPROVE 
 	public void approveLeaveApp(Leaveapp leaveapp)throws Exception{
 		dao.approveLeave(leaveapp);
@@ -193,7 +192,6 @@ public class LeaveappService {
 		while (rs.next()){
 			Leaveapp leaveapp = new Leaveapp();
 			leaveapp.setId_leaveapp(rs.getInt("ID_LEAVEAPP"));
-			
 			leaveapp.setFullname(rs.getString("FULLNAME"));
 			leaveapp.setDatefrom(rs.getDate("DATEFROM"));
 			leaveapp.setDateto(rs.getDate("DATETO"));
@@ -496,11 +494,8 @@ public class LeaveappService {
 		}
 		return dataday;
 	}
-	//LOAD LEAVE APPLICATION MANAGINGDIRETOR ******************************hieu********************
-	public void allDayAprove(){
-		
-		
-	}
+	
+	
 
 
 }

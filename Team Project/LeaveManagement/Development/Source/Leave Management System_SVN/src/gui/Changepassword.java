@@ -50,7 +50,7 @@ public class Changepassword extends JDialog {
 		initialize();
 	}
 	public Changepassword(Frame owner,int id){
-		super(owner);
+		super(owner,true);
 		this.id = id;
 		this.user = service.loadUser(id);
 		initialize();
