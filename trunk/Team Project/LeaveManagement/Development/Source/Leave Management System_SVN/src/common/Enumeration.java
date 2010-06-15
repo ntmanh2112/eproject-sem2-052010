@@ -7,7 +7,7 @@ public class Enumeration {
 		boss,
 		managerbusiness,
 		manager,
-		enginerr
+		engineer
 	}
 	
 	

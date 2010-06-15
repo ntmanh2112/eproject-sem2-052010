@@ -16,7 +16,6 @@ import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -48,7 +47,7 @@ import common.ConnectionDB;
 
 import dao.LeaveDAO;
 
-public class MDControlPanel extends JFrame {
+public class BMControlPanel extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel jContentPane = null;
@@ -82,7 +81,6 @@ public class MDControlPanel extends JFrame {
 	private JPanel jpnLeaveapp = null;
 	private JPanel jpmUsermanager = null;
 	private JTabbedPane jtpnUsermanager = null;
-	private JPanel jpnBusinessmanager = null;
 	private JPanel jpnManager = null;
 	private JPanel jpnEngineer = null;
 	private JTabbedPane jtbnLeaveapp = null;
@@ -113,22 +111,14 @@ public class MDControlPanel extends JFrame {
 	private JTable tblLeaveappReject = null;
 	private JScrollPane jScrollPane3 = null;
 	private JTable tblLeaveappFinish = null;
-	private JButton btnViewBusinessEdit = null;
-	private JButton btnViewBusinessLock = null;
-	private JPanel pnTableBusinessManager = null;
-	private JScrollPane jScrollPane4 = null;
-	private JTable tblBusinessManager = null;
 	private JPanel pnManager = null;
 	private JButton btnViewManagerEdit = null;
-	private JButton btnViewManagerLock = null;
 	private JScrollPane jScrollPane5 = null;
 	private JTable tblManager = null;
 	private JPanel pnEngineer = null;
 	private JButton btnViewEngineerEdit = null;
-	private JButton btnViewEngineerLock = null;
 	private JScrollPane jScrollPane6 = null;
 	private JTable tblEngineer = null;
-	private JButton btnCreatLeaveAppSystem = null;
 	private JLabel lbTotalLeave = null;
 	private JLabel lbDaycanLeave = null;
 	User user = new User();
@@ -147,14 +137,7 @@ public class MDControlPanel extends JFrame {
 			"Status", "Address", "Phone" };
 	private String[][] dataday = null;
 	private String[] columnday = { "DateFrom", "Dateto", "Reason" };
-	private JPanel pnUserlock = null;
-	private JPanel pnTableUserlock = null;
-	private JScrollPane jScrollPane7 = null;
-	private JTable tblUserlock = null;
-	private JButton btnUnlock = null;
-	private JButton btnEdit = null;
 	private JTextField txtTotalApprovalLeave = null;
-	private JButton btnRefresh = null;
 	private JMenu mnModeration = null;
 	private JMenu mnView = null;
 	private JMenu mnHelp = null;
@@ -166,17 +149,10 @@ public class MDControlPanel extends JFrame {
 	private JLabel lbHistory = null;
 	private JLabel lbDayoff = null;
 	private JPanel pnTableDayoff = null;
-	private JButton btnViewUserunlockRefresh = null;
 	private JButton btnViewEnginerrRefresh = null;
 	private JButton btnViewApproveFrefresh = null;
 	private JButton btnViewValidRefresh = null;
-	private JButton btnViewBusinessmanagerAddgroup = null;
-	private JComboBox cbxViewBusinessmanager = null;
 	private JButton btnViewManagerRefresh = null;
-	private JButton btnViewManagerAddgroup = null;
-	private JComboBox cbxViewManager = null;
-	private JButton btnViewEngineerAddgroup = null;
-	private JComboBox cbxViewEngineer = null;
 	private JLabel lbMyLeaveApp = null;
 	private JPanel pnTableMyLeaveApp = null;
 	private common.TableModel tableModel = new common.TableModel(data, column);
@@ -191,23 +167,19 @@ public class MDControlPanel extends JFrame {
 	private JTable tblMyleaveapp = null;
 	private JScrollPane tblDayofSystem = null;
 	private JTable tblDayOfSystem = null;
-	private JMenuItem mnExportReportBusinessManager = null;
 	private JButton btnRefreshHistory = null;
 	private JButton jButton = null;
 	private JMenuItem mniExportReportManager = null;
-	private JMenuItem mnExportReportEngineer = null;
-	private JButton btnHistoryDelete = null;
-
 	/**
 	 * This is the default constructor
 	 */
-	public MDControlPanel() {
+	public BMControlPanel() {
 		super();
 		initialize();
 
 	}
 
-	public MDControlPanel(int id) {
+	public BMControlPanel(int id) {
 		super();
 		this.id = id;
 		this.user = userservice.loadUser(id);
@@ -229,7 +201,7 @@ public class MDControlPanel extends JFrame {
 		this.setJMenuBar(getJJMenuBar());
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Welcome to Managing Director");
+		this.setTitle("Welcome to Business Manager");
 		totalDayOff();
 		totalCanDayOff();
 		this.setVisible(false);
@@ -314,7 +286,6 @@ public class MDControlPanel extends JFrame {
 			jContentPane.add(getBtnCreatleaveapp(), null);
 			jContentPane.add(getBtnLogout(), null);
 			jContentPane.add(getJPanel(), null);
-			jContentPane.add(getBtnCreatLeaveAppSystem(), null);
 			jContentPane.add(getJButton(), null);
 		}
 		return jContentPane;
@@ -495,7 +466,7 @@ public class MDControlPanel extends JFrame {
 			btnAdduser.setText("Add User");
 			btnAdduser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new MDControlPanel(id)).setVisible(true);
+					new Addmember(new BMControlPanel(id)).setVisible(true);
 				}
 			});
 		}
@@ -518,7 +489,7 @@ public class MDControlPanel extends JFrame {
 			btnChangepass
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new Changepassword(new MDControlPanel(id),id).setVisible(true);
+							new Changepassword(new BMControlPanel(id),id).setVisible(true);
 						}
 					});
 		}
@@ -541,7 +512,7 @@ public class MDControlPanel extends JFrame {
 			btnEditProfile.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					new Editprofile(new MDControlPanel(id),id).setVisible(true);
+					new Editprofile(new BMControlPanel(id),id).setVisible(true);
 				}
 
 			});
@@ -564,7 +535,7 @@ public class MDControlPanel extends JFrame {
 			btnCreatleaveapp
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new CreateLeaveapp(new MDControlPanel(id),id).setVisible(true);
+							new CreateLeaveapp(new BMControlPanel(id),id).setVisible(true);
 						}
 					});
 		}
@@ -680,7 +651,6 @@ public class MDControlPanel extends JFrame {
 			jpnHistory.add(lbMyLeaveApp, null);
 			jpnHistory.add(getPnTableMyLeaveApp(), null);
 			jpnHistory.add(getBtnRefreshHistory(), null);
-			jpnHistory.add(getBtnHistoryDelete(), null);
 		}
 		return jpnHistory;
 	}
@@ -734,44 +704,10 @@ public class MDControlPanel extends JFrame {
 	private JTabbedPane getJtpnUsermanager() {
 		if (jtpnUsermanager == null) {
 			jtpnUsermanager = new JTabbedPane();
-			jtpnUsermanager.addTab("Business Manager", null,
-					getJpnBusinessmanager(), null);
 			jtpnUsermanager.addTab("Manager", null, getJpnManager(), null);
 			jtpnUsermanager.addTab("Engineer", null, getJpnEngineer(), null);
-			jtpnUsermanager.addTab("User Lock", null, getPnUserlock(), null);
 		}
 		return jtpnUsermanager;
-	}
-
-	/**
-	 * This method initializes jpnBusinessmanager
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getJpnBusinessmanager() {
-		if (jpnBusinessmanager == null) {
-			jpnBusinessmanager = new JPanel();
-			jpnBusinessmanager.setLayout(null);
-			jpnBusinessmanager.add(getPnTableBusinessManager(), null);
-			jpnBusinessmanager.add(getBtnViewBusinessEdit(), null);
-			jpnBusinessmanager.add(getBtnViewBusinessLock(), null);
-			jpnBusinessmanager.add(getBtnRefresh(), null);
-			jpnBusinessmanager.add(getBtnViewBusinessmanagerAddgroup(), null);
-			jpnBusinessmanager.add(getCbxViewBusinessmanager(), null);
-			jpnBusinessmanager
-					.addComponentListener(new java.awt.event.ComponentAdapter() {
-						public void componentShown(
-								java.awt.event.ComponentEvent e) {
-							try {
-								data = userservice.selectAllUserBM();
-								tableModel.setData(data);
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
-						}
-					});
-		}
-		return jpnBusinessmanager;
 	}
 
 	/**
@@ -785,10 +721,7 @@ public class MDControlPanel extends JFrame {
 			jpnManager.setLayout(null);
 			jpnManager.add(getPnManager(), null);
 			jpnManager.add(getBtnViewManagerEdit(), null);
-			jpnManager.add(getBtnViewManagerLock(), null);
 			jpnManager.add(getBtnViewManagerRefresh(), null);
-			jpnManager.add(getBtnViewManagerAddgroup(), null);
-			jpnManager.add(getCbxViewManager(), null);
 			jpnManager
 					.addComponentListener(new java.awt.event.ComponentAdapter() {
 						public void componentShown(
@@ -816,10 +749,7 @@ public class MDControlPanel extends JFrame {
 			jpnEngineer.setLayout(null);
 			jpnEngineer.add(getPnEngineer(), null);
 			jpnEngineer.add(getBtnViewEngineerEdit(), null);
-			jpnEngineer.add(getBtnViewEngineerLock(), null);
 			jpnEngineer.add(getBtnViewEnginerrRefresh(), null);
-			jpnEngineer.add(getBtnViewEngineerAddgroup(), null);
-			jpnEngineer.add(getCbxViewEngineer(), null);
 			jpnEngineer
 					.addComponentListener(new java.awt.event.ComponentAdapter() {
 						public void componentShown(
@@ -870,7 +800,7 @@ public class MDControlPanel extends JFrame {
 						public void componentShown(
 								java.awt.event.ComponentEvent e) {
 							try {
-								data1 = leaveappservice.selectLeaveappMDvalid();
+								data1 = leaveappservice.selectLeaveappBMvalid();
 								tableModelLeaveapp.setData(data1);
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -900,7 +830,7 @@ public class MDControlPanel extends JFrame {
 								java.awt.event.ComponentEvent e) {
 							try {
 								data1 = leaveappservice
-										.selectLeaveappMDapprove();
+										.selectLeaveappBMapprove();
 								tableModelLeaveapp.setData(data1);
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -929,7 +859,7 @@ public class MDControlPanel extends JFrame {
 								java.awt.event.ComponentEvent e) {
 							try {
 								data1 = leaveappservice
-										.selectLeaveappMDreject();
+										.selectLeaveappBMreject();
 								tableModelLeaveapp.setData(data1);
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -962,7 +892,7 @@ public class MDControlPanel extends JFrame {
 								java.awt.event.ComponentEvent e) {
 							try {
 								data1 = leaveappservice
-										.selectLeaveappMDfinish();
+										.selectLeaveappBMfinish();
 								tableModelLeaveapp.setData(data1);
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -990,8 +920,7 @@ public class MDControlPanel extends JFrame {
 			mniEditprofile
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new Editprofile(new MDControlPanel(id),id).setVisible(true);
-						}
+							new Editprofile(new BMControlPanel(id),id).setVisible(true);						}
 					});
 		}
 		return mniEditprofile;
@@ -1014,7 +943,7 @@ public class MDControlPanel extends JFrame {
 			mniChangepass
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new Changepassword(new MDControlPanel(id),id).setVisible(true);
+							new Changepassword(null).setVisible(true);
 						}
 					});
 		}
@@ -1038,7 +967,7 @@ public class MDControlPanel extends JFrame {
 			mniCreatleaveapp
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new CreateLeaveapp(new MDControlPanel(id),id).setVisible(true);
+							new CreateLeaveapp(new BMControlPanel(id),id).setVisible(true);
 						}
 					});
 		}
@@ -1119,7 +1048,7 @@ public class MDControlPanel extends JFrame {
 					"/image/button-ok-icon.png")));
 			mniAdduser.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new Addmember(new MDControlPanel(id)).setVisible(true);
+					new Addmember(new BMControlPanel(id)).setVisible(true);
 				}
 			});
 		}
@@ -1158,7 +1087,7 @@ public class MDControlPanel extends JFrame {
 											.toString()));
 							try {
 								leaveappservice.approveLeaveApp(leaveapp);
-								tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDvalid());
+								tableModelLeaveapp.setData(leaveappservice.selectLeaveappBMvalid());
 							} catch (Exception ex) {
 								ex.printStackTrace();
 								JOptionPane.showMessageDialog(null, "error");
@@ -1203,7 +1132,7 @@ public class MDControlPanel extends JFrame {
 											.toString()));
 							try {
 								leaveappservice.rejectLeaveApp(leaveapp);
-								tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDvalid());
+								tableModelLeaveapp.setData(leaveappservice.selectLeaveappBMvalid());
 							} catch (Exception ex) {
 								ex.printStackTrace();
 								JOptionPane.showMessageDialog(null, "error");
@@ -1259,7 +1188,7 @@ public class MDControlPanel extends JFrame {
 		if (tblLeaveappValid == null) {
 			try {
 
-				data1 = leaveappservice.selectLeaveappMDvalid();
+				data1 = leaveappservice.selectLeaveappBMvalid();
 				tableModelLeaveapp.setData(data1);
 				tblLeaveappValid = new JTable(tableModelLeaveapp) {
 
@@ -1317,7 +1246,7 @@ public class MDControlPanel extends JFrame {
 													.toString()));
 									try {
 										leaveappservice.rejectLeaveApp(leaveapp);
-										tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDapprove());
+										tableModelLeaveapp.setData(leaveappservice.selectLeaveappBMapprove());
 									} catch (Exception ex) {
 										ex.printStackTrace();
 										JOptionPane.showMessageDialog(null,
@@ -1369,7 +1298,7 @@ public class MDControlPanel extends JFrame {
 									try {
 										leaveappservice
 												.finishLeaveApp(leaveapp);
-										tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDapprove());
+										tableModelLeaveapp.setData(leaveappservice.selectLeaveappBMapprove());
 									} catch (Exception ex) {
 										ex.printStackTrace();
 										JOptionPane.showMessageDialog(null,
@@ -1425,7 +1354,7 @@ public class MDControlPanel extends JFrame {
 	private JTable getTblLeaveappApprove() {
 		if (tblLeaveappApprove == null) {
 			try {
-				data1 = leaveappservice.selectLeaveappMDapprove();
+				data1 = leaveappservice.selectLeaveappBMapprove();
 				tableModelLeaveapp.setData(data1);
 				tblLeaveappApprove = new JTable(tableModelLeaveapp) {
 
@@ -1483,7 +1412,7 @@ public class MDControlPanel extends JFrame {
 									try {
 										leaveappservice
 												.approveLeaveApp(leaveapp);
-										tableModelLeaveapp.setData(leaveappservice.selectLeaveappMDreject());
+										tableModelLeaveapp.setData(leaveappservice.selectLeaveappBMreject());
 									} catch (Exception ex) {
 										ex.printStackTrace();
 										JOptionPane.showMessageDialog(null,
@@ -1515,7 +1444,7 @@ public class MDControlPanel extends JFrame {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 							try {
 								data1 = leaveappservice
-										.selectLeaveappMDreject();
+										.selectLeaveappBMreject();
 								tableModelLeaveapp.setData(data1);
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -1570,7 +1499,7 @@ public class MDControlPanel extends JFrame {
 	private JTable getTblLeaveappReject() {
 		if (tblLeaveappReject == null) {
 			try {
-				data1 = leaveappservice.selectLeaveappMDreject();
+				data1 = leaveappservice.selectLeaveappBMreject();
 				tableModelLeaveapp.setData(data1);
 				tblLeaveappReject = new JTable(tableModelLeaveapp) {
 
@@ -1612,7 +1541,7 @@ public class MDControlPanel extends JFrame {
 	private JTable getTblLeaveappFinish() {
 		if (tblLeaveappFinish == null) {
 			try {
-				data1 = leaveappservice.selectLeaveappMDfinish();
+				data1 = leaveappservice.selectLeaveappBMfinish();
 				tableModelLeaveapp.setData(data1);
 				tblLeaveappFinish = new JTable(tableModelLeaveapp) {
 
@@ -1631,157 +1560,6 @@ public class MDControlPanel extends JFrame {
 			}
 		}
 		return tblLeaveappFinish;
-	}
-
-	/**
-	 * This method initializes btnViewBusinessEdit
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnViewBusinessEdit() {
-		if (btnViewBusinessEdit == null) {
-			btnViewBusinessEdit = new JButton();
-			btnViewBusinessEdit.setText("Edit User");
-			btnViewBusinessEdit.setBounds(new Rectangle(22, 328, 159, 45));
-			btnViewBusinessEdit.setIcon(new ImageIcon(getClass().getResource(
-					"/image/edit-user-icon.png")));
-			btnViewBusinessEdit
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							int count = tblBusinessManager
-									.getSelectedRowCount();
-							int i = tblBusinessManager.getSelectedRow();
-							if (count != 1) {
-								JOptionPane.showMessageDialog(null,
-										"Please select only one User");
-							} else {
-								int id = Integer.parseInt(tblBusinessManager
-										.getValueAt(i, 0).toString());
-								try {
-									new Editprofile(null, id).setVisible(true);
-								} catch (Exception ex) {
-									ex.printStackTrace();
-								}
-							}
-						}
-					});
-		}
-		return btnViewBusinessEdit;
-	}
-
-	/**
-	 * This method initializes btnViewBusinessLock
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnViewBusinessLock() {
-		if (btnViewBusinessLock == null) {
-			btnViewBusinessLock = new JButton();
-			btnViewBusinessLock.setText("Lock User");
-			btnViewBusinessLock.setLocation(new Point(399, 328));
-			btnViewBusinessLock.setSize(new Dimension(159, 45));
-			btnViewBusinessLock.setIcon(new ImageIcon(getClass().getResource(
-					"/image/remove-user-icon.png")));
-			btnViewBusinessLock
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							int i = tblBusinessManager.getSelectedRow();
-							int count = tblBusinessManager
-									.getSelectedRowCount();
-							if (count != 1) {
-								JOptionPane.showMessageDialog(null,
-										"Please select only one user");
-							} else {
-								if (JOptionPane.showConfirmDialog(null,
-										"Are you sure want to "
-												+ tblBusinessManager
-														.getValueAt(i, 1)
-												+ " this User??", "Lock User",
-										JOptionPane.YES_NO_OPTION) == 0) {
-									User user = new User();
-									user.setId_user(Integer
-											.parseInt(tblBusinessManager
-													.getValueAt(i, 0)
-													.toString()));
-									user.setStatus(tblBusinessManager
-											.getValueAt(i, 2).toString());
-									try {
-										userservice.lockUser(user);
-										tableModel.setData(userservice.selectAllUserBM());
-									} catch (Exception ex) {
-										ex.printStackTrace();
-										JOptionPane.showMessageDialog(null,
-												"error");
-									}
-								}
-							}
-						}
-					});
-		}
-		return btnViewBusinessLock;
-	}
-
-	/**
-	 * This method initializes pnTableBusinessManager
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getPnTableBusinessManager() {
-		if (pnTableBusinessManager == null) {
-			GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
-			gridBagConstraints8.fill = GridBagConstraints.BOTH;
-			gridBagConstraints8.gridy = 0;
-			gridBagConstraints8.weightx = 1.0;
-			gridBagConstraints8.weighty = 1.0;
-			gridBagConstraints8.gridx = 0;
-			pnTableBusinessManager = new JPanel();
-			pnTableBusinessManager.setLayout(new GridBagLayout());
-			pnTableBusinessManager.setBounds(new Rectangle(1, 0, 1266, 324));
-			pnTableBusinessManager.add(getJScrollPane4(), gridBagConstraints8);
-		}
-		return pnTableBusinessManager;
-	}
-
-	/**
-	 * This method initializes jScrollPane4
-	 * 
-	 * @return javax.swing.JScrollPane
-	 */
-	private JScrollPane getJScrollPane4() {
-		if (jScrollPane4 == null) {
-			jScrollPane4 = new JScrollPane();
-			jScrollPane4.setViewportView(getTblBusinessManager());
-		}
-		return jScrollPane4;
-	}
-
-	/**
-	 * This method initializes tblBusinessManager
-	 * 
-	 * @return javax.swing.JTable
-	 */
-	private JTable getTblBusinessManager() {
-		if (tblBusinessManager == null) {
-			try {
-				data = userservice.selectAllUserBM();
-				tableModel.setData(data);
-				tblBusinessManager = new JTable(tableModel) {
-
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
-
-					public boolean isCellEditable(int rowIndex, int vColIndex) {
-						return false;
-					}
-				};
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Error");
-			}
-		}
-		return tblBusinessManager;
 	}
 
 	/**
@@ -1840,55 +1618,6 @@ public class MDControlPanel extends JFrame {
 					});
 		}
 		return btnViewManagerEdit;
-	}
-
-	/**
-	 * This method initializes btnViewManagerLock
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnViewManagerLock() {
-		if (btnViewManagerLock == null) {
-			btnViewManagerLock = new JButton();
-			btnViewManagerLock.setText("Lock User");
-			btnViewManagerLock.setSize(new Dimension(159, 45));
-			btnViewManagerLock.setLocation(new Point(399, 328));
-			btnViewManagerLock.setIcon(new ImageIcon(getClass().getResource(
-					"/image/remove-user-icon.png")));
-			btnViewManagerLock
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							int i = tblManager.getSelectedRow();
-							int count = tblManager.getSelectedRowCount();
-							if (count != 1) {
-								JOptionPane.showMessageDialog(null,
-										"Please select only one user");
-							} else {
-								if (JOptionPane.showConfirmDialog(null,
-										"Are you sure want to "
-												+ tblManager.getValueAt(i, 1)
-												+ " this User??", "Lock User",
-										JOptionPane.YES_NO_OPTION) == 0) {
-									User user = new User();
-									user.setId_user(Integer.parseInt(tblManager
-											.getValueAt(i, 0).toString()));
-									user.setStatus(tblManager.getValueAt(i, 2)
-											.toString());
-									try {
-										userservice.lockUser(user);
-										tableModel.setData(userservice.selectAllUserM());
-
-									} catch (Exception ex) {
-										ex.printStackTrace();
-										JOptionPane.showMessageDialog(null,
-												"error");
-									}
-								}
-							}
-						}
-					});
-		}
-		return btnViewManagerLock;
 	}
 
 	/**
@@ -1993,56 +1722,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes btnViewEngineerLock
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnViewEngineerLock() {
-		if (btnViewEngineerLock == null) {
-			btnViewEngineerLock = new JButton();
-			btnViewEngineerLock.setText("Lock User");
-			btnViewEngineerLock.setLocation(new Point(399, 328));
-			btnViewEngineerLock.setSize(new Dimension(159, 45));
-			btnViewEngineerLock.setIcon(new ImageIcon(getClass().getResource(
-					"/image/remove-user-icon.png")));
-			btnViewEngineerLock
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							int i = tblEngineer.getSelectedRow();
-							int count = tblEngineer.getSelectedRowCount();
-							if (count != 1) {
-								JOptionPane.showMessageDialog(null,
-										"Please select only one user");
-							} else {
-								if (JOptionPane.showConfirmDialog(null,
-										"Are you sure want to "
-												+ tblEngineer.getValueAt(i, 1)
-												+ " this User??", "Lock User",
-										JOptionPane.YES_NO_OPTION) == 0) {
-									User user = new User();
-									user.setId_user(Integer
-											.parseInt(tblEngineer.getValueAt(i,
-													0).toString()));
-									user.setStatus(tblEngineer.getValueAt(i, 2)
-											.toString());
-									try {
-										userservice.lockUser(user);
-										tableModel.setData(userservice.selectAllUserE());
-
-									} catch (Exception ex) {
-										ex.printStackTrace();
-										JOptionPane.showMessageDialog(null,
-												"error");
-									}
-								}
-							}
-						}
-					});
-		}
-		return btnViewEngineerLock;
-	}
-
-	/**
 	 * This method initializes jScrollPane6
 	 * 
 	 * @return javax.swing.JScrollPane
@@ -2087,206 +1766,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes btnCreatLeaveAppSystem
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnCreatLeaveAppSystem() {
-		if (btnCreatLeaveAppSystem == null) {
-			btnCreatLeaveAppSystem = new JButton();
-			btnCreatLeaveAppSystem.setText("Create LeaveApp System");
-			btnCreatLeaveAppSystem.setSize(new Dimension(334, 40));
-			btnCreatLeaveAppSystem.setIcon(new ImageIcon(getClass()
-					.getResource("/image/Clients-icon.png")));
-			btnCreatLeaveAppSystem.setLocation(new Point(808, 150));
-			btnCreatLeaveAppSystem
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							new LeaveappDirector(new MDControlPanel(id)).setVisible(true);
-						}
-					});
-		}
-		return btnCreatLeaveAppSystem;
-	}
-
-	/**
-	 * This method initializes pnUserlock
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getPnUserlock() {
-		if (pnUserlock == null) {
-			pnUserlock = new JPanel();
-			pnUserlock.setLayout(null);
-			pnUserlock.add(getPnTableUserlock(), null);
-			pnUserlock.add(getBtnEdit(), null);
-			pnUserlock.add(getBtnUnlock(), null);
-			pnUserlock.add(getBtnViewUserunlockRefresh(), null);
-			pnUserlock
-					.addComponentListener(new java.awt.event.ComponentAdapter() {
-						public void componentShown(
-								java.awt.event.ComponentEvent e) {
-							try {
-								data = userservice.selectAllUserlock();
-								tableModel.setData(data);
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
-						}
-					});
-		}
-		return pnUserlock;
-	}
-
-	/**
-	 * This method initializes pnTableUserlock
-	 * 
-	 * @return javax.swing.JPanel
-	 */
-	private JPanel getPnTableUserlock() {
-		if (pnTableUserlock == null) {
-			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
-			gridBagConstraints11.fill = GridBagConstraints.BOTH;
-			gridBagConstraints11.gridy = 0;
-			gridBagConstraints11.weightx = 1.0;
-			gridBagConstraints11.weighty = 1.0;
-			gridBagConstraints11.gridx = 0;
-			pnTableUserlock = new JPanel();
-			pnTableUserlock.setLayout(new GridBagLayout());
-			pnTableUserlock.setBounds(new Rectangle(-1, 0, 1262, 325));
-			pnTableUserlock.add(getJScrollPane7(), gridBagConstraints11);
-		}
-		return pnTableUserlock;
-	}
-
-	/**
-	 * This method initializes jScrollPane7
-	 * 
-	 * @return javax.swing.JScrollPane
-	 */
-	private JScrollPane getJScrollPane7() {
-		if (jScrollPane7 == null) {
-			jScrollPane7 = new JScrollPane();
-			jScrollPane7.setViewportView(getTblUserlock());
-		}
-		return jScrollPane7;
-	}
-
-	/**
-	 * This method initializes tblUserlock
-	 * 
-	 * @return javax.swing.JTable
-	 */
-	private JTable getTblUserlock() {
-		if (tblUserlock == null) {
-			try {
-				data = userservice.selectAllUserlock();
-				tableModel.setData(data);
-				tblUserlock = new JTable(tableModel) {
-
-					/**
-						 * 
-						 */
-					private static final long serialVersionUID = 1L;
-
-					public boolean isCellEditable(int rowIndex, int vColIndex) {
-						return false;
-					}
-				};
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Error");
-			}
-
-		}
-		return tblUserlock;
-	}
-
-	/**
-	 * This method initializes btnUnlock
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnUnlock() {
-		if (btnUnlock == null) {
-			btnUnlock = new JButton();
-			btnUnlock.setText("Unlock User");
-			btnUnlock.setLocation(new Point(399, 328));
-			btnUnlock.setSize(new Dimension(159, 45));
-			btnUnlock.setIcon(new ImageIcon(getClass().getResource(
-					"/image/upload-icon.png")));
-			btnUnlock.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					int i = tblUserlock.getSelectedRow();
-					int count = tblUserlock.getSelectedRowCount();
-					if (count != 1) {
-						JOptionPane.showMessageDialog(null,
-								"Please select only one user");
-					} else {
-						if (JOptionPane.showConfirmDialog(null,
-								"Are you sure want to  "
-										+ tblUserlock.getValueAt(i, 1)
-										+ " this User??", "UnLock User",
-								JOptionPane.YES_NO_OPTION) == 0) {
-							User user = new User();
-							user.setId_user(Integer.parseInt(tblUserlock
-									.getValueAt(i, 0).toString()));
-							user.setStatus(tblUserlock.getValueAt(i, 2)
-									.toString());
-							try {
-								userservice.unlockUser(user);
-								tableModel.setData(userservice.selectAllUserlock());
-
-							} catch (Exception ex) {
-								ex.printStackTrace();
-								JOptionPane.showMessageDialog(null, "error");
-							}
-						}
-					}
-				}
-			});
-		}
-
-		return btnUnlock;
-	}
-
-	/**
-	 * This method initializes btnEdit
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnEdit() {
-		if (btnEdit == null) {
-			btnEdit = new JButton();
-			btnEdit.setText("Edit User");
-			btnEdit.setLocation(new Point(22, 328));
-			btnEdit.setSize(new Dimension(159, 45));
-			btnEdit.setMnemonic(KeyEvent.VK_UNDEFINED);
-			btnEdit.setIcon(new ImageIcon(getClass().getResource(
-					"/image/edit-user-icon.png")));
-			btnEdit.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					int count = tblUserlock.getSelectedRowCount();
-					int i = tblUserlock.getSelectedRow();
-					if (count != 1) {
-						JOptionPane.showMessageDialog(null,
-								"Please select only one User");
-					} else {
-						int id = Integer.parseInt(tblUserlock.getValueAt(i, 0)
-								.toString());
-						try {
-							new Editprofile(null, id).setVisible(true);
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						}
-					}
-				}
-			});
-		}
-		return btnEdit;
-	}
-
-	/**
 	 * This method initializes txtTotalApprovalLeave
 	 * 
 	 * @return javax.swing.JTextField
@@ -2303,34 +1782,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes btnRefresh
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnRefresh() {
-		if (btnRefresh == null) {
-			btnRefresh = new JButton();
-			btnRefresh.setText("Refresh");
-			btnRefresh.setLocation(new Point(211, 328));
-			btnRefresh.setSize(new Dimension(159, 45));
-			btnRefresh.setIcon(new ImageIcon(getClass().getResource(
-					"/image/Refresh-icon_2.png")));
-			btnRefresh.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					try {
-						data = userservice.selectAllUserBM();
-						tableModel.setData(data);
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-
-				}
-			});
-		}
-		return btnRefresh;
-	}
-
-	/**
 	 * This method initializes mnModeration
 	 * 
 	 * @return javax.swing.JMenu
@@ -2342,9 +1793,7 @@ public class MDControlPanel extends JFrame {
 			mnModeration.setIcon(new ImageIcon(getClass().getResource(
 					"/image/config.png")));
 			mnModeration.add(getMniAdduser());
-			mnModeration.add(getMnExportReportBusinessManager());
 			mnModeration.add(getMniExportReportManager());
-			mnModeration.add(getMnExportReportEngineer());
 		}
 		return mnModeration;
 	}
@@ -2418,7 +1867,7 @@ public class MDControlPanel extends JFrame {
 					"/image/about.png")));
 			mnAbout.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					new About(new MDControlPanel(id)).setVisible(true);
+					new About(new BMControlPanel(id)).setVisible(true);
 				}
 			});
 		}
@@ -2510,35 +1959,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes btnViewUserunlockRefresh
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnViewUserunlockRefresh() {
-		if (btnViewUserunlockRefresh == null) {
-			btnViewUserunlockRefresh = new JButton();
-			btnViewUserunlockRefresh.setText("Refresh");
-			btnViewUserunlockRefresh.setSize(new Dimension(159, 45));
-			btnViewUserunlockRefresh.setIcon(new ImageIcon(getClass()
-					.getResource("/image/Refresh-icon_2.png")));
-			btnViewUserunlockRefresh.setLocation(new Point(211, 328));
-			btnViewUserunlockRefresh
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							try {
-								data = userservice.selectAllUserlock();
-								tableModel.setData(data);
-							} catch (Exception ex) {
-								ex.printStackTrace();
-							}
-
-						}
-					});
-		}
-		return btnViewUserunlockRefresh;
-	}
-
-	/**
 	 * This method initializes btnViewEnginerrRefresh
 	 * 
 	 * @return javax.swing.JButton
@@ -2585,7 +2005,7 @@ public class MDControlPanel extends JFrame {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 							try {
 								data1 = leaveappservice
-										.selectLeaveappMDapprove();
+										.selectLeaveappBMapprove();
 								tableModelLeaveapp.setData(data1);
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -2614,7 +2034,7 @@ public class MDControlPanel extends JFrame {
 					.addActionListener(new java.awt.event.ActionListener() {
 						public void actionPerformed(java.awt.event.ActionEvent e) {
 							try {
-								data1 = leaveappservice.selectLeaveappMDvalid();
+								data1 = leaveappservice.selectLeaveappBMvalid();
 								tableModelLeaveapp.setData(data1);
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -2623,68 +2043,6 @@ public class MDControlPanel extends JFrame {
 					});
 		}
 		return btnViewValidRefresh;
-	}
-
-	/**
-	 * This method initializes btnViewBusinessmanagerAddgroup
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnViewBusinessmanagerAddgroup() {
-		if (btnViewBusinessmanagerAddgroup == null) {
-			btnViewBusinessmanagerAddgroup = new JButton();
-			btnViewBusinessmanagerAddgroup.setName("");
-			btnViewBusinessmanagerAddgroup.setSize(new Dimension(159, 45));
-			btnViewBusinessmanagerAddgroup.setText("Add Group");
-			btnViewBusinessmanagerAddgroup.setIcon(new ImageIcon(getClass()
-					.getResource("/image/Clients-icon.png")));
-			btnViewBusinessmanagerAddgroup.setLocation(new Point(588, 328));
-			btnViewBusinessmanagerAddgroup
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							int count = tblBusinessManager
-									.getSelectedRowCount();
-							int i = tblBusinessManager.getSelectedRow();
-							if (count != 1) {
-								JOptionPane.showMessageDialog(null,
-										"Please select only one User");
-							} else {
-
-								int id = Integer.parseInt(tblBusinessManager
-										.getValueAt(i, 0).toString());
-								if (cbxViewBusinessmanager.getSelectedItem()
-										.toString()
-										.equalsIgnoreCase("Engineer")) {
-									userservice.addgroup(1, id);
-									JOptionPane.showMessageDialog(null,
-											"Addgroup successfull");
-								} else if (cbxViewBusinessmanager
-										.getSelectedItem().toString()
-										.equalsIgnoreCase("Manager")) {
-									userservice.addgroup(2, id);
-									JOptionPane.showMessageDialog(null,
-											"Addgroup successfull");
-								}
-							}
-						}
-					});
-		}
-		return btnViewBusinessmanagerAddgroup;
-	}
-
-	/**
-	 * This method initializes cbxViewBusinessmanager
-	 * 
-	 * @return javax.swing.JComboBox
-	 */
-	private JComboBox getCbxViewBusinessmanager() {
-		if (cbxViewBusinessmanager == null) {
-			String[] data = { "Manager", "Engineer" };
-			cbxViewBusinessmanager = new JComboBox(data);
-			cbxViewBusinessmanager.setLocation(new Point(755, 328));
-			cbxViewBusinessmanager.setSize(new Dimension(159, 45));
-		}
-		return cbxViewBusinessmanager;
 	}
 
 	/**
@@ -2714,122 +2072,6 @@ public class MDControlPanel extends JFrame {
 					});
 		}
 		return btnViewManagerRefresh;
-	}
-
-	/**
-	 * This method initializes btnViewManagerAddgroup
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnViewManagerAddgroup() {
-		if (btnViewManagerAddgroup == null) {
-			btnViewManagerAddgroup = new JButton();
-			btnViewManagerAddgroup.setLocation(new Point(588, 328));
-			btnViewManagerAddgroup.setText("Add Group");
-			btnViewManagerAddgroup.setIcon(new ImageIcon(getClass()
-					.getResource("/image/Clients-icon.png")));
-			btnViewManagerAddgroup.setSize(new Dimension(159, 45));
-			btnViewManagerAddgroup
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							int count = tblManager.getSelectedRowCount();
-							int i = tblManager.getSelectedRow();
-							if (count != 1) {
-								JOptionPane.showMessageDialog(null,
-										"Please select only one User");
-							} else {
-								int id = Integer.parseInt(tblManager
-										.getValueAt(i, 0).toString());
-								if (cbxViewManager.getSelectedItem().toString()
-										.equalsIgnoreCase("Engineer")) {
-									userservice.addgroup(1, id);
-									JOptionPane.showMessageDialog(null,
-											"Addgroup successfull");
-								} else if (cbxViewManager.getSelectedItem()
-										.toString().equalsIgnoreCase(
-												"Business Manager")) {
-									userservice.addgroup(3, id);
-									JOptionPane.showMessageDialog(null,
-											"Addgroup successfull");
-								}
-							}
-						}
-					});
-		}
-		return btnViewManagerAddgroup;
-	}
-
-	/**
-	 * This method initializes cbxViewManager
-	 * 
-	 * @return javax.swing.JComboBox
-	 */
-	private JComboBox getCbxViewManager() {
-		if (cbxViewManager == null) {
-			String[] data = { "Business Manager", "Engineer" };
-			cbxViewManager = new JComboBox(data);
-			cbxViewManager.setLocation(new Point(755, 328));
-			cbxViewManager.setSize(new Dimension(159, 45));
-		}
-		return cbxViewManager;
-	}
-
-	/**
-	 * This method initializes btnViewEngineerAddgroup
-	 * 
-	 * @return javax.swing.JButton
-	 */
-	private JButton getBtnViewEngineerAddgroup() {
-		if (btnViewEngineerAddgroup == null) {
-			btnViewEngineerAddgroup = new JButton();
-			btnViewEngineerAddgroup.setIcon(new ImageIcon(getClass()
-					.getResource("/image/Clients-icon.png")));
-			btnViewEngineerAddgroup.setLocation(new Point(588, 328));
-			btnViewEngineerAddgroup.setSize(new Dimension(159, 45));
-			btnViewEngineerAddgroup.setText("Add Group");
-			btnViewEngineerAddgroup
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							int count = tblEngineer.getSelectedRowCount();
-							int i = tblEngineer.getSelectedRow();
-							if (count != 1) {
-								JOptionPane.showMessageDialog(null,
-										"Please select only one User");
-							} else {
-								int id = Integer.parseInt(tblEngineer
-										.getValueAt(i, 0).toString());
-								if (cbxViewEngineer.getSelectedItem()
-										.toString().equalsIgnoreCase("Manager")) {
-									userservice.addgroup(2, id);
-									JOptionPane.showMessageDialog(null,
-											"Addgroup successfull");
-								} else if (cbxViewEngineer.getSelectedItem()
-										.toString().equalsIgnoreCase(
-												"Business Manager")) {
-									userservice.addgroup(3, id);
-									JOptionPane.showMessageDialog(null,
-											"Addgroup successfull");
-								}
-							}
-						}
-					});
-		}
-		return btnViewEngineerAddgroup;
-	}
-
-	/**
-	 * This method initializes cbxViewEngineer
-	 * 
-	 * @return javax.swing.JComboBox
-	 */
-	private JComboBox getCbxViewEngineer() {
-		if (cbxViewEngineer == null) {
-			String[] data = { "Business Manager", "Manager" };
-			cbxViewEngineer = new JComboBox(data);
-			cbxViewEngineer.setLocation(new Point(755, 328));
-			cbxViewEngineer.setSize(new Dimension(159, 45));
-		}
-		return cbxViewEngineer;
 	}
 
 	/**
@@ -2936,37 +2178,6 @@ public class MDControlPanel extends JFrame {
 	}
 
 	/**
-	 * This method initializes mnExportReportBusinessManager
-	 * 
-	 * @return javax.swing.JMenuItem
-	 */
-	private JMenuItem getMnExportReportBusinessManager() {
-		if (mnExportReportBusinessManager == null) {
-			mnExportReportBusinessManager = new JMenuItem();
-			mnExportReportBusinessManager.setText("Export Report Business Manager");
-			mnExportReportBusinessManager.setMnemonic(KeyEvent.VK_E);
-			KeyStroke keyStroke = KeyStroke.getKeyStroke("control R");
-			mnExportReportBusinessManager.setAccelerator(keyStroke);
-			mnExportReportBusinessManager.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-
-							ConnectionDB conn = new ConnectionDB();
-							conn.connect();
-							try {
-									JasperDesign jasperDesign = JRXmlLoader.load("src/Report/RP_BusinessManager.jrxml");
-							         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-							         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn.getConn());
-							         JasperViewer.viewReport(jasperPrint);
-							} catch (JRException ex) {
-								ex.printStackTrace();
-							}
-						}
-					});
-		}
-		return mnExportReportBusinessManager;
-	}
-
-	/**
 	 * This method initializes btnRefreshHistory	
 	 * 	
 	 * @return javax.swing.JButton	
@@ -2985,6 +2196,8 @@ public class MDControlPanel extends JFrame {
 								.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 						tableModelDayoff.setData(dataday);
 						tblDayOfSystem = new JTable(tableModelDayoff);
+						tableModelHistory.setData(datah);
+						tblMyleaveapp = new JTable(tableModelHistory);
 					}catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -3009,7 +2222,7 @@ public class MDControlPanel extends JFrame {
 			jButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					new Viewhistory(new MDControlPanel(id),id).setVisible(true);
+					new Viewhistory(new BMControlPanel(id),id).setVisible(true);
 				}
 
 			});
@@ -3064,49 +2277,6 @@ public class MDControlPanel extends JFrame {
 			});
 }
 		return mniExportReportManager;
-	}
-
-	/**
-	 * This method initializes mnExportReportEngineer	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getMnExportReportEngineer() {
-		if (mnExportReportEngineer == null) {
-			mnExportReportEngineer = new JMenuItem();
-			mnExportReportEngineer.setText("Export Report Engineer");
-			mnExportReportEngineer.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					ConnectionDB conn = new ConnectionDB();
-					conn.connect();
-					try {
-							JasperDesign jasperDesign = JRXmlLoader.load("src/Report/RP_Engineer.jrxml");
-					         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-					         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn.getConn());
-					         JasperViewer.viewReport(jasperPrint);
-					} catch (JRException ex) {
-						ex.printStackTrace();
-					}
-				}
-			});
-}
-		return mnExportReportEngineer;
-	}
-
-	/**
-	 * This method initializes btnHistoryDelete	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getBtnHistoryDelete() {
-		if (btnHistoryDelete == null) {
-			btnHistoryDelete = new JButton();
-			btnHistoryDelete.setText("Delete ");
-			btnHistoryDelete.setSize(new Dimension(154, 33));
-			btnHistoryDelete.setIcon(new ImageIcon(getClass().getResource("/image/Symbols-Delete-icon.png")));
-			btnHistoryDelete.setLocation(new Point(17, 225));
-		}
-		return btnHistoryDelete;
 	}
 
 }

@@ -1,11 +1,8 @@
 package common;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class Constant {
 	public static Integer LANGUAGE = 0; // 0 = EN , 1 =VN

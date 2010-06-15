@@ -1,24 +1,20 @@
 
-/**
- * 
- */
+
 package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import model.LeaveDirector;
 import model.Leaveapp;
 import model.User;
 
 import common.ConnectionDB;
+import common.leaveappResult.addleaveResult;
 
 
 
-/**
- * @author HIEU
- *
- */
 public class LeaveDAO {
 	
 	//History User
@@ -54,7 +50,6 @@ public class LeaveDAO {
 		public void  rejectLeave(Leaveapp leaveapp)throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		
 		String reject =  "UPDATE TBL_LEAVEAPP SET STATUSLEAVE = 'reject' WHERE ID_LEAVEAPP = "+leaveapp.getId_leaveapp();
 		Statement st = connection.getConn().createStatement();
 		st.executeUpdate(reject);
@@ -99,7 +94,7 @@ public class LeaveDAO {
 	public ResultSet selectAllLeaveappMDFinish() throws Exception{
 		ConnectionDB connection = new ConnectionDB();
 		connection.connect();
-		String sql = "SELECT TBL_LEAVEAPP.ID_LEAVEAPP,TBL_LEAVEAPP.ID_USER,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='finish'";
+		String sql = "SELECT TBL_LEAVEAPP.ID_LEAVEAPP,TBL_USER.FULLNAME,TBL_LEAVEAPP.DATEFROM,TBL_LEAVEAPP.DATETO,TBL_LEAVEAPP.REASON,TBL_LEAVEAPP.STATUSLEAVE,TBL_LEAVEAPP.ADDRESS,TBL_LEAVEAPP.PHONE FROM TBL_LEAVEAPP INNER JOIN TBL_USER ON TBL_USER.ID_USER=TBL_LEAVEAPP.ID_USER WHERE TBL_LEAVEAPP.STATUSLEAVE='finish'";
 		Statement st = connection.getConn().createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
@@ -176,24 +171,41 @@ public class LeaveDAO {
 		ResultSet rs = st.executeQuery(sql);
 		return rs;
 	}
-	
-	public void addLeaveapp(Leaveapp leave_app){
+	//add leaveapp
+	public addleaveResult addLeaveapp(Leaveapp leave_app , int year,int month,int day){
+		addleaveResult addleaveresult = null;
 		try {
 			ConnectionDB conn = new ConnectionDB();
 			conn.connect();
+			String check = "SELECT DATEFROM FROM TBL_LEAVEAPP WHERE ID_USER = '" + leave_app.getId_user()+ "' AND DATEPART(YEAR,TBL_LEAVEAPP.DATEFROM)= '"+ year + "' AND DATEPART(MONTH,TBL_LEAVEAPP.DATEFROM) = '" + month + "' AND DATEPART(DAY,TBL_LEAVEAPP.DATEFROM) ='"+ day + "'";
 			String sql_addleave = "INSERT INTO TBL_LEAVEAPP (ID_USER,DATEFROM,DATETO,REASON,STATUSLEAVE,PHONE,ADDRESS) VALUES(?,?,?,?,'valid',?,?)";
 			PreparedStatement psmt = conn.getConn().prepareStatement(sql_addleave);
+			Statement st = conn.getConn().createStatement();
 			psmt.setInt(1, leave_app.getId_user());
 			psmt.setDate(2,leave_app.getDatefrom());
 			psmt.setDate(3,leave_app.getDateto());
 			psmt.setString(4, leave_app.getReason());
 			psmt.setString(5, leave_app.getPhone());
 			psmt.setString(6, leave_app.getAddress());
-			psmt.executeUpdate();
+			ResultSet rs = st.executeQuery(check);
+			int i = 0;
+			while(rs.next()){
+				leave_app.setDatefrom(rs.getDate("DATEFROM"));
+				i++;
+			}
+			if(i>0){
+				addleaveresult = addleaveResult.incorrect;
+			}else{
+				psmt.executeUpdate();
+				addleaveresult = addleaveResult.sucessful;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return addleaveresult;
 			
 		}
+		return addleaveresult;
 	}
 	// LOAD LEAVE APPLICATION MANAGING DIRECTOR***************************hieu*************************
 	public ResultSet selectAllDayOff(int month,int year) throws Exception{

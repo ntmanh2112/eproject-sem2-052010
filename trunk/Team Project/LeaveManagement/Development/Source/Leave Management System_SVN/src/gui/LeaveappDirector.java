@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import common.leaveappResult.addleaveResult;
 
 import model.LeaveDirector;
 import business.Method;
@@ -312,12 +313,15 @@ public class LeaveappDirector extends JDialog {
 								}try {
 									int sr = JOptionPane.showConfirmDialog(null,"Are you sure to want to Add leave system ?");
 									if(sr==0){
-							
-							
-									UserService service = new UserService();
-									service.creatLeaveDirector(leavedirector);
-									JOptionPane.showMessageDialog(null, "Create LeaveApp successfully!!");
-									LeaveappDirector.this.dispose();
+										UserService service = new UserService();
+										addleaveResult result =service.creatLeaveDirector(leavedirector,Integer.valueOf(txtYearDateFrom.getText().toString()),Integer.valueOf(txtDateFromMonth.getText().toString()),Integer.valueOf(cbxDayDateFrom.getSelectedItem().toString()));
+										if(result == addleaveResult.sucessful){
+											JOptionPane.showMessageDialog(null, "Create LeaveApp successfully!!");
+											LeaveappDirector.this.dispose();
+										
+										}else if (result == addleaveResult.incorrect) {
+											JOptionPane.showMessageDialog(null, "This DATEFROM  is exist!!");
+									}
 									repaint();
 									}
 								

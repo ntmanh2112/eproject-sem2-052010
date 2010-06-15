@@ -172,10 +172,17 @@ public class Login extends JFrame {
 							new MDControlPanel(id).setVisible(true);
 							Constant.exit();
 						}else if (result == loginResult.managerbusiness){
-							
+							id = service.selectIdUser(username);
+							new BMControlPanel(id).setVisible(true);
 							Constant.exit();
 						}else if (result == loginResult.manager) {
-							
+							id = service.selectIdUser(username);
+							new MControlPanel(id).setVisible(true);
+							Constant.exit();
+						}
+						else if (result == loginResult.engineer) {
+							id = service.selectIdUser(username);
+							new EControlPanel(id).setVisible(true);
 							Constant.exit();
 						}
 						
