@@ -590,7 +590,9 @@ public class MDControlPanel extends JFrame {
 					int sr = JOptionPane.showConfirmDialog(null,
 							"Are you sure to want to quit ?");
 					if (sr == 0) {
-						System.exit(1);
+						//System.exit(1);
+						MDControlPanel.this.dispose();
+						new Wellcome().setVisible(true);
 					}
 				}
 			});
@@ -1077,7 +1079,7 @@ public class MDControlPanel extends JFrame {
 	private JMenuItem getMniSignout() {
 		if (mniSignout == null) {
 			mniSignout = new JMenuItem();
-			mniSignout.setText("Sign Out");
+			mniSignout.setText("Exit");
 			mniSignout.setMnemonic(KeyEvent.VK_E);
 			KeyStroke keyStroke = KeyStroke.getKeyStroke("control Q");
 			mniSignout.setAccelerator(keyStroke);
@@ -2925,7 +2927,16 @@ public class MDControlPanel extends JFrame {
 						.getInstance().get(Calendar.MONTH) + 1), Integer
 						.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 				tableModelDayoff.setData(dataday);
-				tblDayOfSystem = new JTable(tableModelDayoff);
+				//khoa chuc nang table ko cho nguoi dung sua
+				
+				tblDayOfSystem = new JTable(tableModelDayoff){
+					
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex, int vColIndex) {
+						return false;
+					}
+				};
 			
 			} catch (Exception ex) {
 				ex.printStackTrace();

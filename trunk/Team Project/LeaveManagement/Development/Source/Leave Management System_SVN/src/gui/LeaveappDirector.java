@@ -318,7 +318,7 @@ public class LeaveappDirector extends JDialog {
 										if(result == addleaveResult.sucessful){
 											JOptionPane.showMessageDialog(null, "Create LeaveApp successfully!!");
 											LeaveappDirector.this.dispose();
-										
+											
 										}else if (result == addleaveResult.incorrect) {
 											JOptionPane.showMessageDialog(null, "This DATEFROM  is exist!!");
 									}
