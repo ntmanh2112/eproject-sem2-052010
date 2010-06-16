@@ -531,7 +531,9 @@ public class MControlPanel extends JFrame {
 					int sr = JOptionPane.showConfirmDialog(null,
 							"Are you sure to want to quit ?");
 					if (sr == 0) {
-						System.exit(1);
+						//System.exit(1);
+						MControlPanel.this.dispose();
+						new Wellcome().setVisible(true);
 					}
 				}
 			});
@@ -592,7 +594,7 @@ public class MControlPanel extends JFrame {
 			lbMyLeaveApp.setSize(new Dimension(187, 43));
 			lbMyLeaveApp
 					.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
-			lbMyLeaveApp.setLocation(new Point(371, 5));
+			lbMyLeaveApp.setLocation(new Point(410, 2));
 			lbDayoff = new JLabel();
 			lbDayoff.setBounds(new Rectangle(371, 216, 230, 43));
 			lbDayoff.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 24));
@@ -948,7 +950,7 @@ public class MControlPanel extends JFrame {
 	private JMenuItem getMniSignout() {
 		if (mniSignout == null) {
 			mniSignout = new JMenuItem();
-			mniSignout.setText("Sign Out");
+			mniSignout.setText("Exit");
 			mniSignout.setMnemonic(KeyEvent.VK_E);
 			KeyStroke keyStroke = KeyStroke.getKeyStroke("control Q");
 			mniSignout.setAccelerator(keyStroke);
@@ -1955,7 +1957,15 @@ public class MControlPanel extends JFrame {
 						.getInstance().get(Calendar.MONTH) + 1), Integer
 						.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 				tableModelDayoff.setData(dataday);
-				tblDayOfSystem = new JTable(tableModelDayoff);
+				//khoa chuc nang chinh sua tu nguoi dung
+				tblDayOfSystem = new JTable(tableModelDayoff){
+					
+					private static final long serialVersionUID = 1L;
+
+					public boolean isCellEditable(int rowIndex, int vColIndex) {
+						return false;
+					}
+				};
 			
 			} catch (Exception ex) {
 				ex.printStackTrace();
