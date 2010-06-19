@@ -116,6 +116,7 @@ CREATE TABLE [Author] (
     [FullName] NVARCHAR(40),
     [Address] NVARCHAR(40),
     [Birthday] DATETIME,
+	[Last_updated_date] DATETIME,
     CONSTRAINT [PK_Author] PRIMARY KEY ([ID])
 )
 GO
@@ -127,6 +128,7 @@ GO
 CREATE TABLE [Type] (
     [ID] INTEGER IDENTITY(0,1) NOT NULL,
     [Name] NVARCHAR(40),
+	[Last_updated_date] DATETIME,
     CONSTRAINT [PK_Type] PRIMARY KEY ([ID])
 )
 GO
@@ -139,6 +141,7 @@ CREATE TABLE [Producers] (
     [ID] INTEGER IDENTITY(0,1) NOT NULL,
     [Name] NVARCHAR(40),
     [Address] NVARCHAR(40),
+	[Last_updated_date] DATETIME,
     CONSTRAINT [PK_Producers] PRIMARY KEY ([ID])
 )
 GO
